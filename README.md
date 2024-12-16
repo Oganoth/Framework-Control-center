@@ -4,6 +4,8 @@
 
 ![Framework Laptop Hub](main.png)
 
+![Framework Hub Screenshot](https://github.com/Oganoth/Framework-Hub-PY/blob/main/Screens/Capture%20d'écran%202024-12-16%20192147.png)
+
 ## English
 
 A powerful control center for Framework laptops running Windows. This application provides comprehensive system monitoring and power management capabilities, specifically designed for Framework laptop users.
