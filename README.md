@@ -71,6 +71,11 @@ json5==0.9.14
 
 Administrator privileges are required for certain features.
 
+### ⚠️ Known Issues
+
+- **Performance Monitoring**: CPU and GPU usage metrics may occasionally show delayed or incorrect updates
+- **System Requirements**: The application requires administrator privileges for full functionality
+
 ### ❤️ Acknowledgments
 
 I want to express my sincere gratitude to:
@@ -153,6 +158,11 @@ json5==0.9.14
 ### 📝 Note
 
 Les privilèges administrateur sont nécessaires pour certaines fonctionnalités.
+
+### ⚠️ Problèmes Connus
+
+- **Surveillance des Performances**: Les mesures d'utilisation du CPU et du GPU peuvent parfois montrer des mises à jour retardées ou incorrectes
+- **Prérequis Système**: L'application nécessite des privilèges administrateur pour une fonctionnalité complète
 
 ### ❤️ Remerciements
 
