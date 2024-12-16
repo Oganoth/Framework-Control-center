@@ -44,26 +44,22 @@ json5==0.9.14
 ### 📥 Installation
 
 #### Option 1: Using the Installer (Recommended)
-1. Download the latest installer from the [releases page](https://github.com/Oganoth/Framework-Hub-PY/releases/tag/latest)
-2. Run the downloaded .exe installer
-3. Follow the installation wizard instructions
-4. Launch the application from the Start menu
+1. Download the latest release archive (.7z) from the [releases page](https://github.com/Oganoth/Framework-Hub-PY/releases/tag/latest)
+2. Extract the downloaded .7z file using [7-Zip](https://www.7-zip.org/) to a location of your choice
+3. Navigate to the extracted folder and run `Framework_Laptop_Hub_Setup.exe`
+4. If prompted by Windows Security, click "More Info" and then "Run Anyway"
+5. Follow the installation wizard:
+   - Choose your installation directory (default is recommended)
+   - Wait for the installation to complete
+   - Click "Finish" to close the installer
+6. Launch Framework Laptop Hub from:
+   - The desktop shortcut
+   - The Start menu
+   - Or directly from the installation folder
 
-#### Option 2: Building from Source
-1. Clone this repository
-2. Install Python 3.8 or higher
-3. Install NSIS from https://nsis.sourceforge.io/Download
-4. Install required packages:
-   ```
-   pip install -r requirements.txt
-   ```
-5. Run the build script:
-   ```
-   python build.py
-   ```
-6. The installer will be created in the `dist` folder
+**Note**: Administrator privileges are required for installation.
 
-#### Option 3: Manual Installation
+#### Option 2: Manual Installation
 1. Clone this repository
 2. Install required packages:
    ```
@@ -146,26 +142,22 @@ json5==0.9.14
 ### 📥 Installation
 
 #### Option 1 : Utiliser l'installateur (Recommandé)
-1. Téléchargez le dernier installateur depuis la [page des versions](https://github.com/Oganoth/Framework-Hub-PY/releases/tag/latest)
-2. Exécutez l'installateur .exe téléchargé
-3. Suivez les instructions de l'assistant d'installation
-4. Lancez l'application depuis le menu Démarrer
+1. Téléchargez la dernière archive (.7z) depuis la [page des versions](https://github.com/Oganoth/Framework-Hub-PY/releases/tag/latest)
+2. Extrayez le fichier .7z téléchargé avec [7-Zip](https://www.7-zip.org/) à l'emplacement de votre choix
+3. Naviguez vers le dossier extrait et exécutez `Framework_Laptop_Hub_Setup.exe`
+4. Si Windows Security vous avertit, cliquez sur "Plus d'infos" puis "Exécuter quand même"
+5. Suivez l'assistant d'installation :
+   - Choisissez votre répertoire d'installation (par défaut recommandé)
+   - Attendez que l'installation se termine
+   - Cliquez sur "Terminer" pour fermer l'installateur
+6. Lancez Framework Laptop Hub depuis :
+   - Le raccourci sur le bureau
+   - Le menu Démarrer
+   - Ou directement depuis le dossier d'installation
 
-#### Option 2 : Compilation depuis les sources
-1. Clonez ce dépôt
-2. Installez Python 3.8 ou supérieur
-3. Installez NSIS depuis https://nsis.sourceforge.io/Download
-4. Installez les packages requis :
-   ```
-   pip install -r requirements.txt
-   ```
-5. Exécutez le script de compilation :
-   ```
-   python build.py
-   ```
-6. L'installateur sera créé dans le dossier `dist`
+**Note** : Les privilèges administrateur sont nécessaires pour l'installation.
 
-#### Option 3 : Installation manuelle
+#### Option 2 : Installation manuelle
 1. Clonez ce dépôt
 2. Installez les packages requis :
    ```
