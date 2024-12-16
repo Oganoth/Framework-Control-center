@@ -10,7 +10,7 @@ A powerful control center for Framework laptops running Windows. This applicatio
 
 ### 🚀 Download
 
-Get the latest release from the [GitHub Releases page](https://github.com/yourusername/framework-laptop-hub/releases/latest).
+Get the latest release from the [GitHub Releases page](https://github.com/Oganoth/Framework-Hub-PY/releases/tag/latest).
 
 ### 🚀 Features
 
