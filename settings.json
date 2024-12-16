@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "language": "fr",
     "ryzenadj_profile": "Performance",
@@ -16,4 +17,24 @@
         "max-performance": true
     },
     "admin_granted": true
+=======
+{
+    "language": "fr",
+    "ryzenadj_profile": "Performance",
+    "ryzenadj_custom_values": {
+        "tctl-temp": 100,
+        "apu-skin-temp": 3,
+        "stapm-limit": 65000,
+        "fast-limit": 70000,
+        "slow-limit": 65000,
+        "vrm-current": 120000,
+        "vrmmax-current": 120000,
+        "vrmsoc-current": 120000,
+        "vrmsocmax-current": 120000,
+        "psi0-current": 65000,
+        "prochot-deassertion-ramp": 15,
+        "max-performance": true
+    },
+    "admin_granted": true
+>>>>>>> 8f8d397c7b484dbae0b69356bfd753ecb37b9d32
 }
