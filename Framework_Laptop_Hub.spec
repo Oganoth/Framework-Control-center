@@ -2,11 +2,11 @@
 
 
 a = Analysis(
-    ['C:\\Users\\johnd\\Documents\\TEST\\app\\framework_laptop_hub.py'],
+    ['framework_laptop_hub.py'],
     pathex=[],
     binaries=[],
-    datas=[('C:\\Users\\johnd\\Documents\\TEST\\app/assets', 'assets'), ('C:\\Users\\johnd\\Documents\\TEST\\app/fonts', 'fonts'), ('C:\\Users\\johnd\\Documents\\TEST\\app/ryzenadj', 'ryzenadj'), ('C:\\Users\\johnd\\Documents\\TEST\\app/translations.py', '.'), ('C:\\Users\\johnd\\Documents\\TEST\\app/language_manager.py', '.'), ('C:\\Users\\johnd\\Documents\\TEST\\app/settings.json', '.')],
-    hiddenimports=['PIL._tkinter_finder', 'queue', 'urllib.parse', 'http.client', 'urllib.request', 'json'],
+    datas=[('assets', 'assets/'), ('ryzenadj', 'ryzenadj/')],
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -31,8 +31,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    uac_admin=True,
-    icon=['C:\\Users\\johnd\\Documents\\TEST\\app\\assets\\logo.ico'],
+    icon=['assets\\icon.ico'],
 )
 coll = COLLECT(
     exe,

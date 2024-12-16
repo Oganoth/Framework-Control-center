@@ -49,7 +49,21 @@ json5==0.9.14
 3. Follow the installation wizard instructions
 4. Launch the application from the Start menu
 
-#### Option 2: Manual Installation
+#### Option 2: Building from Source
+1. Clone this repository
+2. Install Python 3.8 or higher
+3. Install NSIS from https://nsis.sourceforge.io/Download
+4. Install required packages:
+   ```
+   pip install -r requirements.txt
+   ```
+5. Run the build script:
+   ```
+   python build.py
+   ```
+6. The installer will be created in the `dist` folder
+
+#### Option 3: Manual Installation
 1. Clone this repository
 2. Install required packages:
    ```
@@ -137,7 +151,21 @@ json5==0.9.14
 3. Suivez les instructions de l'assistant d'installation
 4. Lancez l'application depuis le menu Démarrer
 
-#### Option 2 : Installation manuelle
+#### Option 2 : Compilation depuis les sources
+1. Clonez ce dépôt
+2. Installez Python 3.8 ou supérieur
+3. Installez NSIS depuis https://nsis.sourceforge.io/Download
+4. Installez les packages requis :
+   ```
+   pip install -r requirements.txt
+   ```
+5. Exécutez le script de compilation :
+   ```
+   python build.py
+   ```
+6. L'installateur sera créé dans le dossier `dist`
+
+#### Option 3 : Installation manuelle
 1. Clonez ce dépôt
 2. Installez les packages requis :
    ```
