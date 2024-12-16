@@ -43,6 +43,13 @@ json5==0.9.14
 
 ### 📥 Installation
 
+#### Option 1: Using the Installer (Recommended)
+1. Download the latest installer from the [releases page](https://github.com/Oganoth/Framework-Hub-PY/releases/tag/latest)
+2. Run the downloaded .exe installer
+3. Follow the installation wizard instructions
+4. Launch the application from the Start menu
+
+#### Option 2: Manual Installation
 1. Clone this repository
 2. Install required packages:
    ```
@@ -86,7 +93,7 @@ Un centre de contrôle puissant pour les ordinateurs portables Framework sous Wi
 
 ### 🚀 Téléchargement
 
-Téléchargez la dernière version depuis la [page des versions GitHub](https://github.com/yourusername/framework-laptop-hub/releases/latest).
+Téléchargez la dernière version depuis la [page des versions GitHub](https://github.com/Oganoth/Framework-Hub-PY/releases/tag/latest).
 
 ### 🚀 Fonctionnalités
 
@@ -119,6 +126,13 @@ json5==0.9.14
 
 ### 📥 Installation
 
+#### Option 1 : Utiliser l'installateur (Recommandé)
+1. Téléchargez le dernier installateur depuis la [page des versions](https://github.com/Oganoth/Framework-Hub-PY/releases/tag/latest)
+2. Exécutez l'installateur .exe téléchargé
+3. Suivez les instructions de l'assistant d'installation
+4. Lancez l'application depuis le menu Démarrer
+
+#### Option 2 : Installation manuelle
 1. Clonez ce dépôt
 2. Installez les packages requis :
    ```
