@@ -84,9 +84,9 @@ translations = {
         "error_stats": "Error updating stats",
         
         # Profile descriptions
-        "silent_description": "Optimized for quiet operation and battery life",
-        "balanced_description": "Default profile with balanced performance and power consumption",
-        "performance_description": "Maximum performance mode",
+        "silent_description": "ECO mode optimized for quiet operation and battery life (15W TDP, boost disabled)",
+        "balanced_description": "Balanced profile with moderate performance and power consumption (30W TDP, boost enabled)",
+        "performance_description": "Maximum performance mode without compromise (60W TDP, boost enabled)",
         
         # Power settings
         "power_limit": "Power Limit",
@@ -184,9 +184,9 @@ translations = {
         "error_stats": "Erreur lors de la mise à jour des statistiques",
         
         # Profile descriptions
-        "silent_description": "Optimisé pour un fonctionnement silencieux et l'autonomie",
-        "balanced_description": "Profil par défaut avec performances et consommation équilibrées",
-        "performance_description": "Mode performance maximale",
+        "silent_description": "Mode ECO optimisé pour un fonctionnement silencieux et l'autonomie (15W TDP, boost désactivé)",
+        "balanced_description": "Profil équilibré avec performances et consommation modérées (30W TDP, boost activé)",
+        "performance_description": "Mode performance maximale sans compromis (60W TDP, boost activé)",
         
         # Power settings
         "power_limit": "Limite de Puissance",
@@ -284,9 +284,9 @@ translations = {
         "error_stats": "Error al actualizar las estadísticas",
         
         # Profile descriptions
-        "silent_description": "Optimizado para funcionamiento silencioso y duración de batería",
-        "balanced_description": "Perfil predeterminado con rendimiento y consumo equilibrados",
-        "performance_description": "Modo de máximo rendimiento",
+        "silent_description": "Modo ECO optimizado para funcionamiento silencioso y duración de batería (15W TDP, boost desactivado)",
+        "balanced_description": "Perfil equilibrado con rendimiento y consumo moderados (30W TDP, boost activado)",
+        "performance_description": "Modo de máximo rendimiento sin compromiso (60W TDP, boost activado)",
         
         # Power settings
         "power_limit": "Límite de Potencia",
@@ -384,9 +384,9 @@ translations = {
         "error_stats": "Fehler beim Aktualisieren der Statistiken",
         
         # Profile descriptions
-        "silent_description": "Optimiert für leisen Betrieb und Akkulaufzeit",
-        "balanced_description": "Standardprofil mit ausgewogener Leistung und Stromverbrauch",
-        "performance_description": "Maximale Leistung Modus",
+        "silent_description": "ECO-Modus optimiert für leisen Betrieb und Akkulaufzeit (15W TDP, Boost deaktiviert)",
+        "balanced_description": "Ausgewogenes Profil mit moderater Leistung und Stromverbrauch (30W TDP, Boost aktiviert)",
+        "performance_description": "Maximale Leistung ohne Kompromisse (60W TDP, Boost aktiviert)",
         
         # Power settings
         "power_limit": "Leistungslimit",

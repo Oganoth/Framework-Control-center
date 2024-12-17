@@ -1,54 +1,53 @@
-('C:\\Users\\johnd\\Documents\\TEST\\app\\build\\Framework_Laptop_Hub\\Framework_Laptop_Hub.exe',
+('D:\\Python\\Framework-Hub\\build\\Framework_Laptop_Hub\\Framework_Laptop_Hub.exe',
  False,
  False,
  True,
- ['C:\\Users\\johnd\\Documents\\TEST\\app\\assets\\logo.ico'],
+ ['D:\\Python\\Framework-Hub\\assets/logo.ico'],
  None,
- True,
+ False,
  False,
  b'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<assembly xmlns='
  b'"urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">\n  <trustInfo x'
  b'mlns="urn:schemas-microsoft-com:asm.v3">\n    <security>\n      <requested'
- b'Privileges>\n        <requestedExecutionLevel level="requireAdministrator'
- b'" uiAccess="false"/>\n      </requestedPrivileges>\n    </security>\n  </tr'
- b'ustInfo>\n  <compatibility xmlns="urn:schemas-microsoft-com:compatibility'
- b'.v1">\n    <application>\n      <supportedOS Id="{e2011457-1546-43c5-a5fe-'
- b'008deee3d3f0}"/>\n      <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a244022'
- b'5f93a}"/>\n      <supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"'
- b'/>\n      <supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>\n    '
- b'  <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}"/>\n    </appli'
- b'cation>\n  </compatibility>\n  <application xmlns="urn:schemas-microsoft-c'
- b'om:asm.v3">\n    <windowsSettings>\n      <longPathAware xmlns="http://sch'
- b'emas.microsoft.com/SMI/2016/WindowsSettings">true</longPathAware>\n    </'
- b'windowsSettings>\n  </application>\n  <dependency>\n    <dependentAssembly>'
- b'\n      <assemblyIdentity type="win32" name="Microsoft.Windows.Common-Con'
- b'trols" version="6.0.0.0" processorArchitecture="*" publicKeyToken="6595b6414'
- b'4ccf1df" language="*"/>\n    </dependentAssembly>\n  </dependency>\n</assem'
- b'bly>',
+ b'Privileges>\n        <requestedExecutionLevel level="asInvoker" uiAccess='
+ b'"false"/>\n      </requestedPrivileges>\n    </security>\n  </trustInfo>\n  '
+ b'<compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">\n    <'
+ b'application>\n      <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f'
+ b'0}"/>\n      <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>\n '
+ b'     <supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"/>\n      <s'
+ b'upportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>\n      <supporte'
+ b'dOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}"/>\n    </application>\n  <'
+ b'/compatibility>\n  <application xmlns="urn:schemas-microsoft-com:asm.v3">'
+ b'\n    <windowsSettings>\n      <longPathAware xmlns="http://schemas.micros'
+ b'oft.com/SMI/2016/WindowsSettings">true</longPathAware>\n    </windowsSett'
+ b'ings>\n  </application>\n  <dependency>\n    <dependentAssembly>\n      <ass'
+ b'emblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version='
+ b'"6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" langua'
+ b'ge="*"/>\n    </dependentAssembly>\n  </dependency>\n</assembly>',
  True,
  False,
  None,
  None,
  None,
- 'C:\\Users\\johnd\\Documents\\TEST\\app\\build\\Framework_Laptop_Hub\\Framework_Laptop_Hub.pkg',
+ 'D:\\Python\\Framework-Hub\\build\\Framework_Laptop_Hub\\Framework_Laptop_Hub.pkg',
  [('pyi-contents-directory _internal', '', 'OPTION'),
   ('PYZ-00.pyz',
-   'C:\\Users\\johnd\\Documents\\TEST\\app\\build\\Framework_Laptop_Hub\\PYZ-00.pyz',
+   'D:\\Python\\Framework-Hub\\build\\Framework_Laptop_Hub\\PYZ-00.pyz',
    'PYZ'),
   ('struct',
-   'C:\\Users\\johnd\\Documents\\TEST\\app\\build\\Framework_Laptop_Hub\\localpycs\\struct.pyc',
+   'D:\\Python\\Framework-Hub\\build\\Framework_Laptop_Hub\\localpycs\\struct.pyc',
    'PYMODULE'),
   ('pyimod01_archive',
-   'C:\\Users\\johnd\\Documents\\TEST\\app\\build\\Framework_Laptop_Hub\\localpycs\\pyimod01_archive.pyc',
+   'D:\\Python\\Framework-Hub\\build\\Framework_Laptop_Hub\\localpycs\\pyimod01_archive.pyc',
    'PYMODULE'),
   ('pyimod02_importers',
-   'C:\\Users\\johnd\\Documents\\TEST\\app\\build\\Framework_Laptop_Hub\\localpycs\\pyimod02_importers.pyc',
+   'D:\\Python\\Framework-Hub\\build\\Framework_Laptop_Hub\\localpycs\\pyimod02_importers.pyc',
    'PYMODULE'),
   ('pyimod03_ctypes',
-   'C:\\Users\\johnd\\Documents\\TEST\\app\\build\\Framework_Laptop_Hub\\localpycs\\pyimod03_ctypes.pyc',
+   'D:\\Python\\Framework-Hub\\build\\Framework_Laptop_Hub\\localpycs\\pyimod03_ctypes.pyc',
    'PYMODULE'),
   ('pyimod04_pywin32',
-   'C:\\Users\\johnd\\Documents\\TEST\\app\\build\\Framework_Laptop_Hub\\localpycs\\pyimod04_pywin32.pyc',
+   'D:\\Python\\Framework-Hub\\build\\Framework_Laptop_Hub\\localpycs\\pyimod04_pywin32.pyc',
    'PYMODULE'),
   ('pyiboot01_bootstrap',
    'C:\\Users\\johnd\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
@@ -81,12 +80,12 @@
    'C:\\Users\\johnd\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_win32comgenpy.py',
    'PYSOURCE'),
   ('framework_laptop_hub',
-   'C:\\Users\\johnd\\Documents\\TEST\\app\\framework_laptop_hub.py',
+   'D:\\Python\\Framework-Hub\\framework_laptop_hub.py',
    'PYSOURCE')],
  [],
  False,
  False,
- 1734366949,
+ 1734435944,
  [('runw.exe',
    'C:\\Users\\johnd\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw.exe',
    'EXECUTABLE')],

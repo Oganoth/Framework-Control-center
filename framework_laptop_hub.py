@@ -182,19 +182,41 @@ class RyzenADJ:
                 "stapm-limit": str(model_profiles["silent"]["tdp"] * 1000),
                 "fast-limit": str(model_profiles["silent"]["tdp"] * 1000),
                 "slow-limit": str(model_profiles["silent"]["tdp"] * 1000),
-                "tctl-temp": "95"
+                "tctl-temp": str(model_profiles["silent"]["temp_limit"]),
+                "apu-skin-temp": str(model_profiles["silent"]["skin_temp"]),
+                "vrm-current": str(model_profiles["silent"]["current_limit"] * 1000),
+                "vrmmax-current": str(model_profiles["silent"]["current_limit"] * 1000),
+                "vrmsoc-current": str(model_profiles["silent"]["current_limit"] * 1000),
+                "vrmsocmax-current": str(model_profiles["silent"]["current_limit"] * 1000),
+                "vrmgfx-current": str(model_profiles["silent"]["current_limit"] * 1000)
             },
             "Balanced": {
                 "stapm-limit": str(model_profiles["balanced"]["tdp"] * 1000),
-                "fast-limit": str(model_profiles["balanced"]["tdp"] * 1000),
-                "slow-limit": str(model_profiles["balanced"]["tdp"] * 1000),
-                "tctl-temp": "95"
+                "fast-limit": str(model_profiles["balanced"].get("fast_limit", model_profiles["balanced"]["tdp"]) * 1000),
+                "slow-limit": str(model_profiles["balanced"].get("slow_limit", model_profiles["balanced"]["tdp"]) * 1000),
+                "tctl-temp": str(model_profiles["balanced"]["temp_limit"]),
+                "cHTC-temp": str(model_profiles["balanced"]["temp_limit"]),
+                "apu-skin-temp": str(model_profiles["balanced"]["skin_temp"]),
+                "vrm-current": str(model_profiles["balanced"]["current_limit"] * 1000),
+                "vrmmax-current": str(model_profiles["balanced"]["current_limit"] * 1000),
+                "vrmsoc-current": str(model_profiles["balanced"]["current_limit"] * 1000),
+                "vrmsocmax-current": str(model_profiles["balanced"]["current_limit"] * 1000),
+                "vrmgfx-current": str(model_profiles["balanced"]["current_limit"] * 1000),
+                "Win-Power": str(model_profiles["balanced"].get("win_power", 0))
             },
             "Performance": {
                 "stapm-limit": str(model_profiles["performance"]["tdp"] * 1000),
-                "fast-limit": str(model_profiles["performance"]["tdp"] * 1000),
-                "slow-limit": str(model_profiles["performance"]["tdp"] * 1000),
-                "tctl-temp": "100"
+                "fast-limit": str(model_profiles["performance"].get("fast_limit", model_profiles["performance"]["tdp"]) * 1000),
+                "slow-limit": str(model_profiles["performance"].get("slow_limit", model_profiles["performance"]["tdp"]) * 1000),
+                "tctl-temp": str(model_profiles["performance"]["temp_limit"]),
+                "cHTC-temp": str(model_profiles["performance"]["temp_limit"]),
+                "apu-skin-temp": str(model_profiles["performance"]["skin_temp"]),
+                "vrm-current": str(model_profiles["performance"]["current_limit"] * 1000),
+                "vrmmax-current": str(model_profiles["performance"]["current_limit"] * 1000),
+                "vrmsoc-current": str(model_profiles["performance"]["current_limit"] * 1000),
+                "vrmsocmax-current": str(model_profiles["performance"]["current_limit"] * 1000),
+                "vrmgfx-current": str(model_profiles["performance"]["current_limit"] * 1000),
+                "Win-Power": str(model_profiles["performance"].get("win_power", 0))
             }
         }
     
@@ -857,8 +879,8 @@ class FrameworkApp(ctk.CTk):
         
         # Window setup
         self.title("Framework Hub PY Edition")
-        self.geometry("1200x800")
-        self.minsize(800, 600)  # Set minimum window size
+        self.geometry("1200x800")  # Set default window size to match the image
+        self.minsize(800, 600)  # Keep minimum window size
         
         # Set theme from settings
         theme = self.settings.get_setting("theme", "light")
@@ -1215,11 +1237,16 @@ class FrameworkApp(ctk.CTk):
         header.grid(row=0, column=0, sticky="new")
         header.grid_columnconfigure(0, weight=1)
         
+        # Get current theme
+        current_theme = self.settings.get_setting("theme", "light")
+        is_dark = current_theme == "dark"
+        
         # Title with Ubuntu font
         title_label = ctk.CTkLabel(
             header,
             text="Framework Hub",
             font=self.font_manager.get_font("bold", 24),
+            text_color="white" if is_dark else "black",
             anchor="w"
         )
         title_label.pack(fill="x")
@@ -1230,20 +1257,55 @@ class FrameworkApp(ctk.CTk):
                  f"- {', '.join(self.system_info.gpu_names)}\n"
                  f"- {self.system_info.total_ram}GB RAM",
             font=self.font_manager.get_font("light", 11),
-            text_color="gray",
+            text_color="#8f8f8f" if is_dark else "gray",
             anchor="w",
             justify="left"
         )
         specs.pack(fill="x", pady=(5,20))
         
         # Create main content area with two columns
-        content = ctk.CTkFrame(main_container, fg_color="transparent")
-        content.grid(row=1, column=0, sticky="nsew")
-        content.grid_columnconfigure(1, weight=1)  # Make right column expandable
+        content_frame = ctk.CTkFrame(main_container, fg_color="transparent")
+        content_frame.grid(row=1, column=0, sticky="nsew")
+        content_frame.grid_columnconfigure(1, weight=1)  # Make right column expandable
         
         # Left column for image and buttons
-        left_column = ctk.CTkFrame(content, fg_color="transparent")
+        left_column = ctk.CTkFrame(content_frame, fg_color="transparent")
         left_column.grid(row=0, column=0, sticky="n", padx=(0, 20))
+        
+        # Model selection dropdown
+        model_frame = ctk.CTkFrame(left_column, fg_color="transparent")
+        model_frame.pack(fill="x", pady=(0, 10))
+        
+        # Get current theme
+        current_theme = self.settings.get_setting("theme", "light")
+        is_dark = current_theme == "dark"
+        
+        # Get current model
+        current_model = self.settings.get_setting("laptop_model", "model_13_amd")
+        
+        # Create model selection dropdown
+        model_options = {
+            "model_13_amd": "Framework 13 AMD",
+            "model_16": "Framework 16 AMD"
+        }
+        
+        model_var = ctk.StringVar(value=model_options.get(current_model, model_options["model_13_amd"]))
+        
+        model_dropdown = ctk.CTkOptionMenu(
+            model_frame,
+            values=list(model_options.values()),
+            variable=model_var,
+            font=self.font_manager.get_font("regular", 11),
+            fg_color="#2b2b2b" if is_dark else "white",
+            button_color="#ff4400",
+            button_hover_color="#ff5500",
+            text_color="white" if is_dark else "black",
+            dropdown_fg_color="#2b2b2b" if is_dark else "white",
+            dropdown_text_color="white" if is_dark else "black",
+            dropdown_hover_color="#363636" if is_dark else "#f0f0f0",
+            command=lambda choice: self.change_laptop_model({v: k for k, v in model_options.items()}[choice])
+        )
+        model_dropdown.pack(fill="x", padx=5)
         
         # Main image in left column
         try:
@@ -1276,27 +1338,35 @@ class FrameworkApp(ctk.CTk):
                 image_label.pack(pady=20)
             else:
                 # Create placeholder if image doesn't exist
-                placeholder = ctk.CTkFrame(left_column, fg_color="#f5f5f5", height=300)
+                placeholder = ctk.CTkFrame(
+                    left_column, 
+                    fg_color="#2b2b2b" if is_dark else "#f5f5f5",
+                    height=300
+                )
                 placeholder.pack(pady=20)
                 
                 error_label = ctk.CTkLabel(
                     placeholder,
                     text="Framework Laptop Hub",
                     font=("Segoe UI", 24, "bold"),
-                    text_color="gray"
+                    text_color="#8f8f8f" if is_dark else "gray"
                 )
                 error_label.place(relx=0.5, rely=0.5, anchor="center")
             
         except Exception as e:
             print(f"Error handling image: {e}")
-            placeholder = ctk.CTkFrame(left_column, fg_color="#f5f5f5", height=300)
+            placeholder = ctk.CTkFrame(
+                left_column,
+                fg_color="#2b2b2b" if is_dark else "#f5f5f5",
+                height=300
+            )
             placeholder.pack(pady=20)
             
             error_label = ctk.CTkLabel(
                 placeholder,
                 text="Framework Laptop Hub",
                 font=("Segoe UI", 24, "bold"),
-                text_color="gray"
+                text_color="#8f8f8f" if is_dark else "gray"
             )
             error_label.place(relx=0.5, rely=0.5, anchor="center")
         
@@ -1320,10 +1390,10 @@ class FrameworkApp(ctk.CTk):
                 button_frame,
                 text=display_name,
                 font=self.font_manager.get_font("bold" if is_active else "regular", 11),
-                fg_color="#ff4400" if is_active else "transparent",
-                text_color="white" if is_active else "black",
-                hover_color="#ff5500" if is_active else "#f0f0f0",
-                border_color="#ff4400" if is_active else "#e0e0e0",
+                fg_color="#ff4400" if is_active else ("#2b2b2b" if is_dark else "transparent"),
+                text_color="white" if (is_active or is_dark) else "black",
+                hover_color="#ff5500" if is_active else ("#363636" if is_dark else "#f0f0f0"),
+                border_color="#ff4400" if is_active else ("#363636" if is_dark else "#e0e0e0"),
                 border_width=1,
                 width=120,
                 command=lambda m=mode: self.switch_profile(self.language_manager.get_text(m))
@@ -1332,31 +1402,58 @@ class FrameworkApp(ctk.CTk):
             self.mode_buttons[mode] = btn
         
         # Right column for profile explanations
-        right_column = ctk.CTkFrame(content, fg_color="transparent")
+        right_column = ctk.CTkFrame(content_frame, fg_color="transparent")
         right_column.grid(row=0, column=1, sticky="nsew")
         right_column.grid_columnconfigure(0, weight=1)
         
         # Profile explanations in right column
+        current_model = self.settings.get_setting("laptop_model", "model_13_amd")
+        # Map the model key to match POWER_PROFILES keys
+        if current_model == "model_16":
+            current_model = "model_16"
+        elif current_model == "model_13_amd":
+            current_model = "model_13_amd"
+            
+        model_profiles = POWER_PROFILES.get(current_model, POWER_PROFILES["model_13_amd"])
+        
         explanations = {
             self.language_manager.get_text("silent"): {
                 "description": self.language_manager.get_text("silent_description"),
                 "values": {
-                    self.language_manager.get_text("power_limit"): "30W",
-                    self.language_manager.get_text("current_limit"): "80A"
+                    self.language_manager.get_text("power_limit"): f"{model_profiles['silent']['tdp']}W",
+                    "Fast Limit": f"{model_profiles['silent'].get('fast_limit', model_profiles['silent']['tdp'])}W",
+                    "Slow Limit": f"{model_profiles['silent'].get('slow_limit', model_profiles['silent']['tdp'])}W",
+                    "Temperature Limit": f"{model_profiles['silent']['temp_limit']}°C",
+                    "Skin Temperature": f"{model_profiles['silent']['skin_temp']}°C",
+                    self.language_manager.get_text("current_limit"): f"{model_profiles['silent']['current_limit']}A",
+                    "Boost": "Disabled" if not model_profiles['silent']['boost_enabled'] else "Enabled",
+                    "Win Power": str(model_profiles['silent'].get('win_power', 0))
                 }
             },
             self.language_manager.get_text("balanced"): {
                 "description": self.language_manager.get_text("balanced_description"),
                 "values": {
-                    self.language_manager.get_text("power_limit"): "45W",
-                    self.language_manager.get_text("current_limit"): "100A"
+                    self.language_manager.get_text("power_limit"): f"{model_profiles['balanced']['tdp']}W",
+                    "Fast Limit": f"{model_profiles['balanced'].get('fast_limit', model_profiles['balanced']['tdp'])}W",
+                    "Slow Limit": f"{model_profiles['balanced'].get('slow_limit', model_profiles['balanced']['tdp'])}W",
+                    "Temperature Limit": f"{model_profiles['balanced']['temp_limit']}°C",
+                    "Skin Temperature": f"{model_profiles['balanced']['skin_temp']}°C",
+                    self.language_manager.get_text("current_limit"): f"{model_profiles['balanced']['current_limit']}A",
+                    "Boost": "Disabled" if not model_profiles['balanced']['boost_enabled'] else "Enabled",
+                    "Win Power": str(model_profiles['balanced'].get('win_power', 0))
                 }
             },
             self.language_manager.get_text("performance_profile"): {
                 "description": self.language_manager.get_text("performance_description"),
                 "values": {
-                    self.language_manager.get_text("power_limit"): "65W",
-                    self.language_manager.get_text("current_limit"): "120A"
+                    self.language_manager.get_text("power_limit"): f"{model_profiles['performance']['tdp']}W",
+                    "Fast Limit": f"{model_profiles['performance'].get('fast_limit', model_profiles['performance']['tdp'])}W",
+                    "Slow Limit": f"{model_profiles['performance'].get('slow_limit', model_profiles['performance']['tdp'])}W",
+                    "Temperature Limit": f"{model_profiles['performance']['temp_limit']}°C",
+                    "Skin Temperature": f"{model_profiles['performance']['skin_temp']}°C",
+                    self.language_manager.get_text("current_limit"): f"{model_profiles['performance']['current_limit']}A",
+                    "Boost": "Disabled" if not model_profiles['performance']['boost_enabled'] else "Enabled",
+                    "Win Power": str(model_profiles['performance'].get('win_power', 0))
                 }
             }
         }
@@ -1366,41 +1463,64 @@ class FrameworkApp(ctk.CTk):
                 master=right_column,
                 title=profile,
                 subtitle=info["description"],
-                fg_color="white",
+                fg_color="#2b2b2b" if is_dark else "white",
                 corner_radius=8
             )
-            frame.pack(fill="x", pady=5)
+            frame.pack(fill="x", pady=3, padx=3)  # Minimal padding
             
-            for setting, value in info["values"].items():
-                value_frame = ctk.CTkFrame(frame.content, fg_color="transparent")
-                value_frame.pack(fill="x", pady=2)
+            # Configure frame colors based on theme
+            if is_dark:
+                frame.title_label.configure(text_color="white")
+                frame.subtitle_label.configure(text_color="#8f8f8f")
+            
+            # Create grid for values with two columns
+            values_frame = ctk.CTkFrame(frame.content, fg_color="transparent")
+            values_frame.pack(fill="x", pady=1, padx=3)  # Minimal padding
+            
+            # Configure two equal columns
+            for i in range(4):  # 4 columns (2 pairs of label+value)
+                values_frame.grid_columnconfigure(i, weight=1)
+            
+            # Organize values in two columns
+            items = list(info["values"].items())
+            row = 0
+            col = 0
+            
+            for setting, value in items:
+                # Default fonts with smaller size
+                label_font = self.font_manager.get_font("regular", 9)
+                value_font = self.font_manager.get_font("bold", 9)
                 
-                # Default fonts
-                label_font = ctk.CTkFont(family="Ubuntu", size=11)
-                value_font = ctk.CTkFont(family="Ubuntu", size=11, weight="bold")
-                
-                # Try to get fonts from master if available
-                try:
-                    if hasattr(self, "font_manager"):
-                        label_font = self.font_manager.get_font("regular", 11)
-                        value_font = self.font_manager.get_font("bold", 11)
-                except Exception as e:
-                    print(f"Warning: Could not access font_manager: {e}")
-                
+                # Label (left-aligned)
                 ctk.CTkLabel(
-                    master=value_frame,
+                    master=values_frame,
                     text=setting,
                     font=label_font,
+                    text_color="white" if is_dark else "black",
                     anchor="w"
-                ).pack(side="left")
+                ).grid(row=row, column=col*2, sticky="w", pady=0, padx=(3,5))
                 
+                # Set color based on value type
+                value_color = "#ff4400"  # Default orange
+                if setting == "Boost":
+                    value_color = "#00ff00" if value == "Enabled" else "#ff0000"
+                elif setting == "Win Power":
+                    value_color = "#0088ff"  # Blue for Win Power
+                
+                # Value (right-aligned)
                 ctk.CTkLabel(
-                    master=value_frame,
+                    master=values_frame,
                     text=value,
                     font=value_font,
-                    text_color="#ff4400",
+                    text_color=value_color,
                     anchor="e"
-                ).pack(side="right")
+                ).grid(row=row, column=col*2+1, sticky="e", pady=0, padx=(0,10))
+                
+                # Switch to next column or row
+                col += 1
+                if col == 2:  # After 2 columns, move to next row
+                    col = 0
+                    row += 1
 
     def set_theme(self, theme):
         """Set the application theme"""
@@ -1413,12 +1533,50 @@ class FrameworkApp(ctk.CTk):
                 
                 # Update all frames recursively
                 def update_frame_colors(widget):
-                    if isinstance(widget, ctk.CTkFrame):
-                        if not isinstance(widget, CustomSlider):  # Skip CustomSlider frames
-                            widget.configure(fg_color="#1a1a1a")
+                    try:
+                        if isinstance(widget, ctk.CTkFrame):
+                            if isinstance(widget, CollapsibleFrame):
+                                widget.configure(fg_color="#2b2b2b")
+                                if hasattr(widget, 'title_label'):
+                                    widget.title_label.configure(text_color="white")
+                                if hasattr(widget, 'subtitle_label'):
+                                    widget.subtitle_label.configure(text_color="#8f8f8f")
+                            elif not isinstance(widget, CustomSlider):
+                                widget.configure(fg_color="#1a1a1a")
+                        
+                        if isinstance(widget, ctk.CTkLabel):
+                            current_color = widget.cget("text_color")
+                            if current_color == "black" or current_color == "gray":
+                                widget.configure(text_color="white" if current_color == "black" else "#8f8f8f")
+                        
+                        if isinstance(widget, ctk.CTkButton):
+                            if widget.cget("fg_color") == "transparent":
+                                widget.configure(
+                                    text_color="white",
+                                    hover_color="#2b2b2b"
+                                )
+                        
                         for child in widget.winfo_children():
                             update_frame_colors(child)
+                            
+                    except Exception as e:
+                        print(f"Error updating widget colors: {e}")
                 
+                # Update sidebar
+                sidebar = self.grid_slaves(row=0, column=0)[0]
+                if isinstance(sidebar, ctk.CTkFrame):
+                    sidebar.configure(fg_color="#2b2b2b")
+                    for btn in sidebar.winfo_children():
+                        if isinstance(btn, ctk.CTkFrame):  # Button container
+                            btn.configure(fg_color="#2b2b2b")
+                            for sub_btn in btn.winfo_children():
+                                if isinstance(sub_btn, ctk.CTkButton) and sub_btn.cget("fg_color") == "transparent":
+                                    sub_btn.configure(
+                                        text_color="#8f8f8f",
+                                        hover_color="#363636"
+                                    )
+                
+                # Update all other widgets
                 for widget in self.winfo_children():
                     update_frame_colors(widget)
                 
@@ -1428,12 +1586,50 @@ class FrameworkApp(ctk.CTk):
                 
                 # Update all frames recursively
                 def update_frame_colors(widget):
-                    if isinstance(widget, ctk.CTkFrame):
-                        if not isinstance(widget, CustomSlider):  # Skip CustomSlider frames
-                            widget.configure(fg_color="white")
+                    try:
+                        if isinstance(widget, ctk.CTkFrame):
+                            if isinstance(widget, CollapsibleFrame):
+                                widget.configure(fg_color="white")
+                                if hasattr(widget, 'title_label'):
+                                    widget.title_label.configure(text_color="black")
+                                if hasattr(widget, 'subtitle_label'):
+                                    widget.subtitle_label.configure(text_color="gray")
+                            elif not isinstance(widget, CustomSlider):
+                                widget.configure(fg_color="white")
+                        
+                        if isinstance(widget, ctk.CTkLabel):
+                            current_color = widget.cget("text_color")
+                            if current_color == "white" or current_color == "#8f8f8f":
+                                widget.configure(text_color="black" if current_color == "white" else "gray")
+                        
+                        if isinstance(widget, ctk.CTkButton):
+                            if widget.cget("fg_color") == "transparent":
+                                widget.configure(
+                                    text_color="black",
+                                    hover_color="#f0f0f0"
+                                )
+                        
                         for child in widget.winfo_children():
                             update_frame_colors(child)
+                            
+                    except Exception as e:
+                        print(f"Error updating widget colors: {e}")
                 
+                # Update sidebar
+                sidebar = self.grid_slaves(row=0, column=0)[0]
+                if isinstance(sidebar, ctk.CTkFrame):
+                    sidebar.configure(fg_color="#fafafa")
+                    for btn in sidebar.winfo_children():
+                        if isinstance(btn, ctk.CTkFrame):  # Button container
+                            btn.configure(fg_color="#fafafa")
+                            for sub_btn in btn.winfo_children():
+                                if isinstance(sub_btn, ctk.CTkButton) and sub_btn.cget("fg_color") == "transparent":
+                                    sub_btn.configure(
+                                        text_color="gray",
+                                        hover_color="#f0f0f0"
+                                    )
+                
+                # Update all other widgets
                 for widget in self.winfo_children():
                     update_frame_colors(widget)
             
@@ -1461,6 +1657,43 @@ class FrameworkApp(ctk.CTk):
             
         except Exception as e:
             print(f"Error setting theme: {e}")
+            import traceback
+            traceback.print_exc()
+
+    def change_laptop_model(self, model_key):
+        """Change the laptop model and update all relevant components"""
+        try:
+            print(f"Changing laptop model to: {model_key}")  # Debug log
+            
+            # Update settings
+            self.settings.set_setting("laptop_model", model_key)
+            
+            # Update system info with new model
+            self.system_info.update_system_info()
+            
+            # Update RyzenADJ profiles for the new model
+            self.ryzenadj.set_laptop_model(model_key)
+            
+            # Refresh the current page to update all information
+            current_page = next(
+                (key for key, btn in self.sidebar_buttons.items() 
+                 if btn.winfo_exists() and btn.cget("fg_color") == "#ff4400"),
+                "home"
+            )
+            
+            print(f"Refreshing current page: {current_page}")  # Debug log
+            
+            if current_page == "home":
+                self.show_home()
+            elif current_page == "performance":
+                self.show_performance()
+            elif current_page == "settings":
+                self.show_settings()
+            
+            print("Model change complete")  # Debug log
+            
+        except Exception as e:
+            print(f"Error changing laptop model: {e}")
             import traceback
             traceback.print_exc()
 

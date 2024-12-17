@@ -85,44 +85,89 @@ LAPTOP_MODELS = {
 POWER_PROFILES = {
     "model_13_intel": {
         "silent": {
-            "tdp": 20,
-            "boost_enabled": False
+            "tdp": 15,
+            "boost_enabled": False,
+            "current_limit": 65,
+            "temp_limit": 90,
+            "skin_temp": 40
         },
         "balanced": {
-            "tdp": 24,
-            "boost_enabled": True
+            "tdp": 20,
+            "boost_enabled": True,
+            "current_limit": 80,
+            "temp_limit": 95,
+            "skin_temp": 45
         },
         "performance": {
             "tdp": 28,
-            "boost_enabled": True
+            "boost_enabled": True,
+            "current_limit": 95,
+            "temp_limit": 95,
+            "skin_temp": 45
         }
     },
     "model_13_amd": {
         "silent": {
             "tdp": 15,
-            "boost_enabled": False
+            "fast_limit": 20,
+            "slow_limit": 15,
+            "boost_enabled": False,
+            "current_limit": 150,
+            "temp_limit": 85,
+            "skin_temp": 40,
+            "win_power": 0
         },
         "balanced": {
-            "tdp": 22,
-            "boost_enabled": True
+            "tdp": 30,
+            "fast_limit": 35,
+            "slow_limit": 30,
+            "boost_enabled": True,
+            "current_limit": 180,
+            "temp_limit": 90,
+            "skin_temp": 45,
+            "win_power": 1
         },
         "performance": {
-            "tdp": 28,
-            "boost_enabled": True
+            "tdp": 60,
+            "fast_limit": 70,
+            "slow_limit": 60,
+            "boost_enabled": True,
+            "current_limit": 200,
+            "temp_limit": 95,
+            "skin_temp": 50,
+            "win_power": 2
         }
     },
     "model_16": {
         "silent": {
-            "tdp": 35,
-            "boost_enabled": False
+            "tdp": 30,
+            "boost_enabled": False,
+            "current_limit": 180,
+            "temp_limit": 95,
+            "skin_temp": 45,
+            "fast_limit": 35,
+            "slow_limit": 30,
+            "win_power": 0
         },
         "balanced": {
-            "tdp": 45,
-            "boost_enabled": True
+            "tdp": 95,
+            "boost_enabled": True,
+            "current_limit": 180,
+            "temp_limit": 95,
+            "skin_temp": 50,
+            "fast_limit": 95,
+            "slow_limit": 95,
+            "win_power": 1
         },
         "performance": {
-            "tdp": 54,
-            "boost_enabled": True
+            "tdp": 120,
+            "boost_enabled": True,
+            "current_limit": 200,
+            "temp_limit": 100,
+            "skin_temp": 50,
+            "fast_limit": 140,
+            "slow_limit": 120,
+            "win_power": 2
         }
     }
 } 

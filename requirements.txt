@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 customtkinter==5.2.0
 Pillow==10.0.0
 psutil==5.9.5
@@ -6,13 +5,4 @@ pywin32==306
 requests==2.31.0
 wmi==1.5.1
 json5==0.9.14
-=======
-customtkinter==5.2.0
-Pillow==10.0.0
-psutil==5.9.5
-pywin32==306
-requests==2.31.0
-wmi==1.5.1
-json5==0.9.14
->>>>>>> 8f8d397c7b484dbae0b69356bfd753ecb37b9d32
-pyinstaller==6.3.0 
+pyinstaller==6.3.0
