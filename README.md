@@ -4,7 +4,7 @@
 
 ![Framework Laptop Hub](main.png)
 
-![Framework Hub Screenshot](https://github.com/Oganoth/Framework-Hub-PY/blob/main/Screens/Capture%20d'écran%202024-12-16%20192147.png)
+![Framework Hub Screenshot](https://github.com/Oganoth/Framework-Hub-PY/blob/main/Screens/Capture%20d'%C3%A9cran%202024-12-17%20133515.png)
 
 ## English
 
