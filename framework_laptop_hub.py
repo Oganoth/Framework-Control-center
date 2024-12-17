@@ -14,6 +14,7 @@ import time
 import customtkinter as ctk
 from PIL import Image
 from language_manager import LanguageManager
+from laptop_models import LAPTOP_MODELS, POWER_PROFILES
 import pythoncom
 import tkinter.font as tkfont
 import logging
@@ -62,8 +63,9 @@ class FontManager:
             return ctk.CTkFont(size=size)  # Fallback to system font
 
 class SystemInfo:
-    def __init__(self):
+    def __init__(self, settings):
         self._wmi = None
+        self.settings = settings
         self.update_system_info()
     
     @property
@@ -90,7 +92,21 @@ class SystemInfo:
             
             # Framework specific info
             self.is_framework = any("Framework" in gpu.Name for gpu in gpu_info)
-            self.model_name = "Framework Laptop" if self.is_framework else "Unknown System"
+            
+            # Get model info from settings
+            model_key = self.settings.get_setting("laptop_model", "model_13_amd")
+            model_info = LAPTOP_MODELS.get(model_key, LAPTOP_MODELS["model_13_amd"])
+            self.model_name = model_info["name"]
+            
+            # Additional model-specific info
+            self.display_info = model_info["display"]
+            self.ram_info = model_info["ram"]
+            self.storage_info = model_info["storage"]
+            self.expansion_ports = model_info["expansion_ports"]
+            self.battery_capacity = model_info["battery"]
+            self.tdp_range = model_info["tdp"]
+            self.has_dgpu = model_info["has_dgpu"]
+            self.gpu_model = model_info.get("gpu", None)
             
         except Exception as e:
             print(f"Error updating system info: {e}")
@@ -98,6 +114,14 @@ class SystemInfo:
             self.gpu_names = ["Unknown GPU"]
             self.total_ram = 0
             self.model_name = "Unknown System"
+            self.display_info = {}
+            self.ram_info = {}
+            self.storage_info = {}
+            self.expansion_ports = 0
+            self.battery_capacity = 0
+            self.tdp_range = {"min": 0, "max": 0}
+            self.has_dgpu = False
+            self.gpu_model = None
 
 class Settings:
     def __init__(self):
@@ -108,6 +132,8 @@ class Settings:
         default_settings = {
             "language": "en",
             "ryzenadj_profile": "Balanced",
+            "laptop_model": "model_13_amd",  # Default to AMD 13" model
+            "theme": "light",  # Default to light theme
             "ryzenadj_custom_values": {},
             "admin_granted": False
         }
@@ -116,6 +142,10 @@ class Settings:
             try:
                 with open(self.settings_file, 'r') as f:
                     self.settings = json.load(f)
+                    # Ensure new settings are added
+                    for key, value in default_settings.items():
+                        if key not in self.settings:
+                            self.settings[key] = value
             except:
                 self.settings = default_settings
         else:
@@ -137,28 +167,42 @@ class RyzenADJ:
         self.settings = settings
         self.ryzenadj_path = self.ensure_ryzenadj()
         self.current_profile = self.settings.get_setting("ryzenadj_profile", "Balanced")
+        self.laptop_model = self.settings.get_setting("laptop_model", "model_13_amd")
         
-        # Initialize profiles with simpler values
+        # Get the model-specific power profiles
+        self.update_profiles()
+    
+    def update_profiles(self):
+        """Update power profiles based on the selected laptop model"""
+        model_profiles = POWER_PROFILES.get(self.laptop_model, POWER_PROFILES["model_13_amd"])
+        
+        # Convert the power profiles to RyzenADJ format
         self.profiles = {
             "Silent": {
-                "stapm-limit": "30000",
-                "fast-limit": "35000",
-                "slow-limit": "30000",
+                "stapm-limit": str(model_profiles["silent"]["tdp"] * 1000),
+                "fast-limit": str(model_profiles["silent"]["tdp"] * 1000),
+                "slow-limit": str(model_profiles["silent"]["tdp"] * 1000),
                 "tctl-temp": "95"
             },
             "Balanced": {
-                "stapm-limit": "45000",
-                "fast-limit": "50000",
-                "slow-limit": "45000",
+                "stapm-limit": str(model_profiles["balanced"]["tdp"] * 1000),
+                "fast-limit": str(model_profiles["balanced"]["tdp"] * 1000),
+                "slow-limit": str(model_profiles["balanced"]["tdp"] * 1000),
                 "tctl-temp": "95"
             },
             "Performance": {
-                "stapm-limit": "65000",
-                "fast-limit": "70000",
-                "slow-limit": "65000",
+                "stapm-limit": str(model_profiles["performance"]["tdp"] * 1000),
+                "fast-limit": str(model_profiles["performance"]["tdp"] * 1000),
+                "slow-limit": str(model_profiles["performance"]["tdp"] * 1000),
                 "tctl-temp": "100"
             }
         }
+    
+    def set_laptop_model(self, model):
+        """Update the laptop model and refresh power profiles"""
+        self.laptop_model = model
+        self.settings.set_setting("laptop_model", model)
+        self.update_profiles()
     
     def apply_profile(self, profile_name):
         try:
@@ -801,7 +845,7 @@ class FrameworkApp(ctk.CTk):
         
         # Initialize system info and settings
         self.settings = Settings()
-        self.system_info = SystemInfo()
+        self.system_info = SystemInfo(self.settings)
         self.language_manager = LanguageManager(self.settings)
         self.ryzenadj = RyzenADJ(self.settings)
         
@@ -816,16 +860,18 @@ class FrameworkApp(ctk.CTk):
         self.geometry("1200x800")
         self.minsize(800, 600)  # Set minimum window size
         
-        # Set white background
-        self.configure(fg_color="white")
+        # Set theme from settings
+        theme = self.settings.get_setting("theme", "light")
+        if theme == "dark":
+            ctk.set_appearance_mode("dark")
+            self.configure(fg_color="#1a1a1a")
+        else:
+            ctk.set_appearance_mode("light")
+            self.configure(fg_color="white")
         
         # Configure grid weights for proper scaling
         self.grid_columnconfigure(1, weight=1)  # Main content area expands
         self.grid_rowconfigure(0, weight=1)
-        
-        # Theme setup
-        ctk.set_appearance_mode("light")
-        ctk.set_default_color_theme("blue")
         
         # Create main sections
         self.create_sidebar()
@@ -1007,6 +1053,45 @@ class FrameworkApp(ctk.CTk):
                     btn.pack(pady=2, padx=10, fill="x")
                 except Exception as e:
                     print(f"Error creating language button for {lang_code}: {e}")
+            
+            # Theme settings section
+            theme_frame = CollapsibleFrame(
+                master=settings_frame,
+                title=self.language_manager.get_text("theme_settings"),
+                subtitle="",
+                fg_color="white",
+                corner_radius=8
+            )
+            theme_frame.pack(fill="x", pady=5)
+            
+            # Create theme buttons container
+            theme_buttons_frame = ctk.CTkFrame(master=theme_frame.content, fg_color="transparent")
+            theme_buttons_frame.pack(fill="x", pady=5)
+            
+            # Create theme buttons
+            theme_options = {
+                "light": self.language_manager.get_text("theme_light"),
+                "dark": self.language_manager.get_text("theme_dark")
+            }
+            
+            current_theme = self.settings.get_setting("theme", "light")
+            
+            for theme_code, theme_name in theme_options.items():
+                try:
+                    is_current = theme_code == current_theme
+                    
+                    btn = ctk.CTkButton(
+                        master=theme_buttons_frame,
+                        text=theme_name,
+                        font=self.font_manager.get_font("bold" if is_current else "regular", 11),
+                        fg_color="#ff4400" if is_current else "transparent",
+                        text_color="white" if is_current else "black",
+                        hover_color="#ff5500",
+                        command=lambda t=theme_code: self.change_theme(t)
+                    )
+                    btn.pack(pady=2, padx=10, fill="x")
+                except Exception as e:
+                    print(f"Error creating theme button for {theme_code}: {e}")
             
         except Exception as e:
             print(f"Error showing settings: {e}")
@@ -1316,6 +1401,32 @@ class FrameworkApp(ctk.CTk):
                     text_color="#ff4400",
                     anchor="e"
                 ).pack(side="right")
+
+    def set_theme(self, theme):
+        """Set the application theme"""
+        if theme == "dark":
+            ctk.set_appearance_mode("dark")
+            self.configure(fg_color="#1a1a1a")
+            for widget in self.winfo_children():
+                if isinstance(widget, ctk.CTkFrame):
+                    widget.configure(fg_color="#1a1a1a")
+                    for child in widget.winfo_children():
+                        if isinstance(child, ctk.CTkFrame):
+                            child.configure(fg_color="#1a1a1a")
+        else:
+            ctk.set_appearance_mode("light")
+            self.configure(fg_color="white")
+            for widget in self.winfo_children():
+                if isinstance(widget, ctk.CTkFrame):
+                    widget.configure(fg_color="white")
+                    for child in widget.winfo_children():
+                        if isinstance(child, ctk.CTkFrame):
+                            child.configure(fg_color="white")
+        
+        self.settings.set_setting("theme", theme)
+        
+        # Update UI elements
+        self.show_home()  # Refresh the current page to apply theme changes
 
 if __name__ == "__main__":
     try:
