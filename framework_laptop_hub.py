@@ -1087,7 +1087,7 @@ class FrameworkApp(ctk.CTk):
                         fg_color="#ff4400" if is_current else "transparent",
                         text_color="white" if is_current else "black",
                         hover_color="#ff5500",
-                        command=lambda t=theme_code: self.change_theme(t)
+                        command=lambda t=theme_code: self.set_theme(t)
                     )
                     btn.pack(pady=2, padx=10, fill="x")
                 except Exception as e:
@@ -1404,29 +1404,65 @@ class FrameworkApp(ctk.CTk):
 
     def set_theme(self, theme):
         """Set the application theme"""
-        if theme == "dark":
-            ctk.set_appearance_mode("dark")
-            self.configure(fg_color="#1a1a1a")
-            for widget in self.winfo_children():
-                if isinstance(widget, ctk.CTkFrame):
-                    widget.configure(fg_color="#1a1a1a")
-                    for child in widget.winfo_children():
-                        if isinstance(child, ctk.CTkFrame):
-                            child.configure(fg_color="#1a1a1a")
-        else:
-            ctk.set_appearance_mode("light")
-            self.configure(fg_color="white")
-            for widget in self.winfo_children():
-                if isinstance(widget, ctk.CTkFrame):
-                    widget.configure(fg_color="white")
-                    for child in widget.winfo_children():
-                        if isinstance(child, ctk.CTkFrame):
-                            child.configure(fg_color="white")
-        
-        self.settings.set_setting("theme", theme)
-        
-        # Update UI elements
-        self.show_home()  # Refresh the current page to apply theme changes
+        try:
+            print(f"Setting theme to: {theme}")  # Debug log
+            
+            if theme == "dark":
+                ctk.set_appearance_mode("dark")
+                self.configure(fg_color="#1a1a1a")
+                
+                # Update all frames recursively
+                def update_frame_colors(widget):
+                    if isinstance(widget, ctk.CTkFrame):
+                        if not isinstance(widget, CustomSlider):  # Skip CustomSlider frames
+                            widget.configure(fg_color="#1a1a1a")
+                        for child in widget.winfo_children():
+                            update_frame_colors(child)
+                
+                for widget in self.winfo_children():
+                    update_frame_colors(widget)
+                
+            else:
+                ctk.set_appearance_mode("light")
+                self.configure(fg_color="white")
+                
+                # Update all frames recursively
+                def update_frame_colors(widget):
+                    if isinstance(widget, ctk.CTkFrame):
+                        if not isinstance(widget, CustomSlider):  # Skip CustomSlider frames
+                            widget.configure(fg_color="white")
+                        for child in widget.winfo_children():
+                            update_frame_colors(child)
+                
+                for widget in self.winfo_children():
+                    update_frame_colors(widget)
+            
+            # Save the theme setting
+            self.settings.set_setting("theme", theme)
+            print(f"Theme setting saved: {theme}")  # Debug log
+            
+            # Refresh the current page to apply theme changes
+            current_page = next(
+                (key for key, btn in self.sidebar_buttons.items() 
+                 if btn.winfo_exists() and btn.cget("fg_color") == "#ff4400"),
+                "home"
+            )
+            
+            print(f"Refreshing current page: {current_page}")  # Debug log
+            
+            if current_page == "home":
+                self.show_home()
+            elif current_page == "performance":
+                self.show_performance()
+            elif current_page == "settings":
+                self.show_settings()
+            
+            print("Theme change complete")  # Debug log
+            
+        except Exception as e:
+            print(f"Error setting theme: {e}")
+            import traceback
+            traceback.print_exc()
 
 if __name__ == "__main__":
     try:
