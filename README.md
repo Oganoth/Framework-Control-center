@@ -10,9 +10,27 @@
 
 A powerful control center for Framework laptops running Windows. This application provides comprehensive system monitoring and power management capabilities, specifically designed for Framework laptop users.
 
-### 🚀 Download
+### 🚀 What's New in Version 1.1
 
-Get the latest release from the [GitHub Releases page](https://github.com/Oganoth/Framework-Hub-PY/releases/tag/latest).
+- **New Hardware Support**:
+  - Added support for Framework Laptop 13 AMD
+  - Added support for Framework Laptop 16 AMD
+  - Optimized power profiles for each model
+- **Enhanced Power Management**:
+  - Refined power profiles with model-specific optimizations
+  - Improved TDP control for better performance/battery balance
+  - Added ECO mode for maximum battery life
+- **UI Improvements**:
+  - New compact 2-column layout
+  - Dark/Light theme support with proper system integration
+  - Improved performance monitoring display
+- **Language Support**:
+  - Added German and Spanish localizations
+  - Improved translations across all languages
+- **Technical Improvements**:
+  - Better RyzenADJ integration
+  - Improved error handling and stability
+  - Reduced memory usage
 
 ### 🚀 Features
 
@@ -22,13 +40,19 @@ Get the latest release from the [GitHub Releases page](https://github.com/Oganot
   - RAM utilization
   - Storage information
 - **Power Profiles**: 
-  - Silent: Optimized for quiet operation
-  - Balanced: Default profile for everyday use
-  - Performance: Maximum power mode
+  - Silent/ECO: Optimized for quiet operation and battery life (15W TDP)
+  - Balanced: Optimal balance of performance and power (30W TDP)
+  - Performance: Maximum power mode (up to 65W TDP)
   - Custom: Create your own profile
 - **Multi-language Support**:
   - English
   - French
+  - German
+  - Spanish
+- **Theme Support**:
+  - Light theme
+  - Dark theme
+  - System theme integration
 - **Settings Persistence**: All preferences saved in JSON format
 
 ### 🔧 Requirements
@@ -75,18 +99,20 @@ json5==0.9.14
 ### ⚙️ Usage
 
 1. Launch the application
-2. Select your preferred power profile
-3. Monitor system performance in the System tab
-4. Customize settings as needed
+2. Select your Framework laptop model
+3. Choose your preferred power profile
+4. Monitor system performance in real-time
+5. Customize theme and language settings as needed
 
 ### 📝 Note
 
-Administrator privileges are required for certain features.
+Administrator privileges are required for power management features.
 
 ### ⚠️ Known Issues
 
-- **Performance Monitoring**: CPU and GPU usage metrics may occasionally show delayed or incorrect updates
+- **Performance Monitoring**: CPU and GPU usage metrics may occasionally show delayed updates
 - **System Requirements**: The application requires administrator privileges for full functionality
+- **Theme Switching**: Occasional UI refresh needed after theme changes
 
 ### ❤️ Acknowledgments
 
@@ -108,9 +134,27 @@ I want to express my sincere gratitude to:
 
 Un centre de contrôle puissant pour les ordinateurs portables Framework sous Windows. Cette application offre une surveillance complète du système et des capacités de gestion d'énergie, spécialement conçue pour les utilisateurs d'ordinateurs Framework.
 
-### 🚀 Téléchargement
+### 🚀 Nouveautés de la Version 1.1
 
-Téléchargez la dernière version depuis la [page des versions GitHub](https://github.com/Oganoth/Framework-Hub-PY/releases/tag/latest).
+- **Support de Nouveaux Matériels**:
+  - Ajout du support pour Framework Laptop 13 AMD
+  - Ajout du support pour Framework Laptop 16 AMD
+  - Profils d'alimentation optimisés pour chaque modèle
+- **Gestion d'Énergie Améliorée**:
+  - Profils d'alimentation affinés avec optimisations spécifiques par modèle
+  - Contrôle TDP amélioré pour un meilleur équilibre performance/batterie
+  - Ajout du mode ECO pour une autonomie maximale
+- **Améliorations de l'Interface**:
+  - Nouvelle disposition compacte à 2 colonnes
+  - Support des thèmes clair/sombre avec intégration système
+  - Affichage amélioré du monitoring de performance
+- **Support Linguistique**:
+  - Ajout des localisations allemande et espagnole
+  - Traductions améliorées dans toutes les langues
+- **Améliorations Techniques**:
+  - Meilleure intégration de RyzenADJ
+  - Gestion des erreurs et stabilité améliorées
+  - Utilisation mémoire réduite
 
 ### 🚀 Fonctionnalités
 
@@ -120,13 +164,19 @@ Téléchargez la dernière version depuis la [page des versions GitHub](https://
   - Utilisation de la RAM
   - Informations sur le stockage
 - **Profils d'Alimentation**: 
-  - Silencieux : Optimisé pour un fonctionnement discret
-  - Équilibré : Profil par défaut pour une utilisation quotidienne
-  - Performance : Mode puissance maximale
+  - Silencieux/ECO : Optimisé pour un fonctionnement discret et l'autonomie (TDP 15W)
+  - Équilibré : Équilibre optimal entre performance et consommation (TDP 30W)
+  - Performance : Mode puissance maximale (jusqu'à 65W TDP)
   - Personnalisé : Créez votre propre profil
 - **Support Multilingue**:
   - Anglais
   - Français
+  - Allemand
+  - Espagnol
+- **Support des Thèmes**:
+  - Thème clair
+  - Thème sombre
+  - Intégration avec le thème système
 - **Persistance des Paramètres**: Toutes les préférences sauvegardées au format JSON
 
 ### 🔧 Prérequis
@@ -173,18 +223,20 @@ json5==0.9.14
 ### ⚙️ Utilisation
 
 1. Lancez l'application
-2. Sélectionnez votre profil d'alimentation préféré
-3. Surveillez les performances système dans l'onglet Système
-4. Personnalisez les paramètres selon vos besoins
+2. Sélectionnez votre modèle de Framework laptop
+3. Choisissez votre profil d'alimentation préféré
+4. Surveillez les performances système en temps réel
+5. Personnalisez le thème et la langue selon vos préférences
 
 ### 📝 Note
 
-Les privilèges administrateur sont nécessaires pour certaines fonctionnalités.
+Les privilèges administrateur sont nécessaires pour les fonctionnalités de gestion d'énergie.
 
 ### ⚠️ Problèmes Connus
 
-- **Surveillance des Performances**: Les mesures d'utilisation du CPU et du GPU peuvent parfois montrer des mises à jour retardées ou incorrectes
+- **Surveillance des Performances**: Les mesures d'utilisation du CPU et du GPU peuvent parfois montrer des mises à jour retardées
 - **Prérequis Système**: L'application nécessite des privilèges administrateur pour une fonctionnalité complète
+- **Changement de Thème**: Rafraîchissement occasionnel de l'interface nécessaire après les changements de thème
 
 ### ❤️ Remerciements
 
