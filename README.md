@@ -44,13 +44,11 @@ A powerful control center for Framework laptops running Windows. This applicatio
   - Silent/ECO: Optimized for quiet operation and battery life (15W TDP)
   - Balanced: Optimal balance of performance and power (30W TDP)
   - Performance: Maximum power mode (up to 60W TDP)
-  - Custom: Create your own profile
 
 - **Framework 16 AMD Power Profiles**:
   - Silent/ECO: Battery-focused profile (30W TDP)
   - Balanced: High-performance balance (95W TDP)
   - Performance: Maximum power with GPU boost (up to 120W TDP)
-  - Custom: Create your own profile
 
 - **Hardware-Specific Features**:
   - Framework 13 AMD:
@@ -188,13 +186,11 @@ Un centre de contrôle puissant pour les ordinateurs portables Framework sous Wi
   - Silencieux/ECO : Optimisé pour un fonctionnement discret et l'autonomie (TDP 15W)
   - Équilibré : Équilibre optimal entre performance et consommation (TDP 30W)
   - Performance : Mode puissance maximale (jusqu'à 60W TDP)
-  - Personnalisé : Créez votre propre profil
 
 - **Profils d'Alimentation Framework 16 AMD**:
   - Silencieux/ECO : Profil orienté autonomie (TDP 30W)
   - Équilibré : Équilibre haute performance (TDP 95W)
   - Performance : Puissance maximale avec boost GPU (jusqu'à 120W TDP)
-  - Personnalisé : Créez votre propre profil
 
 - **Fonctionnalités Spécifiques au Matériel**:
   - Framework 13 AMD :
