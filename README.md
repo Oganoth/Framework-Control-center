@@ -39,20 +39,40 @@ A powerful control center for Framework laptops running Windows. This applicatio
   - GPU status and performance
   - RAM utilization
   - Storage information
-- **Power Profiles**: 
+
+- **Framework 13 AMD Power Profiles**: 
   - Silent/ECO: Optimized for quiet operation and battery life (15W TDP)
   - Balanced: Optimal balance of performance and power (30W TDP)
-  - Performance: Maximum power mode (up to 65W TDP)
+  - Performance: Maximum power mode (up to 60W TDP)
   - Custom: Create your own profile
+
+- **Framework 16 AMD Power Profiles**:
+  - Silent/ECO: Battery-focused profile (30W TDP)
+  - Balanced: High-performance balance (95W TDP)
+  - Performance: Maximum power with GPU boost (up to 120W TDP)
+  - Custom: Create your own profile
+
+- **Hardware-Specific Features**:
+  - Framework 13 AMD:
+    - Optimized for mobility and battery life
+    - Power management for Ryzen 7 7840U
+    - TDP control affecting integrated GPU performance
+  - Framework 16 AMD:
+    - Combined CPU/GPU power management
+    - Thermal profiles affecting both CPU and GPU
+    - Power limit controls impacting GPU performance
+
 - **Multi-language Support**:
   - English
   - French
   - German
   - Spanish
+
 - **Theme Support**:
   - Light theme
   - Dark theme
   - System theme integration
+
 - **Settings Persistence**: All preferences saved in JSON format
 
 ### 🔧 Requirements
@@ -163,20 +183,40 @@ Un centre de contrôle puissant pour les ordinateurs portables Framework sous Wi
   - État et performance du GPU
   - Utilisation de la RAM
   - Informations sur le stockage
-- **Profils d'Alimentation**: 
+
+- **Profils d'Alimentation Framework 13 AMD**: 
   - Silencieux/ECO : Optimisé pour un fonctionnement discret et l'autonomie (TDP 15W)
   - Équilibré : Équilibre optimal entre performance et consommation (TDP 30W)
-  - Performance : Mode puissance maximale (jusqu'à 65W TDP)
+  - Performance : Mode puissance maximale (jusqu'à 60W TDP)
   - Personnalisé : Créez votre propre profil
+
+- **Profils d'Alimentation Framework 16 AMD**:
+  - Silencieux/ECO : Profil orienté autonomie (TDP 30W)
+  - Équilibré : Équilibre haute performance (TDP 95W)
+  - Performance : Puissance maximale avec boost GPU (jusqu'à 120W TDP)
+  - Personnalisé : Créez votre propre profil
+
+- **Fonctionnalités Spécifiques au Matériel**:
+  - Framework 13 AMD :
+    - Optimisé pour la mobilité et l'autonomie
+    - Gestion d'énergie pour Ryzen 7 7840U
+    - Contrôle TDP affectant les performances du GPU intégré
+  - Framework 16 AMD :
+    - Gestion d'énergie combinée CPU/GPU
+    - Profils thermiques affectant CPU et GPU
+    - Contrôles de puissance impactant les performances GPU
+
 - **Support Multilingue**:
   - Anglais
   - Français
   - Allemand
   - Espagnol
+
 - **Support des Thèmes**:
   - Thème clair
   - Thème sombre
   - Intégration avec le thème système
+
 - **Persistance des Paramètres**: Toutes les préférences sauvegardées au format JSON
 
 ### 🔧 Prérequis
