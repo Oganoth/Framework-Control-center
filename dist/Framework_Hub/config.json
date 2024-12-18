@@ -1,0 +1,17 @@
+{
+    "profiles": {
+        "silent": {
+            "tdp": 15,
+            "boost": false
+        },
+        "balanced": {
+            "tdp": 25,
+            "boost": true
+        },
+        "performance": {
+            "tdp": 35,
+            "boost": true
+        }
+    },
+    "current_profile": "balanced"
+}

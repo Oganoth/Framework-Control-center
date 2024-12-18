@@ -1,0 +1,630 @@
+2024-12-17 23:44:57,821 - INFO - Starting application
+2024-12-17 23:44:57,821 - INFO - Requesting admin privileges
+2024-12-17 23:45:00,778 - INFO - Starting application
+2024-12-17 23:45:00,778 - INFO - Running with admin privileges
+2024-12-17 23:45:00,853 - INFO - Initializing MiniFrameworkHub
+2024-12-17 23:45:00,853 - INFO - Initializing Windows Resource Monitor
+2024-12-17 23:45:00,853 - INFO - System monitor initialized
+2024-12-17 23:45:01,922 - INFO - Detected CPU: AMD RYZEN 7 7840HS W/ RADEON 780M GRAPHICS     
+2024-12-17 23:45:01,922 - INFO - Detected Framework 16 AMD CPU
+2024-12-17 23:45:01,922 - INFO - Loaded settings from file with model: model_16
+2024-12-17 23:45:01,922 - INFO - Settings loaded
+2024-12-17 23:45:02,977 - INFO - Processor Name: AMD Ryzen 7 7840HS w/ Radeon 780M Graphics     
+2024-12-17 23:45:02,977 - INFO - Processor Manufacturer: AuthenticAMD
+2024-12-17 23:45:02,977 - INFO - Processor ID: 178BFBFF00A70F41
+2024-12-17 23:45:02,977 - INFO - CPU Family: 107
+2024-12-17 23:45:02,977 - INFO - System info initialized
+2024-12-17 23:45:03,611 - WARNING - No refresh rates detected, using default values
+2024-12-17 23:45:03,611 - INFO - Screen capabilities detected: {'max_rate': 165, 'available_rates': [60, 120, 165]}
+2024-12-17 23:45:03,695 - INFO - AMD GPU detected: AMD Radeon(TM) 780M
+2024-12-17 23:45:03,700 - INFO - AMD GPU detected: AMD Radeon(TM) RX 7700S
+2024-12-17 23:45:03,700 - INFO - AMD GPU detected: AMD Radeon(TM) 780M
+2024-12-17 23:45:03,700 - INFO - AMD GPU detected: AMD Radeon(TM) RX 7700S
+2024-12-17 23:45:03,700 - INFO - Model initialized to: Framework 16 AMD
+2024-12-17 23:45:03,728 - INFO - Window setup complete
+2024-12-17 23:45:03,745 - DEBUG - Importing BlpImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing BmpImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing BufrStubImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing CurImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing DcxImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing DdsImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing EpsImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing FitsImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing FliImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing FpxImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Image: failed to import FpxImagePlugin: No module named 'olefile'
+2024-12-17 23:45:03,745 - DEBUG - Importing FtexImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing GbrImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing GifImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing GribStubImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing Hdf5StubImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing IcnsImagePlugin
+2024-12-17 23:45:03,745 - DEBUG - Importing IcoImagePlugin
+2024-12-17 23:45:03,756 - DEBUG - Importing ImImagePlugin
+2024-12-17 23:45:03,756 - DEBUG - Importing ImtImagePlugin
+2024-12-17 23:45:03,756 - DEBUG - Importing IptcImagePlugin
+2024-12-17 23:45:03,756 - DEBUG - Importing JpegImagePlugin
+2024-12-17 23:45:03,756 - DEBUG - Importing Jpeg2KImagePlugin
+2024-12-17 23:45:03,756 - DEBUG - Importing McIdasImagePlugin
+2024-12-17 23:45:03,756 - DEBUG - Importing MicImagePlugin
+2024-12-17 23:45:03,761 - DEBUG - Image: failed to import MicImagePlugin: No module named 'olefile'
+2024-12-17 23:45:03,761 - DEBUG - Importing MpegImagePlugin
+2024-12-17 23:45:03,761 - DEBUG - Importing MpoImagePlugin
+2024-12-17 23:45:03,761 - DEBUG - Importing MspImagePlugin
+2024-12-17 23:45:03,761 - DEBUG - Importing PalmImagePlugin
+2024-12-17 23:45:03,761 - DEBUG - Importing PcdImagePlugin
+2024-12-17 23:45:03,761 - DEBUG - Importing PcxImagePlugin
+2024-12-17 23:45:03,761 - DEBUG - Importing PdfImagePlugin
+2024-12-17 23:45:03,773 - DEBUG - Importing PixarImagePlugin
+2024-12-17 23:45:03,773 - DEBUG - Importing PngImagePlugin
+2024-12-17 23:45:03,773 - DEBUG - Importing PpmImagePlugin
+2024-12-17 23:45:03,773 - DEBUG - Importing PsdImagePlugin
+2024-12-17 23:45:03,773 - DEBUG - Importing QoiImagePlugin
+2024-12-17 23:45:03,773 - DEBUG - Importing SgiImagePlugin
+2024-12-17 23:45:03,773 - DEBUG - Importing SpiderImagePlugin
+2024-12-17 23:45:03,773 - DEBUG - Importing SunImagePlugin
+2024-12-17 23:45:03,773 - DEBUG - Importing TgaImagePlugin
+2024-12-17 23:45:03,778 - DEBUG - Importing TiffImagePlugin
+2024-12-17 23:45:03,778 - DEBUG - Importing WebPImagePlugin
+2024-12-17 23:45:03,778 - DEBUG - Importing WmfImagePlugin
+2024-12-17 23:45:03,778 - DEBUG - Importing XbmImagePlugin
+2024-12-17 23:45:03,778 - DEBUG - Importing XpmImagePlugin
+2024-12-17 23:45:03,778 - DEBUG - Importing XVThumbImagePlugin
+2024-12-17 23:45:03,778 - DEBUG - STREAM b'IHDR' 161894 13
+2024-12-17 23:45:03,778 - DEBUG - STREAM b'orNT' 161919 1
+2024-12-17 23:45:03,778 - DEBUG - b'orNT' 161919 1 (unknown)
+2024-12-17 23:45:03,778 - DEBUG - STREAM b'IDAT' 161932 26045
+2024-12-17 23:45:03,778 - INFO - Tray setup complete
+2024-12-17 23:45:03,875 - INFO - Hotkey setup complete
+2024-12-17 23:45:03,875 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'sBIT' 41 4
+2024-12-17 23:45:03,878 - DEBUG - b'sBIT' 41 4 (unknown)
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'pHYs' 57 9
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'tEXt' 78 25
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IDAT' 115 8192
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'sBIT' 41 4
+2024-12-17 23:45:03,878 - DEBUG - b'sBIT' 41 4 (unknown)
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'pHYs' 57 9
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'tEXt' 78 25
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IDAT' 115 8192
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:45:03,878 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:45:04,180 - INFO - Widgets created
+2024-12-17 23:45:04,180 - INFO - Monitoring started
+2024-12-17 23:45:04,180 - INFO - Window hidden
+2024-12-17 23:45:09,446 - DEBUG - Stats - CPU: 8.7%, Temp: 30.9°C, RAM: 38.0%
+2024-12-17 23:45:10,521 - DEBUG - Stats - CPU: 3.6%, Temp: 30.9°C, RAM: 38.0%
+2024-12-17 23:45:11,592 - DEBUG - Stats - CPU: 6.8%, Temp: 30.9°C, RAM: 38.0%
+2024-12-17 23:45:12,658 - DEBUG - Stats - CPU: 2.5%, Temp: 31.0°C, RAM: 38.1%
+2024-12-17 23:45:13,716 - DEBUG - Stats - CPU: 3.5%, Temp: 30.9°C, RAM: 38.0%
+2024-12-17 23:51:11,786 - INFO - Starting application
+2024-12-17 23:51:11,786 - INFO - Requesting admin privileges
+2024-12-17 23:51:14,512 - INFO - Starting application
+2024-12-17 23:51:14,512 - INFO - Running with admin privileges
+2024-12-17 23:51:14,566 - INFO - Initializing MiniFrameworkHub
+2024-12-17 23:51:14,582 - INFO - System monitor initialized
+2024-12-17 23:51:14,582 - ERROR - Error in initialization: '_tkinter.tkapp' object has no attribute '_detect_framework_model'
+Traceback (most recent call last):
+  File "d:\Python\Framework-Hub-mini\mini.py", line 237, in __init__
+    self.settings = self.load_settings()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "d:\Python\Framework-Hub-mini\mini.py", line 718, in load_settings
+    "laptop_model": self._detect_framework_model(),  # Use CPU detection to set default model
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johnd\AppData\Local\Programs\Python\Python312\Lib\tkinter\__init__.py", line 2433, in __getattr__
+    return getattr(self.tk, attr)
+           ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: '_tkinter.tkapp' object has no attribute '_detect_framework_model'
+2024-12-17 23:51:14,582 - ERROR - Critical error: '_tkinter.tkapp' object has no attribute '_detect_framework_model'
+Traceback (most recent call last):
+  File "d:\Python\Framework-Hub-mini\mini.py", line 2580, in <module>
+    app = MiniFrameworkHub()
+          ^^^^^^^^^^^^^^^^^^
+  File "d:\Python\Framework-Hub-mini\mini.py", line 237, in __init__
+    self.settings = self.load_settings()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "d:\Python\Framework-Hub-mini\mini.py", line 718, in load_settings
+    "laptop_model": self._detect_framework_model(),  # Use CPU detection to set default model
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johnd\AppData\Local\Programs\Python\Python312\Lib\tkinter\__init__.py", line 2433, in __getattr__
+    return getattr(self.tk, attr)
+           ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: '_tkinter.tkapp' object has no attribute '_detect_framework_model'
+2024-12-17 23:54:24,370 - INFO - Starting application
+2024-12-17 23:54:24,370 - INFO - Requesting admin privileges
+2024-12-17 23:54:26,405 - INFO - Starting application
+2024-12-17 23:54:26,407 - INFO - Running with admin privileges
+2024-12-17 23:54:26,467 - INFO - Initializing MiniFrameworkHub
+2024-12-17 23:54:27,494 - INFO - Settings manager initialized
+2024-12-17 23:54:28,083 - INFO - System monitor initialized
+2024-12-17 23:54:29,115 - INFO - Processor Name: AMD Ryzen 7 7840HS w/ Radeon 780M Graphics     
+2024-12-17 23:54:29,115 - INFO - Processor Manufacturer: AuthenticAMD
+2024-12-17 23:54:29,115 - INFO - Processor ID: 178BFBFF00A70F41
+2024-12-17 23:54:29,131 - INFO - CPU Family: 107
+2024-12-17 23:54:29,131 - INFO - System info initialized
+2024-12-17 23:54:29,131 - INFO - Screen capabilities detected: {'max_rate': 165, 'available_rates': [60, 120, 165]}
+2024-12-17 23:54:29,194 - INFO - AMD GPU detected: AMD Radeon(TM) 780M
+2024-12-17 23:54:29,194 - INFO - AMD GPU detected: AMD Radeon(TM) RX 7700S
+2024-12-17 23:54:29,194 - INFO - AMD GPU detected: AMD Radeon(TM) 780M
+2024-12-17 23:54:29,194 - INFO - AMD GPU detected: AMD Radeon(TM) RX 7700S
+2024-12-17 23:54:29,194 - INFO - Model initialized to: Framework 16 AMD
+2024-12-17 23:54:29,226 - INFO - Window setup complete
+2024-12-17 23:54:29,242 - DEBUG - Importing BlpImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing BmpImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing BufrStubImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing CurImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing DcxImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing DdsImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing EpsImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing FitsImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing FliImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing FpxImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Image: failed to import FpxImagePlugin: No module named 'olefile'
+2024-12-17 23:54:29,242 - DEBUG - Importing FtexImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing GbrImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing GifImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing GribStubImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing Hdf5StubImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing IcnsImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing IcoImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing ImImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing ImtImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing IptcImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing JpegImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing Jpeg2KImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing McIdasImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing MicImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Image: failed to import MicImagePlugin: No module named 'olefile'
+2024-12-17 23:54:29,242 - DEBUG - Importing MpegImagePlugin
+2024-12-17 23:54:29,242 - DEBUG - Importing MpoImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing MspImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing PalmImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing PcdImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing PcxImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing PdfImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing PixarImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing PngImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing PpmImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing PsdImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing QoiImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing SgiImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing SpiderImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing SunImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing TgaImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing TiffImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing WebPImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing WmfImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing XbmImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing XpmImagePlugin
+2024-12-17 23:54:29,258 - DEBUG - Importing XVThumbImagePlugin
+2024-12-17 23:54:29,273 - DEBUG - STREAM b'IHDR' 161894 13
+2024-12-17 23:54:29,273 - DEBUG - STREAM b'orNT' 161919 1
+2024-12-17 23:54:29,273 - DEBUG - b'orNT' 161919 1 (unknown)
+2024-12-17 23:54:29,273 - DEBUG - STREAM b'IDAT' 161932 26045
+2024-12-17 23:54:29,273 - INFO - Tray setup complete
+2024-12-17 23:54:29,369 - INFO - Hotkey setup complete
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'sBIT' 41 4
+2024-12-17 23:54:29,369 - DEBUG - b'sBIT' 41 4 (unknown)
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'pHYs' 57 9
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'tEXt' 78 25
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IDAT' 115 8192
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'sBIT' 41 4
+2024-12-17 23:54:29,369 - DEBUG - b'sBIT' 41 4 (unknown)
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'pHYs' 57 9
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'tEXt' 78 25
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IDAT' 115 8192
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:54:29,369 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:54:29,622 - INFO - Widgets created
+2024-12-17 23:54:29,638 - INFO - Monitoring started
+2024-12-17 23:54:29,638 - INFO - Window hidden
+2024-12-17 23:54:29,987 - DEBUG - Stats - CPU: 10.8%, Temp: 30.9°C, RAM: 37.8%
+2024-12-17 23:54:31,153 - DEBUG - Stats - CPU: 1.7%, Temp: 30.9°C, RAM: 37.7%
+2024-12-17 23:54:32,321 - DEBUG - Stats - CPU: 2.0%, Temp: 30.9°C, RAM: 37.6%
+2024-12-17 23:54:33,469 - DEBUG - Stats - CPU: 0.8%, Temp: 30.9°C, RAM: 37.7%
+2024-12-17 23:54:34,645 - DEBUG - Stats - CPU: 7.1%, Temp: 30.9°C, RAM: 37.5%
+2024-12-17 23:54:35,092 - INFO - Attempting to apply profile: Boost
+2024-12-17 23:54:35,115 - ERROR - Failed to apply power settings: error: unknown option `--tdp`
+
+2024-12-17 23:54:35,115 - ERROR - Failed to apply power settings
+2024-12-17 23:54:35,800 - DEBUG - Stats - CPU: 2.2%, Temp: 30.9°C, RAM: 37.5%
+2024-12-17 23:54:36,971 - DEBUG - Stats - CPU: 0.9%, Temp: 30.9°C, RAM: 37.6%
+2024-12-17 23:54:38,155 - DEBUG - Stats - CPU: 3.0%, Temp: 30.9°C, RAM: 37.5%
+2024-12-17 23:54:39,314 - DEBUG - Stats - CPU: 1.3%, Temp: 30.9°C, RAM: 37.5%
+2024-12-17 23:54:40,469 - DEBUG - Stats - CPU: 2.2%, Temp: 30.9°C, RAM: 37.4%
+2024-12-17 23:54:41,635 - DEBUG - Stats - CPU: 1.7%, Temp: 30.9°C, RAM: 37.4%
+2024-12-17 23:54:42,794 - DEBUG - Stats - CPU: 4.1%, Temp: 30.9°C, RAM: 37.4%
+2024-12-17 23:54:43,713 - INFO - AC power detected, setting max refresh rate
+2024-12-17 23:54:43,967 - DEBUG - Stats - CPU: 3.3%, Temp: 30.9°C, RAM: 37.3%
+2024-12-17 23:54:44,449 - INFO - Successfully set refresh rate to 165Hz
+2024-12-17 23:54:44,491 - INFO - AC power detected, setting max refresh rate
+2024-12-17 23:54:45,216 - INFO - Successfully set refresh rate to 165Hz
+2024-12-17 23:54:45,655 - DEBUG - Stats - CPU: 19.0%, Temp: 30.9°C, RAM: 37.6%
+2024-12-17 23:54:46,839 - DEBUG - Stats - CPU: 3.8%, Temp: 30.9°C, RAM: 37.5%
+2024-12-17 23:54:48,025 - DEBUG - Stats - CPU: 10.8%, Temp: 30.9°C, RAM: 37.4%
+2024-12-17 23:54:49,186 - DEBUG - Stats - CPU: 7.4%, Temp: 30.9°C, RAM: 37.3%
+2024-12-17 23:54:50,356 - DEBUG - Stats - CPU: 1.7%, Temp: 30.9°C, RAM: 37.3%
+2024-12-17 23:54:51,506 - DEBUG - Stats - CPU: 2.0%, Temp: 30.9°C, RAM: 37.3%
+2024-12-17 23:54:52,697 - DEBUG - Stats - CPU: 2.3%, Temp: 30.9°C, RAM: 37.2%
+2024-12-17 23:54:53,880 - DEBUG - Stats - CPU: 7.2%, Temp: 30.9°C, RAM: 37.4%
+2024-12-17 23:54:55,059 - DEBUG - Stats - CPU: 6.0%, Temp: 30.9°C, RAM: 37.4%
+2024-12-17 23:54:56,227 - DEBUG - Stats - CPU: 3.6%, Temp: 30.9°C, RAM: 37.3%
+2024-12-17 23:54:57,402 - DEBUG - Stats - CPU: 4.5%, Temp: 30.9°C, RAM: 37.2%
+2024-12-17 23:54:58,593 - DEBUG - Stats - CPU: 5.0%, Temp: 30.9°C, RAM: 37.2%
+2024-12-17 23:54:59,741 - DEBUG - Stats - CPU: 4.6%, Temp: 30.9°C, RAM: 37.2%
+2024-12-17 23:55:00,920 - DEBUG - Stats - CPU: 4.4%, Temp: 30.9°C, RAM: 37.2%
+2024-12-17 23:55:01,679 - INFO - Attempting to apply profile: Boost
+2024-12-17 23:55:01,695 - ERROR - Failed to apply power settings: error: unknown option `--tdp`
+
+2024-12-17 23:55:01,695 - ERROR - Failed to apply power settings
+2024-12-17 23:55:02,078 - DEBUG - Stats - CPU: 4.2%, Temp: 30.9°C, RAM: 37.3%
+2024-12-17 23:55:03,251 - DEBUG - Stats - CPU: 1.6%, Temp: 30.9°C, RAM: 37.3%
+2024-12-17 23:55:04,413 - DEBUG - Stats - CPU: 4.1%, Temp: 30.9°C, RAM: 37.3%
+2024-12-17 23:55:05,587 - DEBUG - Stats - CPU: 6.4%, Temp: 30.9°C, RAM: 37.2%
+2024-12-17 23:55:06,747 - DEBUG - Stats - CPU: 2.5%, Temp: 30.8°C, RAM: 37.1%
+2024-12-17 23:55:10,016 - DEBUG - Stats - CPU: 2.8%, Temp: 30.8°C, RAM: 37.1%
+2024-12-17 23:55:11,194 - DEBUG - Stats - CPU: 2.8%, Temp: 30.8°C, RAM: 37.1%
+2024-12-17 23:55:12,363 - DEBUG - Stats - CPU: 4.8%, Temp: 30.8°C, RAM: 37.2%
+2024-12-17 23:55:13,524 - DEBUG - Stats - CPU: 4.2%, Temp: 30.8°C, RAM: 37.2%
+2024-12-17 23:58:07,936 - INFO - Starting application
+2024-12-17 23:58:07,936 - INFO - Requesting admin privileges
+2024-12-17 23:58:10,551 - INFO - Starting application
+2024-12-17 23:58:10,551 - INFO - Running with admin privileges
+2024-12-17 23:58:10,617 - INFO - Initializing MiniFrameworkHub
+2024-12-17 23:58:11,660 - INFO - Settings manager initialized
+2024-12-17 23:58:12,231 - INFO - System monitor initialized
+2024-12-17 23:58:13,282 - INFO - Processor Name: AMD Ryzen 7 7840HS w/ Radeon 780M Graphics     
+2024-12-17 23:58:13,282 - INFO - Processor Manufacturer: AuthenticAMD
+2024-12-17 23:58:13,282 - INFO - Processor ID: 178BFBFF00A70F41
+2024-12-17 23:58:13,297 - INFO - CPU Family: 107
+2024-12-17 23:58:13,297 - INFO - System info initialized
+2024-12-17 23:58:13,297 - INFO - Screen capabilities detected: {'max_rate': 165, 'available_rates': [60, 120, 165]}
+2024-12-17 23:58:13,363 - INFO - AMD GPU detected: AMD Radeon(TM) 780M
+2024-12-17 23:58:13,363 - INFO - AMD GPU detected: AMD Radeon(TM) RX 7700S
+2024-12-17 23:58:13,363 - INFO - AMD GPU detected: AMD Radeon(TM) 780M
+2024-12-17 23:58:13,363 - INFO - AMD GPU detected: AMD Radeon(TM) RX 7700S
+2024-12-17 23:58:13,363 - INFO - Model initialized to: Framework 16 AMD
+2024-12-17 23:58:13,393 - INFO - Window setup complete
+2024-12-17 23:58:13,409 - DEBUG - Importing BlpImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing BmpImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing BufrStubImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing CurImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing DcxImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing DdsImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing EpsImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing FitsImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing FliImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing FpxImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Image: failed to import FpxImagePlugin: No module named 'olefile'
+2024-12-17 23:58:13,409 - DEBUG - Importing FtexImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing GbrImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing GifImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing GribStubImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing Hdf5StubImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing IcnsImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing IcoImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing ImImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing ImtImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing IptcImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing JpegImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing Jpeg2KImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing McIdasImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing MicImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Image: failed to import MicImagePlugin: No module named 'olefile'
+2024-12-17 23:58:13,409 - DEBUG - Importing MpegImagePlugin
+2024-12-17 23:58:13,409 - DEBUG - Importing MpoImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing MspImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing PalmImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing PcdImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing PcxImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing PdfImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing PixarImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing PngImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing PpmImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing PsdImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing QoiImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing SgiImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing SpiderImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing SunImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing TgaImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing TiffImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing WebPImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing WmfImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing XbmImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing XpmImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - Importing XVThumbImagePlugin
+2024-12-17 23:58:13,425 - DEBUG - STREAM b'IHDR' 161894 13
+2024-12-17 23:58:13,425 - DEBUG - STREAM b'orNT' 161919 1
+2024-12-17 23:58:13,425 - DEBUG - b'orNT' 161919 1 (unknown)
+2024-12-17 23:58:13,425 - DEBUG - STREAM b'IDAT' 161932 26045
+2024-12-17 23:58:13,441 - INFO - Tray setup complete
+2024-12-17 23:58:13,542 - INFO - Hotkey setup complete
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'sBIT' 41 4
+2024-12-17 23:58:13,542 - DEBUG - b'sBIT' 41 4 (unknown)
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'pHYs' 57 9
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'tEXt' 78 25
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IDAT' 115 8192
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'sBIT' 41 4
+2024-12-17 23:58:13,542 - DEBUG - b'sBIT' 41 4 (unknown)
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'pHYs' 57 9
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'tEXt' 78 25
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IDAT' 115 8192
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-17 23:58:13,542 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-17 23:58:13,615 - INFO - Widgets created
+2024-12-17 23:58:13,631 - INFO - Monitoring started
+2024-12-17 23:58:13,631 - INFO - Window hidden
+2024-12-17 23:58:13,995 - DEBUG - Stats - CPU: 9.0%, Temp: 30.7°C, RAM: 38.8%
+2024-12-17 23:58:15,161 - DEBUG - Stats - CPU: 0.9%, Temp: 30.7°C, RAM: 38.7%
+2024-12-17 23:58:16,323 - DEBUG - Stats - CPU: 4.1%, Temp: 30.7°C, RAM: 38.7%
+2024-12-17 23:58:17,468 - DEBUG - Stats - CPU: 0.7%, Temp: 30.7°C, RAM: 38.7%
+2024-12-17 23:58:18,643 - DEBUG - Stats - CPU: 3.9%, Temp: 30.7°C, RAM: 38.8%
+2024-12-17 23:58:19,656 - INFO - Attempting to apply profile: Boost
+2024-12-17 23:58:19,656 - INFO - Executing RyzenADJ command: ryzenadj\ryzenadj.exe --stapm-limit 120000 --fast-limit 140000 --slow-limit 120000 --vrmmax-current 200 --tctl-temp 100 --apu-skin-temp 50
+2024-12-17 23:58:19,831 - INFO - Power settings applied successfully
+2024-12-17 23:58:21,198 - DEBUG - Stats - CPU: 1.6%, Temp: 30.8°C, RAM: 38.8%
+2024-12-17 23:58:28,713 - INFO - Successfully applied profile: Boost
+2024-12-17 23:58:28,795 - INFO - Attempting to apply profile: Balanced
+2024-12-17 23:58:28,795 - INFO - Executing RyzenADJ command: ryzenadj\ryzenadj.exe --stapm-limit 95000 --fast-limit 95000 --slow-limit 95000 --vrmmax-current 180 --tctl-temp 95 --apu-skin-temp 50
+2024-12-17 23:58:31,156 - INFO - Power settings applied successfully
+2024-12-17 23:58:33,743 - DEBUG - Stats - CPU: 44.4%, Temp: 30.8°C, RAM: 38.7%
+2024-12-17 23:58:40,590 - INFO - Successfully applied profile: Balanced
+2024-12-17 23:58:44,400 - INFO - AC power detected, setting max refresh rate
+2024-12-17 23:58:45,415 - DEBUG - Stats - CPU: 21.9%, Temp: 30.7°C, RAM: 38.7%
+2024-12-17 23:58:57,239 - INFO - Successfully set refresh rate to 165Hz
+2024-12-17 23:58:57,253 - INFO - AC power detected, setting max refresh rate
+2024-12-17 23:59:01,673 - DEBUG - Stats - CPU: 31.6%, Temp: 30.7°C, RAM: 38.7%
+2024-12-17 23:59:07,159 - DEBUG - Stats - CPU: 32.4%, Temp: 30.8°C, RAM: 38.8%
+2024-12-17 23:59:10,027 - INFO - Attempting to apply profile: Boost
+2024-12-17 23:59:10,030 - INFO - Executing RyzenADJ command: ryzenadj\ryzenadj.exe --stapm-limit 120000 --fast-limit 140000 --slow-limit 120000 --vrmmax-current 200 --tctl-temp 100 --apu-skin-temp 50
+2024-12-17 23:59:11,875 - INFO - Successfully set refresh rate to 165Hz
+2024-12-17 23:59:13,347 - DEBUG - Stats - CPU: 29.0%, Temp: 30.8°C, RAM: 38.7%
+2024-12-17 23:59:13,408 - INFO - Power settings applied successfully
+2024-12-17 23:59:15,460 - INFO - Successfully applied profile: Boost
+2024-12-17 23:59:20,339 - DEBUG - Stats - CPU: 47.7%, Temp: 30.8°C, RAM: 38.8%
+2024-12-17 23:59:24,018 - DEBUG - Stats - CPU: 27.1%, Temp: 30.8°C, RAM: 38.8%
+2024-12-17 23:59:26,359 - INFO - AC power detected, setting max refresh rate
+2024-12-17 23:59:27,774 - DEBUG - Stats - CPU: 31.9%, Temp: 30.8°C, RAM: 38.7%
+2024-12-17 23:59:41,087 - INFO - Successfully set refresh rate to 165Hz
+2024-12-17 23:59:44,550 - DEBUG - Stats - CPU: 45.5%, Temp: 30.8°C, RAM: 38.8%
+2024-12-17 23:59:48,330 - DEBUG - Stats - CPU: 27.8%, Temp: 30.8°C, RAM: 38.8%
+2024-12-17 23:59:51,195 - DEBUG - Stats - CPU: 30.7%, Temp: 30.8°C, RAM: 38.7%
+2024-12-17 23:59:54,170 - DEBUG - Stats - CPU: 7.2%, Temp: 30.8°C, RAM: 38.7%
+2024-12-17 23:59:57,491 - DEBUG - Stats - CPU: 17.4%, Temp: 30.8°C, RAM: 38.7%
+2024-12-18 00:00:01,207 - DEBUG - Stats - CPU: 25.9%, Temp: 30.8°C, RAM: 38.8%
+2024-12-18 00:00:04,180 - DEBUG - Stats - CPU: 37.9%, Temp: 30.8°C, RAM: 38.6%
+2024-12-18 00:00:06,665 - DEBUG - Stats - CPU: 15.1%, Temp: 30.8°C, RAM: 38.6%
+2024-12-18 00:00:09,621 - DEBUG - Stats - CPU: 13.3%, Temp: 30.8°C, RAM: 38.6%
+2024-12-18 00:00:12,042 - DEBUG - Stats - CPU: 16.5%, Temp: 30.8°C, RAM: 38.6%
+2024-12-18 00:00:15,319 - DEBUG - Stats - CPU: 20.6%, Temp: 30.8°C, RAM: 38.6%
+2024-12-18 00:00:18,309 - DEBUG - Stats - CPU: 15.2%, Temp: 30.9°C, RAM: 38.6%
+2024-12-18 00:00:20,579 - DEBUG - Stats - CPU: 16.3%, Temp: 30.9°C, RAM: 38.8%
+2024-12-18 00:00:23,067 - DEBUG - Stats - CPU: 13.2%, Temp: 30.8°C, RAM: 38.8%
+2024-12-18 00:00:25,980 - DEBUG - Stats - CPU: 7.2%, Temp: 30.9°C, RAM: 38.7%
+2024-12-18 00:00:26,382 - INFO - AC power detected, setting max refresh rate
+2024-12-18 00:00:30,163 - DEBUG - Stats - CPU: 64.2%, Temp: 30.9°C, RAM: 38.5%
+2024-12-18 00:00:33,500 - INFO - Successfully set refresh rate to 165Hz
+2024-12-18 00:00:34,714 - DEBUG - Stats - CPU: 28.2%, Temp: 30.9°C, RAM: 38.7%
+2024-12-18 00:00:37,007 - DEBUG - Stats - CPU: 11.1%, Temp: 30.9°C, RAM: 38.7%
+2024-12-18 00:00:39,630 - INFO - AC power detected, setting max refresh rate
+2024-12-18 00:00:41,086 - DEBUG - Stats - CPU: 16.2%, Temp: 30.9°C, RAM: 38.7%
+2024-12-18 00:00:45,059 - INFO - Refresh rate change output: 0
+Attempting to change refresh rate from 0 Hz to 165 Hz
+Successfully changed refresh rate to 165 Hz
+2024-12-18 00:00:45,061 - INFO - Successfully changed refresh rate to 165
+2024-12-18 00:00:45,095 - INFO - Successfully set refresh rate to 165Hz
+2024-12-18 00:00:45,097 - INFO - AC power detected, setting max refresh rate
+2024-12-18 00:00:48,141 - DEBUG - Stats - CPU: 38.4%, Temp: 30.9°C, RAM: 38.7%
+2024-12-18 00:00:50,833 - DEBUG - Stats - CPU: 36.6%, Temp: 30.9°C, RAM: 38.8%
+2024-12-18 00:00:51,312 - INFO - Successfully set refresh rate to 165Hz
+2024-12-18 00:00:53,885 - DEBUG - Stats - CPU: 31.2%, Temp: 30.9°C, RAM: 38.7%
+2024-12-18 00:00:56,704 - DEBUG - Stats - CPU: 30.6%, Temp: 30.9°C, RAM: 38.7%
+2024-12-18 00:00:58,035 - DEBUG - Stats - CPU: 19.2%, Temp: 30.9°C, RAM: 38.7%
+2024-12-18 00:01:00,736 - DEBUG - Stats - CPU: 9.4%, Temp: 30.9°C, RAM: 38.8%
+2024-12-18 00:01:03,267 - DEBUG - Stats - CPU: 26.2%, Temp: 30.9°C, RAM: 38.7%
+2024-12-18 00:01:06,305 - DEBUG - Stats - CPU: 16.9%, Temp: 30.9°C, RAM: 38.8%
+2024-12-18 00:01:08,379 - DEBUG - Stats - CPU: 40.8%, Temp: 30.9°C, RAM: 38.9%
+2024-12-18 00:01:18,744 - DEBUG - Stats - CPU: 29.5%, Temp: 30.9°C, RAM: 38.8%
+2024-12-18 00:06:30,896 - INFO - Starting application
+2024-12-18 00:06:30,898 - INFO - Requesting admin privileges
+2024-12-18 00:06:39,917 - INFO - Starting application
+2024-12-18 00:06:39,917 - INFO - Running with admin privileges
+2024-12-18 00:06:40,034 - INFO - Initializing MiniFrameworkHub
+2024-12-18 00:06:40,034 - INFO - Initializing Windows Resource Monitor
+2024-12-18 00:06:40,034 - INFO - System monitor initialized
+2024-12-18 00:06:41,229 - INFO - Detected CPU: AMD RYZEN 7 7840HS W/ RADEON 780M GRAPHICS     
+2024-12-18 00:06:41,229 - INFO - Detected Framework 16 AMD CPU
+2024-12-18 00:06:41,229 - INFO - Loaded settings from file with model: model_16
+2024-12-18 00:06:41,229 - INFO - Settings loaded
+2024-12-18 00:06:42,449 - INFO - Processor Name: AMD Ryzen 7 7840HS w/ Radeon 780M Graphics     
+2024-12-18 00:06:42,465 - INFO - Processor Manufacturer: AuthenticAMD
+2024-12-18 00:06:42,465 - INFO - Processor ID: 178BFBFF00A70F41
+2024-12-18 00:06:42,465 - INFO - CPU Family: 107
+2024-12-18 00:06:42,465 - INFO - System info initialized
+2024-12-18 00:06:46,765 - WARNING - No refresh rates detected, using default values
+2024-12-18 00:06:46,767 - INFO - Screen capabilities detected: {'max_rate': 165, 'available_rates': [60, 120, 165]}
+2024-12-18 00:06:47,941 - INFO - AMD GPU detected: AMD Radeon(TM) 780M
+2024-12-18 00:06:47,970 - INFO - AMD GPU detected: AMD Radeon(TM) RX 7700S
+2024-12-18 00:06:47,970 - INFO - AMD GPU detected: AMD Radeon(TM) 780M
+2024-12-18 00:06:47,972 - INFO - AMD GPU detected: AMD Radeon(TM) RX 7700S
+2024-12-18 00:06:47,972 - INFO - Model initialized to: Framework 16 AMD
+2024-12-18 00:06:48,202 - INFO - Window setup complete
+2024-12-18 00:06:48,224 - DEBUG - Importing BlpImagePlugin
+2024-12-18 00:06:48,224 - DEBUG - Importing BmpImagePlugin
+2024-12-18 00:06:48,224 - DEBUG - Importing BufrStubImagePlugin
+2024-12-18 00:06:48,224 - DEBUG - Importing CurImagePlugin
+2024-12-18 00:06:48,224 - DEBUG - Importing DcxImagePlugin
+2024-12-18 00:06:48,224 - DEBUG - Importing DdsImagePlugin
+2024-12-18 00:06:48,240 - DEBUG - Importing EpsImagePlugin
+2024-12-18 00:06:48,240 - DEBUG - Importing FitsImagePlugin
+2024-12-18 00:06:48,240 - DEBUG - Importing FliImagePlugin
+2024-12-18 00:06:48,240 - DEBUG - Importing FpxImagePlugin
+2024-12-18 00:06:48,240 - DEBUG - Image: failed to import FpxImagePlugin: No module named 'olefile'
+2024-12-18 00:06:48,240 - DEBUG - Importing FtexImagePlugin
+2024-12-18 00:06:48,240 - DEBUG - Importing GbrImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing GifImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing GribStubImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing Hdf5StubImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing IcnsImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing IcoImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing ImImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing ImtImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing IptcImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing JpegImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing Jpeg2KImagePlugin
+2024-12-18 00:06:48,255 - DEBUG - Importing McIdasImagePlugin
+2024-12-18 00:06:48,271 - DEBUG - Importing MicImagePlugin
+2024-12-18 00:06:48,271 - DEBUG - Image: failed to import MicImagePlugin: No module named 'olefile'
+2024-12-18 00:06:48,271 - DEBUG - Importing MpegImagePlugin
+2024-12-18 00:06:48,271 - DEBUG - Importing MpoImagePlugin
+2024-12-18 00:06:48,287 - DEBUG - Importing MspImagePlugin
+2024-12-18 00:06:48,294 - DEBUG - Importing PalmImagePlugin
+2024-12-18 00:06:48,294 - DEBUG - Importing PcdImagePlugin
+2024-12-18 00:06:48,296 - DEBUG - Importing PcxImagePlugin
+2024-12-18 00:06:48,296 - DEBUG - Importing PdfImagePlugin
+2024-12-18 00:06:48,308 - DEBUG - Importing PixarImagePlugin
+2024-12-18 00:06:48,308 - DEBUG - Importing PngImagePlugin
+2024-12-18 00:06:48,310 - DEBUG - Importing PpmImagePlugin
+2024-12-18 00:06:48,310 - DEBUG - Importing PsdImagePlugin
+2024-12-18 00:06:48,312 - DEBUG - Importing QoiImagePlugin
+2024-12-18 00:06:48,312 - DEBUG - Importing SgiImagePlugin
+2024-12-18 00:06:48,314 - DEBUG - Importing SpiderImagePlugin
+2024-12-18 00:06:48,314 - DEBUG - Importing SunImagePlugin
+2024-12-18 00:06:48,316 - DEBUG - Importing TgaImagePlugin
+2024-12-18 00:06:48,318 - DEBUG - Importing TiffImagePlugin
+2024-12-18 00:06:48,318 - DEBUG - Importing WebPImagePlugin
+2024-12-18 00:06:48,321 - DEBUG - Importing WmfImagePlugin
+2024-12-18 00:06:48,323 - DEBUG - Importing XbmImagePlugin
+2024-12-18 00:06:48,325 - DEBUG - Importing XpmImagePlugin
+2024-12-18 00:06:48,325 - DEBUG - Importing XVThumbImagePlugin
+2024-12-18 00:06:48,327 - DEBUG - STREAM b'IHDR' 161894 13
+2024-12-18 00:06:48,327 - DEBUG - STREAM b'orNT' 161919 1
+2024-12-18 00:06:48,329 - DEBUG - b'orNT' 161919 1 (unknown)
+2024-12-18 00:06:48,329 - DEBUG - STREAM b'IDAT' 161932 26045
+2024-12-18 00:06:48,333 - INFO - Tray setup complete
+2024-12-18 00:06:48,990 - INFO - Hotkey setup complete
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'sBIT' 41 4
+2024-12-18 00:06:49,006 - DEBUG - b'sBIT' 41 4 (unknown)
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'pHYs' 57 9
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'tEXt' 78 25
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'IDAT' 115 8192
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'sBIT' 41 4
+2024-12-18 00:06:49,006 - DEBUG - b'sBIT' 41 4 (unknown)
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'pHYs' 57 9
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'tEXt' 78 25
+2024-12-18 00:06:49,006 - DEBUG - STREAM b'IDAT' 115 8192
+2024-12-18 00:06:49,022 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-18 00:06:49,022 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-18 00:06:49,022 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-18 00:06:49,022 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-18 00:06:49,022 - DEBUG - STREAM b'IHDR' 16 13
+2024-12-18 00:06:49,022 - DEBUG - STREAM b'pHYs' 41 9
+2024-12-18 00:06:49,022 - DEBUG - STREAM b'tEXt' 62 25
+2024-12-18 00:06:49,022 - DEBUG - STREAM b'IDAT' 99 8192
+2024-12-18 00:06:49,420 - INFO - Widgets created
+2024-12-18 00:06:49,420 - INFO - Monitoring started
+2024-12-18 00:06:49,420 - INFO - Window hidden
+2024-12-18 00:06:54,543 - DEBUG - Stats - CPU: 23.3%, Temp: 31.0°C, RAM: 37.6%
+2024-12-18 00:06:56,091 - DEBUG - Stats - CPU: 15.8%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:06:57,416 - DEBUG - Stats - CPU: 23.4%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:06:59,238 - DEBUG - Stats - CPU: 12.1%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:00,035 - INFO - Attempting to apply profile: Balanced
+2024-12-18 00:07:00,035 - INFO - Available profiles: ['Silent', 'Balanced', 'Boost']
+2024-12-18 00:07:00,051 - INFO - Applying profile: Balanced (Balanced)
+2024-12-18 00:07:00,051 - INFO - Setting stapm-limit to 95
+2024-12-18 00:07:00,051 - INFO - Setting fast-limit to 95
+2024-12-18 00:07:00,051 - INFO - Setting slow-limit to 95
+2024-12-18 00:07:00,051 - INFO - Setting tctl-temp to 95
+2024-12-18 00:07:00,051 - INFO - Setting apu-skin-temp to 50
+2024-12-18 00:07:00,067 - INFO - Setting vrmmax-current to 180
+2024-12-18 00:07:00,067 - INFO - Final RyzenADJ command: ryzenadj\ryzenadj.exe --stapm-limit 95 --fast-limit 95000 --slow-limit 95000 --tctl-temp 95 --apu-skin-temp 50 --vrmmax-current 180000
+2024-12-18 00:07:00,067 - INFO - Profile settings to be applied: {'tdp': 95, 'fast_limit': 95, 'slow_limit': 95, 'boost_enabled': True, 'current_limit': 180, 'temp_limit': 95, 'skin_temp': 50, 'win_power': 1}
+2024-12-18 00:07:00,067 - INFO - RyzenADJ arguments: ['--stapm-limit', '95', '--fast-limit', '95000', '--slow-limit', '95000', '--tctl-temp', '95', '--apu-skin-temp', '50', '--vrmmax-current', '180000']
+2024-12-18 00:07:00,067 - INFO - Saving PowerShell script to: ryzenadj\apply_profile.ps1
+2024-12-18 00:07:00,067 - INFO - Executing RyzenADJ command
+2024-12-18 00:07:01,311 - DEBUG - Stats - CPU: 26.9%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:03,674 - INFO - PowerShell output: Using RyzenADJ at: ryzenadj\ryzenadj.exe
+Arguments: --stapm-limit 95 --fast-limit 95000 --slow-limit 95000 --tctl-temp 95 --apu-skin-temp 50 --vrmmax-current 180000
+Running as admin: True
+Running RyzenADJ directly...
+Output: Sucessfully set stapm_limit to 95 Sucessfully set fast_limit to 95000 Sucessfully set slow_limit to 95000 Sucessfully set tctl_temp to 95 Sucessfully set vrmmax_current to 180000 Sucessfully set apu_skin_temp_limit to 50
+Profile applied successfully
+
+2024-12-18 00:07:03,674 - INFO - Profile Balanced applied successfully
+2024-12-18 00:07:05,367 - DEBUG - Stats - CPU: 15.8%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:06,420 - DEBUG - Stats - CPU: 3.2%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:07,268 - INFO - Refresh rate change output: 0
+Attempting to change refresh rate from 0 Hz to 165 Hz
+Successfully changed refresh rate to 165 Hz
+2024-12-18 00:07:07,268 - INFO - Successfully changed refresh rate to 165
+2024-12-18 00:07:07,486 - DEBUG - Stats - CPU: 11.5%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:08,544 - DEBUG - Stats - CPU: 2.7%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:09,608 - DEBUG - Stats - CPU: 3.1%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:10,671 - DEBUG - Stats - CPU: 2.2%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:11,729 - DEBUG - Stats - CPU: 3.1%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:12,709 - INFO - Battery charge limit set to 100% with adjusted power limits
+2024-12-18 00:07:12,806 - DEBUG - Stats - CPU: 7.8%, Temp: 31.0°C, RAM: 37.8%
+2024-12-18 00:07:13,864 - DEBUG - Stats - CPU: 3.1%, Temp: 31.0°C, RAM: 37.9%
+2024-12-18 00:07:14,923 - DEBUG - Stats - CPU: 1.1%, Temp: 31.0°C, RAM: 37.8%
+2024-12-18 00:07:15,978 - DEBUG - Stats - CPU: 1.9%, Temp: 31.1°C, RAM: 37.8%
+2024-12-18 00:07:17,049 - DEBUG - Stats - CPU: 3.4%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:18,117 - DEBUG - Stats - CPU: 3.4%, Temp: 31.0°C, RAM: 37.7%
+2024-12-18 00:07:19,187 - DEBUG - Stats - CPU: 7.4%, Temp: 31.0°C, RAM: 37.8%
+2024-12-18 00:07:20,249 - DEBUG - Stats - CPU: 2.7%, Temp: 31.0°C, RAM: 37.8%
