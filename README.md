@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
 ![Platform](https://img.shields.io/badge/Platform-Windows%2011-orange.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+![License](https://img.shields.io/badge/License-GPL--3.0-green.svg)
 ![Framework](https://img.shields.io/badge/Framework-AMD%20Only-red.svg)
 ![Status](https://img.shields.io/badge/Status-Beta-yellow.svg)
 ![RyzenADJ](https://img.shields.io/badge/RyzenADJ-v0.14.0-purple.svg)
@@ -145,9 +145,28 @@ pystray==0.19.4        # System tray integration
    - Adjust battery limits
 3. **Monitor**: Track system performance in real-time
 
+### 🤝 License
+
+Framework Hub Mini is free and open source software licensed under the GNU General Public License v3.0 (GPL-3.0). This means:
+
+- ✅ You can use, modify, and distribute this software freely
+- ✅ If you modify and distribute it, you must:
+  - Keep it open source
+  - License it under GPL-3.0
+  - Provide attribution
+  - State your changes
+
+[View the full license](LICENSE)
+
 ### 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit issues and pull requests.
+Contributions are welcome! Feel free to:
+- Submit issues and bug reports
+- Propose new features
+- Create pull requests
+- Share your improvements
+
+Check out our [Contributing Guidelines](CONTRIBUTING.md) to get started.
 
 ### ❤️ Support the Project
 
@@ -292,9 +311,28 @@ pystray==0.19.4        # Intégration barre des tâches
    - Ajustez les limites de batterie
 3. **Surveillance** : Suivez les performances en temps réel
 
+### 🤝 Licence
+
+Framework Hub Mini est un logiciel libre et open source sous licence GNU General Public License v3.0 (GPL-3.0). Cela signifie :
+
+- ✅ Vous pouvez utiliser, modifier et distribuer ce logiciel librement
+- ✅ Si vous le modifiez et le distribuez, vous devez :
+  - Le garder open source
+  - Le licencer sous GPL-3.0
+  - Mentionner l'attribution
+  - Indiquer vos modifications
+
+[Voir la licence complète](LICENSE)
+
 ### 🤝 Contribution
 
-Les contributions sont les bienvenues ! N'hésitez pas à soumettre des problèmes et des pull requests.
+Les contributions sont les bienvenues ! N'hésitez pas à :
+- Soumettre des problèmes et rapports de bugs
+- Proposer de nouvelles fonctionnalités
+- Créer des pull requests
+- Partager vos améliorations
+
+Consultez nos [Directives de contribution](CONTRIBUTING.md) pour commencer.
 
 ### ❤️ Soutenir le projet
 
