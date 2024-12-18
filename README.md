@@ -154,6 +154,14 @@ Contributions are welcome! Please feel free to submit issues and pull requests.
 - **[JamesCJ60](https://github.com/JamesCJ60)** - Original concept inspiration
 - **[FlyGoat](https://github.com/FlyGoat)** - RyzenADJ development
 
+### ❤️ Soutenir le projet
+
+Si vous appréciez Framework Hub Mini et souhaitez soutenir son développement, vous pouvez devenir un patron ! Votre soutien m'aide à maintenir et améliorer le projet, tout en gardant mes chats bien nourris 😺
+
+[![Devenez un Patron](https://img.shields.io/badge/Patreon-Soutenez%20le%20projet-FF424D?style=for-the-badge&logo=patreon)](https://patreon.com/Oganoth?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink)
+
+Un grand merci à tous les patrons qui rendent ce projet possible ! ❤️
+
 ---
 
 ## Français
@@ -276,7 +284,7 @@ pystray==0.19.4        # Intégration barre des tâches
 
 ### 🔧 Utilisation
 
-1. **Lancement** : Appuyez sur F12 ou utilisez l'icône de la barre des tâches
+1. **Lancement** : Appuyez sur F12 ou utilisez l'icone de la barre des tâches
 2. **Configuration** :
    - Sélectionnez le modèle (détection auto)
    - Choisissez le profil d'alimentation
@@ -292,3 +300,11 @@ Les contributions sont les bienvenues ! N'hésitez pas à soumettre des problèm
 
 - **[JamesCJ60](https://github.com/JamesCJ60)** - Inspiration du concept original
 - **[FlyGoat](https://github.com/FlyGoat)** - Développement de RyzenADJ
+
+### ❤️ Soutenir le projet
+
+Si vous trouvez Framework Hub Mini utile et que vous souhaitez contribuer à son développement, vous pouvez devenir mécène ! Votre soutien m'aide à maintenir et améliorer le projet, tout en gardant mes chats bien nourris 😺
+
+[![Devenez mécène](https://img.shields.io/badge/Patreon-Soutenez%20le%20projet-FF424D?style=for-the-badge&logo=patreon)](https://patreon.com/Oganoth?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink)
+
+Un immense merci à tous les mécènes qui rendent ce projet possible ! ❤️

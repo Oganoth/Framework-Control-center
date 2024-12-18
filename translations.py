@@ -1,401 +1,158 @@
-translations = {
-    "en": {
-        # Main window
-        "title": "Framework Hub PY Edition",
-        "home": "Home",
-        "performance": "Performance",
-        "keyboard": "Keyboard",
+TRANSLATIONS = {
+    "en": {  # English (default)
         "settings": "Settings",
-        
-        # Framework Laptop Models
-        "select_model": "Select your Framework Laptop model",
-        "model_12": "Framework Laptop 12",
-        "model_13": "Framework Laptop 13",
-        "model_16": "Framework Laptop 16",
-        
-        # Theme Settings
-        "theme_settings": "Theme Settings",
-        "theme_light": "Light Theme",
-        "theme_dark": "Dark Theme",
-        
-        # Profiles
+        "advanced_settings": "Advanced Settings",
+        "laptop_model": "Laptop Model",
+        "language": "Language",
+        "profile": "Profile",
         "silent": "Silent",
         "balanced": "Balanced",
-        "performance_profile": "Performance",
-        "custom": "Custom",
-        
-        # Performance monitoring
-        "cpu": "CPU",
-        "cpu_usage": "CPU Usage",
-        "cpu_temp": "CPU Temperature",
-        "gpu": "GPU",
-        "gpu_usage": "GPU Usage",
-        "gpu_temp": "GPU Temperature",
-        "memory": "Memory",
-        "memory_usage": "Memory Usage",
-        "network": "Network",
-        "network_info": "Network Information",
-        "speed_test": "Speed Test",
-        "testing": "Testing...",
-        "download": "Download",
-        "upload": "Upload",
-        "ping": "Ping",
-        "external_ip": "External IP",
-        "internal_ip": "Internal IP",
-        "interface": "Interface",
-        "netmask": "Netmask",
-        
-        # Controls
-        "temperature_controls": "Temperature Controls",
-        "power_controls": "Power Controls",
-        "voltage_controls": "Voltage Controls",
-        "boost_controls": "Boost Controls",
-        "apply": "Apply",
-        "reset": "Reset",
-        
-        # Settings
-        "language_settings": "Language Settings",
-        "choose_language": "Choose your preferred language",
-        "profile_settings": "Profile Settings",
-        "save_profile": "Save Profile",
-        
-        # Messages
-        "profile_applied": "Profile applied successfully",
-        "admin_required": "Administrator privileges required",
-        "error_occurred": "An error occurred",
-        "unsupported_cpu": "Unsupported CPU",
-        "simulation_mode": "Running in simulation mode",
-        
-        # Storage monitoring
-        "storage": "Storage",
-        "storage_usage": "Storage Usage",
-        "storage_temp": "Storage Temperature",
-        "storage_info": "SSD Usage and Temperature",
-        
-        # Additional messages
-        "unable_to_fetch": "Unable to fetch",
-        "speed_test_failed": "Speed test failed",
-        "downloading": "Downloading RyzenADJ...",
-        "checking_cpu": "Checking CPU support...",
-        "unsupported_warning": "WARNING: Unsupported CPU or administrator rights required",
-        "simulation_warning": "RyzenADJ will only work in simulation mode",
-        "error_admin": "Error running as admin",
-        "error_cpu_check": "Error checking CPU support",
-        "error_stats": "Error updating stats",
-        
-        # Profile descriptions
-        "silent_description": "ECO mode optimized for quiet operation and battery life (15W TDP, boost disabled)",
-        "balanced_description": "Balanced profile with moderate performance and power consumption (30W TDP, boost enabled)",
-        "performance_description": "Maximum performance mode without compromise (60W TDP, boost enabled)",
-        
-        # Power settings
-        "power_limit": "Power Limit",
-        "current_limit": "Current Limit",
-        
-        # System info
-        "system": "System",
-        "system_info": "System Information",
-        "system_info_subtitle": "CPU, GPU, RAM, and Storage Usage",
-        "results": "Results"
+        "boost": "Boost",
+        "cpu_boost": "CPU Boost",
+        "tdp": "TDP (STAPM) Limit",
+        "fast_limit": "Fast Limit",
+        "slow_limit": "Slow Limit",
+        "current_limit": "VRM Current",
+        "temp_limit": "Temperature Limit",
+        "skin_temp": "Skin Temperature",
+        "reset_to_defaults": "Reset to Defaults",
+        "save_settings": "Save Settings",
+        "refresh_rate": "Refresh Rate",
+        "auto": "Auto",
+        "battery": "Battery",
+        "charge_limit": "Charge Limit",
+        "brightness": "Brightness",
+        "updates": "Updates",
+        "keyboard": "Keyboard"
     },
-    
-    "fr": {
-        # Main window
-        "title": "Framework Hub PY Edition",
-        "home": "Accueil",
-        "performance": "Performance",
-        "keyboard": "Clavier",
+    "fr": {  # French
         "settings": "Paramètres",
-        
-        # Framework Laptop Models
-        "select_model": "Sélectionnez votre modèle de Framework Laptop",
-        "model_12": "Framework Laptop 12",
-        "model_13": "Framework Laptop 13",
-        "model_16": "Framework Laptop 16",
-        
-        # Theme Settings
-        "theme_settings": "Paramètres du thème",
-        "theme_light": "Thème clair",
-        "theme_dark": "Thème sombre",
-        
-        # Profiles
+        "advanced_settings": "Paramètres avancés",
+        "laptop_model": "Modèle d'ordinateur",
+        "language": "Langue",
+        "profile": "Profil",
         "silent": "Silencieux",
         "balanced": "Équilibré",
-        "performance_profile": "Performance",
-        "custom": "Personnalisé",
-        
-        # Performance monitoring
-        "cpu": "CPU",
-        "cpu_usage": "Utilisation CPU",
-        "cpu_temp": "Température CPU",
-        "gpu": "GPU",
-        "gpu_usage": "Utilisation GPU",
-        "gpu_temp": "Température GPU",
-        "memory": "Mémoire",
-        "memory_usage": "Utilisation Mémoire",
-        "network": "Réseau",
-        "network_info": "Informations Réseau",
-        "speed_test": "Test de Vitesse",
-        "testing": "Test en cours...",
-        "download": "Téléchargement",
-        "upload": "Envoi",
-        "ping": "Ping",
-        "external_ip": "IP Externe",
-        "internal_ip": "IP Interne",
-        "interface": "Interface",
-        "netmask": "Masque de sous-réseau",
-        
-        # Controls
-        "temperature_controls": "Contrôles de Température",
-        "power_controls": "Contrôles de Puissance",
-        "voltage_controls": "Contrôles de Voltage",
-        "boost_controls": "Contrôles de Boost",
-        "apply": "Appliquer",
-        "reset": "Réinitialiser",
-        
-        # Settings
-        "language_settings": "Paramètres de Langue",
-        "choose_language": "Choisissez votre langue",
-        "profile_settings": "Paramètres de Profil",
-        "save_profile": "Sauvegarder le Profil",
-        
-        # Messages
-        "profile_applied": "Profil appliqué avec succès",
-        "admin_required": "Privilèges administrateur requis",
-        "error_occurred": "Une erreur est survenue",
-        "unsupported_cpu": "CPU non supporté",
-        "simulation_mode": "Mode simulation",
-        
-        # Storage monitoring
-        "storage": "Stockage",
-        "storage_usage": "Utilisation Stockage",
-        "storage_temp": "Température Stockage",
-        "storage_info": "Utilisation et Température SSD",
-        
-        # Additional messages
-        "unable_to_fetch": "Impossible à récupérer",
-        "speed_test_failed": "Test de vitesse échoué",
-        "downloading": "Téléchargement de RyzenADJ...",
-        "checking_cpu": "Vérification du support CPU...",
-        "unsupported_warning": "ATTENTION: CPU non supporté ou droits administrateur requis",
-        "simulation_warning": "RyzenADJ fonctionnera uniquement en mode simulation",
-        "error_admin": "Erreur lors de l'exécution en admin",
-        "error_cpu_check": "Erreur lors de la vérification du CPU",
-        "error_stats": "Erreur lors de la mise à jour des statistiques",
-        
-        # Profile descriptions
-        "silent_description": "Mode ECO optimisé pour un fonctionnement silencieux et l'autonomie (15W TDP, boost désactivé)",
-        "balanced_description": "Profil équilibré avec performances et consommation modérées (30W TDP, boost activé)",
-        "performance_description": "Mode performance maximale sans compromis (60W TDP, boost activé)",
-        
-        # Power settings
-        "power_limit": "Limite de Puissance",
-        "current_limit": "Limite de Courant",
-        
-        # System info
-        "system": "Système",
-        "system_info": "Informations Système",
-        "system_info_subtitle": "Utilisation CPU, GPU, RAM et Stockage",
-        "results": "Résultats"
+        "boost": "Performance",
+        "cpu_boost": "Boost CPU",
+        "tdp": "Limite TDP (STAPM)",
+        "fast_limit": "Limite rapide",
+        "slow_limit": "Limite lente",
+        "current_limit": "Courant VRM",
+        "temp_limit": "Limite de température",
+        "skin_temp": "Température externe",
+        "reset_to_defaults": "Réinitialiser",
+        "save_settings": "Sauvegarder",
+        "refresh_rate": "Taux de rafraîchissement",
+        "auto": "Auto",
+        "battery": "Batterie",
+        "charge_limit": "Limite de charge",
+        "brightness": "Luminosité",
+        "updates": "Mises à jour",
+        "keyboard": "Clavier"
     },
-    
-    "es": {
-        # Main window
-        "title": "Framework Hub PY Edition",
-        "home": "Inicio",
-        "performance": "Rendimiento",
-        "keyboard": "Teclado",
-        "settings": "Ajustes",
-        
-        # Framework Laptop Models
-        "select_model": "Seleccione su modelo de Framework Laptop",
-        "model_12": "Framework Laptop 12",
-        "model_13": "Framework Laptop 13",
-        "model_16": "Framework Laptop 16",
-        
-        # Theme Settings
-        "theme_settings": "Ajustes de tema",
-        "theme_light": "Tema claro",
-        "theme_dark": "Tema oscuro",
-        
-        # Profiles
-        "silent": "Silencioso",
-        "balanced": "Equilibrado",
-        "performance_profile": "Rendimiento",
-        "custom": "Personalizado",
-        
-        # Performance monitoring
-        "cpu": "CPU",
-        "cpu_usage": "Uso de CPU",
-        "cpu_temp": "Temperatura CPU",
-        "gpu": "GPU",
-        "gpu_usage": "Uso de GPU",
-        "gpu_temp": "Temperatura GPU",
-        "memory": "Memoria",
-        "memory_usage": "Uso de Memoria",
-        "network": "Red",
-        "network_info": "Información de Red",
-        "speed_test": "Test de Velocidad",
-        "testing": "Probando...",
-        "download": "Descarga",
-        "upload": "Subida",
-        "ping": "Ping",
-        "external_ip": "IP Externa",
-        "internal_ip": "IP Interna",
-        "interface": "Interfaz",
-        "netmask": "Máscara de Red",
-        
-        # Controls
-        "temperature_controls": "Controles de Temperatura",
-        "power_controls": "Controles de Energía",
-        "voltage_controls": "Controles de Voltaje",
-        "boost_controls": "Controles de Boost",
-        "apply": "Aplicar",
-        "reset": "Restablecer",
-        
-        # Settings
-        "language_settings": "Ajustes de Idioma",
-        "choose_language": "Elige tu idioma",
-        "profile_settings": "Ajustes de Perfil",
-        "save_profile": "Guardar Perfil",
-        
-        # Messages
-        "profile_applied": "Perfil aplicado con éxito",
-        "admin_required": "Se requieren privilegios de administrador",
-        "error_occurred": "Ha ocurrido un error",
-        "unsupported_cpu": "CPU no soportada",
-        "simulation_mode": "Modo simulación",
-        
-        # Storage monitoring
-        "storage": "Almacenamiento",
-        "storage_usage": "Uso de Almacenamiento",
-        "storage_temp": "Temperatura de Almacenamiento",
-        "storage_info": "Uso y Temperatura del SSD",
-        
-        # Additional messages
-        "unable_to_fetch": "No se puede obtener",
-        "speed_test_failed": "Prueba de velocidad fallida",
-        "downloading": "Descargando RyzenADJ...",
-        "checking_cpu": "Comprobando soporte de CPU...",
-        "unsupported_warning": "ADVERTENCIA: CPU no compatible o se requieren derechos de administrador",
-        "simulation_warning": "RyzenADJ solo funcionará en modo simulación",
-        "error_admin": "Error al ejecutar como administrador",
-        "error_cpu_check": "Error al verificar el soporte de CPU",
-        "error_stats": "Error al actualizar las estadísticas",
-        
-        # Profile descriptions
-        "silent_description": "Modo ECO optimizado para funcionamiento silencioso y duración de batería (15W TDP, boost desactivado)",
-        "balanced_description": "Perfil equilibrado con rendimiento y consumo moderados (30W TDP, boost activado)",
-        "performance_description": "Modo de máximo rendimiento sin compromiso (60W TDP, boost activado)",
-        
-        # Power settings
-        "power_limit": "Límite de Potencia",
-        "current_limit": "Límite de Corriente",
-        
-        # System info
-        "system": "Sistema",
-        "system_info": "Información del Sistema",
-        "system_info_subtitle": "Uso de CPU, GPU, RAM y Almacenamiento",
-        "results": "Resultados"
-    },
-    
-    "de": {
-        # Main window
-        "title": "Framework Hub PY Edition",
-        "home": "Start",
-        "performance": "Leistung",
-        "keyboard": "Tastatur",
+    "de": {  # German
         "settings": "Einstellungen",
-        
-        # Framework Laptop Models
-        "select_model": "Wählen Sie Ihr Framework Laptop-Modell",
-        "model_12": "Framework Laptop 12",
-        "model_13": "Framework Laptop 13",
-        "model_16": "Framework Laptop 16",
-        
-        # Theme Settings
-        "theme_settings": "Theme-Einstellungen",
-        "theme_light": "Helles Theme",
-        "theme_dark": "Dunkles Theme",
-        
-        # Profiles
+        "advanced_settings": "Erweiterte Einstellungen",
+        "laptop_model": "Laptop-Modell",
+        "language": "Sprache",
+        "profile": "Profil",
         "silent": "Leise",
         "balanced": "Ausgewogen",
-        "performance_profile": "Leistung",
-        "custom": "Benutzerdefiniert",
-        
-        # Performance monitoring
-        "cpu": "CPU",
-        "cpu_usage": "CPU-Auslastung",
-        "cpu_temp": "CPU-Temperatur",
-        "gpu": "GPU",
-        "gpu_usage": "GPU-Auslastung",
-        "gpu_temp": "GPU-Temperatur",
-        "memory": "Arbeitsspeicher",
-        "memory_usage": "Speicherauslastung",
-        "network": "Netzwerk",
-        "network_info": "Netzwerkinformationen",
-        "speed_test": "Geschwindigkeitstest",
-        "testing": "Test läuft...",
-        "download": "Download",
-        "upload": "Upload",
-        "ping": "Ping",
-        "external_ip": "Externe IP",
-        "internal_ip": "Interne IP",
-        "interface": "Schnittstelle",
-        "netmask": "Netzmaske",
-        
-        # Controls
-        "temperature_controls": "Temperatursteuerung",
-        "power_controls": "Energiesteuerung",
-        "voltage_controls": "Spannungssteuerung",
-        "boost_controls": "Boost-Steuerung",
-        "apply": "Anwenden",
-        "reset": "Zurücksetzen",
-        
-        # Settings
-        "language_settings": "Spracheinstellungen",
-        "choose_language": "Wähle deine Sprache",
-        "profile_settings": "Profileinstellungen",
-        "save_profile": "Profil speichern",
-        
-        # Messages
-        "profile_applied": "Profil erfolgreich angewendet",
-        "admin_required": "Administratorrechte erforderlich",
-        "error_occurred": "Ein Fehler ist aufgetreten",
-        "unsupported_cpu": "CPU nicht unterstützt",
-        "simulation_mode": "Simulationsmodus",
-        
-        # Storage monitoring
-        "storage": "Speicher",
-        "storage_usage": "Speichernutzung",
-        "storage_temp": "Speichertemperatur",
-        "storage_info": "SSD-Nutzung und Temperatur",
-        
-        # Additional messages
-        "unable_to_fetch": "Abruf nicht möglich",
-        "speed_test_failed": "Geschwindigkeitstest fehlgeschlagen",
-        "downloading": "RyzenADJ wird heruntergeladen...",
-        "checking_cpu": "CPU-Unterstützung wird überprüft...",
-        "unsupported_warning": "WARNUNG: Nicht unterstützte CPU oder Administratorrechte erforderlich",
-        "simulation_warning": "RyzenADJ wird nur im Simulationsmodus ausgeführt",
-        "error_admin": "Fehler bei der Ausführung als Administrator",
-        "error_cpu_check": "Fehler bei der Überprüfung der CPU-Unterstützung",
-        "error_stats": "Fehler beim Aktualisieren der Statistiken",
-        
-        # Profile descriptions
-        "silent_description": "ECO-Modus optimiert für leisen Betrieb und Akkulaufzeit (15W TDP, Boost deaktiviert)",
-        "balanced_description": "Ausgewogenes Profil mit moderater Leistung und Stromverbrauch (30W TDP, Boost aktiviert)",
-        "performance_description": "Maximale Leistung ohne Kompromisse (60W TDP, Boost aktiviert)",
-        
-        # Power settings
-        "power_limit": "Leistungslimit",
-        "current_limit": "Stromlimit",
-        
-        # System info
-        "system": "System",
-        "system_info": "Systeminformationen",
-        "system_info_subtitle": "CPU-, GPU-, RAM- und Speicherauslastung",
-        "results": "Ergebnisse"
+        "boost": "Leistung",
+        "cpu_boost": "CPU-Boost",
+        "tdp": "TDP (STAPM) Limit",
+        "fast_limit": "Schnelles Limit",
+        "slow_limit": "Langsames Limit",
+        "current_limit": "VRM-Strom",
+        "temp_limit": "Temperaturgrenze",
+        "skin_temp": "Gehäusetemperatur",
+        "reset_to_defaults": "Zurücksetzen",
+        "save_settings": "Speichern",
+        "refresh_rate": "Bildwiederholrate",
+        "auto": "Auto",
+        "battery": "Akku",
+        "charge_limit": "Ladelimit",
+        "brightness": "Helligkeit",
+        "updates": "Updates",
+        "keyboard": "Tastatur"
+    },
+    "it": {  # Italian
+        "settings": "Impostazioni",
+        "advanced_settings": "Impostazioni avanzate",
+        "laptop_model": "Modello laptop",
+        "language": "Lingua",
+        "profile": "Profilo",
+        "silent": "Silenzioso",
+        "balanced": "Bilanciato",
+        "boost": "Prestazioni",
+        "cpu_boost": "Boost CPU",
+        "tdp": "Limite TDP (STAPM)",
+        "fast_limit": "Limite veloce",
+        "slow_limit": "Limite lento",
+        "current_limit": "Corrente VRM",
+        "temp_limit": "Limite temperatura",
+        "skin_temp": "Temperatura esterna",
+        "reset_to_defaults": "Ripristina",
+        "save_settings": "Salva",
+        "refresh_rate": "Frequenza di aggiornamento",
+        "auto": "Auto",
+        "battery": "Batteria",
+        "charge_limit": "Limite di carica",
+        "brightness": "Luminosità",
+        "updates": "Aggiornamenti",
+        "keyboard": "Tastiera"
+    },
+    "es": {  # Spanish
+        "settings": "Ajustes",
+        "advanced_settings": "Ajustes avanzados",
+        "laptop_model": "Modelo de portátil",
+        "language": "Idioma",
+        "profile": "Perfil",
+        "silent": "Silencioso",
+        "balanced": "Equilibrado",
+        "boost": "Rendimiento",
+        "cpu_boost": "Boost CPU",
+        "tdp": "Límite TDP (STAPM)",
+        "fast_limit": "Límite rápido",
+        "slow_limit": "Límite lento",
+        "current_limit": "Corriente VRM",
+        "temp_limit": "Límite de temperatura",
+        "skin_temp": "Temperatura externa",
+        "reset_to_defaults": "Restablecer",
+        "save_settings": "Guardar",
+        "refresh_rate": "Tasa de refresco",
+        "auto": "Auto",
+        "battery": "Batería",
+        "charge_limit": "Límite de carga",
+        "brightness": "Brillo",
+        "updates": "Actualizaciones",
+        "keyboard": "Teclado"
+    },
+    "zh": {  # Chinese
+        "settings": "设置",
+        "advanced_settings": "高级设置",
+        "laptop_model": "笔记本型号",
+        "language": "语言",
+        "profile": "配置文件",
+        "silent": "静音",
+        "balanced": "平衡",
+        "boost": "性能",
+        "cpu_boost": "CPU加速",
+        "tdp": "TDP（STAPM）限制",
+        "fast_limit": "快速限制",
+        "slow_limit": "慢速限制",
+        "current_limit": "VRM电流",
+        "temp_limit": "温度限制",
+        "skin_temp": "表面温度",
+        "reset_to_defaults": "重置",
+        "save_settings": "保存",
+        "refresh_rate": "刷新率",
+        "auto": "自动",
+        "battery": "电池",
+        "charge_limit": "充电限制",
+        "brightness": "亮度",
+        "updates": "更新",
+        "keyboard": "键盘"
     }
 } 

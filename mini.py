@@ -24,6 +24,8 @@ import win32gui
 import pythoncom
 import wmi
 import platform
+from translations import TRANSLATIONS
+from settings_window import SettingsWindow
 
 # Configure logging
 logging.basicConfig(
@@ -130,22 +132,21 @@ class MiniFrameworkHub(ctk.CTk):
         try:
             super().__init__()
             logger.info("Initializing MiniFrameworkHub")
-
+            
             # Initialize monitoring flags
             self.power_monitor_thread = None
             self.stop_power_monitor = False
             self.battery_monitor_thread = None
-
+            
             # Initialize system monitor
             self.monitor = SystemMonitor()
             logger.info("System monitor initialized")
-
-            # Load battery settings
-            self.load_battery_settings()
             
-            # Initialize settings and managers
+            # Initialize settings
             self.settings = self.load_settings()
-            logger.info("Settings loaded")
+            self.current_language = self.settings.get("language", "en")
+            self.translations = TRANSLATIONS[self.current_language]
+            logger.info(f"Settings loaded, language: {self.current_language}")
             
             # Initialize system info
             self.system_info = self.initialize_system_info()
@@ -163,7 +164,7 @@ class MiniFrameworkHub(ctk.CTk):
                     logger.info(f"AMD GPU detected: {gpu_data['name']}")
             else:
                 logger.warning("No AMD GPUs detected")
-
+                
             # IMPORTANT: Initialize model var with default value
             self.model_var = ctk.StringVar()
             saved_model = self.settings.get("laptop_model", "model_13_amd")
@@ -194,7 +195,49 @@ class MiniFrameworkHub(ctk.CTk):
         except Exception as e:
             logger.error(f"Error in initialization: {str(e)}", exc_info=True)
             raise
+            
+    def tr(self, key):
+        """Get translation for key"""
+        return self.translations.get(key, key)
         
+    def update_ui_language(self):
+        """Update UI text based on selected language"""
+        self.current_language = self.settings.get("language", "en")
+        self.translations = TRANSLATIONS[self.current_language]
+        logger.info(f"Language updated to: {self.current_language}")
+        
+        # Update window title
+        self.title(self.tr("settings"))
+        
+        # Update all labels and buttons
+        self.update_all_widgets_text(self)
+        
+    def update_all_widgets_text(self, parent):
+        """Recursively update text of all widgets"""
+        for widget in parent.winfo_children():
+            if isinstance(widget, ctk.CTkLabel):
+                text = widget.cget("text")
+                if text in self.translations:
+                    widget.configure(text=self.tr(text))
+            elif isinstance(widget, ctk.CTkButton):
+                text = widget.cget("text")
+                if text in self.translations:
+                    widget.configure(text=self.tr(text))
+            elif isinstance(widget, ctk.CTkFrame) or isinstance(widget, ctk.CTkScrollableFrame):
+                self.update_all_widgets_text(widget)
+                
+        # Update settings window if open
+        if hasattr(self, 'settings_window') and self.settings_window:
+            self.settings_window.update_ui_language()
+            
+    def open_settings(self):
+        """Open settings window"""
+        if not hasattr(self, 'settings_window') or not self.settings_window.winfo_exists():
+            self.settings_window = SettingsWindow(self)
+            self.settings_window.focus()
+        else:
+            self.settings_window.focus()
+    
     def setup_window(self):
         self.title("Framework Mini Hub")
         self.geometry("300x750")
@@ -1679,13 +1722,6 @@ try {{
         except Exception as e:
             logger.error(f"Error setting brightness: {str(e)}")
 
-    def open_settings(self):
-        if not hasattr(self, 'settings_window') or not self.settings_window.winfo_exists():
-            self.settings_window = SettingsWindow(self)
-            self.settings_window.focus()
-        else:
-            self.settings_window.focus()
-
     def auto_refresh_rate(self):
         """Adjusts refresh rate based on power source"""
         try:
@@ -1828,6 +1864,44 @@ class SettingsWindow(ctk.CTkToplevel):
         )
         title_label.pack(pady=10)
         
+        # Language Selection
+        language_frame = ctk.CTkFrame(self.main_frame, **frame_style)
+        language_frame.pack(fill="x", pady=5)
+        
+        ctk.CTkLabel(
+            language_frame,
+            text="Language",
+            text_color=self.text_color,
+            font=("Arial", 14, "bold")
+        ).pack(anchor="w", padx=10, pady=5)
+        
+        # Language mapping for display
+        self.language_display = {
+            "en": "English",
+            "fr": "Français",
+            "de": "Deutsch",
+            "it": "Italiano",
+            "es": "Español",
+            "zh": "中文"
+        }
+        
+        # Create list of language display names in the same order as language codes
+        language_codes = ["en", "fr", "de", "it", "es", "zh"]
+        language_names = [self.language_display[code] for code in language_codes]
+        
+        self.language_var = ctk.StringVar(value=self.language_display[self.parent.settings.get("language", "en")])
+        language_menu = ctk.CTkOptionMenu(
+            language_frame,
+            values=language_names,
+            command=lambda name: self.on_language_change(language_codes[language_names.index(name)]),
+            variable=self.language_var,
+            fg_color=self.button_color,
+            button_color=self.button_color,
+            button_hover_color=self.hover_color,
+            text_color="black"
+        )
+        language_menu.pack(fill="x", padx=10, pady=5)
+        
         # Model Selection
         model_frame = ctk.CTkFrame(self.main_frame, **frame_style)
         model_frame.pack(fill="x", pady=5)
@@ -1908,6 +1982,37 @@ class SettingsWindow(ctk.CTkToplevel):
             corner_radius=8
         )
         self.save_button.pack(side="right", fill="x", expand=True, padx=5)
+        
+    def on_language_change(self, language_code):
+        """Handle language change"""
+        self.parent.settings["language"] = language_code
+        self.parent.save_settings()
+        self.update_ui_language()
+        
+    def update_ui_language(self):
+        """Update UI text based on selected language"""
+        lang = self.parent.settings.get("language", "en")
+        translations = TRANSLATIONS[lang]
+        
+        # Update window title
+        self.title(translations["settings"])
+        
+        # Update main title
+        for widget in self.main_frame.winfo_children():
+            if isinstance(widget, ctk.CTkLabel) and widget.cget("text") == "Advanced Settings":
+                widget.configure(text=translations["advanced_settings"])
+                break
+                
+        # Update frame labels
+        for frame in self.main_frame.winfo_children():
+            if isinstance(frame, ctk.CTkFrame):
+                for widget in frame.winfo_children():
+                    if isinstance(widget, ctk.CTkLabel):
+                        text = widget.cget("text")
+                        if text == "Language":
+                            widget.configure(text=translations["language"])
+                        elif text == "Laptop Model":
+                            widget.configure(text=translations["laptop_model"])
         
     def create_ryzenadj_settings(self):
         # Clear existing settings if any
