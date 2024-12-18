@@ -107,7 +107,7 @@ customtkinter==5.2.0    # Modern UI components
 Pillow==10.0.0         # Image processing
 psutil==5.9.5          # System monitoring
 pywin32==306           # Windows API integration
-requests==2.31.0       # Network operations
+requests==2.31.0       # Network operations (WIP)
 wmi==1.5.1             # Hardware information
 keyboard==0.13.5       # Hotkey support
 pystray==0.19.4        # System tray integration
