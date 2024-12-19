@@ -89,85 +89,97 @@ POWER_PROFILES = {
             "boost_enabled": False,
             "current_limit": 65,
             "temp_limit": 90,
-            "skin_temp": 40
+            "skin_temp": 40,
+            "change_theme": True,
+            "dark_theme": True
         },
         "balanced": {
             "tdp": 20,
             "boost_enabled": True,
             "current_limit": 80,
             "temp_limit": 95,
-            "skin_temp": 45
+            "skin_temp": 45,
+            "change_theme": False,
+            "dark_theme": False
         },
         "performance": {
             "tdp": 28,
             "boost_enabled": True,
             "current_limit": 95,
             "temp_limit": 95,
-            "skin_temp": 45
+            "skin_temp": 45,
+            "change_theme": True,
+            "dark_theme": False
         }
     },
     "model_13_amd": {
-        "silent": {
+        "Silent": {
             "tdp": 15,
             "fast_limit": 20,
             "slow_limit": 15,
-            "boost_enabled": False,
-            "current_limit": 150,
             "temp_limit": 85,
             "skin_temp": 40,
-            "win_power": 0
+            "current_limit": 120,
+            "boost_enabled": False,
+            "change_theme": True,
+            "dark_theme": True
         },
-        "balanced": {
-            "tdp": 30,
-            "fast_limit": 35,
-            "slow_limit": 30,
-            "boost_enabled": True,
-            "current_limit": 180,
+        "Balanced": {
+            "tdp": 25,
+            "fast_limit": 30,
+            "slow_limit": 25,
             "temp_limit": 90,
             "skin_temp": 45,
-            "win_power": 1
-        },
-        "performance": {
-            "tdp": 60,
-            "fast_limit": 70,
-            "slow_limit": 60,
+            "current_limit": 150,
             "boost_enabled": True,
-            "current_limit": 200,
+            "change_theme": False,
+            "dark_theme": False
+        },
+        "Boost": {
+            "tdp": 28,
+            "fast_limit": 35,
+            "slow_limit": 28,
             "temp_limit": 95,
             "skin_temp": 50,
-            "win_power": 2
+            "current_limit": 180,
+            "boost_enabled": True,
+            "change_theme": True,
+            "dark_theme": False
         }
     },
     "model_16": {
-        "silent": {
+        "Silent": {
             "tdp": 30,
-            "boost_enabled": False,
-            "current_limit": 180,
-            "temp_limit": 95,
-            "skin_temp": 45,
             "fast_limit": 35,
             "slow_limit": 30,
-            "win_power": 0
+            "temp_limit": 85,
+            "skin_temp": 40,
+            "current_limit": 150,
+            "boost_enabled": False,
+            "change_theme": True,
+            "dark_theme": True
         },
-        "balanced": {
+        "Balanced": {
             "tdp": 95,
-            "boost_enabled": True,
-            "current_limit": 180,
-            "temp_limit": 95,
-            "skin_temp": 50,
             "fast_limit": 95,
             "slow_limit": 95,
-            "win_power": 1
-        },
-        "performance": {
-            "tdp": 120,
+            "temp_limit": 90,
+            "skin_temp": 45,
+            "current_limit": 180,
             "boost_enabled": True,
-            "current_limit": 200,
-            "temp_limit": 100,
-            "skin_temp": 50,
+            "change_theme": False,
+            "dark_theme": False
+        },
+        "Boost": {
+            "tdp": 120,
             "fast_limit": 140,
             "slow_limit": 120,
-            "win_power": 2
+            "temp_limit": 95,
+            "skin_temp": 50,
+            "current_limit": 200,
+            "boost_enabled": True,
+            "change_theme": True,
+            "dark_theme": False
         }
     }
 } 

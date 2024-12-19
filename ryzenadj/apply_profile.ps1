@@ -2,44 +2,43 @@
 $ErrorActionPreference = "Stop"
 try {
     $ryzenadj = "ryzenadj\ryzenadj.exe"
-    Write-Output "Using RyzenADJ at: $ryzenadj"
+    Write-Output "Utilisation de RyzenADJ: $ryzenadj"
     
-    # Test if RyzenADJ exists
     if (-not (Test-Path $ryzenadj)) {
-        throw "RyzenADJ executable not found at: $ryzenadj"
+        throw "ryzenadj.exe non trouvé: $ryzenadj"
     }
     
-    # Build arguments array
     $ryzenadj_args = @(
         "--stapm-limit"
-        "95"
+        "120"
         "--fast-limit"
-        "95000"
+        "140000"
         "--slow-limit"
-        "95000"
+        "120000"
         "--tctl-temp"
-        "95"
+        "100"
         "--apu-skin-temp"
         "50"
         "--vrmmax-current"
-        "180000"
+        "200000"
     )
     Write-Output "Arguments: $($ryzenadj_args -join ' ')"
     
-    # Check if running as admin
     $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-    Write-Output "Running as admin: $isAdmin"
+    Write-Output "Exécution en tant qu'admin: $isAdmin"
     
     if (-not $isAdmin) {
-        Write-Output "Elevating privileges..."
+        Write-Output "Élévation des privilèges..."
         $argString = $ryzenadj_args -join ' '
+        
         $pinfo = New-Object System.Diagnostics.ProcessStartInfo
         $pinfo.FileName = "powershell.exe"
-        $pinfo.Arguments = "-NoProfile -ExecutionPolicy Bypass -Command & `"$ryzenadj`" $argString"
+        $pinfo.Arguments = "-NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -Command & `"$ryzenadj`" $argString"
         $pinfo.Verb = "runas"
         $pinfo.RedirectStandardError = $true
         $pinfo.RedirectStandardOutput = $true
         $pinfo.UseShellExecute = $false
+        $pinfo.CreateNoWindow = $true
         
         $p = New-Object System.Diagnostics.Process
         $p.StartInfo = $pinfo
@@ -49,22 +48,22 @@ try {
         $stdout = $p.StandardOutput.ReadToEnd()
         $stderr = $p.StandardError.ReadToEnd()
         
-        Write-Output "Output: $stdout"
-        if ($stderr) { Write-Error "Error: $stderr" }
+        Write-Output "Sortie: $stdout"
+        if ($stderr) { Write-Error "Erreur: $stderr" }
         
         if ($p.ExitCode -ne 0) {
-            throw "RyzenADJ failed with exit code: $($p.ExitCode)"
+            throw "ryzenadj a échoué avec le code: $($p.ExitCode)"
         }
     } else {
-        Write-Output "Running RyzenADJ directly..."
+        Write-Output "Exécution directe de ryzenadj..."
         $output = & $ryzenadj $ryzenadj_args 2>&1
-        Write-Output "Output: $output"
+        Write-Output "Sortie: $output"
         if ($LASTEXITCODE -ne 0) {
-            throw "RyzenADJ failed with exit code: $LASTEXITCODE`nOutput: $output"
+            throw "ryzenadj a échoué avec le code: $LASTEXITCODE`nSortie: $output"
         }
     }
     
-    Write-Output "Profile applied successfully"
+    Write-Output "Profil appliqué avec succès"
     exit 0
 } catch {
     Write-Error $_.Exception.Message

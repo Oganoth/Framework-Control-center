@@ -2,3 +2,8 @@
 framework_hub.py
 Framework-Hub.code-workspace
 .gitignore
+
+# Icônes générées
+assets/tray_icon.png
+assets/error_icon.png
+assets/info_icon.png

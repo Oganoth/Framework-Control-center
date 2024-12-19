@@ -7,18 +7,14 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
-        ('assets', 'assets'),
-        ('fonts', 'fonts'),
-        ('ryzenadj', 'ryzenadj'),
-        ('battery_config.json', '.'),
-        ('config.json', '.'),
-        ('settings.json', '.'),
-        ('translations.py', '.'),
-        ('language_manager.py', '.'),
-        ('laptop_models.py', '.'),
         ('LICENSE', '.'),
         ('README.md', '.'),
-        ('RELEASE_NOTES.md', '.')
+        ('RELEASE_NOTES.md', '.'),
+        ('assets/*', 'assets/'),
+        ('battery_config.json', '.'),
+        ('config.json', '.'),
+        ('libs/*', 'libs/'),
+        ('ryzenadj/*', 'ryzenadj/'),
     ],
     hiddenimports=[
         'customtkinter',
@@ -28,6 +24,7 @@ a = Analysis(
         'psutil',
         'keyboard',
         'pystray',
+        'pystray._win32',
         'requests',
         'charset_normalizer',
         'idna',
@@ -35,7 +32,7 @@ a = Analysis(
         'urllib3',
         'wmi',
         'win32api',
-        'win32con',
+        'win32con', 
         'win32gui',
         'pythoncom',
         'platform',
@@ -60,7 +57,11 @@ a = Analysis(
     noarchive=False,
 )
 
-pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+pyz = PYZ(
+    a.pure, 
+    a.zipped_data,
+    cipher=block_cipher
+)
 
 exe = EXE(
     pyz,
@@ -69,7 +70,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='Framework_Hub',
+    name='Framework Hub',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -85,4 +86,4 @@ exe = EXE(
     icon='assets/logo.ico',
     version='file_version_info.txt',
     uac_admin=True
-) 
+)
