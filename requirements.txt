@@ -5,3 +5,4 @@ keyboard>=0.13.5
 pystray>=0.19.4
 requests>=2.31.0
 pythonnet>=3.0.1
+pywin32>=302
