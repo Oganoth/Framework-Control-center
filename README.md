@@ -22,6 +22,7 @@ A lightweight yet powerful control center for Framework AMD laptops, focusing on
 ### 🎯 Overview
 
 Framework Hub Mini is a streamlined power management tool designed specifically for Framework AMD laptops. Built with Python and modern UI components, it offers essential controls for optimizing your laptop's performance and battery life through an elegant, minimalist interface.
+For updates logs and future updates check out the patreon.
 
 ### 📸 Available Versions
 
