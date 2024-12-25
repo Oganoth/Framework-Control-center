@@ -26,6 +26,7 @@ Framework Hub Mini is a powerful system management tool designed specifically fo
 <div align="center">
 
 ![Main Interface](screenshots/main.png)
+
 *Main Interface - Control your laptop's performance with ease*
 
 ![Updates Manager](screenshots/Updates%20manager.png)
