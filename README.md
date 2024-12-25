@@ -40,10 +40,12 @@ Framework Hub Mini is a powerful system management tool designed specifically fo
 <div align="center">
 <p float="left">
   <img src="screenshots/main.png" width="400" alt="Main Interface"/>
+
   <img src="screenshots/Updates%20manager.png" width="400" alt="Updates Manager"/>
 </p>
 <p float="left">
   <img src="screenshots/Tweaks.png" width="400" alt="System Tweaks"/>
+
   <em>Framework Hub Mini in action - Control, Monitor, and Optimize your laptop</em>
 </p>
 </div>
