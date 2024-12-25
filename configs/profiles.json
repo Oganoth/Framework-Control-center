@@ -1,0 +1,117 @@
+{
+    "amd_profiles": {
+        "16_AMD": {
+            "silent": {
+                "name": "silent",
+                "tctl_temp": 95,
+                "chtc_temp": 95,
+                "apu_skin_temp": 50,
+                "stapm_limit": 30000,
+                "fast_limit": 35000,
+                "slow_limit": 30000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000,
+                "vrmgfx_current": 120000,
+                "win_power": 0
+            },
+            "balanced": {
+                "name": "balanced",
+                "tctl_temp": 95,
+                "chtc_temp": 95,
+                "apu_skin_temp": 50,
+                "stapm_limit": 95000,
+                "fast_limit": 95000,
+                "slow_limit": 95000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000,
+                "vrmgfx_current": 120000,
+                "win_power": 1
+            },
+            "boost": {
+                "name": "boost",
+                "tctl_temp": 100,
+                "chtc_temp": 95,
+                "apu_skin_temp": 50,
+                "stapm_limit": 120000,
+                "fast_limit": 120000,
+                "slow_limit": 120000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000,
+                "vrmgfx_current": 120000,
+                "win_power": 2
+            }
+        },
+        "13_AMD": {
+            "silent": {
+                "name": "silent",
+                "tctl_temp": 85,
+                "stapm_limit": 15000,
+                "fast_limit": 20000,
+                "slow_limit": 15000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000
+            },
+            "balanced": {
+                "name": "balanced",
+                "tctl_temp": 90,
+                "stapm_limit": 25000,
+                "fast_limit": 30000,
+                "slow_limit": 25000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000
+            },
+            "boost": {
+                "name": "boost",
+                "tctl_temp": 95,
+                "stapm_limit": 28000,
+                "fast_limit": 35000,
+                "slow_limit": 28000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000
+            }
+        }
+    },
+    "intel_profiles": {
+        "13_INTEL": {
+            "silent": {
+                "name": "silent",
+                "pl1": 10,
+                "pl2": 15,
+                "tau": 10,
+                "cpu_core_offset": 0,
+                "gpu_core_offset": 0,
+                "max_frequency": "2.5GHz"
+            },
+            "balanced": {
+                "name": "balanced",
+                "pl1": 20,
+                "pl2": 40,
+                "tau": 28,
+                "cpu_core_offset": -50,
+                "gpu_core_offset": 0,
+                "max_frequency": "Dynamic"
+            },
+            "boost": {
+                "name": "boost",
+                "pl1": 28,
+                "pl2": 55,
+                "tau": 28,
+                "cpu_core_offset": 0,
+                "gpu_core_offset": 0,
+                "max_frequency": "Dynamic"
+            }
+        }
+    }
+}

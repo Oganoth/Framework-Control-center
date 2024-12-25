@@ -1,17 +1,6 @@
 {
-    "profiles": {
-        "silent": {
-            "tdp": 15,
-            "boost": false
-        },
-        "balanced": {
-            "tdp": 25,
-            "boost": true
-        },
-        "performance": {
-            "tdp": 35,
-            "boost": true
-        }
-    },
-    "current_profile": "balanced"
+    "window_position": {
+        "x": 2060,
+        "y": 537
+    }
 }

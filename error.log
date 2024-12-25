@@ -1,0 +1,17 @@
+Error: 'SystemConfig' object has no attribute 'refresh_rate_mode'
+
+Traceback:
+Traceback (most recent call last):
+  File "D:\Python\Framework-CC\main.py", line 50, in main
+    app = FrameworkControlCenter()
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Framework-CC\framework_cc\gui.py", line 116, in __init__
+    self._create_widgets()
+  File "D:\Python\Framework-CC\framework_cc\gui.py", line 270, in _create_widgets
+    self._create_refresh_controls()
+  File "D:\Python\Framework-CC\framework_cc\gui.py", line 362, in _create_refresh_controls
+    if mode == self.config.refresh_rate_mode:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johnd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydantic\main.py", line 892, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'SystemConfig' object has no attribute 'refresh_rate_mode'

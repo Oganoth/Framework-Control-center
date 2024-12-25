@@ -1,4 +1,4 @@
-# Framework Laptop Hub Mini
+# Framework Hub Mini
 
 <div align="center">
 
@@ -9,11 +9,9 @@
 ![Status](https://img.shields.io/badge/Status-Beta-yellow.svg)
 ![RyzenADJ](https://img.shields.io/badge/RyzenADJ-v0.14.0-purple.svg)
 
-A lightweight yet powerful control center for Framework AMD laptops, focusing on performance and battery optimization.
+A comprehensive control center for Framework AMD laptops (soon intel too), offering advanced power management, hardware monitoring, and system optimization.
 
 [English](#english) | [Français](#français)
-
-<img src="screenshots/main.png" alt="Framework Hub Mini" width="300"/>
 
 </div>
 
@@ -21,236 +19,249 @@ A lightweight yet powerful control center for Framework AMD laptops, focusing on
 
 ### 🎯 Overview
 
-Framework Hub Mini is a streamlined power management tool designed specifically for Framework AMD laptops. Built with Python and modern UI components, it offers essential controls for optimizing your laptop's performance and battery life through an elegant, minimalist interface.
-
-### 📸 Available Versions
-
-- **Python Edition**
-  - Open source version
-  - Full source code access
-  - Community-driven development
-  - Manual dependency management
-
-- **Compiled Executable** ([Available on Patreon](https://patreon.com/Oganoth))
-  - One-click installation
-  - Pre-configured dependencies
-  - Automatic updates
-  - Priority support
-  - Additional features
+Framework Hub Mini is a powerful system management tool designed specifically for Framework AMD laptops. Built with Python and modern UI components, it provides comprehensive control over power management, performance optimization, and hardware monitoring through an elegant, feature-rich interface.
 
 ### 📸 Screenshots
 
 <div align="center">
-<table>
-<tr>
-<td><img src="screenshots/main.png" alt="Main Interface" width="200"/></td>
-<td><img src="screenshots/settings.png" alt="Settings" width="200"/></td>
-<td><img src="screenshots/updates.png" alt="Updates" width="200"/></td>
-</tr>
-<tr>
-<td align="center">Main Interface</td>
-<td align="center">Settings</td>
-<td align="center">Updates</td>
-</tr>
-</table>
+
+![Main Interface](Screenshots/main.png)
+*Main Interface - Control your laptop's performance with ease*
+
+![Updates Manager](Screenshots/Updates%20manager.png)
+*Updates Manager - Keep your system up to date*
+
+![System Tweaks](Screenshots/Tweaks.png)
+*System Tweaks - Fine-tune your laptop's settings*
+
 </div>
 
 ### ✨ Key Features
 
 #### Power Management
-- **Intelligent Power Profiles**
-  - Framework 13 (7640U/7840U):
+- **Advanced Power Profiles**
+  - Framework 13 AMD (7640U/7840U):
     - Silent/ECO (15W TDP)
-    - Balanced (30W TDP)
-    - Boost (60W TDP)
-  - Framework 16 (7840HS/7940HS):
+    - Balanced (25W TDP)
+    - Boost (28W TDP)
+  - Framework 16 AMD (7840HS/7940HS):
     - Silent/ECO (30W TDP)
     - Balanced (95W TDP)
     - Boost (120W TDP)
+  - Framework 13 Intel (WIP still in development):
+    - Silent (PL1: 10W, PL2: 15W)
+    - Balanced (PL1: 20W, PL2: 40W)
+    - Boost (PL1: 28W, PL2: 55W)
+- **Custom Power Plans**
+  - Create and save custom TDP configurations (Temporary disabled)
+  - Fine-tune CPU and GPU power limits (Temporary disabled)
+  - Profile-based power management
 
-#### Display Control
-- **Dynamic Refresh Rate Management**
-  - Auto-switching based on power source
-  - Framework 13: 60Hz/120Hz
-  - Framework 16: 60Hz/165Hz
-- **Brightness Control**
-  - Hardware-level adjustment
-  - Hotkey support
+#### Hardware Control
+- **CPU Management**
+  - Real-time frequency control 
+  - Temperature monitoring
+  - Core parking optimization
+  - Platform-specific tweaks
+- **GPU Control**
+  - iGPU frequency management (and dGPU if available)
+  - Temperature monitoring
+- **Fan Control**
+  - Custom fan curves
+  - Temperature-based adjustment
+  - Silent mode optimization
 
-#### Battery Optimization
-- **Advanced Charging Control**
-  - Customizable charge limit (60-100%)
-  - Battery longevity optimization
-  - Real-time status monitoring
+#### Display Management
+- **Advanced Display Control**
+  - Dynamic refresh rate switching (60Hz-165Hz)
+  - Power-source based automation
+  - Brightness control with hotkeys
+  - HDR management
+- **Multi-Monitor Support**
+  - External display detection
+  - Resolution management
+  - Refresh rate synchronization
 
-#### System Monitoring
-- **Real-time Performance Metrics**
-  - CPU usage and temperature
-  - RAM utilization
+#### System Optimization
+- **Performance Monitoring**
+  - Real-time CPU/GPU metrics
   - Power consumption tracking
-  - GPU metrics (integrated & discrete)
+  - Temperature monitoring
+  - Memory usage analysis
+- **Power Optimization**
+  - Battery charge limiting
+  - Power plan automation
+  - Sleep state management
+  - Runtime power optimization
 
-### 🛠️ Installation
+#### Additional Features
+- **System Tray Integration**
+  - Quick access to common settings
+  - Status indicators
+  - Profile switching
+- **Hotkey Support**
+  - Customizable shortcuts
+  - Profile switching
+  - Display management
+- **Multi-Language Support**
+  - English (default)
+  - French
+  - Spanish
+  - German
+  - Italian
+  - Chinese
+  - Klingon
 
-#### Python Edition
-1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run `python mini.py`
-
-#### Compiled Executable
-1. Get access through [Patreon](https://patreon.com/Oganoth)
-2. Download the installer
-3. Run the setup wizard
-4. Launch from Start Menu or Desktop shortcut
-
-### 📋 System Requirements
-
-- Windows 11 (22H2 or later)
-- 4GB RAM
-- 100MB disk space
-- Administrator privileges
-- .NET Framework 4.8
-- Visual C++ Redistributable 2015-2022
-
-### 📸 Screenshots
-
-<div align="center">
-<table>
-<tr>
-<td><img src="screenshots/main.png" alt="Main Interface" width="300"/></td>
-<td><img src="screenshots/settings.png" alt="Settings Window" width="300"/></td>
-</tr>
-<tr>
-<td align="center">Main Interface</td>
-<td align="center">Settings Window</td>
-</tr>
-</table>
-</div>
-
-### ✨ Key Features
-
-#### Power Management
-- **Intelligent Power Profiles**
-  - Framework 13 (7640U/7840U):
-    - Silent/ECO (15W TDP)
-    - Balanced (30W TDP)
-    - Boost (60W TDP)
-  - Framework 16 (7840HS/7940HS):
-    - Silent/ECO (30W TDP)
-    - Balanced (95W TDP)
-    - Boost (120W TDP)
-
-#### Display Control
-- **Dynamic Refresh Rate Management**
-  - Auto-switching based on power source
-  - Framework 13: 60Hz/120Hz
-  - Framework 16: 60Hz/165Hz
-- **Brightness Control**
-  - Hardware-level adjustment
-  - Hotkey support
-
-#### Battery Optimization
-- **Advanced Charging Control**
-  - Customizable charge limit (60-100%)
-  - Battery longevity optimization
-  - Real-time status monitoring
-
-#### System Monitoring
-- **Real-time Performance Metrics**
-  - CPU usage and temperature
-  - RAM utilization
-  - Power consumption tracking
-
-#### User Experience
-- **Modern Interface**
-  - System tray integration
-  - Global hotkey (F12)
-  - Clean, intuitive design
-- **Automatic Model Detection**
-  - CPU-based laptop model identification
-  - Profile auto-configuration
+- **Automatic Updates**
+  - Driver updates
+  - Software updates
+  - Profile optimizations
 
 ### 🛠️ Technical Details
 
 #### Dependencies
 ```python
-customtkinter==5.2.0    # Modern UI components
-Pillow==10.0.0         # Image processing
-psutil==5.9.5          # System monitoring
-pywin32==306           # Windows API integration
-requests==2.31.0       # Network operations (WIP)
-wmi==1.5.1             # Hardware information
-keyboard==0.13.5       # Hotkey support
-pystray==0.19.4        # System tray integration
+customtkinter>=5.2.0    # Modern UI framework
+pydantic>=2.5.0        # Data validation
+requests>=2.31.0       # Network operations
+psutil>=5.9.0         # System monitoring
+Pillow>=10.0.0        # Image processing
+aiohttp>=3.9.0        # Async HTTP client
+pywin32>=306          # Windows API integration
+wmi>=1.5.1            # Hardware information
+comtypes>=1.2.0       # COM interface
+pythonnet>=3.0.3      # .NET integration
+pystray>=0.19.4       # System tray
+keyboard>=0.13.5      # Hotkey support
 ```
 
-#### Architecture
-- **Core Components**
-  - `SystemMonitor`: Hardware monitoring and metrics
-  - `MiniFrameworkHub`: Main application logic
-  - `SettingsWindow`: Configuration interface
-  - `UpdateWindow`: Driver update management (WIP)
+#### Core Components
+- **Power Management**
+  - `power.py`: Power profile management
+  - `power_plan.py`: Windows power plan integration
+  - `tweaks.py`: System optimization
+- **Hardware Control**
+  - `hardware.py`: Hardware monitoring and control
+  - `display.py`: Display management
+  - `detector.py`: Hardware detection
+- **User Interface**
+  - `gui.py`: Main application interface
+  - `models.py`: Data models
+  - `translations.py`: Localization
 
-#### Key Technologies
-- RyzenADJ integration for power management
-- WMI for hardware interaction
-- Modern CTk-based UI
-- Multi-threaded monitoring system
+### 🔧 Installation
 
-### 📥 Installation
+1. **Prerequisites**
+   - Windows 11 (22H2 or later)
+   - Administrator privileges
+   - .NET Framework 4.8
+   - Visual C++ Redistributable 2015-2022
 
-1. Download the latest release
-2. Run the installer with administrator privileges
-3. Access via:
-   - Desktop shortcut
-   - Start menu
-   - System tray (F12)
+2. **Installation Options**
 
-### 🔧 Usage
+   #### Python Edition (Open Source)
+   - Requires Python 3.10+
+   ```bash
+   # Clone repository
+   git clone https://github.com/Oganoth/Framework-Hub-PY.git
+   cd Framework-Hub-PY
 
-1. **Launch**: Press F12 or use system tray icon
-2. **Configure**:
-   - Select laptop model (auto-detected)
-   - Choose power profile
-   - Set refresh rate
-   - Adjust battery limits
-3. **Monitor**: Track system performance in real-time
+   # Install dependencies
+   pip install -r requirements.txt
 
-### 🤝 License
+   # Run application
+   python main.py
+   ```
 
-Framework Hub Mini is free and open source software licensed under the GNU General Public License v3.0 (GPL-3.0). This means:
+   #### Framework-Hub.exe (Easy Install)
+   - All-in-one installer available on [Patreon](https://patreon.com/Oganoth)
+   - No Python or dependencies required
+   - One-click installation
 
-- ✅ You can use, modify, and distribute this software freely
-- ✅ If you modify and distribute it, you must:
-  - Keep it open source
-  - License it under GPL-3.0
-  - Provide attribution
-  - State your changes
+### 📋 Usage
 
-[View the full license](LICENSE)
+1. **First Launch**
+   - Run as administrator
+   - Hardware detection is automatic
+   - Initial configuration wizard
+
+2. **Daily Use**
+   - Access via system tray
+   - Quick profile switching
+   - Real-time monitoring
+   - Custom profile management
+
+3. **Advanced Features**
+   - Create custom power profiles
+   - Configure fan curves
+   - Set up automation rules
+   - Manage display settings
 
 ### 🤝 Contributing
 
-Contributions are welcome! Feel free to:
-- Submit issues and bug reports
-- Propose new features
-- Create pull requests
-- Share your improvements
+We welcome all contributions to make Framework Hub Mini better! Here's how you can help:
 
-Check out our [Contributing Guidelines](CONTRIBUTING.md) to get started.
+#### Code Contributions
+- Fork the repository
+- Create a feature branch
+- Add your improvements
+- Submit a pull request
 
-### ❤️ Support the Project
+#### Other Ways to Help
+- Report bugs and issues
+- Suggest new features
+- Improve documentation
+- Share your power profiles
+- Help with translations
+- Test on different Framework models
 
-If you find Framework Hub Mini useful and would like to support its development, you can become a patron! Your support helps me maintain and improve the project, while keeping my cats well fed 😺
+Join our community and help make Framework Hub Mini even better!
 
-[![Become a Patron](https://img.shields.io/badge/Patreon-Support%20the%20project-FF424D?style=for-the-badge&logo=patreon)](https://patreon.com/Oganoth?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink)
+### ❤️ Support
+
+If you find Framework Control Center useful, consider:
+- Starring the repository
+- Reporting bugs
+- Contributing code
+- Spreading the word
+
+### 📜 Support on Patreon
+
+Framework Hub Mini is a passion project that requires significant time and effort to maintain and improve. Your support on [Patreon](https://patreon.com/Oganoth) helps me dedicate more time to:
+- Developing new features
+- Improving existing functionality
+- Providing faster support
+- Testing on different hardware configurations
+- Creating better documentation
+
+By becoming a patron, you also get access to:
+- The easy-to-use installer version
+- Priority support
+- Early access to new features
+- Vote on upcoming features
+- Exclusive development insights
+
+[![Become a Patron](https://img.shields.io/badge/Patreon-Support%20Framework%20Hub-FF424D?style=for-the-badge&logo=patreon)](https://patreon.com/Oganoth)
 
 A huge thank you to all patrons who make this project possible! ❤️
 
+### 📜 License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+
 ### ❤️ Acknowledgments
 
-- **[JamesCJ60](https://github.com/JamesCJ60)** - Original concept inspiration
-- **[FlyGoat](https://github.com/FlyGoat)** - RyzenADJ development
+A special thanks to:
+
+#### My Amazing Patrons
+- Jonathan Webber
+
+#### The Framework Community
+Thank you to all the Framework community members who have helped test, provide feedback, and support this project.
+
+#### Special Thanks
+- Nirav Patel for the upcoming support
+- All contributors who have helped make this project better
 
 ---
 
@@ -258,124 +269,213 @@ A huge thank you to all patrons who make this project possible! ❤️
 
 ### 🎯 Aperçu
 
-Framework Hub Mini est un outil de gestion d'énergie optimisé pour les ordinateurs portables Framework AMD. Développé en Python avec une interface moderne, il offre les contrôles essentiels pour optimiser les performances et l'autonomie de votre ordinateur portable via une interface minimaliste et élégante.
-
-### 💻 Versions Disponibles
-
-- **Édition Python**
-  - Version open source
-  - Accès au code source complet
-  - Développement communautaire
-  - Gestion manuelle des dépendances
-
-- **Exécutable Compilé** ([Disponible sur Patreon](https://patreon.com/Oganoth))
-  - Installation en un clic
-  - Dépendances préconfigurées
-  - Mises à jour automatiques
-  - Support prioritaire
-  - Fonctionnalités additionnelles
+Framework Hub Mini est un outil puissant de gestion système conçu spécifiquement pour les ordinateurs portables Framework AMD. Développé en Python avec des composants d'interface moderne, il offre un contrôle complet sur la gestion de l'alimentation, l'optimisation des performances et la surveillance du matériel via une interface élégante et riche en fonctionnalités.
 
 ### 📸 Captures d'écran
 
 <div align="center">
-<table>
-<tr>
-<td><img src="screenshots/main.png" alt="Interface Principale" width="200"/></td>
-<td><img src="screenshots/settings.png" alt="Paramètres" width="200"/></td>
-<td><img src="screenshots/updates.png" alt="Mises à jour" width="200"/></td>
-</tr>
-<tr>
-<td align="center">Interface Principale</td>
-<td align="center">Paramètres</td>
-<td align="center">Mises à jour</td>
-</tr>
-</table>
+
+![Interface Principale](Screenshots/main.png)
+*Interface Principale - Contrôlez les performances de votre ordinateur portable facilement*
+
+![Gestionnaire de mises à jour](Screenshots/Updates%20manager.png)
+*Gestionnaire de mises à jour - Gardez votre système à jour*
+
+![Ajustements système](Screenshots/Tweaks.png)
+*Ajustements système - Affinez les paramètres de votre ordinateur portable*
+
 </div>
 
-### ✨ Fonctionnalités Clés
+### ✨ Fonctionnalités Principales
 
 #### Gestion de l'Alimentation
-- **Profils Intelligents**
-  - Framework 13 (7640U/7840U):
+- **Profils de Puissance Avancés**
+  - Framework 13 AMD (7640U/7840U):
     - Silencieux/ECO (15W TDP)
-    - Équilibré (30W TDP)
-    - Performance (60W TDP)
-  - Framework 16 (7840HS/7940HS):
+    - Équilibré (25W TDP)
+    - Performance (28W TDP)
+  - Framework 16 AMD (7840HS/7940HS):
     - Silencieux/ECO (30W TDP)
     - Équilibré (95W TDP)
     - Performance (120W TDP)
+  - Framework 13 Intel (En développement):
+    - Silencieux (PL1: 10W, PL2: 15W)
+    - Équilibré (PL1: 20W, PL2: 40W)
+    - Performance (PL1: 28W, PL2: 55W)
+- **Plans d'Alimentation Personnalisés**
+  - Création et sauvegarde de configurations TDP personnalisées (Temporairement désactivé)
+  - Réglage fin des limites de puissance CPU et GPU (Temporairement désactivé)
+  - Gestion des profils basée sur l'utilisation
 
-#### Contrôle de l'Affichage
-- **Gestion Dynamique du Taux de Rafraîchissement**
-  - Commutation automatique selon l'alimentation
-  - Framework 13: 60Hz/120Hz
-  - Framework 16: 60Hz/165Hz
-- **Contrôle de la Luminosité**
-  - Ajustement matériel
-  - Support des raccourcis clavier
+#### Contrôle Matériel
+- **Gestion du CPU**
+  - Contrôle de fréquence en temps réel
+  - Surveillance de la température
+  - Optimisation du parking des cœurs
+  - Ajustements spécifiques à la plateforme
+- **Contrôle du GPU**
+  - Gestion de la fréquence iGPU (et dGPU si disponible)
+  - Surveillance de la température
+- **Contrôle des Ventilateurs**
+  - Courbes personnalisées
+  - Ajustement basé sur la température
+  - Optimisation du mode silencieux
 
-#### Optimisation de la Batterie
-- **Contrôle Avancé de la Charge**
-  - Limite de charge personnalisable (60-100%)
-  - Optimisation de la longévité
-  - Surveillance en temps réel
+#### Gestion de l'Affichage
+- **Contrôle Avancé de l'Affichage**
+  - Changement dynamique du taux de rafraîchissement (60Hz-165Hz)
+  - Automatisation basée sur la source d'alimentation
+  - Contrôle de la luminosité avec raccourcis
+  - Gestion HDR
+- **Support Multi-Écrans**
+  - Détection des écrans externes
+  - Gestion de la résolution
+  - Synchronisation du taux de rafraîchissement
 
-#### Surveillance Système
-- **Métriques en Temps Réel**
-  - Utilisation et température CPU
-  - Utilisation de la RAM
-  - Suivi de la consommation
-  - Métriques GPU (intégré & dédié)
+#### Optimisation Système
+- **Surveillance des Performances**
+  - Métriques CPU/GPU en temps réel
+  - Suivi de la consommation d'énergie
+  - Surveillance de la température
+  - Analyse de l'utilisation de la mémoire
+- **Optimisation Énergétique**
+  - Limitation de charge de la batterie
+  - Automatisation des plans d'alimentation
+  - Gestion des états de veille
+  - Optimisation de la consommation en temps réel
 
-### 🛠️ Installation
+#### Fonctionnalités Additionnelles
+- **Intégration dans la Barre des Tâches**
+  - Accès rapide aux paramètres courants
+  - Indicateurs d'état
+  - Changement de profil
+- **Support des Raccourcis**
+  - Raccourcis personnalisables
+  - Changement de profil
+  - Gestion de l'affichage
+- **Support Multi-Langues**
+  - Anglais (par défaut)
+  - Français
+  - Espagnol
+  - Allemand
+  - Italien
+  - Chinois
+  - Klingon
+- **Mises à Jour Automatiques**
+  - Mises à jour des pilotes
+  - Mises à jour logicielles
+  - Optimisation des profils
 
-#### Édition Python
-1. Cloner le dépôt
-2. Installer les dépendances: `pip install -r requirements.txt`
-3. Exécuter `python mini.py`
+### 🔧 Installation
 
-#### Exécutable Compilé
-1. Accéder via [Patreon](https://patreon.com/Oganoth)
-2. Télécharger l'installateur
-3. Lancer l'assistant d'installation
-4. Démarrer depuis le Menu Démarrer ou le raccourci bureau
+1. **Prérequis**
+   - Windows 11 (22H2 ou plus récent)
+   - Privilèges administrateur
+   - .NET Framework 4.8
+   - Visual C++ Redistributable 2015-2022
 
-### 📋 Configuration Requise
+2. **Options d'Installation**
 
-- Windows 11 (22H2 ou ultérieur)
-- 4GB RAM
-- 100MB d'espace disque
-- Privilèges administrateur
-- .NET Framework 4.8
-- Visual C++ Redistributable 2015-2022
+   #### Édition Python (Open Source)
+   - Nécessite Python 3.10+
+   ```bash
+   # Cloner le dépôt
+   git clone https://github.com/Oganoth/Framework-Hub-PY.git
+   cd Framework-Hub-PY
 
-### 🔧 Utilisation
+   # Installer les dépendances
+   pip install -r requirements.txt
 
-1. **Lancement**: Appuyez sur F12 ou utilisez l'icône de la barre des tâches
-2. **Configuration**:
-   - Sélection du modèle (détection automatique)
-   - Choix du profil d'alimentation
-   - Réglage du taux de rafraîchissement
-   - Ajustement des limites de batterie
-3. **Surveillance**: Suivi des performances en temps réel
+   # Lancer l'application
+   python main.py
+   ```
 
-### 🤝 Licence
+   #### Framework-Hub.exe (Installation Facile)
+   - Installateur tout-en-un disponible sur [Patreon](https://patreon.com/Oganoth)
+   - Pas besoin de Python ni de dépendances
+   - Installation en un clic
 
-Framework Hub Mini est un logiciel libre sous licence GNU GPL v3.0. Cela signifie :
+### 📋 Utilisation
 
-- ✅ Utilisation, modification et distribution libres
-- ✅ En cas de modification et distribution :
-  - Conserver l'open source
-  - Licence GPL-3.0
-  - Attribution requise
-  - Mention des modifications
+1. **Premier Lancement**
+   - Exécuter en tant qu'administrateur
+   - Détection automatique du matériel
+   - Assistant de configuration initial
 
-[Voir la licence complète](LICENSE)
+2. **Utilisation Quotidienne**
+   - Accès via la barre des tâches
+   - Changement rapide de profil
+   - Surveillance en temps réel
+   - Gestion des profils personnalisés
 
-### ❤️ Soutenir le Projet
+3. **Fonctionnalités Avancées**
+   - Création de profils de puissance personnalisés
+   - Configuration des courbes de ventilation
+   - Configuration des règles d'automatisation
+   - Gestion des paramètres d'affichage
 
-Si vous trouvez Framework Hub Mini utile, vous pouvez devenir mécène ! Votre soutien aide au développement du projet et à nourrir mes chats 😺
+### 🤝 Contribution
 
-[![Devenir Mécène](https://img.shields.io/badge/Patreon-Soutenir%20le%20projet-FF424D?style=for-the-badge&logo=patreon)](https://patreon.com/Oganoth)
+Nous accueillons toutes les contributions pour améliorer Framework Hub Mini ! Voici comment vous pouvez aider :
+
+#### Contributions au Code
+- Forker le dépôt
+- Créer une branche de fonctionnalité
+- Ajouter vos améliorations
+- Soumettre une pull request
+
+#### Autres Façons d'Aider
+- Signaler des bugs et problèmes
+- Suggérer de nouvelles fonctionnalités
+- Améliorer la documentation
+- Partager vos profils de puissance
+- Aider aux traductions
+- Tester sur différents modèles Framework
+
+Rejoignez notre communauté et aidez à rendre Framework Hub Mini encore meilleur !
+
+### ❤️ Support
+
+Si vous trouvez Framework Hub Mini utile, vous pouvez :
+- Mettre une étoile au dépôt
+- Signaler des bugs
+- Contribuer au code
+- Faire connaître le projet
+
+### 📜 Soutien sur Patreon
+
+Framework Hub Mini est un projet passionnant qui nécessite beaucoup de temps et d'efforts pour être maintenu et amélioré. Votre soutien sur [Patreon](https://patreon.com/Oganoth) m'aide à consacrer plus de temps à :
+- Développer de nouvelles fonctionnalités
+- Améliorer les fonctionnalités existantes
+- Fournir un support plus rapide
+- Tester sur différentes configurations matérielles
+- Créer une meilleure documentation
+
+En devenant mécène, vous obtenez également :
+- La version avec installateur facile à utiliser
+- Un support prioritaire
+- Un accès anticipé aux nouvelles fonctionnalités
+- La possibilité de voter pour les futures fonctionnalités
+- Des informations exclusives sur le développement
+
+[![Devenir Mécène](https://img.shields.io/badge/Patreon-Soutenir%20Framework%20Hub-FF424D?style=for-the-badge&logo=patreon)](https://patreon.com/Oganoth)
 
 Un grand merci à tous les mécènes qui rendent ce projet possible ! ❤️
+
+### 📜 Licence
+
+Ce projet est sous licence GNU General Public License v3.0 - voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+### ❤️ Remerciements
+
+Un grand merci à :
+
+#### Mes Formidables Mécènes
+- Jonathan Webber
+
+#### La Communauté Framework
+Merci à tous les membres de la communauté Framework qui ont aidé à tester, fournir des retours et soutenir ce projet.
+
+#### Remerciements Spéciaux
+- Nirav Patel pour le soutien à venir
+- Tous les contributeurs qui ont aidé à améliorer ce projet

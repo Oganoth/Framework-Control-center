@@ -1,0 +1,10 @@
+{
+    "current_model": "13_AMD",
+    "current_profile": "Balanced",
+    "theme": "dark",
+    "language": "en",
+    "minimize_to_tray": true,
+    "start_minimized": true,
+    "monitoring_interval": 1000,
+    "refresh_rate_mode": "Auto"
+}

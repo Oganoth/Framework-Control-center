@@ -1,0 +1,132 @@
+{
+    "models": {
+        "13_AMD": {
+            "name": "Framework 13 AMD",
+            "processors": ["AMD Ryzen 7 7840U"],
+            "display": {
+                "size": 13.5,
+                "resolution": "2256x1504",
+                "aspect_ratio": "3:2",
+                "refresh_rate": 120
+            },
+            "ram": {
+                "max_capacity": 64,
+                "type": "DDR5",
+                "speed": 5600
+            },
+            "storage": {
+                "slots": 1,
+                "type": "M.2 2280 NVMe"
+            },
+            "expansion_ports": 4,
+            "battery": 55,
+            "tdp": {
+                "min": 15,
+                "max": 60
+            },
+            "has_dgpu": false,
+            "gpu": null
+        },
+        "13_Intel": {
+            "name": "Framework 13 Intel",
+            "processors": ["Intel Core i7-1370P", "Intel Core i5-1340P"],
+            "display": {
+                "size": 13.5,
+                "resolution": "2256x1504",
+                "aspect_ratio": "3:2",
+                "refresh_rate": 120
+            },
+            "ram": {
+                "max_capacity": 64,
+                "type": "DDR4",
+                "speed": 3200
+            },
+            "storage": {
+                "slots": 1,
+                "type": "M.2 2280 NVMe"
+            },
+            "expansion_ports": 4,
+            "battery": 55,
+            "tdp": {
+                "min": 15,
+                "max": 60
+            },
+            "has_dgpu": false,
+            "gpu": null
+        },
+        "16_AMD": {
+            "name": "Framework 16 AMD",
+            "processors": ["AMD Ryzen 7 7840HS", "AMD Ryzen 9 7940HS"],
+            "display": {
+                "size": 16.0,
+                "resolution": "2560x1600",
+                "aspect_ratio": "16:10",
+                "refresh_rate": 165
+            },
+            "ram": {
+                "max_capacity": 64,
+                "type": "DDR5",
+                "speed": 5600
+            },
+            "storage": {
+                "slots": 2,
+                "type": "M.2 2280 NVMe"
+            },
+            "expansion_ports": 6,
+            "battery": 85,
+            "tdp": {
+                "min": 35,
+                "max": 120
+            },
+            "has_dgpu": true,
+            "gpu": "AMD Radeon RX 7700S"
+        }
+    },
+    "profiles": {
+        "Silent": {
+            "tdp": 15,
+            "cpu_power": 15,
+            "gpu_power": 35,
+            "boost_enabled": false,
+            "fan_mode": "Silent",
+            "fan_curve": {
+                "40": 0,
+                "50": 20,
+                "60": 40,
+                "70": 60,
+                "80": 80,
+                "90": 100
+            }
+        },
+        "Balanced": {
+            "tdp": 28,
+            "cpu_power": 25,
+            "gpu_power": 65,
+            "boost_enabled": true,
+            "fan_mode": "Balanced",
+            "fan_curve": {
+                "40": 20,
+                "50": 40,
+                "60": 60,
+                "70": 80,
+                "80": 100,
+                "90": 100
+            }
+        },
+        "Boost": {
+            "tdp": 45,
+            "cpu_power": 35,
+            "gpu_power": 95,
+            "boost_enabled": true,
+            "fan_mode": "Performance",
+            "fan_curve": {
+                "40": 40,
+                "50": 60,
+                "60": 80,
+                "70": 100,
+                "80": 100,
+                "90": 100
+            }
+        }
+    }
+} 
