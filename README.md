@@ -39,11 +39,11 @@ Framework Hub Mini is a powerful system management tool designed specifically fo
 
 <div align="center">
 <p float="left">
-  <img src="Screenshots/main.png" width="400" alt="Main Interface"/>
-  <img src="Screenshots/Updates%20manager.png" width="400" alt="Updates Manager"/>
+  <img src="screenshots/main.png" width="400" alt="Main Interface"/>
+  <img src="screenshots/Updates%20manager.png" width="400" alt="Updates Manager"/>
 </p>
 <p float="left">
-  <img src="Screenshots/Tweaks.png" width="400" alt="System Tweaks"/>
+  <img src="screenshots/Tweaks.png" width="400" alt="System Tweaks"/>
   <em>Framework Hub Mini in action - Control, Monitor, and Optimize your laptop</em>
 </p>
 </div>
@@ -227,11 +227,11 @@ Framework Hub Mini est un outil puissant de gestion système conçu spécifiquem
 
 <div align="center">
 <p float="left">
-  <img src="Screenshots/main.png" width="400" alt="Interface Principale"/>
-  <img src="Screenshots/Updates%20manager.png" width="400" alt="Gestionnaire de mises à jour"/>
+  <img src="screenshots/main.png" width="400" alt="Interface Principale"/>
+  <img src="screenshots/Updates%20manager.png" width="400" alt="Gestionnaire de mises à jour"/>
 </p>
 <p float="left">
-  <img src="Screenshots/Tweaks.png" width="400" alt="Ajustements système"/>
+  <img src="screenshots/Tweaks.png" width="400" alt="Ajustements système"/>
   <em>Framework Hub Mini en action - Contrôlez, Surveillez et Optimisez votre ordinateur portable</em>
 </p>
 </div>
