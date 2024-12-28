@@ -2,8 +2,6 @@
 
 <div align="center">
 
-<img src="screenshots/main.png" width="600" alt="Framework Hub Mini Main Interface"/>
-
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
 ![Platform](https://img.shields.io/badge/Platform-Windows%2011-orange.svg)
 ![License](https://img.shields.io/badge/License-GPL--3.0-green.svg)
