@@ -52,8 +52,7 @@ Framework Hub Mini is a powerful system management tool designed specifically fo
 
 ### ✨ Key Features
 
-<details>
-<summary>🔋 Theme System</summary>
+### 🎨 Theme System
 
 #### Built-in Themes
 - **Default Dark**: Modern dark theme with orange accents
@@ -68,10 +67,8 @@ Framework Hub Mini is a powerful system management tool designed specifically fo
 - Real-time theme switching
 
 For detailed information about creating and customizing themes, check out our [Theming Guide](Theming_guide.md).
-</details>
 
-<details>
-<summary>🔋 Power Management</summary>
+### 🔋 Power Management
 
 #### Advanced Power Profiles
 - **Framework 13 AMD (7640U/7840U)**:
@@ -86,52 +83,47 @@ For detailed information about creating and customizing themes, check out our [T
   - Silent (PL1: 10W, PL2: 15W)
   - Balanced (PL1: 20W, PL2: 40W)
   - Boost (PL1: 28W, PL2: 55W)
-</details>
 
-<details>
-<summary>💻 Hardware Control</summary>
+### 💻 Hardware Control
 
-- **CPU Management**
-  - Real-time frequency control 
-  - Temperature monitoring
-  - Core parking optimization
-- **GPU Control**
-  - iGPU frequency management
-  - Temperature monitoring
-- **Fan Control**
-  - Custom fan curves
-  - Temperature-based adjustment
-</details>
+#### CPU Management
+- Real-time frequency control 
+- Temperature monitoring
+- Core parking optimization
 
-<details>
-<summary>🖥️ Display Management</summary>
+#### GPU Control
+- iGPU frequency management
+- Temperature monitoring
 
-- **Advanced Display Control**
-  - Dynamic refresh rate (60Hz-165Hz)
-  - Power-source based automation
-  - Brightness control with hotkeys
-- **Multi-Monitor Support**
-  - External display detection
-  - Resolution management
-</details>
+#### Fan Control
+- Custom fan curves
+- Temperature-based adjustment
 
-<details>
-<summary>⚡ System Optimization</summary>
+### 🖥️ Display Management
 
-- **Performance Monitoring**
-  - Real-time CPU/GPU metrics
-  - Power consumption tracking
-  - Temperature monitoring
-- **Power Optimization**
-  - Battery charge limiting
-  - Power plan automation
-</details>
+#### Advanced Display Control
+- Dynamic refresh rate (60Hz-165Hz)
+- Power-source based automation
+- Brightness control with hotkeys
+
+#### Multi-Monitor Support
+- External display detection
+- Resolution management
+
+### ⚡ System Optimization
+
+#### Performance Monitoring
+- Real-time CPU/GPU metrics
+- Power consumption tracking
+- Temperature monitoring
+
+#### Power Optimization
+- Battery charge limiting
+- Power plan automation
 
 ### 🛠️ Technical Details
 
-<details>
-<summary>View Dependencies</summary>
-
+#### Dependencies
 ```python
 customtkinter>=5.2.0    # Modern UI framework
 pydantic>=2.5.0        # Data validation
@@ -146,12 +138,8 @@ pythonnet>=3.0.3      # .NET integration
 pystray>=0.19.4       # System tray
 keyboard>=0.13.5      # Hotkey support
 ```
-</details>
 
 ### 🔧 Installation
-
-<details>
-<summary>View Installation Steps</summary>
 
 #### Prerequisites
 - Windows 11 (22H2 or later)
@@ -174,36 +162,26 @@ python main.py
 
 #### Framework-Hub.exe (Easy Install)
 Download the all-in-one installer from [Patreon](https://patreon.com/Oganoth)
-</details>
 
 ### 📋 Usage
 
-<details>
-<summary>View Usage Guide</summary>
+#### First Launch
+- Run as administrator
+- Hardware detection is automatic
+- Initial configuration wizard
 
-1. **First Launch**
-   - Run as administrator
-   - Hardware detection is automatic
-   - Initial configuration wizard
+#### Daily Use
+- Access via system tray
+- Quick profile switching
+- Real-time monitoring
 
-2. **Daily Use**
-   - Access via system tray
-   - Quick profile switching
-   - Real-time monitoring
-
-3. **Advanced Features**
-   - Create custom power profiles
-   - Configure fan curves
-   - Set up automation rules
-   - Switch between themes
-</details>
+#### Advanced Features
+- Create custom power profiles
+- Configure fan curves
+- Set up automation rules
+- Switch between themes
 
 ### 🤝 Contributing
-
-<details>
-<summary>How to Contribute</summary>
-
-We welcome all contributions! Here's how you can help:
 
 #### Code Contributions
 1. Fork the repository
@@ -217,7 +195,6 @@ We welcome all contributions! Here's how you can help:
 - Improve documentation
 - Help with translations
 - Create custom themes
-</details>
 
 ### ❤️ Support
 
