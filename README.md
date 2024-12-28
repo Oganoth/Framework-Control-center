@@ -70,56 +70,58 @@ For detailed information about creating and customizing themes, check out our [T
 
 ### 🔋 Power Management
 
-#### Advanced Power Profiles
+#### AMD Power Profiles
 - **Framework 13 AMD (7640U/7840U)**:
   - Silent/ECO (15W TDP)
   - Balanced (25W TDP)
   - Boost (28W TDP)
 - **Framework 16 AMD (7840HS/7940HS)**:
   - Silent/ECO (30W TDP)
-  - Balanced (95W TDP)
-  - Boost (120W TDP)
-- **Framework 13 Intel** (WIP):
-  - Silent (PL1: 10W, PL2: 15W)
-  - Balanced (PL1: 20W, PL2: 40W)
-  - Boost (PL1: 28W, PL2: 55W)
+  - Balanced (45W TDP)
+  - Boost (54W TDP)
 
-### 💻 Hardware Control
+#### Power Features
+- RyzenADJ integration for AMD models
+- Windows power plan synchronization
+- Profile-based power management
+- Automatic hardware detection
 
-#### CPU Management
-- Real-time frequency control 
-- Temperature monitoring
-- Core parking optimization
+### 💻 Hardware Monitoring
 
-#### GPU Control
-- iGPU frequency management
-- Temperature monitoring
+#### Real-time Metrics
+- CPU usage and temperature
+- RAM usage monitoring
+- iGPU usage and temperature
+- dGPU metrics (Framework 16)
+- Battery status and time remaining
 
-#### Fan Control
-- Custom fan curves
-- Temperature-based adjustment
+#### System Integration
+- LibreHardwareMonitor integration
+- Automatic sensor detection
+- Real-time metrics update
+- Progress bar visualizations
 
 ### 🖥️ Display Management
 
-#### Advanced Display Control
-- Dynamic refresh rate (60Hz-165Hz)
-- Power-source based automation
-- Brightness control with hotkeys
+#### Display Features
+- Brightness control via WMI
+- Hotkey support (F12)
+- System tray integration
+- Minimized mode operation
 
-#### Multi-Monitor Support
-- External display detection
-- Resolution management
+### ⚡ System Features
 
-### ⚡ System Optimization
+#### Core Features
+- Multi-language support (English/French/Italian/Spanish/German/Chinese/Klingon)
+- Automatic model detection
+- Configuration persistence
+- Logging system with rotation
 
-#### Performance Monitoring
-- Real-time CPU/GPU metrics
-- Power consumption tracking
-- Temperature monitoring
-
-#### Power Optimization
-- Battery charge limiting
-- Power plan automation
+#### Updates & Tools
+- Built-in updates manager (winget integration)
+- Framework drivers shortcuts
+- AMD drivers shortcuts
+- System information display
 
 ### 🛠️ Technical Details
 
