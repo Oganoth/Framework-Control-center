@@ -71,19 +71,20 @@ For detailed information about creating and customizing themes, check out our [T
 ### 🔋 Power Management
 
 #### AMD Power Profiles
-- **Framework 13 AMD (7640U/7840U)**:
-  - Silent/ECO (15W TDP)
-  - Balanced (25W TDP)
-  - Boost (28W TDP)
+- **Framework 13 AMD (7840U)**:
+  - Silent/ECO: STAPM 15W, Fast 20W, Slow 15W
+  - Balanced: STAPM 25W, Fast 30W, Slow 25W
+  - Boost: STAPM 28W, Fast 35W, Slow 28W
 - **Framework 16 AMD (7840HS/7940HS)**:
-  - Silent/ECO (30W TDP)
-  - Balanced (45W TDP)
-  - Boost (54W TDP)
+  - Silent/ECO: STAPM 30W, Fast 35W, Slow 30W
+  - Balanced: STAPM 95W, Fast 95W, Slow 95W
+  - Boost: STAPM 120W, Fast 120W, Slow 120W
 
 #### Power Features
 - RyzenADJ integration for AMD models
-- Windows power plan synchronization
-- Profile-based power management
+- Windows power plan synchronization (Silent/Balanced/Performance)
+- Temperature limits management
+- VRM current control
 - Automatic hardware detection
 
 ### 💻 Hardware Monitoring
