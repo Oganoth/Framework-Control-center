@@ -14,6 +14,9 @@ import os
 import logging
 from tkinter import font
 from datetime import datetime
+import shutil
+import winreg
+import ctypes
 
 from .models import SystemConfig, PowerProfile, HardwareMetrics
 from .hardware import HardwareMonitor
@@ -46,19 +49,75 @@ def load_custom_font(language_code: str = "en") -> tuple:
         
         # Load the appropriate font based on language
         if language_code == "tlh" and os.path.exists(klingon_font_path):
-            # Register Klingon font
+            # Register Klingon font with larger size
             ctk.FontManager.load_font(klingon_font_path)
-            return "klingon font"
+            return ("klingon font", 14)  # Increased from default
         elif os.path.exists(font_path):
-            # Register Ubuntu font with smaller size
+            # Register Ubuntu font with larger size
             ctk.FontManager.load_font(font_path)
-            # Return font name with size specification
-            return ("Ubuntu-Regular", 10)
+            return ("Ubuntu-Regular", 13)  # Increased from 10
     except Exception as e:
         logger.error(f"Error loading custom font: {e}")
     
-    # Return fallback font with size specification
-    return ("Helvetica", 10)  # Fallback font that's guaranteed to exist
+    # Return fallback font with larger size
+    return ("Helvetica", 13)  # Increased from 10
+
+def install_system_fonts() -> None:
+    """Install application fonts to Windows system if they don't exist."""
+    try:
+        # Check for admin privileges
+        if not ctypes.windll.shell32.IsUserAnAdmin():
+            logger.info("Admin privileges required to install fonts")
+            return
+            
+        # Get Windows Fonts directory
+        windows_fonts_dir = Path(os.environ["WINDIR"]) / "Fonts"
+            
+        # Get application fonts directory
+        app_fonts_dir = Path("fonts")
+        if not app_fonts_dir.exists():
+            logger.warning("Fonts directory not found")
+            return
+            
+        # List of fonts to install
+        fonts_to_install = {
+            "Ubuntu-Regular.ttf": "Ubuntu Regular (TrueType)",
+            "klingon font.ttf": "Klingon (TrueType)"
+        }
+        
+        for font_file, reg_name in fonts_to_install.items():
+            font_path = app_fonts_dir / font_file
+            system_font_path = windows_fonts_dir / font_file
+            
+            if not font_path.exists():
+                logger.warning(f"Font file not found: {font_file}")
+                continue
+                
+            try:
+                # Check if font is already installed
+                with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts", 0, winreg.KEY_READ) as key:
+                    winreg.QueryValueEx(key, reg_name)
+                logger.debug(f"Font already installed: {font_file}")
+            except FileNotFoundError:
+                try:
+                    # Font not installed, copy it to Windows Fonts directory
+                    logger.info(f"Installing font: {font_file}")
+                    shutil.copy2(font_path, system_font_path)
+                    
+                    # Add font to registry
+                    with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts", 0, winreg.KEY_SET_VALUE) as key:
+                        winreg.SetValueEx(key, reg_name, 0, winreg.REG_SZ, font_file)
+                        
+                    logger.info(f"Font installed successfully: {font_file}")
+                except PermissionError:
+                    logger.warning(f"Permission denied while installing font: {font_file}")
+                except Exception as e:
+                    logger.error(f"Error installing font {font_file}: {e}")
+                
+    except Exception as e:
+        logger.error(f"Error installing fonts: {e}")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
 
 class FrameworkControlCenter(ctk.CTk):
     # Class-level variables for tray icon management
@@ -68,6 +127,10 @@ class FrameworkControlCenter(ctk.CTk):
     
     def __init__(self):
         super().__init__()
+        
+        # Install system fonts if needed
+        install_system_fonts()
+        
         FrameworkControlCenter._open_windows.append(self)  # Add main window to list
         
         # Setup theme and colors first
@@ -348,7 +411,7 @@ class FrameworkControlCenter(ctk.CTk):
         refresh_frame = ctk.CTkFrame(self.container, fg_color=self.colors["background"])
         refresh_frame.pack(fill="x", padx=10, pady=5)
 
-        # Créer un sous-frame pour les boutons avec distribution égale
+        # Cr��er un sous-frame pour les boutons avec distribution égale
         buttons_frame = ctk.CTkFrame(refresh_frame, fg_color=self.colors["background"])
         buttons_frame.pack(fill="x", padx=5)
         buttons_frame.grid_columnconfigure((0, 1, 2), weight=1)
@@ -667,6 +730,12 @@ class FrameworkControlCenter(ctk.CTk):
                     self.after_cancel(self._update_metrics)
                     self.after(config.monitoring_interval, self._update_metrics)
                 
+                # Load and apply font based on configured language
+                self.current_font = load_custom_font(config.language)
+                self.after(100, self._update_widgets_font)  # Update fonts after a short delay
+                self.after(100, self._update_window_text)   # Update text after a short delay
+                
+                logger.info(f"Configuration loaded with language: {config.language}")
                 return config
             else:
                 # Create default config if file doesn't exist
@@ -675,6 +744,13 @@ class FrameworkControlCenter(ctk.CTk):
                 self.config_path.parent.mkdir(parents=True, exist_ok=True)
                 with open(self.config_path, "w", encoding="utf-8") as f:
                     json.dump(config.dict(), f, indent=4)
+                    
+                # Load and apply default font
+                self.current_font = load_custom_font(config.language)
+                self.after(100, self._update_widgets_font)  # Update fonts after a short delay
+                self.after(100, self._update_window_text)   # Update text after a short delay
+                
+                logger.info("Created default configuration")
                 return config
                 
         except Exception as e:
@@ -924,43 +1000,60 @@ class FrameworkControlCenter(ctk.CTk):
 
     def _update_window_text(self) -> None:
         """Update all text in the window with the current language."""
-        # Update window title
-        self.title(get_text(self.config.language, "window_title"))
-        
-        # Update power profile buttons
-        for profile, btn in self.profile_buttons.items():
-            btn.configure(text=get_text(self.config.language, f"power_profiles.{profile.lower()}"))
-        
-        # Update refresh rate buttons
-        for mode, btn in self.refresh_buttons.items():
-            btn.configure(text=get_text(self.config.language, f"refresh_rates.{mode.lower()}"))
-        
-        # Update utility buttons
-        for widget in self.container.winfo_children():
-            if isinstance(widget, ctk.CTkButton):
-                text = widget.cget("text")
-                if text in ["Keyboard", get_text(self.language, "utility_buttons.updates_manager", "Updates manager"), "Tweaks", "Settings"]:
-                    key = text.lower().replace(" ", "_")
-                    widget.configure(text=get_text(self.config.language, f"utility_buttons.{key}"))
-        
-        # Update brightness labels
-        for widget in self.container.winfo_children():
-            if isinstance(widget, ctk.CTkLabel):
-                text = widget.cget("text")
-                if text.startswith("BRIGHTNESS:"):
-                    widget.configure(text=get_text(self.config.language, "brightness"))
-                elif text.startswith("ACTUEL:"):
-                    current_value = text.split(":")[1].strip()
-                    widget.configure(text=f"{get_text(self.config.language, 'current')} {current_value}")
-                elif text.startswith("BATTERY:"):
-                    battery_value = text.split(":")[1].strip()
-                    widget.configure(text=f"{get_text(self.config.language, 'battery')} {battery_value}")
-                elif text.startswith("Time remaining:"):
-                    if "Plugged In" in text:
-                        widget.configure(text=get_text(self.config.language, "plugged_in"))
-                    else:
-                        time_value = text.split(":")[1].strip()
-                        widget.configure(text=f"{get_text(self.config.language, 'time_remaining')} {time_value}")
+        try:
+            # Update window title
+            self.title(get_text(self.config.language, "window_title"))
+            
+            # Update power profile buttons
+            for profile, btn in self.profile_buttons.items():
+                btn.configure(text=get_text(self.config.language, f"power_profiles.{profile.lower()}"))
+            
+            # Update refresh rate buttons
+            for mode, btn in self.refresh_buttons.items():
+                btn.configure(text=get_text(self.config.language, f"refresh_rates.{mode.lower()}"))
+            
+            # Update all buttons in the container
+            for widget in self.container.winfo_children():
+                if isinstance(widget, ctk.CTkButton):
+                    text = widget.cget("text")
+                    # Keyboard button
+                    if text.lower() in ["keyboard", "clavier"]:
+                        widget.configure(text=get_text(self.config.language, "utility_buttons.keyboard"))
+                    # Updates manager button
+                    elif text.lower() in ["updates manager", "gestionnaire de mises à jour", "qon"]:
+                        widget.configure(text=get_text(self.config.language, "utility_buttons.updates_manager"))
+                    # Tweaks button
+                    elif text.lower() in ["tweaks", "optimisations", "choH"]:
+                        widget.configure(text=get_text(self.config.language, "utility_buttons.tweaks"))
+                    # Settings button
+                    elif text.lower() in ["settings", "paramètres", "SeH"]:
+                        widget.configure(text=get_text(self.config.language, "utility_buttons.settings"))
+            
+            # Update brightness labels
+            for widget in self.container.winfo_children():
+                if isinstance(widget, ctk.CTkLabel):
+                    text = widget.cget("text")
+                    if text.startswith(("BRIGHTNESS:", "LUMINOSITÉ:", "HoS:")):
+                        widget.configure(text=get_text(self.config.language, "brightness"))
+                    elif text.startswith(("ACTUEL:", "CURRENT:", "DaH:")):
+                        current_value = text.split(":")[-1].strip()
+                        widget.configure(text=f"{get_text(self.config.language, 'current')} {current_value}")
+                    elif text.startswith(("BATTERY:", "BATTERIE:", "HoS:")):
+                        battery_value = text.split(":")[-1].strip()
+                        widget.configure(text=f"{get_text(self.config.language, 'battery')} {battery_value}")
+                    elif text.startswith(("Time remaining:", "Temps restant:", "poH:")):
+                        if any(x in text for x in ["Plugged In", "Branché", "cha'"]):
+                            widget.configure(text=get_text(self.config.language, "plugged_in"))
+                        else:
+                            time_value = text.split(":")[-1].strip()
+                            widget.configure(text=f"{get_text(self.config.language, 'time_remaining')} {time_value}")
+            
+            logger.debug(f"Window text updated to language: {self.config.language}")
+            
+        except Exception as e:
+            logger.error(f"Error updating window text: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
 
     def _initialize_default_profiles(self) -> None:
         """Initialize default power and refresh rate profiles at startup."""
@@ -981,20 +1074,34 @@ class FrameworkControlCenter(ctk.CTk):
 
     def _on_language_change(self, value: str) -> None:
         """Handle language change."""
-        self.config.language = value
-        # Update font when language changes
-        self.current_font = load_custom_font(value)
-        # Update all open windows
-        for window in FrameworkControlCenter._open_windows:
-            if window.winfo_exists():
-                if hasattr(window, 'current_font'):
-                    window.current_font = self.current_font
-                if hasattr(window, '_update_window_text'):
-                    window._update_window_text()
-                if hasattr(window, '_update_widgets_font'):
-                    window._update_widgets_font()
-            else:
-                FrameworkControlCenter._open_windows.remove(window)
+        try:
+            # Update configuration
+            self.config.language = value
+            
+            # Save configuration immediately
+            self._save_config()
+            
+            # Update font when language changes
+            self.current_font = load_custom_font(value)
+            
+            # Update all open windows
+            for window in FrameworkControlCenter._open_windows:
+                if window.winfo_exists():
+                    if hasattr(window, 'current_font'):
+                        window.current_font = self.current_font
+                    if hasattr(window, '_update_window_text'):
+                        window._update_window_text()
+                    if hasattr(window, '_update_widgets_font'):
+                        window._update_widgets_font()
+                else:
+                    FrameworkControlCenter._open_windows.remove(window)
+                    
+            logger.info(f"Language changed to: {value}")
+            
+        except Exception as e:
+            logger.error(f"Error changing language: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
 
     def _update_widgets_font(self) -> None:
         """Update font in all widgets."""
@@ -1246,23 +1353,6 @@ class FrameworkControlCenter(ctk.CTk):
         self.config.theme = value
         ctk.set_appearance_mode(value)
 
-    def _update_language(self, value: str) -> None:
-        """Handle language change."""
-        self.config.language = value
-        # Update font when language changes
-        self.current_font = load_custom_font(value)
-        # Update all open windows
-        for window in FrameworkControlCenter._open_windows:
-            if window.winfo_exists():
-                if hasattr(window, 'current_font'):
-                    window.current_font = self.current_font
-                if hasattr(window, '_update_window_text'):
-                    window._update_window_text()
-                if hasattr(window, '_update_widgets_font'):
-                    window._update_widgets_font()
-            else:
-                FrameworkControlCenter._open_windows.remove(window)
-
     def _update_minimize_to_tray(self, value: bool) -> None:
         """Handle minimize to tray change."""
         self.config.minimize_to_tray = value
@@ -1330,6 +1420,22 @@ class FrameworkControlCenter(ctk.CTk):
         finally:
             # Schedule next check in 5 minutes
             self.after(300000, self._check_log_file_size)
+
+    def _save_config(self) -> None:
+        """Save current configuration to file."""
+        try:
+            # Ensure config directory exists
+            self.config_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Save to file
+            with open(self.config_path, "w", encoding="utf-8") as f:
+                json.dump(self.config.dict(), f, indent=4)
+                
+            logger.debug("Configuration saved successfully")
+        except Exception as e:
+            logger.error(f"Error saving configuration: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
 
 
 class UpdatesManager(ctk.CTkToplevel):
