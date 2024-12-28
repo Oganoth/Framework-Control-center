@@ -428,7 +428,7 @@ class FrameworkControlCenter(ctk.CTk):
         """Create utility buttons."""
         buttons = [
             ("Keyboard", self._open_keyboard_config),
-            ("Updates manager", self._open_updates_manager),
+            ("Update manager", self._open_updates_manager),
             ("Tweaks", self._open_tweaks),
             ("Settings", self._open_settings)
         ]
@@ -456,7 +456,7 @@ class FrameworkControlCenter(ctk.CTk):
 
         self.brightness_value = ctk.CTkLabel(
             brightness_frame,
-            text="ACTUEL: 100%",
+            text="VALUE: 100%",
             text_color=self.colors["text"]
         )
         self.brightness_value.pack(side="right")
@@ -933,7 +933,7 @@ class FrameworkControlCenter(ctk.CTk):
         for widget in self.container.winfo_children():
             if isinstance(widget, ctk.CTkButton):
                 text = widget.cget("text")
-                if text in ["Keyboard", "Updates manager", "Tweaks", "Settings"]:
+                if text in ["Keyboard", "Update manager", "Tweaks", "Settings"]:
                     key = text.lower().replace(" ", "_")
                     widget.configure(text=get_text(self.config.language, f"utility_buttons.{key}"))
         
@@ -1360,7 +1360,7 @@ class UpdatesManager(ctk.CTkToplevel):
             self.grab_release()
             self.destroy()
         except Exception as e:
-            logger.error(f"Error closing Updates Manager: {e}")
+            logger.error(f"Error closing Update Manager: {e}")
             self.destroy()
 
     def _create_widgets(self) -> None:
