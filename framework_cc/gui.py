@@ -13,13 +13,14 @@ import sys
 import os
 import logging
 from tkinter import font
+from datetime import datetime
 
 from .models import SystemConfig, PowerProfile, HardwareMetrics
 from .hardware import HardwareMonitor
 from .power import PowerManager
 from .display import DisplayManager
 from .detector import ModelDetector
-from .logger import logger
+from .logger import logger, check_and_rotate_log
 from .tweaks import WindowsTweaks
 from .translations import get_text, language_names
 
@@ -129,6 +130,9 @@ class FrameworkControlCenter(ctk.CTk):
         
         # Initialize default profiles after a short delay to ensure all components are loaded
         self.after(1000, self._initialize_default_profiles)
+
+        # Start log file check timer
+        self._check_log_file_size()
 
     def _position_window(self) -> None:
         """Positionner la fenêtre dans le coin inférieur droit."""
@@ -1315,6 +1319,17 @@ class FrameworkControlCenter(ctk.CTk):
         except Exception as e:
             logger.error(f"Error restoring services: {e}")
             self._add_log(f"❌ Error restoring services: {e}\n") 
+
+    def _check_log_file_size(self) -> None:
+        """Periodically check and rotate log file if needed."""
+        try:
+            log_file = Path("logs") / f"{datetime.now().strftime('%Y-%m-%d')}.log"
+            check_and_rotate_log(log_file)
+        except Exception as e:
+            logger.error(f"Error checking log file size: {e}")
+        finally:
+            # Schedule next check in 5 minutes
+            self.after(300000, self._check_log_file_size)
 
 
 class UpdatesManager(ctk.CTkToplevel):

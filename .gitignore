@@ -17937,3 +17937,4 @@ venv/Scripts/__pycache__/pywin32_postinstall.cpython-312.pyc
 venv/Scripts/__pycache__/pywin32_testall.cpython-312.pyc
 venv/Scripts/__pycache__/wmitest.cpython-312.pyc
 venv/Scripts/__pycache__/wmiweb.cpython-312.pyc
+configs/sensors.json
