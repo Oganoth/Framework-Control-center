@@ -34,6 +34,40 @@ class HardwareMonitor:
         # Initial sensors update
         self._update_sensors()
 
+    def _download_lhm(self) -> None:
+        """Download and extract LibreHardwareMonitor DLL."""
+        import requests
+        import zipfile
+        import io
+        
+        logger.info("Downloading LibreHardwareMonitor...")
+        url = "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/latest/download/LibreHardwareMonitor-net472.zip"
+        
+        try:
+            # Create libs directory if it doesn't exist
+            HARDWARE_DLL_PATH.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Download and extract
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            
+            with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
+                # Extract all DLL files
+                for file in zip_ref.namelist():
+                    if file.endswith(".dll"):
+                        logger.info(f"Extracting: {file}")
+                        zip_ref.extract(file, HARDWARE_DLL_PATH.parent)
+                        # If this is the main DLL, rename it
+                        if file.endswith("LibreHardwareMonitorLib.dll"):
+                            extracted_path = HARDWARE_DLL_PATH.parent / file
+                            extracted_path.rename(HARDWARE_DLL_PATH)
+            
+            logger.info(f"LibreHardwareMonitor files extracted to: {HARDWARE_DLL_PATH.parent}")
+            
+        except Exception as e:
+            logger.error(f"Error downloading LibreHardwareMonitor: {e}")
+            raise
+
     def _setup_lhm(self) -> None:
         """Setup LibreHardwareMonitor library."""
         if not HARDWARE_DLL_PATH.exists():

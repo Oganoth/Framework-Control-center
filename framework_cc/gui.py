@@ -42,25 +42,37 @@ def get_resource_path(relative_path):
 def load_custom_font(language_code: str = "en") -> tuple:
     """Load custom font based on language and return font family name."""
     try:
-        # Get the absolute path to the fonts directory
-        base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        font_path = os.path.join(base_path, "fonts", "Ubuntu-Regular.ttf")
-        klingon_font_path = os.path.join(base_path, "fonts", "klingon font.ttf")
+        # Get the absolute path to the fonts using get_resource_path
+        font_path = get_resource_path(os.path.join("fonts", "Ubuntu-Regular.ttf"))
+        klingon_font_path = get_resource_path(os.path.join("fonts", "klingon font.ttf"))
+        
+        logger.debug(f"Looking for fonts at: {font_path} and {klingon_font_path}")
         
         # Load the appropriate font based on language
         if language_code == "tlh" and os.path.exists(klingon_font_path):
             # Register Klingon font with larger size
-            ctk.FontManager.load_font(klingon_font_path)
-            return ("klingon font", 14)  # Increased from default
+            try:
+                ctk.FontManager.load_font(klingon_font_path)
+                logger.info(f"Loaded Klingon font from: {klingon_font_path}")
+                return ("klingon font", 14)  # Increased from default
+            except Exception as e:
+                logger.error(f"Failed to load Klingon font: {e}")
+                return ("Helvetica", 13)  # Fallback
         elif os.path.exists(font_path):
             # Register Ubuntu font with larger size
-            ctk.FontManager.load_font(font_path)
-            return ("Ubuntu-Regular", 13)  # Increased from 10
+            try:
+                ctk.FontManager.load_font(font_path)
+                logger.info(f"Loaded Ubuntu font from: {font_path}")
+                return ("Ubuntu-Regular", 13)  # Increased from 10
+            except Exception as e:
+                logger.error(f"Failed to load Ubuntu font: {e}")
+                return ("Helvetica", 13)  # Fallback
+        else:
+            logger.warning(f"Font files not found at: {font_path} or {klingon_font_path}")
+            return ("Helvetica", 13)  # Fallback
     except Exception as e:
         logger.error(f"Error loading custom font: {e}")
-    
-    # Return fallback font with larger size
-    return ("Helvetica", 13)  # Increased from 10
+        return ("Helvetica", 13)  # Fallback
 
 def install_system_fonts() -> None:
     """Install application fonts to Windows system if they don't exist."""
