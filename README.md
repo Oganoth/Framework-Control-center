@@ -39,15 +39,16 @@ Framework Hub Mini is a powerful system management tool designed specifically fo
 
 <div align="center">
 <p float="left">
-  <img src="screenshots/main.png" width="400" alt="Main Interface"/>
-
-  <img src="screenshots/Updates%20manager.png" width="400" alt="Updates Manager"/>
+  <img src="screenshots/main.png" width="250" alt="Main Interface"/>
+  <img src="screenshots/theme1.png" width="250" alt="Fedora Light Theme"/>
+  <img src="screenshots/theme2.png" width="250" alt="Fedora Dark Theme"/>
 </p>
 <p float="left">
-  <img src="screenshots/Tweaks.png" width="400" alt="System Tweaks"/>
-
-  <em>Framework Hub Mini in action - Control, Monitor, and Optimize your laptop</em>
+  <img src="screenshots/Updates%20manager.png" width="375" alt="Updates Manager"/>
+  <img src="screenshots/Tweaks.png" width="375" alt="System Tweaks"/>
 </p>
+
+<em>Framework Hub Mini in action - Modern UI with multiple themes, system management, and monitoring capabilities</em>
 </div>
 
 ### ✨ Key Features
