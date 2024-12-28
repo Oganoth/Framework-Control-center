@@ -1,0 +1,83 @@
+{
+    "name": "Fedora Dark",
+    "colors": {
+        "primary": "#3584E4",
+        "hover": "#62A0EA",
+        "background": {
+            "main": "#1E1E1E",
+            "secondary": "#242424",
+            "tertiary": "#2D2D2D",
+            "header": "#1E1E1E",
+            "input": "#2D2D2D"
+        },
+        "text": {
+            "primary": "#FFFFFF",
+            "secondary": "#D3D3D3",
+            "disabled": "#919191",
+            "accent": "#78AEFF"
+        },
+        "border": {
+            "active": "#3584E4",
+            "inactive": "#383838",
+            "input": "#3584E4"
+        },
+        "button": {
+            "primary": "#3584E4",
+            "secondary": "#2D2D2D",
+            "disabled": "#383838",
+            "danger": "#E01B24",
+            "success": "#2EC27E",
+            "warning": "#F6D32D"
+        },
+        "progress": {
+            "background": "#2D2D2D",
+            "bar": "#3584E4",
+            "cpu": "#3584E4",
+            "gpu": "#1C71D8",
+            "ram": "#2EC27E",
+            "temp": "#F6D32D"
+        },
+        "status": {
+            "error": "#E01B24",
+            "warning": "#F6D32D",
+            "success": "#2EC27E",
+            "info": "#3584E4"
+        },
+        "separator": "#383838",
+        "scrollbar": {
+            "background": "#242424",
+            "thumb": "#383838",
+            "hover": "#4A4A4A"
+        }
+    },
+    "fonts": {
+        "main": {
+            "family": "Cantarell",
+            "size": {
+                "small": 10,
+                "normal": 11,
+                "large": 12,
+                "title": 14
+            }
+        },
+        "monospace": {
+            "family": "Source Code Pro",
+            "size": {
+                "small": 10,
+                "normal": 11,
+                "large": 12,
+                "title": 14
+            }
+        }
+    },
+    "spacing": {
+        "small": 6,
+        "normal": 12,
+        "large": 24
+    },
+    "radius": {
+        "small": 6,
+        "normal": 12,
+        "large": 18
+    }
+} 

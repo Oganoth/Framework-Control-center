@@ -145,7 +145,14 @@ class FrameworkControlCenter(ctk.CTk):
         
         FrameworkControlCenter._open_windows.append(self)  # Add main window to list
         
-        # Setup theme and colors first
+        # Initialize tweaks manager first
+        self.tweaks = WindowsTweaks()
+        
+        # Load configuration
+        self.config_path = Path.home() / ".framework_cc" / "config.json"
+        self.config = self._load_config()
+        
+        # Setup theme and colors
         self._setup_theme()
         
         # Configuration de la fenêtre
@@ -163,13 +170,10 @@ class FrameworkControlCenter(ctk.CTk):
             logger.error(f"Failed to set window icon: {e}")
         
         # Configurer le style de la fenêtre
-        self.configure(fg_color="#1E1E1E", corner_radius=10)
+        self.configure(fg_color=self.colors.background.main, corner_radius=10)
         
         # Positionner la fenêtre dans le coin inférieur droit
         self._position_window()
-        
-        # Initialize tweaks manager
-        self.tweaks = WindowsTweaks()
         
         # Initialize model detection first
         detector = ModelDetector()
@@ -178,10 +182,6 @@ class FrameworkControlCenter(ctk.CTk):
             logger.error("No compatible Framework laptop detected")
             raise RuntimeError("No compatible Framework laptop detected")
             
-        # Load configuration
-        self.config_path = Path.home() / ".framework_cc" / "config.json"
-        self.config = self._load_config()
-        
         # Load custom font
         self.current_font = load_custom_font(self.config.language)
         
@@ -252,24 +252,20 @@ class FrameworkControlCenter(ctk.CTk):
         self.overrideredirect(True)
         
         # Configurer la couleur de fond sombre
-        self.configure(fg_color=self.colors["background"])
+        self.configure(fg_color=self.colors.background.main)
 
     def _setup_theme(self) -> None:
         """Setup the application theme."""
-        ctk.set_appearance_mode("dark")
-        ctk.set_default_color_theme("blue")
-
-        # Custom colors
-        self.colors = {
-            "primary": "#FF7043",
-            "hover": "#F4511E",
-            "background": "#1E1E1E",  # Fond plus sombre
-            "text": "#FFFFFF",
-            "text_active": "#FFFFFF",
-            "border_active": "#FFFFFF",
-            "button": "#FF7043"  # Même couleur que primary
-        }
-
+        ctk.set_appearance_mode("dark")  # Base appearance mode
+        ctk.set_default_color_theme("blue")  # Base color theme
+        
+        # Load theme colors from config
+        theme = self.config.load_theme()
+        self.colors = theme.colors
+        self.theme_fonts = theme.fonts
+        self.spacing = theme.spacing
+        self.radius = theme.radius
+        
         # Garder une référence aux boutons actifs
         self.active_buttons = {
             "profile": None,
@@ -281,7 +277,7 @@ class FrameworkControlCenter(ctk.CTk):
         # Main container with dark background and rounded corners
         self.container = ctk.CTkFrame(
             self,
-            fg_color=self.colors["background"],
+            fg_color=self.colors.background.main,
             corner_radius=10
         )
         self.container.pack(fill="both", expand=True, padx=0, pady=0)
@@ -289,7 +285,7 @@ class FrameworkControlCenter(ctk.CTk):
         # Ajouter la barre de titre personnalisée
         title_bar = ctk.CTkFrame(
             self.container,
-            fg_color=self.colors["background"],
+            fg_color=self.colors.background.main,
             height=30,
             corner_radius=10
         )
@@ -300,7 +296,7 @@ class FrameworkControlCenter(ctk.CTk):
         title_label = ctk.CTkLabel(
             title_bar,
             text="Framework Control Center",
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 11, "bold")
         )
         title_label.pack(side="left", padx=10)
@@ -317,8 +313,8 @@ class FrameworkControlCenter(ctk.CTk):
             height=20,
             command=self._minimize_to_tray,
             fg_color="transparent",
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"],
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
             corner_radius=5
         )
         minimize_button.pack(side="left", padx=2)
@@ -330,9 +326,9 @@ class FrameworkControlCenter(ctk.CTk):
             width=20,
             height=20,
             command=self._on_close,
-            fg_color="#FF4444",
-            hover_color="#FF6666",
-            text_color=self.colors["text"],
+            fg_color=self.colors.button.danger,
+            hover_color=self.colors.status.error,
+            text_color=self.colors.text.primary,
             corner_radius=5
         )
         close_button.pack(side="left", padx=2)
@@ -374,16 +370,16 @@ class FrameworkControlCenter(ctk.CTk):
         self._create_battery_status()
 
         # Additional buttons
-        buttons_frame = ctk.CTkFrame(self.container, fg_color=self.colors["background"])
+        buttons_frame = ctk.CTkFrame(self.container, fg_color=self.colors.background.main)
         buttons_frame.pack(fill="x", padx=10, pady=5)
 
     def _create_power_profiles(self) -> None:
         """Create power profile buttons."""
-        profiles_frame = ctk.CTkFrame(self.container, fg_color=self.colors["background"])
+        profiles_frame = ctk.CTkFrame(self.container, fg_color=self.colors.background.main)
         profiles_frame.pack(fill="x", padx=10, pady=5)
 
         # Créer un sous-frame pour les boutons avec distribution égale
-        buttons_frame = ctk.CTkFrame(profiles_frame, fg_color=self.colors["background"])
+        buttons_frame = ctk.CTkFrame(profiles_frame, fg_color=self.colors.background.main)
         buttons_frame.pack(fill="x", padx=5)
         buttons_frame.grid_columnconfigure((0, 1, 2), weight=1)
 
@@ -402,13 +398,13 @@ class FrameworkControlCenter(ctk.CTk):
                 image=icons[profile],
                 compound="top",  # Place l'icône au-dessus du texte
                 command=lambda p=profile: self._set_power_profile_sync(p),
-                fg_color=self.colors["primary"],
-                hover_color=self.colors["hover"],
-                text_color=self.colors["text"],
+                fg_color=self.colors.button.primary,
+                hover_color=self.colors.hover,
+                text_color=self.colors.text.primary,
                 height=60,  # Plus haut pour accommoder l'icône au-dessus du texte
                 width=90,
                 border_width=2,
-                border_color=self.colors["background"],
+                border_color=self.colors.border.inactive,
                 corner_radius=10  # Ajout des coins arrondis
             )
             btn.grid(row=0, column=i, padx=3)
@@ -420,11 +416,11 @@ class FrameworkControlCenter(ctk.CTk):
 
     def _create_refresh_controls(self) -> None:
         """Create refresh rate control buttons."""
-        refresh_frame = ctk.CTkFrame(self.container, fg_color=self.colors["background"])
+        refresh_frame = ctk.CTkFrame(self.container, fg_color=self.colors.background.main)
         refresh_frame.pack(fill="x", padx=10, pady=5)
 
-        # Cr��er un sous-frame pour les boutons avec distribution égale
-        buttons_frame = ctk.CTkFrame(refresh_frame, fg_color=self.colors["background"])
+        # Créer un sous-frame pour les boutons avec distribution égale
+        buttons_frame = ctk.CTkFrame(refresh_frame, fg_color=self.colors.background.main)
         buttons_frame.pack(fill="x", padx=5)
         buttons_frame.grid_columnconfigure((0, 1, 2), weight=1)
 
@@ -434,16 +430,16 @@ class FrameworkControlCenter(ctk.CTk):
                 buttons_frame,
                 text=mode,
                 command=lambda m=mode: self._set_refresh_rate_sync(m),
-                fg_color=self.colors["primary"],
-                hover_color=self.colors["hover"],
-                text_color=self.colors["text"],
-                height=35,  # Plus haut
-                width=90,  # Plus large
+                fg_color=self.colors.button.primary,
+                hover_color=self.colors.hover,
+                text_color=self.colors.text.primary,
+                height=35,
+                width=90,
                 border_width=2,
-                border_color=self.colors["background"],
-                corner_radius=10  # Ajout des coins arrondis
+                border_color=self.colors.border.inactive,
+                corner_radius=self.radius.normal
             )
-            btn.grid(row=0, column=i, padx=3)  # Réduit le padding pour compenser la largeur
+            btn.grid(row=0, column=i, padx=3)
             self.refresh_buttons[mode] = btn
 
             # Définir le mode actif par défaut
@@ -452,7 +448,7 @@ class FrameworkControlCenter(ctk.CTk):
 
     def _create_metrics_display(self) -> None:
         """Create system metrics display."""
-        metrics_frame = ctk.CTkFrame(self.container, fg_color=self.colors["background"])
+        metrics_frame = ctk.CTkFrame(self.container, fg_color=self.colors.background.main)
         metrics_frame.pack(fill="x", padx=10, pady=5)
 
         # Create labels and progress bars for metrics
@@ -481,11 +477,11 @@ class FrameworkControlCenter(ctk.CTk):
 
         # Créer les widgets pour chaque métrique
         for label, key, unit in metrics:
-            frame = ctk.CTkFrame(metrics_frame, fg_color=self.colors["background"])
+            frame = ctk.CTkFrame(metrics_frame, fg_color=self.colors.background.main)
             frame.pack(fill="x", pady=2)
 
             # Label with value
-            label_text = ctk.CTkLabel(frame, text=f"{label}: 0{unit}", text_color=self.colors["text"])
+            label_text = ctk.CTkLabel(frame, text=f"{label}: 0{unit}", text_color=self.colors.text.primary)
             label_text.pack(side="left", padx=5)
             self.metric_labels[key] = label_text
             logger.debug(f"Created metric label: {label} -> {key}")
@@ -493,8 +489,8 @@ class FrameworkControlCenter(ctk.CTk):
             # Progress bar
             progress = ctk.CTkProgressBar(
                 frame,
-                progress_color=self.colors["primary"],
-                fg_color="#2D2D2D",
+                progress_color=self.colors.progress.bar,
+                fg_color=self.colors.progress.background,
                 height=15,
                 width=120
             )
@@ -508,7 +504,6 @@ class FrameworkControlCenter(ctk.CTk):
         buttons = [
             ("Keyboard", self._open_keyboard_config),
             (get_text(self.config.language, "utility_buttons.updates_manager", "Updates manager"), self._open_updates_manager),
-            ("Tweaks", self._open_tweaks),
             ("Settings", self._open_settings)
         ]
 
@@ -517,28 +512,28 @@ class FrameworkControlCenter(ctk.CTk):
                 self.container,
                 text=text,
                 command=command,
-                fg_color=self.colors["primary"],
-                hover_color=self.colors["hover"],
+                fg_color=self.colors.button.primary,
+                hover_color=self.colors.hover,
                 height=30,
-                text_color=self.colors["text"],
+                text_color=self.colors.text.primary,
                 corner_radius=10
             )
             btn.pack(fill="x", padx=10, pady=2)
-            if text in ["Keyboard", get_text(self.config.language, "utility_buttons.updates_manager", "Updates manager"), "Tweaks", "Settings"]:
+            if text in ["Keyboard", get_text(self.config.language, "utility_buttons.updates_manager", "Updates manager"), "Settings"]:
                 btn.configure(width=120)
 
     def _create_brightness_control(self) -> None:
         """Create brightness control slider."""
-        brightness_frame = ctk.CTkFrame(self.container, fg_color=self.colors["background"])
+        brightness_frame = ctk.CTkFrame(self.container, fg_color=self.colors.background.main)
         brightness_frame.pack(fill="x", padx=10, pady=10)
 
-        label = ctk.CTkLabel(brightness_frame, text="BRIGHTNESS:", text_color=self.colors["text"])
+        label = ctk.CTkLabel(brightness_frame, text="BRIGHTNESS:", text_color=self.colors.text.primary)
         label.pack(side="left")
 
         self.brightness_value = ctk.CTkLabel(
             brightness_frame,
             text="VALUE: 100%",
-            text_color=self.colors["text"]
+            text_color=self.colors.text.primary
         )
         self.brightness_value.pack(side="right")
 
@@ -547,9 +542,11 @@ class FrameworkControlCenter(ctk.CTk):
             from_=0,
             to=100,
             command=self._on_brightness_change,
-            progress_color=self.colors["primary"],
-            button_color=self.colors["primary"],
-            button_hover_color=self.colors["hover"],
+            progress_color=self.colors.progress.bar,
+            button_color=self.colors.button.primary,
+            button_hover_color=self.colors.hover,
+            fg_color=self.colors.background.secondary,  # Couleur de fond de la barre
+            border_color=self.colors.border.inactive,   # Couleur de la bordure
             corner_radius=10
         )
         self.brightness_slider.pack(fill="x", padx=5)
@@ -659,10 +656,6 @@ class FrameworkControlCenter(ctk.CTk):
         """Open updates manager window."""
         UpdatesManager(self)
 
-    def _open_tweaks(self) -> None:
-        """Open tweaks window."""
-        TweaksWindow(self)
-
     def _open_settings(self) -> None:
         """Open settings window."""
         self._create_settings_window()
@@ -734,9 +727,6 @@ class FrameworkControlCenter(ctk.CTk):
                 if config.minimize_to_tray:
                     self._setup_tray()
                 
-                # Apply theme
-                ctk.set_appearance_mode(config.theme)
-                
                 # Apply monitoring interval
                 if hasattr(self, '_update_metrics'):
                     self.after_cancel(self._update_metrics)
@@ -779,7 +769,7 @@ class FrameworkControlCenter(ctk.CTk):
             logger.error(f"Failed to load icon: {e}")
             
         # Fallback to creating a new icon if logo.ico is not found
-        img = Image.new("RGB", (64, 64), self.colors["primary"])
+        img = Image.new("RGB", (64, 64), self.colors.primary)
         img.save("assets/icon.png")
         return img
 
@@ -907,7 +897,7 @@ class FrameworkControlCenter(ctk.CTk):
                 if not os.path.exists(icon_path):
                     logger.error("Icon file not found: %s", icon_path)
                     # Create a default icon as fallback
-                    img = Image.new("RGB", (64, 64), self.colors["primary"])
+                    img = Image.new("RGB", (64, 64), self.colors.primary)
                     fallback_path = os.path.join(base_path, "assets", "icon.png")
                     os.makedirs(os.path.dirname(fallback_path), exist_ok=True)
                     img.save(fallback_path)
@@ -964,14 +954,14 @@ class FrameworkControlCenter(ctk.CTk):
 
     def _create_battery_status(self) -> None:
         """Create battery status display."""
-        battery_frame = ctk.CTkFrame(self.container, fg_color=self.colors["background"])
+        battery_frame = ctk.CTkFrame(self.container, fg_color=self.colors.background.main)
         battery_frame.pack(fill="x", padx=10, pady=5)
 
         # Battery percentage and charging status
         self.battery_status = ctk.CTkLabel(
             battery_frame,
             text="BATTERY: --% | --",
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 11)
         )
         self.battery_status.pack(side="top", pady=(0, 2))
@@ -980,7 +970,7 @@ class FrameworkControlCenter(ctk.CTk):
         self.battery_time = ctk.CTkLabel(
             battery_frame,
             text="Time remaining: --:--",
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 11)
         )
         self.battery_time.pack(side="top")
@@ -995,16 +985,16 @@ class FrameworkControlCenter(ctk.CTk):
         # Réinitialiser l'ancien bouton actif
         if self.active_buttons[button_type]:
             self.active_buttons[button_type].configure(
-                border_color=self.colors["background"],
-                text_color=self.colors["text"],
-                fg_color=self.colors["primary"]
+                border_color=self.colors.border.inactive,
+                text_color=self.colors.text.primary,
+                fg_color=self.colors.button.primary
             )
 
         # Mettre à jour le nouveau bouton actif
         active_button.configure(
-            border_color=self.colors["border_active"],
-            text_color=self.colors["text_active"],
-            fg_color=self.colors["hover"]
+            border_color=self.colors.border.active,
+            text_color=self.colors.text.primary,
+            fg_color=self.colors.hover
         )
 
         # Sauvegarder le nouveau bouton actif
@@ -1157,7 +1147,7 @@ class FrameworkControlCenter(ctk.CTk):
         self.settings_window.resizable(False, False)
         
         # Configure window style
-        self.settings_window.configure(fg_color=self.colors["background"])
+        self.settings_window.configure(fg_color=self.colors.background.main)
         
         try:
             if sys.platform.startswith('win'):
@@ -1168,27 +1158,39 @@ class FrameworkControlCenter(ctk.CTk):
             logger.error(f"Failed to set window icon: {e}")
         
         # Main container with dark background
-        container = ctk.CTkFrame(self.settings_window, fg_color=self.colors["background"])
+        container = ctk.CTkFrame(self.settings_window, fg_color=self.colors.background.main)
         container.pack(fill="both", expand=True, padx=20, pady=20)
 
         # Theme selection
         theme_label = ctk.CTkLabel(
             container,
             text=get_text(self.config.language, "theme"),
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 11)
         )
         theme_label.pack(anchor="w", pady=(0, 5))
         
-        theme_var = ctk.StringVar(value=self.config.theme)
+        # Get available themes
+        themes = []
+        try:
+            for theme_file in Path("configs").glob("*_theme.json"):
+                with open(theme_file, encoding="utf-8") as f:
+                    theme_data = json.load(f)
+                    themes.append(theme_data["name"])
+        except Exception as e:
+            logger.error(f"Error loading themes: {e}")
+            themes = ["Default Dark", "Light Theme"]
+
+        theme_var = ctk.StringVar(value=self.config.load_theme().name)
         theme_menu = ctk.CTkOptionMenu(
             container,
-            values=["dark", "light"],
+            values=themes,
             variable=theme_var,
-            fg_color="#2D2D2D",
-            button_color=self.colors["primary"],
-            button_hover_color=self.colors["hover"],
-            text_color=self.colors["text"]
+            command=self._on_theme_change,
+            fg_color=self.colors.background.secondary,
+            button_color=self.colors.button.primary,
+            button_hover_color=self.colors.hover,
+            text_color=self.colors.text.primary
         )
         theme_menu.pack(fill="x", pady=(0, 15))
 
@@ -1196,7 +1198,7 @@ class FrameworkControlCenter(ctk.CTk):
         lang_label = ctk.CTkLabel(
             container,
             text=get_text(self.config.language, "language"),
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 11)
         )
         lang_label.pack(anchor="w", pady=(0, 5))
@@ -1206,10 +1208,10 @@ class FrameworkControlCenter(ctk.CTk):
             container,
             values=list(language_names.keys()),
             variable=lang_var,
-            fg_color="#2D2D2D",
-            button_color=self.colors["primary"],
-            button_hover_color=self.colors["hover"],
-            text_color=self.colors["text"]
+            fg_color=self.colors.background.secondary,
+            button_color=self.colors.button.primary,
+            button_hover_color=self.colors.hover,
+            text_color=self.colors.text.primary
         )
         language_menu.pack(fill="x", pady=(0, 15))
 
@@ -1219,10 +1221,10 @@ class FrameworkControlCenter(ctk.CTk):
             container,
             text=get_text(self.config.language, "minimize_to_tray"),
             variable=minimize_var,
-            fg_color=self.colors["primary"],
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"],
-            border_color=self.colors["text"],
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
+            border_color=self.colors.border.inactive,
             corner_radius=6
         )
         minimize_check.pack(anchor="w", pady=(0, 10))
@@ -1233,10 +1235,10 @@ class FrameworkControlCenter(ctk.CTk):
             container,
             text=get_text(self.config.language, "start_minimized"),
             variable=start_min_var,
-            fg_color=self.colors["primary"],
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"],
-            border_color=self.colors["text"],
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
+            border_color=self.colors.border.inactive,
             corner_radius=6
         )
         start_min_check.pack(anchor="w", pady=(0, 10))
@@ -1247,10 +1249,10 @@ class FrameworkControlCenter(ctk.CTk):
             container,
             text=get_text(self.config.language, "start_with_windows"),
             variable=start_windows_var,
-            fg_color=self.colors["primary"],
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"],
-            border_color=self.colors["text"],
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
+            border_color=self.colors.border.inactive,
             corner_radius=6
         )
         start_windows_check.pack(anchor="w", pady=(0, 15))
@@ -1259,7 +1261,7 @@ class FrameworkControlCenter(ctk.CTk):
         interval_label = ctk.CTkLabel(
             container,
             text=get_text(self.config.language, "monitoring_interval"),
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 11)
         )
         interval_label.pack(anchor="w", pady=(0, 5))
@@ -1268,9 +1270,9 @@ class FrameworkControlCenter(ctk.CTk):
         interval_entry = ctk.CTkEntry(
             container,
             textvariable=interval_var,
-            fg_color="#2D2D2D",
-            text_color=self.colors["text"],
-            border_color=self.colors["primary"]
+            fg_color=self.colors.background.secondary,
+            text_color=self.colors.text.primary,
+            border_color=self.colors.border.inactive
         )
         interval_entry.pack(fill="x", pady=(0, 15))
         
@@ -1286,9 +1288,9 @@ class FrameworkControlCenter(ctk.CTk):
                 start_windows_var.get(),
                 interval_var.get()
             ),
-            fg_color=self.colors["primary"],
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"],
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
             height=35,
             corner_radius=6
         )
@@ -1298,62 +1300,86 @@ class FrameworkControlCenter(ctk.CTk):
                       start_minimized: bool, start_with_windows: bool, monitoring_interval: str) -> None:
         """Save settings to config file."""
         try:
-            # Update config values
-            self.config.theme = theme
-            self.config.language = language
-            self.config.minimize_to_tray = minimize_to_tray
-            self.config.start_minimized = start_minimized
-            self.config.start_with_windows = start_with_windows
-            self.config.monitoring_interval = int(monitoring_interval)
+            # Find theme file by name
+            theme_file = None
+            for theme_path in Path("configs").glob("*_theme.json"):
+                with open(theme_path, encoding="utf-8") as f:
+                    theme_data = json.load(f)
+                    if theme_data["name"] == theme:
+                        theme_file = theme_path.stem
+                        break
             
-            # Save to file
-            self.config_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(self.config_path, "w", encoding="utf-8") as f:
-                json.dump(self.config.dict(), f, indent=4)
-            
-            # Apply settings immediately
-            ctk.set_appearance_mode(theme)
-            self.current_font = load_custom_font(language)
-            self._update_window_text()
-            self._update_widgets_font()
-            
-            # Update startup task if needed
-            if start_with_windows:
-                # Get the path to the executable
-                if getattr(sys, 'frozen', False):
-                    # Running as compiled executable
-                    exe_path = sys.executable
-                else:
-                    # Running as script
-                    exe_path = os.path.abspath(sys.argv[0])
+            if theme_file:
+                # Update config values
+                self.config.current_theme = theme_file
+                self.config.language = language
+                self.config.minimize_to_tray = minimize_to_tray
+                self.config.start_minimized = start_minimized
+                self.config.start_with_windows = start_with_windows
+                self.config.monitoring_interval = int(monitoring_interval)
                 
-                success = self.tweaks.create_startup_task(exe_path)
-                if not success:
-                    logger.error("Failed to create startup task")
+                # Save to file
+                self.config_path.parent.mkdir(parents=True, exist_ok=True)
+                with open(self.config_path, "w", encoding="utf-8") as f:
+                    json.dump(self.config.dict(), f, indent=4)
+                
+                # Load and apply new theme
+                theme = self.config.load_theme()
+                self.colors = theme.colors
+                self.theme_fonts = theme.fonts
+                self.spacing = theme.spacing
+                self.radius = theme.radius
+                
+                # Update all windows
+                for window in FrameworkControlCenter._open_windows:
+                    if window.winfo_exists():
+                        if hasattr(window, 'colors'):
+                            window.colors = self.colors
+                        window._update_window_colors()
+                    else:
+                        FrameworkControlCenter._open_windows.remove(window)
+                
+                # Update other settings
+                self.current_font = load_custom_font(language)
+                self._update_window_text()
+                self._update_widgets_font()
+                
+                # Update startup task if needed
+                if start_with_windows:
+                    if getattr(sys, 'frozen', False):
+                        exe_path = sys.executable
+                    else:
+                        exe_path = os.path.abspath(sys.argv[0])
+                    
+                    success = self.tweaks.create_startup_task(exe_path)
+                    if not success:
+                        logger.error("Failed to create startup task")
+                else:
+                    success = self.tweaks.remove_startup_task()
+                    if not success:
+                        logger.error("Failed to remove startup task")
+                
+                # Apply minimize_to_tray setting immediately
+                if minimize_to_tray and not hasattr(self, 'tray_icon'):
+                    self._setup_tray()
+                elif not minimize_to_tray and hasattr(self, 'tray_icon'):
+                    with self._tray_lock:
+                        if self.tray_icon is not None:
+                            self.tray_icon.stop()
+                            self.tray_icon = None
+                
+                # Apply monitoring interval immediately
+                if hasattr(self, '_update_metrics'):
+                    self.after_cancel(self._update_metrics)
+                    self.after(self.config.monitoring_interval, self._update_metrics)
+                
+                # Close settings window
+                if hasattr(self, 'settings_window') and self.settings_window.winfo_exists():
+                    self.settings_window.destroy()
+                
+                logger.info("Settings saved successfully")
             else:
-                success = self.tweaks.remove_startup_task()
-                if not success:
-                    logger.error("Failed to remove startup task")
-            
-            # Apply minimize_to_tray setting immediately
-            if minimize_to_tray and not hasattr(self, 'tray_icon'):
-                self._setup_tray()
-            elif not minimize_to_tray and hasattr(self, 'tray_icon'):
-                with self._tray_lock:
-                    if self.tray_icon is not None:
-                        self.tray_icon.stop()
-                        self.tray_icon = None
-            
-            # Apply monitoring interval immediately
-            if hasattr(self, '_update_metrics'):
-                self.after_cancel(self._update_metrics)
-                self.after(self.config.monitoring_interval, self._update_metrics)
-            
-            # Close settings window
-            if hasattr(self, 'settings_window') and self.settings_window.winfo_exists():
-                self.settings_window.destroy()
-            
-            logger.info("Settings saved successfully")
+                logger.error(f"Theme file not found for: {theme}")
             
         except Exception as e:
             logger.error(f"Error saving settings: {e}")
@@ -1449,6 +1475,138 @@ class FrameworkControlCenter(ctk.CTk):
             import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
 
+    def _on_theme_change(self, theme_name: str) -> None:
+        """Handle theme change."""
+        try:
+            # Find theme file by name
+            theme_file = None
+            for theme_path in Path("configs").glob("*_theme.json"):
+                with open(theme_path, encoding="utf-8") as f:
+                    theme_data = json.load(f)
+                    if theme_data["name"] == theme_name:
+                        theme_file = theme_path.stem
+                        break
+            
+            if theme_file:
+                # Update configuration
+                self.config.current_theme = theme_file
+                
+                # Save configuration
+                self._save_config()
+                
+                # Load and apply new theme
+                theme = self.config.load_theme()
+                self.colors = theme.colors
+                self.theme_fonts = theme.fonts
+                self.spacing = theme.spacing
+                self.radius = theme.radius
+                
+                # Update all windows
+                for window in FrameworkControlCenter._open_windows:
+                    if window.winfo_exists():
+                        if hasattr(window, 'colors'):
+                            window.colors = self.colors
+                        window._update_window_colors()
+                    else:
+                        FrameworkControlCenter._open_windows.remove(window)
+                
+                logger.info(f"Theme changed to: {theme_name}")
+            
+        except Exception as e:
+            logger.error(f"Error changing theme: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+
+    def _update_window_colors(self) -> None:
+        """Update colors in all widgets."""
+        def update_widget_colors(widget):
+            try:
+                # Update background color
+                if hasattr(widget, 'configure') and 'fg_color' in widget.keys():
+                    current_color = widget.cget('fg_color')
+                    if current_color == "#1E1E1E":  # Old main background
+                        widget.configure(fg_color=self.colors.background.main)
+                    elif current_color == "#2D2D2D":  # Old secondary background
+                        widget.configure(fg_color=self.colors.background.secondary)
+                    elif current_color == "#FF7043":  # Old primary color
+                        widget.configure(fg_color=self.colors.button.primary)
+
+                # Update text color
+                if hasattr(widget, 'configure') and 'text_color' in widget.keys():
+                    widget.configure(text_color=self.colors.text.primary)
+
+                # Update button colors
+                if isinstance(widget, ctk.CTkButton):
+                    if widget.cget('text') == "×":  # Close button
+                        widget.configure(
+                            fg_color=self.colors.button.danger,
+                            hover_color=self.colors.status.error,
+                            text_color=self.colors.text.primary
+                        )
+                    else:
+                        widget.configure(
+                            fg_color=self.colors.button.primary,
+                            hover_color=self.colors.hover,
+                            text_color=self.colors.text.primary
+                        )
+
+                # Update progress bars
+                if isinstance(widget, ctk.CTkProgressBar):
+                    parent_text = None
+                    if hasattr(widget, 'master'):
+                        for child in widget.master.winfo_children():
+                            if isinstance(child, ctk.CTkLabel):
+                                parent_text = child.cget('text').lower()
+                                break
+                    
+                    progress_color = self.colors.progress.bar
+                    if parent_text:
+                        if "cpu" in parent_text:
+                            progress_color = self.colors.progress.cpu
+                        elif "gpu" in parent_text or "igpu" in parent_text or "dgpu" in parent_text:
+                            progress_color = self.colors.progress.gpu
+                        elif "ram" in parent_text:
+                            progress_color = self.colors.progress.ram
+                        elif "temp" in parent_text:
+                            progress_color = self.colors.progress.temp
+
+                    widget.configure(
+                        progress_color=progress_color,
+                        fg_color=self.colors.progress.background
+                    )
+
+                # Update borders
+                if hasattr(widget, 'configure') and 'border_color' in widget.keys():
+                    if widget.cget('border_color') == "#FFFFFF":  # Old active border
+                        widget.configure(border_color=self.colors.border.active)
+                    else:
+                        widget.configure(border_color=self.colors.border.inactive)
+
+                # Update font sizes
+                if hasattr(widget, 'configure') and 'font' in widget.keys():
+                    current_font = widget.cget('font')
+                    if isinstance(current_font, tuple):
+                        family = current_font[0]
+                        # Determine size based on context
+                        if isinstance(widget, ctk.CTkLabel) and widget.master and isinstance(widget.master, ctk.CTkFrame):
+                            if "header" in str(widget.master):
+                                size = self.theme_fonts.main.size.title
+                            else:
+                                size = self.theme_fonts.main.size.normal
+                        else:
+                            size = self.theme_fonts.main.size.normal
+                        widget.configure(font=(family, size))
+
+                # Recursively update child widgets
+                for child in widget.winfo_children():
+                    update_widget_colors(child)
+            except Exception as e:
+                logger.error(f"Error updating colors for widget: {e}")
+
+        # Update main window
+        self.configure(fg_color=self.colors.background.main)
+        update_widget_colors(self)
+
 
 class UpdatesManager(ctk.CTkToplevel):
     def __init__(self, parent):
@@ -1461,7 +1619,7 @@ class UpdatesManager(ctk.CTkToplevel):
         self.current_font = load_custom_font(self.parent.config.language)
         
         # Configurer la couleur de fond de la fenêtre
-        self.configure(fg_color=self.colors["background"])
+        self.configure(fg_color=self.colors.background.main)
         
         # Configurer l'icône
         try:
@@ -1488,31 +1646,21 @@ class UpdatesManager(ctk.CTkToplevel):
         # Gérer la fermeture de la fenêtre
         self.protocol("WM_DELETE_WINDOW", self._on_close)
 
-    def _on_close(self):
-        """Gérer la fermeture propre de la fenêtre."""
-        try:
-            FrameworkControlCenter._open_windows.remove(self)  # Remove window from list
-            self.grab_release()
-            self.destroy()
-        except Exception as e:
-            logger.error(f"Error closing Update Manager: {e}")
-            self.destroy()
-
     def _create_widgets(self) -> None:
         """Create updates manager widgets."""
         # Main container
-        container = ctk.CTkFrame(self, fg_color=self.colors["background"])
+        container = ctk.CTkFrame(self, fg_color=self.colors.background.main)
         container.pack(fill="both", expand=True, padx=10, pady=10)
         
         # Top frame pour les boutons de drivers
-        top_frame = ctk.CTkFrame(container, fg_color=self.colors["background"])
+        top_frame = ctk.CTkFrame(container, fg_color=self.colors.background.main)
         top_frame.pack(fill="x", pady=(0, 10))
         
         # Label "Drivers"
         drivers_label = ctk.CTkLabel(
             top_frame,
             text="Drivers & BIOS",
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 12, "bold")
         )
         drivers_label.pack(side="left", padx=5)
@@ -1526,9 +1674,9 @@ class UpdatesManager(ctk.CTkToplevel):
             drivers_buttons,
             text="Framework Drivers",
             command=lambda: webbrowser.open("https://knowledgebase.frame.work/en_us/bios-and-drivers-downloads-rJ3PaCexh"),
-            fg_color=self.colors["primary"],
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"],
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
             height=32,
             width=150
         )
@@ -1539,42 +1687,42 @@ class UpdatesManager(ctk.CTkToplevel):
             drivers_buttons,
             text="AMD Drivers",
             command=lambda: webbrowser.open("https://www.amd.com/en/support/download/drivers.html"),
-            fg_color=self.colors["primary"],
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"],
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
             height=32,
             width=150
         )
         amd_btn.pack(side="left", padx=5)
         
         # Separator
-        separator = ctk.CTkFrame(container, height=2, fg_color=self.colors["primary"])
+        separator = ctk.CTkFrame(container, height=2, fg_color=self.colors.button.primary)
         separator.pack(fill="x", pady=10)
         
         # Frame principal pour la liste des paquets
-        main_frame = ctk.CTkFrame(container, fg_color=self.colors["background"])
+        main_frame = ctk.CTkFrame(container, fg_color=self.colors.background.main)
         main_frame.pack(fill="both", expand=True, padx=5, pady=5)
         main_frame.grid_columnconfigure(0, weight=70)
         main_frame.grid_columnconfigure(1, weight=30)
         
         # Frame pour la liste des paquets (70% de la largeur)
-        packages_frame = ctk.CTkFrame(main_frame, fg_color=self.colors["background"])
+        packages_frame = ctk.CTkFrame(main_frame, fg_color=self.colors.background.main)
         packages_frame.grid(row=0, column=0, sticky="nsew", padx=(0, 5))
         
         # Label pour la section des paquets avec un style amélioré
-        packages_header = ctk.CTkFrame(packages_frame, fg_color=self.colors["primary"], height=40)
+        packages_header = ctk.CTkFrame(packages_frame, fg_color=self.colors.button.primary, height=40)
         packages_header.pack(fill="x", pady=(0, 10))
         packages_header.pack_propagate(False)
         
         ctk.CTkLabel(
             packages_header,
             text="System Packages",
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 12, "bold")
         ).pack(side="left", padx=10, pady=5)
         
         # En-tête des colonnes avec un style amélioré
-        header_frame = ctk.CTkFrame(packages_frame, fg_color="#2D2D2D", height=35)
+        header_frame = ctk.CTkFrame(packages_frame, fg_color=self.colors.background.secondary, height=35)
         header_frame.pack(fill="x", padx=5, pady=(0, 5))
         header_frame.pack_propagate(False)
         header_frame.grid_columnconfigure(0, weight=0)  # Checkbox
@@ -1594,9 +1742,9 @@ class UpdatesManager(ctk.CTkToplevel):
             checkbox_width=20,
             checkbox_height=20,
             corner_radius=5,
-            fg_color=self.colors["primary"],
-            hover_color=self.colors["hover"],
-            border_color=self.colors["text"]
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            border_color=self.colors.border.inactive
         )
         select_all.grid(row=0, column=0, sticky="w", padx=10, pady=5)
         
@@ -1604,7 +1752,7 @@ class UpdatesManager(ctk.CTkToplevel):
         ctk.CTkLabel(
             header_frame,
             text="Name",
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 11, "bold"),
             anchor="w",
             width=200
@@ -1614,7 +1762,7 @@ class UpdatesManager(ctk.CTkToplevel):
         ctk.CTkLabel(
             header_frame,
             text="Current",
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 11, "bold"),
             anchor="e",
             width=100
@@ -1624,7 +1772,7 @@ class UpdatesManager(ctk.CTkToplevel):
         ctk.CTkLabel(
             header_frame,
             text="Available",
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 11, "bold"),
             anchor="e",
             width=100
@@ -1633,34 +1781,34 @@ class UpdatesManager(ctk.CTkToplevel):
         # Liste des paquets avec scrollbar et style amélioré
         self.packages_list = ctk.CTkScrollableFrame(
             packages_frame,
-            fg_color="#2D2D2D",
+            fg_color=self.colors.background.secondary,
             label_text="",
-            label_fg_color=self.colors["background"],
+            label_fg_color=self.colors.background.main,
             corner_radius=10
         )
         self.packages_list.pack(fill="both", expand=True, padx=5, pady=5)
         
         # Frame pour les logs (30% de la largeur)
-        logs_frame = ctk.CTkFrame(main_frame, fg_color=self.colors["background"])
+        logs_frame = ctk.CTkFrame(main_frame, fg_color=self.colors.background.main)
         logs_frame.grid(row=0, column=1, sticky="nsew")
         
         # En-tête des logs avec style amélioré
-        logs_header = ctk.CTkFrame(logs_frame, fg_color=self.colors["primary"], height=40)
+        logs_header = ctk.CTkFrame(logs_frame, fg_color=self.colors.button.primary, height=40)
         logs_header.pack(fill="x", pady=(0, 10))
         logs_header.pack_propagate(False)
         
         ctk.CTkLabel(
             logs_header,
             text="Logs",
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             font=("Roboto", 12, "bold")
         ).pack(side="left", padx=10, pady=5)
         
         # Zone de texte pour les logs avec style amélioré
         self.log_text = ctk.CTkTextbox(
             logs_frame,
-            fg_color="#2D2D2D",
-            text_color=self.colors["text"],
+            fg_color=self.colors.background.secondary,
+            text_color=self.colors.text.primary,
             wrap="word",
             corner_radius=10
         )
@@ -1674,14 +1822,11 @@ class UpdatesManager(ctk.CTkToplevel):
         check_button = ctk.CTkButton(
             bottom_buttons,
             text="Check installed apps",
-            command=lambda: threading.Thread(
-                target=self._check_updates,
-                daemon=True
-            ).start(),
+            command=lambda: threading.Thread(target=self._check_updates, daemon=True).start(),
             height=35,
-            fg_color=self.colors["button"],
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"],
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
             corner_radius=10
         )
         check_button.pack(side="left", padx=5)
@@ -1692,9 +1837,9 @@ class UpdatesManager(ctk.CTkToplevel):
             text="Update selection",
             command=self._update_selected,
             height=35,
-            fg_color=self.colors["button"],
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"],
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
             corner_radius=10
         )
         update_button.pack(side="left", padx=5)
@@ -1703,20 +1848,24 @@ class UpdatesManager(ctk.CTkToplevel):
         refresh_button = ctk.CTkButton(
             bottom_buttons,
             text="Refresh List",
-            command=lambda: threading.Thread(
-                target=self._check_updates,
-                daemon=True
-            ).start(),
+            command=lambda: threading.Thread(target=self._check_updates, daemon=True).start(),
             height=35,
-            fg_color=self.colors["button"],
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"],
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
             corner_radius=10
         )
         refresh_button.pack(side="left", padx=5)
-        
-        # Initial update check
-        threading.Thread(target=self._check_updates, daemon=True).start()
+
+    def _on_close(self):
+        """Gérer la fermeture propre de la fenêtre."""
+        try:
+            FrameworkControlCenter._open_windows.remove(self)  # Remove window from list
+            self.grab_release()
+            self.destroy()
+        except Exception as e:
+            logger.error(f"Error closing Update Manager: {e}")
+            self.destroy()
 
     def _check_updates(self) -> None:
         """Vérifier les mises à jour disponibles."""
@@ -1913,9 +2062,9 @@ class UpdatesManager(ctk.CTkToplevel):
             checkbox_width=20,
             checkbox_height=20,
             corner_radius=5,
-            fg_color=self.colors["primary"],
-            hover_color=self.colors["hover"],
-            border_color=self.colors["text"]
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            border_color=self.colors.border.inactive
         )
         checkbox.grid(row=0, column=0, sticky="w", padx=5)
         
@@ -1927,7 +2076,7 @@ class UpdatesManager(ctk.CTkToplevel):
         name_label = ctk.CTkLabel(
             package_frame,
             text=name,
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             anchor="w",
             width=200  # Largeur fixe pour le nom
         )
@@ -1937,7 +2086,7 @@ class UpdatesManager(ctk.CTkToplevel):
         current_label = ctk.CTkLabel(
             package_frame,
             text=current_version,
-            text_color=self.colors["text"],
+            text_color=self.colors.text.primary,
             anchor="e",
             width=100  # Largeur fixe pour la version
         )
@@ -1952,7 +2101,7 @@ class UpdatesManager(ctk.CTkToplevel):
             arrow_label = ctk.CTkLabel(
                 version_frame,
                 text="→",
-                text_color="#4CAF50",  # Vert
+                text_color=self.colors.status.success,  # Vert
                 anchor="e"
             )
             arrow_label.pack(side="left", padx=2)
@@ -1961,7 +2110,7 @@ class UpdatesManager(ctk.CTkToplevel):
             update_label = ctk.CTkLabel(
                 version_frame,
                 text=new_version,
-                text_color="#4CAF50",  # Vert
+                text_color=self.colors.status.success,  # Vert
                 anchor="e",
                 width=100  # Largeur fixe pour la version
             )
@@ -2042,473 +2191,6 @@ class UpdatesManager(ctk.CTkToplevel):
                     widget.checkbox.set(selected)
 
 
-class TweaksWindow(ctk.CTkToplevel):
-    def __init__(self, parent):
-        super().__init__(parent)
-        FrameworkControlCenter._open_windows.append(self)  # Add window to list
-        self.parent = parent
-        self.title(get_text(self.parent.config.language, "tweaks_title"))
-        self.geometry("600x800")
-        self.colors = parent.colors
-        self.current_font = load_custom_font(self.parent.config.language)
-        
-        # Configurer l'icône
-        try:
-            if sys.platform.startswith('win'):
-                self.after(200, lambda: self.iconbitmap(str(Path("assets/logo.ico").absolute())))
-            else:
-                self.iconbitmap(str(Path("assets/logo.ico")))
-        except Exception as e:
-            logger.error(f"Failed to set window icon: {e}")
-        
-        # Rendre la fenêtre modale
-        self.transient(parent)
-        self.grab_set()
-        
-        # Initialiser les dictionnaires pour stocker les références des checkboxes
-        self.privacy_checkboxes = {}
-        self.performance_checkboxes = {}
-        self.system_checkboxes = {}
-        
-        # Créer l'interface
-        self._create_widgets()
-        
-        # Vérifier l'état des tweaks
-        self._check_tweaks_status()
-        
-        # Gérer la fermeture de la fenêtre
-        self.protocol("WM_DELETE_WINDOW", self._on_close)
-
-    def _check_tweaks_status(self) -> None:
-        """Check which tweaks are already applied."""
-        try:
-            tweaks = WindowsTweaks()
-            
-            # Vérifier les tweaks de confidentialité
-            for name, var in self.privacy_vars.items():
-                is_applied = False
-                if name == "Disable Telemetry":
-                    is_applied = tweaks.is_telemetry_disabled()
-                elif name == "Disable Activity History":
-                    is_applied = tweaks.is_activity_history_disabled()
-                elif name == "Disable Location Tracking":
-                    is_applied = tweaks.is_location_tracking_disabled()
-                elif name == "Disable Consumer Features":
-                    is_applied = tweaks.is_consumer_features_disabled()
-                elif name == "Disable Storage Sense":
-                    is_applied = tweaks.is_storage_sense_disabled()
-                elif name == "Disable Wifi-Sense":
-                    is_applied = tweaks.is_wifi_sense_disabled()
-                
-                if is_applied:
-                    self.privacy_checkboxes[name].configure(state="disabled")
-                    self._add_log(f"✓ {name} is already applied\n")
-            
-            # Vérifier les tweaks de performance
-            for name, var in self.performance_vars.items():
-                is_applied = False
-                if name == "Disable GameDVR":
-                    is_applied = tweaks.is_game_dvr_disabled()
-                elif name == "Disable Hibernation":
-                    is_applied = tweaks.is_hibernation_disabled()
-                elif name == "Disable Homegroup":
-                    is_applied = tweaks.is_homegroup_disabled()
-                elif name == "Prefer IPv4 over IPv6":
-                    is_applied = tweaks.is_ipv4_preferred()
-                
-                if is_applied:
-                    self.performance_checkboxes[name].configure(state="disabled")
-                    self._add_log(f"✓ {name} is already applied\n")
-            
-            # Vérifier les tweaks système
-            for name, var in self.system_vars.items():
-                is_applied = False
-                if name == "Change Windows Terminal default: PowerShell 5 -> PowerShell 7":
-                    is_applied = tweaks.is_powershell7_default()
-                elif name == "Disable Powershell 7 Telemetry":
-                    is_applied = tweaks.is_powershell7_telemetry_disabled()
-                elif name == "Set Hibernation as default (good for laptops)":
-                    is_applied = tweaks.is_hibernation_default()
-                elif name == "Set Services to Manual":
-                    is_applied = tweaks.are_services_manual()
-                elif name == "Debloat Edge":
-                    is_applied = tweaks.is_edge_debloated()
-                
-                if is_applied:
-                    self.system_checkboxes[name].configure(state="disabled")
-                    self._add_log(f"✓ {name} is already applied\n")
-            
-        except Exception as e:
-            logger.error(f"Error checking tweaks status: {e}")
-
-    def _reset_tweaks(self) -> None:
-        """Reset all tweaks to default state."""
-        # Réactiver toutes les checkboxes
-        for checkbox_dict in [self.privacy_checkboxes, self.performance_checkboxes, self.system_checkboxes]:
-            for checkbox in checkbox_dict.values():
-                checkbox.configure(state="normal")
-        
-        # Décocher toutes les cases
-        for var_dict in [self.privacy_vars, self.performance_vars, self.system_vars]:
-            for var in var_dict.values():
-                var.set(False)
-        
-        # Add log message
-        self._add_log("\n✨ All tweaks have been reset to default state.\n")
-
-    def _create_privacy_tweaks(self, parent) -> None:
-        """Create privacy tweaks section."""
-        # Section frame
-        section = ctk.CTkFrame(parent, fg_color=self.colors["background"])
-        section.pack(fill="x", pady=(0, 20))
-
-        # Section title
-        ctk.CTkLabel(
-            section,
-            text="Privacy Tweaks",
-            font=("Roboto", 12, "bold"),
-            text_color=self.colors["text"]
-        ).pack(anchor="w", pady=(0, 10))
-
-        # Privacy tweaks
-        self.privacy_vars = {}
-        privacy_tweaks = [
-            ("Disable Telemetry", "Disable Windows telemetry and data collection"),
-            ("Disable Activity History", "Disable Windows activity history tracking"),
-            ("Disable Location Tracking", "Disable location tracking and services"),
-            ("Disable Consumer Features", "Disable consumer features and suggestions"),
-            ("Disable Storage Sense", "Disable automatic storage management"),
-            ("Disable Wifi-Sense", "Disable automatic WiFi network sharing")
-        ]
-
-        for name, tooltip in privacy_tweaks:
-            var = ctk.BooleanVar(value=False)
-            self.privacy_vars[name] = var
-            
-            checkbox = ctk.CTkCheckBox(
-                section,
-                text=name,
-                variable=var,
-                fg_color=self.colors["primary"],
-                hover_color=self.colors["hover"],
-                text_color=self.colors["text"],
-                border_color=self.colors["text"]
-            )
-            checkbox.pack(anchor="w", pady=2)
-            
-            # Store checkbox reference
-            self.privacy_checkboxes[name] = checkbox
-            
-            # Add tooltip functionality
-            self._create_tooltip(checkbox, tooltip)
-
-    def _create_performance_tweaks(self, parent) -> None:
-        """Create performance tweaks section."""
-        # Section frame
-        section = ctk.CTkFrame(parent, fg_color=self.colors["background"])
-        section.pack(fill="x", pady=(0, 20))
-
-        # Section title
-        ctk.CTkLabel(
-            section,
-            text="Performance Tweaks",
-            font=("Roboto", 12, "bold"),
-            text_color=self.colors["text"]
-        ).pack(anchor="w", pady=(0, 10))
-
-        # Performance tweaks
-        self.performance_vars = {}
-        performance_tweaks = [
-            ("Disable GameDVR", "Disable Game DVR and Game Bar for better gaming performance"),
-            ("Disable Hibernation", "Disable system hibernation to free up disk space"),
-            ("Disable Homegroup", "Disable homegroup services"),
-            ("Run Disk Cleanup", "Clean up system files and free disk space"),
-            ("Prefer IPv4 over IPv6", "Prioritize IPv4 connections over IPv6")
-        ]
-
-        for name, tooltip in performance_tweaks:
-            var = ctk.BooleanVar(value=False)
-            self.performance_vars[name] = var
-            
-            checkbox = ctk.CTkCheckBox(
-                section,
-                text=name,
-                variable=var,
-                fg_color=self.colors["primary"],
-                hover_color=self.colors["hover"],
-                text_color=self.colors["text"],
-                border_color=self.colors["text"]
-            )
-            checkbox.pack(anchor="w", pady=2)
-            
-            # Store checkbox reference
-            self.performance_checkboxes[name] = checkbox
-            
-            # Add tooltip functionality
-            self._create_tooltip(checkbox, tooltip)
-
-    def _create_system_tweaks(self, parent) -> None:
-        """Create system tweaks section."""
-        # Section frame
-        section = ctk.CTkFrame(parent, fg_color=self.colors["background"])
-        section.pack(fill="x", pady=(0, 20))
-
-        # Section title
-        ctk.CTkLabel(
-            section,
-            text="System Tweaks",
-            font=("Roboto", 12, "bold"),
-            text_color=self.colors["text"]
-        ).pack(anchor="w", pady=(0, 10))
-
-        # System tweaks
-        self.system_vars = {}
-        system_tweaks = [
-            ("Delete Temporary Files", "Delete temporary files to free up space"),
-            ("Change Windows Terminal default: PowerShell 5 -> PowerShell 7", "Set PowerShell 7 as default terminal"),
-            ("Disable Powershell 7 Telemetry", "Disable telemetry in PowerShell 7"),
-            ("Set Hibernation as default (good for laptops)", "Configure hibernation as default power action"),
-            ("Set Services to Manual", "Set non-essential services to manual start"),
-            ("Debloat Edge", "Remove unnecessary Edge browser components")
-        ]
-
-        for name, tooltip in system_tweaks:
-            var = ctk.BooleanVar(value=False)
-            self.system_vars[name] = var
-            
-            checkbox = ctk.CTkCheckBox(
-                section,
-                text=name,
-                variable=var,
-                fg_color=self.colors["primary"],
-                hover_color=self.colors["hover"],
-                text_color=self.colors["text"],
-                border_color=self.colors["text"]
-            )
-            checkbox.pack(anchor="w", pady=2)
-            
-            # Store checkbox reference
-            self.system_checkboxes[name] = checkbox
-            
-            # Add tooltip functionality
-            self._create_tooltip(checkbox, tooltip)
-
-    def _create_tooltip(self, widget, text):
-        """Create tooltip for widget."""
-        def show_tooltip(event):
-            tooltip = ctk.CTkToplevel(self)
-            tooltip.wm_overrideredirect(True)
-            tooltip.wm_geometry(f"+{event.x_root + 10}+{event.y_root + 10}")
-            
-            label = ctk.CTkLabel(
-                tooltip,
-                text=text,
-                fg_color="#2D2D2D",
-                text_color=self.colors["text"],
-                corner_radius=6
-            )
-            label.pack(padx=5, pady=5)
-            
-            def hide_tooltip():
-                tooltip.destroy()
-            
-            widget.tooltip = tooltip
-            widget.after(2000, hide_tooltip)
-
-        def hide_tooltip(event):
-            if hasattr(widget, "tooltip"):
-                widget.tooltip.destroy()
-                del widget.tooltip
-
-        widget.bind("<Enter>", show_tooltip)
-        widget.bind("<Leave>", hide_tooltip)
-
-    def _apply_tweaks(self) -> None:
-        """Apply selected tweaks."""
-        try:
-            tweaks = WindowsTweaks()
-
-            # Apply privacy tweaks
-            for name, var in self.privacy_vars.items():
-                if var.get():
-                    self._add_log(f"Applying {name}...\n")
-                    success = False
-                    
-                    if name == "Disable Telemetry":
-                        success = tweaks.disable_telemetry()
-                    elif name == "Disable Activity History":
-                        success = tweaks.disable_activity_history()
-                    elif name == "Disable Location Tracking":
-                        success = tweaks.disable_location_tracking()
-                    elif name == "Disable Consumer Features":
-                        success = tweaks.disable_consumer_features()
-                    elif name == "Disable Storage Sense":
-                        success = tweaks.disable_storage_sense()
-                    elif name == "Disable Wifi-Sense":
-                        success = tweaks.disable_wifi_sense()
-                        
-                    self._add_log(f"{'✅ Success' if success else '❌ Failed'}\n")
-
-            # Apply performance tweaks
-            for name, var in self.performance_vars.items():
-                if var.get():
-                    self._add_log(f"Applying {name}...\n")
-                    success = False
-                    
-                    if name == "Disable GameDVR":
-                        success = tweaks.disable_game_dvr()
-                    elif name == "Disable Hibernation":
-                        success = tweaks.disable_hibernation()
-                    elif name == "Disable Homegroup":
-                        success = tweaks.disable_homegroup()
-                    elif name == "Run Disk Cleanup":
-                        success = tweaks.run_disk_cleanup()
-                    elif name == "Prefer IPv4 over IPv6":
-                        success = tweaks.prefer_ipv4_over_ipv6()
-                        
-                    self._add_log(f"{'✅ Success' if success else '❌ Failed'}\n")
-
-            # Apply system tweaks
-            for name, var in self.system_vars.items():
-                if var.get():
-                    self._add_log(f"Applying {name}...\n")
-                    success = False
-                    
-                    if name == "Delete Temporary Files":
-                        success = tweaks.run_disk_cleanup()
-                    elif name == "Change Windows Terminal default: PowerShell 5 -> PowerShell 7":
-                        success = tweaks.set_powershell7_default()
-                    elif name == "Disable Powershell 7 Telemetry":
-                        success = tweaks.disable_powershell7_telemetry()
-                    elif name == "Set Hibernation as default (good for laptops)":
-                        success = tweaks.set_hibernation_default()
-                    elif name == "Set Services to Manual":
-                        success = tweaks.set_services_manual()
-                    elif name == "Debloat Edge":
-                        success = tweaks.debloat_edge()
-                        
-                    self._add_log(f"{'✅ Success' if success else '❌ Failed'}\n")
-
-            self._add_log("\n✅ All selected tweaks have been applied.\n")
-            
-        except Exception as e:
-            self._add_log(f"\n❌ Error applying tweaks: {str(e)}\n")
-            logger.error(f"Error applying tweaks: {e}")
-
-    def _add_log(self, message: str) -> None:
-        """Add message to log window."""
-        try:
-            if hasattr(self, 'log_text'):
-                self.log_text.configure(state="normal")
-                self.log_text.insert("end", message)
-                self.log_text.configure(state="disabled")
-                self.log_text.see("end")
-                self.update_idletasks()
-        except Exception as e:
-            logger.error(f"Error adding log message: {e}")
-
-    def _on_close(self) -> None:
-        """Handle window close."""
-        try:
-            FrameworkControlCenter._open_windows.remove(self)  # Remove window from list
-            self.grab_release()
-            self.destroy()
-        except Exception as e:
-            logger.error(f"Error closing Tweaks Window: {e}")
-            self.destroy() 
-
-    def _reset_tweaks(self) -> None:
-        """Reset all tweaks to default state."""
-        # Reset all checkboxes
-        for var_dict in [self.privacy_vars, self.performance_vars, self.system_vars]:
-            for var in var_dict.values():
-                var.set(False)
-        
-        # Add log message
-        self._add_log("\n✨ All tweaks have been reset to default state.\n") 
-
-    def _create_widgets(self) -> None:
-        """Create tweaks window widgets."""
-        # Main container
-        container = ctk.CTkFrame(self, fg_color=self.colors["background"])
-        container.pack(fill="both", expand=True, padx=20, pady=20)
-
-        # Scrollable frame for tweaks
-        scrollable_frame = ctk.CTkScrollableFrame(
-            container,
-            fg_color=self.colors["background"],
-            label_text="Windows Tweaks",
-            label_fg_color=self.colors["background"]
-        )
-        scrollable_frame.pack(fill="both", expand=True)
-
-        # Tweaks sections
-        self._create_privacy_tweaks(scrollable_frame)
-        self._create_performance_tweaks(scrollable_frame)
-        self._create_system_tweaks(scrollable_frame)
-
-        # Log text area
-        self.log_text = ctk.CTkTextbox(
-            container,
-            height=100,
-            fg_color=self.colors["background"],
-            text_color=self.colors["text"]
-        )
-        self.log_text.pack(fill="x", pady=(10, 0))
-        self.log_text.configure(state="disabled")
-
-        # Buttons frame
-        buttons_frame = ctk.CTkFrame(container, fg_color="transparent")
-        buttons_frame.pack(fill="x", pady=(20, 0))
-
-        # Apply button
-        apply_btn = ctk.CTkButton(
-            buttons_frame,
-            text="Apply Selected Tweaks",
-            command=self._apply_tweaks,
-            fg_color=self.colors["primary"],
-            hover_color=self.colors["hover"],
-            text_color=self.colors["text"]
-        )
-        apply_btn.pack(side="left", padx=5)
-
-        # Reset button
-        reset_btn = ctk.CTkButton(
-            buttons_frame,
-            text="Reset All",
-            command=self._reset_tweaks,
-            fg_color="#FF4444",
-            hover_color="#FF6666",
-            text_color=self.colors["text"]
-        )
-        reset_btn.pack(side="right", padx=5)
-
-        # Restore Services button
-        restore_services_btn = ctk.CTkButton(
-            buttons_frame,
-            text="Restore Services",
-            command=self._restore_services,
-            fg_color="#4444FF",
-            hover_color="#6666FF",
-            text_color=self.colors["text"]
-        )
-        restore_services_btn.pack(side="right", padx=5)
-
-    def _restore_services(self) -> None:
-        """Restore services to automatic startup."""
-        try:
-            tweaks = WindowsTweaks()
-            self._add_log("\nRestoring services to automatic startup...\n")
-            
-            success = tweaks.restore_services()
-            
-            if success:
-                self._add_log("✅ Services restored successfully\n")
-                # Re-enable all service-related checkboxes
-                for checkbox in self.system_checkboxes.values():
-                    checkbox.configure(state="normal")
-            else:
-                self._add_log("❌ Failed to restore services\n")
-        except Exception as e:
-            logger.error(f"Error restoring services: {e}")
-            self._add_log(f"❌ Error restoring services: {e}\n") 
+def main():
+    """Main function."""
+    # ... existing code ...

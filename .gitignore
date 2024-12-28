@@ -18841,3 +18841,7 @@ venv/Scripts/clear_comtypes_cache.exe
 framework_cc/__pycache__/detector.cpython-312.pyc
 framework_cc/__pycache__/gui.cpython-312.pyc
 framework_cc/__pycache__/hardware.cpython-312.pyc
+framework_cc/__pycache__/constants.cpython-312.pyc
+framework_cc/__pycache__/gui.cpython-312.pyc
+framework_cc/__pycache__/models.cpython-312.pyc
+framework_cc/__pycache__/tweaks.cpython-312.pyc

@@ -1,0 +1,80 @@
+{
+    "name": "Default Dark",
+    "colors": {
+        "primary": "#FF7043",
+        "hover": "#F4511E",
+        "background": {
+            "main": "#1E1E1E",
+            "secondary": "#2D2D2D",
+            "tertiary": "#383838",
+            "header": "#1E1E1E",
+            "input": "#2D2D2D"
+        },
+        "text": {
+            "primary": "#FFFFFF",
+            "secondary": "#E0E0E0",
+            "disabled": "#A0A0A0",
+            "accent": "#FF7043"
+        },
+        "border": {
+            "active": "#FFFFFF",
+            "inactive": "#404040",
+            "input": "#FF7043"
+        },
+        "button": {
+            "primary": "#FF7043",
+            "secondary": "#2D2D2D",
+            "disabled": "#404040",
+            "danger": "#FF4444",
+            "success": "#4CAF50",
+            "warning": "#FFC107"
+        },
+        "progress": {
+            "background": "#2D2D2D",
+            "bar": "#FF7043",
+            "cpu": "#FF7043",
+            "gpu": "#00BCD4",
+            "ram": "#4CAF50",
+            "temp": "#FFC107"
+        },
+        "status": {
+            "error": "#FF4444",
+            "warning": "#FFC107",
+            "success": "#4CAF50",
+            "info": "#2196F3"
+        },
+        "separator": "#FF7043",
+        "scrollbar": {
+            "background": "#2D2D2D",
+            "thumb": "#FF7043",
+            "hover": "#F4511E"
+        }
+    },
+    "fonts": {
+        "main": {
+            "family": "Roboto",
+            "size": {
+                "small": 10,
+                "normal": 11,
+                "large": 12,
+                "title": 14
+            }
+        },
+        "monospace": {
+            "family": "Consolas",
+            "size": {
+                "normal": 11
+            }
+        }
+    },
+    "spacing": {
+        "small": 5,
+        "normal": 10,
+        "large": 20
+    },
+    "radius": {
+        "small": 5,
+        "normal": 10,
+        "large": 15
+    }
+} 
