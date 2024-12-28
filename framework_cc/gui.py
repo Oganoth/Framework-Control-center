@@ -428,7 +428,7 @@ class FrameworkControlCenter(ctk.CTk):
         """Create utility buttons."""
         buttons = [
             ("Keyboard", self._open_keyboard_config),
-            ("Update manager", self._open_updates_manager),
+            (get_text(self.config.language, "utility_buttons.updates_manager", "Updates manager"), self._open_updates_manager),
             ("Tweaks", self._open_tweaks),
             ("Settings", self._open_settings)
         ]
@@ -445,6 +445,8 @@ class FrameworkControlCenter(ctk.CTk):
                 corner_radius=10
             )
             btn.pack(fill="x", padx=10, pady=2)
+            if text in ["Keyboard", get_text(self.config.language, "utility_buttons.updates_manager", "Updates manager"), "Tweaks", "Settings"]:
+                btn.configure(width=120)
 
     def _create_brightness_control(self) -> None:
         """Create brightness control slider."""
@@ -933,7 +935,7 @@ class FrameworkControlCenter(ctk.CTk):
         for widget in self.container.winfo_children():
             if isinstance(widget, ctk.CTkButton):
                 text = widget.cget("text")
-                if text in ["Keyboard", "Update manager", "Tweaks", "Settings"]:
+                if text in ["Keyboard", get_text(self.language, "utility_buttons.updates_manager", "Updates manager"), "Tweaks", "Settings"]:
                     key = text.lower().replace(" ", "_")
                     widget.configure(text=get_text(self.config.language, f"utility_buttons.{key}"))
         

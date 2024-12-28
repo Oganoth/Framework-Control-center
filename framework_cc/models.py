@@ -62,6 +62,6 @@ class SystemConfig(BaseModel):
         json_encoders = {
             # Add custom encoders if needed
         }
-        allow_population_by_field_name = True
+        populate_by_name = True
         validate_assignment = True
         extra = "ignore"  # Ignore extra fields when loading from JSON

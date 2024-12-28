@@ -1,39 +1,38 @@
 """Hardware monitoring module for Framework laptops."""
 
 import asyncio
-import os
-import sys
+import json
 import time
+from datetime import datetime
 from pathlib import Path
-from typing import Dict, Optional, Any
+from typing import Optional, Dict, Any
+
 import clr
 import psutil
-import wmi
-from comtypes import GUID
 
 from .models import HardwareMetrics
 from .logger import logger
-from .constants import (
-    LIBS_DIR,
-    HARDWARE_DLL_PATH,
-    LHM_DOWNLOAD_URL,
-    METRICS_CACHE_TTL,
-    SENSOR_IDS
-)
+from .constants import HARDWARE_DLL_PATH, CONFIGS_DIR, SENSOR_IDS
 
 class HardwareMonitor:
-    def __init__(self):
-        self._setup_lhm()
-        self.wmi = wmi.WMI()
-        self._last_update = 0
+    """Hardware monitoring for Framework laptops."""
+    
+    def __init__(self) -> None:
+        """Initialize hardware monitor."""
         self._metrics_cache = None
-        self._update_interval = METRICS_CACHE_TTL  # Utiliser la constante
-        
-        # Utiliser les identifiants des capteurs depuis les constantes
+        self._last_update = 0
+        self._update_interval = 1.0  # 1 second
+        self.computer = None
+        self.igpu_hardware = None
+        self.dgpu_hardware = None
         self.sensor_ids = SENSOR_IDS
+        self.json_file_path = CONFIGS_DIR / "sensors.json"
         
-        # Identifier les GPUs disponibles
-        self._scan_gpus()
+        # Setup LibreHardwareMonitor
+        self._setup_lhm()
+        
+        # Initial sensors update
+        self._update_sensors()
 
     def _setup_lhm(self) -> None:
         """Setup LibreHardwareMonitor library."""
@@ -46,18 +45,33 @@ class HardwareMonitor:
             logger.info(f"Loading LibreHardwareMonitor from: {dll_path}")
             clr.AddReference(dll_path)
             
-            from LibreHardwareMonitor import Hardware
+            from LibreHardwareMonitor.Hardware import Computer
             
-            # Create computer instance
-            self.computer = Hardware.Computer()
+            # Create computer instance with all features enabled
+            self.computer = Computer()
             self.computer.IsCpuEnabled = True
             self.computer.IsGpuEnabled = True
             self.computer.IsMemoryEnabled = True
+            self.computer.IsMotherboardEnabled = True
+            self.computer.IsControllerEnabled = True
+            self.computer.IsNetworkEnabled = True
+            self.computer.IsStorageEnabled = True
+            
+            # Open computer
             self.computer.Open()
             
-            # Do initial update
+            # Update all hardware
             for hardware in self.computer.Hardware:
                 hardware.Update()
+                for subHardware in hardware.SubHardware:
+                    subHardware.Update()
+            
+            # Log all available sensors for debugging
+            logger.info("Available hardware sensors:")
+            for hardware in self.computer.Hardware:
+                logger.info(f"Hardware: {hardware.Name}")
+                for sensor in hardware.Sensors:
+                    logger.info(f"  - {sensor.Name} ({sensor.SensorType}): {sensor.Value}")
             
             logger.info("LibreHardwareMonitor initialized successfully")
             
@@ -66,133 +80,86 @@ class HardwareMonitor:
             logger.error("Make sure .NET Framework 4.7.2 or later is installed")
             raise
 
-    def _download_lhm(self) -> None:
-        """Download and extract LibreHardwareMonitor files."""
-        import requests
-        from zipfile import ZipFile
-        from io import BytesIO
-        
-        # Create libs directory if it doesn't exist
-        LIBS_DIR.mkdir(parents=True, exist_ok=True)
-        
-        # Download ZIP file
-        logger.info("Downloading LibreHardwareMonitor...")
+    def _update_sensors(self) -> None:
+        """Update all hardware sensors and write to JSON file."""
         try:
-            response = requests.get(LHM_DOWNLOAD_URL)
-            response.raise_for_status()
-        except Exception as e:
-            logger.error("Error downloading LibreHardwareMonitor: %s", e)
-            raise
-        
-        # Extract required files
-        try:
-            with ZipFile(BytesIO(response.content)) as zip_file:
-                # Extract all DLL and config files
-                required_extensions = {'.dll', '.config', '.xml', '.pdb'}
-                for file_info in zip_file.filelist:
-                    file_ext = Path(file_info.filename).suffix.lower()
-                    if file_ext in required_extensions:
-                        target_path = LIBS_DIR / Path(file_info.filename).name
-                        logger.debug("Extracting %s...", file_info.filename)
-                        with zip_file.open(file_info.filename) as source, open(target_path, 'wb') as target:
-                            target.write(source.read())
-            
-            logger.info("LibreHardwareMonitor setup complete")
-        except Exception as e:
-            logger.error("Error extracting files: %s", e)
-            raise
+            if not hasattr(self, 'computer'):
+                return
 
-    def _scan_gpus(self) -> None:
-        """Scan et identifie les GPUs disponibles."""
-        try:
-            self.igpu_hardware = None
-            self.dgpu_hardware = None
-            
+            # Force update all hardware
             for hardware in self.computer.Hardware:
-                if str(hardware.HardwareType) == "GpuAmd":
-                    hardware_name = str(hardware.Name).lower()
-                    hardware_id = str(hardware.Identifier).lower()
-                    logger.debug(f"Found GPU: {hardware_name} (ID: {hardware_id})")
-                    
-                    # Détection plus précise des GPUs
-                    if "780m" in hardware_name or "radeon(tm) 780m" in hardware_name.lower():
-                        self.igpu_hardware = hardware
-                        logger.info(f"Found iGPU: {hardware.Name}")
-                        hardware.Update()  # Mise à jour initiale
-                    elif "7700s" in hardware_name or "radeon(tm) rx 7700s" in hardware_name.lower():
-                        self.dgpu_hardware = hardware
-                        logger.info(f"Found dGPU: {hardware.Name}")
-                        hardware.Update()  # Mise à jour initiale
-            
-            if not self.igpu_hardware:
-                logger.warning("No iGPU (780M) found")
-            if not self.dgpu_hardware:
-                logger.warning("No dGPU (7700S) found")
-                
+                hardware.Update()
+                for subHardware in hardware.SubHardware:
+                    subHardware.Update()
+
+            # Collect sensor data
+            sensors_data = []
+            for hardware in self.computer.Hardware:
+                for sensor in hardware.Sensors:
+                    if sensor.Value is not None:
+                        sensors_data.append({
+                            "Name": sensor.Name,
+                            "Hardware": hardware.Name,
+                            "Type": str(sensor.SensorType),
+                            "Value": float(sensor.Value)
+                        })
+
+            # Write to JSON file
+            self.json_file_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(self.json_file_path, "w", encoding="utf-8") as json_file:
+                json.dump(sensors_data, json_file, indent=4, ensure_ascii=False)
+
+            # Log update
+            logger.debug(f"Sensors data updated in {self.json_file_path}")
+
+            # Check file size and recreate if too large
+            if self.json_file_path.stat().st_size > 10 * 1024 * 1024:  # 10MB
+                self.json_file_path.unlink()
+                logger.warning("Sensors file too large, recreating...")
+                self._update_sensors()
+
         except Exception as e:
-            logger.error(f"Error scanning GPUs: {e}")
+            logger.error(f"Error updating sensors: {e}")
             import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
 
-    def _get_gpu_value(self, gpu_hardware: Any, sensor_type: str, sensor_name: str) -> Optional[float]:
-        """Get sensor value from a specific GPU."""
-        if not gpu_hardware:
-            return None
-            
+    def _get_sensor_value(self, hardware_type: str, sensor_type: str, sensor_name: str, gpu_type: str = None) -> Optional[float]:
+        """Get sensor value from JSON file."""
         try:
-            from LibreHardwareMonitor.Hardware import SensorType
-            sensor_type_enum = getattr(SensorType, sensor_type, None)
-            if not sensor_type_enum:
-                return None
-                
-            gpu_hardware.Update()
-            for sensor in gpu_hardware.Sensors:
-                sensor_name_str = str(sensor.Name)
-                logger.debug(f"GPU {gpu_hardware.Name} - {sensor_name_str}: {sensor.Value}")
-                if (sensor.SensorType == sensor_type_enum and 
-                    sensor_name in sensor_name_str):
-                    value = sensor.Value
-                    if value is not None:
-                        return float(value)
+            # Force update sensors before reading
+            self._update_sensors()
             
-            logger.debug(f"No matching sensor found for {sensor_name} in {gpu_hardware.Name}")
-            return None
-            
-        except Exception as e:
-            logger.error(f"Error getting GPU value: {e}")
-            return None
-
-    def _get_sensor_value(self, hw_type: str, sensor_type: str, sensor_name: str, gpu_type: Optional[str] = None) -> Optional[float]:
-        """Get sensor value from LibreHardwareMonitor."""
-        try:
-            # Pour les GPUs, utiliser la fonction spécialisée
-            if hw_type == "GpuAmd":
-                if gpu_type == "Integrated":
-                    return self._get_gpu_value(self.igpu_hardware, sensor_type, sensor_name)
-                elif gpu_type == "Dedicated":
-                    return self._get_gpu_value(self.dgpu_hardware, sensor_type, sensor_name)
+            # Read the JSON file
+            if not self.json_file_path.exists():
                 return None
             
-            # Pour les autres types de hardware
-            from LibreHardwareMonitor.Hardware import SensorType
-            sensor_type_enum = getattr(SensorType, sensor_type, None)
-            if not sensor_type_enum:
-                logger.error(f"Invalid sensor type: {sensor_type}")
-                return None
-                
-            for hardware in self.computer.Hardware:
-                if str(hardware.HardwareType) == hw_type:
-                    hardware.Update()
-                    for sensor in hardware.Sensors:
-                        if (sensor.SensorType == sensor_type_enum and 
-                            sensor_name in str(sensor.Name)):
-                            value = sensor.Value
-                            if value is not None:
-                                logger.debug(f"Found sensor value for {sensor.Name}: {value}")
-                                return float(value)
-                            else:
-                                logger.debug(f"Sensor {sensor.Name} returned None")
+            with open(self.json_file_path, "r", encoding="utf-8") as f:
+                sensors_data = json.load(f)
             
+            # Find the matching sensor
+            for sensor in sensors_data:
+                # For GPU sensors, check both hardware type and name
+                if gpu_type:
+                    if "780M" in sensor["Hardware"] and gpu_type == "Integrated":
+                        if sensor["Name"] == sensor_name and sensor["Type"] == sensor_type:
+                            logger.debug(f"Found iGPU sensor: {sensor}")
+                            return sensor["Value"]
+                    elif "7700S" in sensor["Hardware"] and gpu_type == "Dedicated":
+                        if sensor["Name"] == sensor_name and sensor["Type"] == sensor_type:
+                            logger.debug(f"Found dGPU sensor: {sensor}")
+                            return sensor["Value"]
+                # For CPU sensors
+                elif hardware_type == "Cpu" and "Ryzen" in sensor["Hardware"]:
+                    if sensor["Name"] == sensor_name and sensor["Type"] == sensor_type:
+                        logger.debug(f"Found CPU sensor: {sensor}")
+                        return sensor["Value"]
+                # For RAM sensors
+                elif hardware_type == "Memory" and "Generic Memory" in sensor["Hardware"]:
+                    if sensor["Name"] == sensor_name and sensor["Type"] == sensor_type:
+                        logger.debug(f"Found RAM sensor: {sensor}")
+                        return sensor["Value"]
+            
+            logger.debug(f"No sensor found for {hardware_type}/{sensor_type}/{sensor_name} (gpu_type={gpu_type})")
             return None
             
         except Exception as e:
@@ -205,15 +172,19 @@ class HardwareMonitor:
         """Get current hardware metrics with caching."""
         current_time = time.time()
         
-        # Vérifier le cache
+        # Check cache
         if (self._metrics_cache and 
             (current_time - self._last_update) < self._update_interval):
             return self._metrics_cache
 
         try:
+            # Update sensors
+            self._update_sensors()
+            
             # Get CPU metrics
             cpu_temp = self._get_sensor_value(*self.sensor_ids['cpu_temp'])
             cpu_load = self._get_sensor_value(*self.sensor_ids['cpu_load'])
+            
             if cpu_load is None:
                 cpu_load = psutil.cpu_percent()
                 logger.debug(f"Using psutil CPU load: {cpu_load}")
@@ -235,20 +206,22 @@ class HardwareMonitor:
             battery = psutil.sensors_battery()
             battery_percentage = int(battery.percent) if battery else 100
             is_charging = battery.power_plugged if battery else True
+            battery_time = battery.secsleft if battery and battery.secsleft > 0 else 0
             logger.debug(f"Battery: {battery_percentage}%, Charging: {is_charging}")
 
             metrics = HardwareMetrics(
                 cpu_temp=cpu_temp or 0.0,
-                cpu_load=cpu_load,
+                cpu_load=cpu_load or 0.0,
                 ram_usage=ram_usage,
-                igpu_temp=igpu_temp,
-                igpu_load=igpu_load,
-                dgpu_temp=dgpu_temp,
-                dgpu_load=dgpu_load,
+                igpu_temp=igpu_temp or 0.0,
+                igpu_load=igpu_load or 0.0,
+                dgpu_temp=dgpu_temp or 0.0,
+                dgpu_load=dgpu_load or 0.0,
                 battery_percentage=battery_percentage,
+                battery_time_remaining=battery_time / 60 if battery_time > 0 else 0.0,
                 is_charging=is_charging
             )
-
+            
             # Update cache
             self._metrics_cache = metrics
             self._last_update = current_time
@@ -256,16 +229,17 @@ class HardwareMonitor:
             return metrics
             
         except Exception as e:
-            logger.error("Error updating metrics: %s", e)
+            logger.error(f"Error getting metrics: {e}")
             import traceback
-            logger.error("Traceback: %s", traceback.format_exc())
-            # Return last cached metrics if available
-            if self._metrics_cache:
-                return self._metrics_cache
-            # Return default metrics
-            return HardwareMetrics()
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return self._metrics_cache if self._metrics_cache else HardwareMetrics()
 
-    def __del__(self):
-        """Cleanup when object is destroyed."""
-        if hasattr(self, "computer"):
-            self.computer.Close()
+    def cleanup(self) -> None:
+        """Cleanup resources."""
+        try:
+            if hasattr(self, 'computer'):
+                self.computer.Close()
+            if self.json_file_path.exists():
+                self.json_file_path.unlink()
+        except Exception as e:
+            logger.error(f"Error during cleanup: {e}")

@@ -20,14 +20,23 @@ RYZENADJ_DOWNLOAD_URL = "https://github.com/FlyGoat/RyzenAdj/releases/download/v
 LHM_DOWNLOAD_URL = "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/download/v0.9.4/LibreHardwareMonitor-net472.zip"
 
 # Hardware monitoring settings
+METRICS_CACHE_TTL = 1.0  # Temps de cache des métriques en secondes
+
 SENSOR_IDS = {
-    'cpu_temp': ('Cpu', 'Temperature', 'Core (Tctl/Tdie)'),  # Capteur de température CPU
-    'cpu_load': ('Cpu', 'Load', 'CPU Total'),  # Charge CPU totale
-    'ram_usage': ('Memory', 'Load', 'Memory'),  # Utilisation de la RAM
-    'igpu_temp': ('GpuAmd', 'Temperature', 'GPU VR SoC'),  # Température iGPU (780M)
-    'igpu_load': ('GpuAmd', 'Load', 'GPU Core'),  # Charge iGPU (780M)
-    'dgpu_temp': ('GpuAmd', 'Temperature', 'GPU Core'),  # Température dGPU (7700S)
-    'dgpu_load': ('GpuAmd', 'Load', 'GPU Core')  # Charge dGPU (7700S)
+    # CPU
+    'cpu_temp': ('Cpu', 'Temperature', 'Core (Tctl/Tdie)'),
+    'cpu_load': ('Cpu', 'Load', 'CPU Total'),
+    
+    # RAM
+    'ram_load': ('Memory', 'Load', 'Memory'),
+    
+    # iGPU (AMD 780M)
+    'igpu_temp': ('GpuAmd', 'Temperature', 'GPU VR SoC'),
+    'igpu_load': ('GpuAmd', 'Load', 'D3D 3D'),
+    
+    # dGPU (RX 7700S)
+    'dgpu_temp': ('GpuAmd', 'Temperature', 'GPU Core'),
+    'dgpu_load': ('GpuAmd', 'Load', 'D3D 3D')
 }
 
 # RyzenAdj configuration
