@@ -53,6 +53,24 @@ Framework Hub Mini is a powerful system management tool designed specifically fo
 ### ✨ Key Features
 
 <details>
+<summary>🔋 Theme System</summary>
+
+#### Built-in Themes
+- **Default Dark**: Modern dark theme with orange accents
+- **Fedora Dark**: GNOME-inspired dark theme with blue accents
+- **Fedora Light**: Clean light theme based on GNOME
+
+#### Theme Features
+- Complete UI customization
+- Color schemes for all elements
+- Font configuration (family and sizes)
+- Spacing and border radius control
+- Real-time theme switching
+
+For detailed information about creating and customizing themes, check out our [Theming Guide](Theming_guide.md).
+</details>
+
+<details>
 <summary>🔋 Power Management</summary>
 
 #### Advanced Power Profiles
@@ -177,6 +195,7 @@ Download the all-in-one installer from [Patreon](https://patreon.com/Oganoth)
    - Create custom power profiles
    - Configure fan curves
    - Set up automation rules
+   - Switch between themes
 </details>
 
 ### 🤝 Contributing
@@ -197,6 +216,7 @@ We welcome all contributions! Here's how you can help:
 - Suggest new features
 - Improve documentation
 - Help with translations
+- Create custom themes
 </details>
 
 ### ❤️ Support
