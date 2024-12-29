@@ -1,15 +1,12 @@
 """Framework Control Center package."""
 
+from .logger import logger
 from .models import SystemConfig, PowerProfile, LaptopModel
-from .power_plan import PowerPlanManager
-from .power import PowerManager
-from .utils import get_resource_path
+from .power_plan import PowerManager, WindowsPowerPlanManager
+from .hardware import HardwareMonitor
+from .display import DisplayManager
+from .detector import ModelDetector
+from .admin import is_admin, run_as_admin
+from .tweaks import WindowsTweaks
 
-__all__ = [
-    'SystemConfig',
-    'PowerProfile',
-    'LaptopModel',
-    'PowerPlanManager',
-    'PowerManager',
-    'get_resource_path'
-] 
+__version__ = "1.0.0" 

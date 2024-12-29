@@ -18,14 +18,14 @@ import shutil
 import winreg
 import ctypes
 
-from .models import SystemConfig, PowerProfile, HardwareMetrics
+from .models import SystemConfig, HardwareMetrics
 from .hardware import HardwareMonitor
-from .power import PowerManager
 from .display import DisplayManager
 from .detector import ModelDetector
 from .logger import logger, check_and_rotate_log
 from .tweaks import WindowsTweaks
 from .translations import get_text, language_names
+from .power_plan import PowerManager, PowerProfile
 
 logger = logging.getLogger(__name__)
 
@@ -806,7 +806,7 @@ class FrameworkControlCenter(ctk.CTk):
             if success:
                 self.config.current_profile = profile_name
                 
-                # Mettre à jour l'état des boutons
+                # Update button states
                 if profile_name in self.profile_buttons:
                     self._update_button_state("profile", self.profile_buttons[profile_name])
                 
@@ -823,6 +823,7 @@ class FrameworkControlCenter(ctk.CTk):
                                 logger.error(f"Error showing tray notification: {e}")
             else:
                 logger.error(f"Failed to apply power profile: {profile_name}")
+                
         except Exception as e:
             logger.error(f"Error setting power profile: {e}")
 
