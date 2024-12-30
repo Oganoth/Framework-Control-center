@@ -2,7 +2,7 @@
     "models": {
         "13_AMD": {
             "name": "Framework 13 AMD",
-            "processors": ["AMD Ryzen 7 7840U"],
+            "processors": ["AMD Ryzen 7 7840U", "AMD Ryzen 5 7640U"],
             "display": {
                 "size": 13.5,
                 "resolution": "2256x1504",

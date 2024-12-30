@@ -76,7 +76,7 @@ SUPPORTED_MODELS: Dict[str, Dict[str, Any]] = {
     "13_AMD": {
         "name": "13_AMD",
         "display_name": "Framework 13 AMD",
-        "processors": ["AMD Ryzen 7 7840U"],
+        "processors": ["AMD Ryzen 7 7840U", "AMD Ryzen 5 7640U"],
         "tdp": {
             "min": 15,
             "max": 28
