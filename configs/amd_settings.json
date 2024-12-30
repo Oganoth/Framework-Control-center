@@ -1,0 +1,86 @@
+{
+    "Silent": {
+        "display": {
+            "brightness": 50,
+            "contrast": 50,
+            "saturation": 50,
+            "refresh_rate": 60
+        },
+        "performance": {
+            "gpu_clock": "AUTO",
+            "memory_timing": "AUTO",
+            "power_limit": "AUTO",
+            "fan_mode": "SILENT"
+        },
+        "3d": {
+            "anti_aliasing": "OFF",
+            "anisotropic_filtering": "OFF",
+            "image_sharpening": 0,
+            "radeon_boost": false,
+            "radeon_chill": true,
+            "frame_rate_target": 60
+        },
+        "auto_tuning": {
+            "gpu_tuning": "UNDERVOLT",
+            "memory_tuning": "DEFAULT",
+            "fan_tuning": "SILENT",
+            "power_tuning": "EFFICIENCY"
+        }
+    },
+    "Balanced": {
+        "display": {
+            "brightness": 75,
+            "contrast": 50,
+            "saturation": 50,
+            "refresh_rate": 120
+        },
+        "performance": {
+            "gpu_clock": "AUTO",
+            "memory_timing": "AUTO",
+            "power_limit": "AUTO",
+            "fan_mode": "BALANCED"
+        },
+        "3d": {
+            "anti_aliasing": "QUALITY",
+            "anisotropic_filtering": "QUALITY",
+            "image_sharpening": 50,
+            "radeon_boost": true,
+            "radeon_chill": true,
+            "frame_rate_target": 120
+        },
+        "auto_tuning": {
+            "gpu_tuning": "AUTO",
+            "memory_tuning": "AUTO",
+            "fan_tuning": "BALANCED",
+            "power_tuning": "BALANCED"
+        }
+    },
+    "Boost": {
+        "display": {
+            "brightness": 100,
+            "contrast": 50,
+            "saturation": 50,
+            "refresh_rate": 165
+        },
+        "performance": {
+            "gpu_clock": "AUTO",
+            "memory_timing": "AUTO",
+            "power_limit": "AUTO",
+            "fan_mode": "PERFORMANCE"
+        },
+        "3d": {
+            "anti_aliasing": "PERFORMANCE",
+            "anisotropic_filtering": "PERFORMANCE",
+            "image_sharpening": 100,
+            "radeon_boost": true,
+            "radeon_chill": false,
+            "frame_rate_target": 165
+        },
+        "auto_tuning": {
+            "gpu_tuning": "OVERCLOCK",
+            "memory_tuning": "OVERCLOCK",
+            "fan_tuning": "PERFORMANCE",
+            "power_tuning": "PERFORMANCE"
+        }
+    }
+} 

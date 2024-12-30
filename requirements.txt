@@ -8,6 +8,6 @@ aiofiles>=23.2.0
 pywin32>=306
 wmi>=1.5.1
 comtypes>=1.2.0
-pythonnet>=3.0.3
+pythonnet>=3.0.1
 pystray>=0.19.4
 keyboard>=0.13.5 

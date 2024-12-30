@@ -26,6 +26,7 @@ from .logger import logger, check_and_rotate_log
 from .tweaks import WindowsTweaks
 from .translations import get_text, language_names
 from .power_plan import PowerManager, PowerProfile
+from .amd_settings import AMDSettingsWindow
 
 logger = logging.getLogger(__name__)
 
@@ -138,6 +139,7 @@ class FrameworkControlCenter(ctk.CTk):
     _open_windows = []  # Track all open windows
     
     def __init__(self):
+        """Initialize Framework Control Center."""
         super().__init__()
         
         # Install system fonts if needed
@@ -191,21 +193,21 @@ class FrameworkControlCenter(ctk.CTk):
         self.display = DisplayManager()
         
         # Setup window
-        self.protocol("WM_DELETE_WINDOW", self._on_close)
-
+        self.protocol("WM_DELETE_WINDOW", self._cleanup)  # Changed from _on_close to _cleanup
+        
         # Setup UI
         self._create_widgets()
         self._setup_hotkeys()
         
         # Setup tray icon
         self._setup_tray()
-
+        
         # Start monitoring
         self.after(self.config.monitoring_interval, self._update_metrics)
         
         # Initialize default profiles after a short delay to ensure all components are loaded
         self.after(1000, self._initialize_default_profiles)
-
+        
         # Start log file check timer
         self._check_log_file_size()
 
@@ -503,6 +505,7 @@ class FrameworkControlCenter(ctk.CTk):
         """Create utility buttons."""
         buttons = [
             ("Keyboard", self._open_keyboard_config),
+            ("AMD Settings", self._open_amd_settings),
             (get_text(self.config.language, "utility_buttons.updates_manager", "Updates manager"), self._open_updates_manager),
             ("Settings", self._open_settings)
         ]
@@ -519,8 +522,32 @@ class FrameworkControlCenter(ctk.CTk):
                 corner_radius=10
             )
             btn.pack(fill="x", padx=10, pady=2)
-            if text in ["Keyboard", get_text(self.config.language, "utility_buttons.updates_manager", "Updates manager"), "Settings"]:
+            if text in ["Keyboard", "AMD Settings", get_text(self.config.language, "utility_buttons.updates_manager", "Updates manager"), "Settings"]:
                 btn.configure(width=120)
+
+    def _open_amd_settings(self) -> None:
+        """Open AMD settings window."""
+        try:
+            if hasattr(self, 'amd_settings_window'):
+                # Check if window exists and is valid
+                try:
+                    if self.amd_settings_window.window.winfo_exists():
+                        self.amd_settings_window.window.focus_force()
+                        return
+                except Exception:
+                    pass  # Window was destroyed or invalid
+            
+            # Create new window
+            self.amd_settings_window = AMDSettingsWindow(self)
+            
+        except Exception as e:
+            logger.error(f"Error opening AMD Settings window: {e}")
+            if hasattr(self, 'amd_settings_window'):
+                try:
+                    self.amd_settings_window.window.destroy()
+                except Exception:
+                    pass
+                delattr(self, 'amd_settings_window')
 
     def _create_brightness_control(self) -> None:
         """Create brightness control slider."""
@@ -1607,6 +1634,63 @@ class FrameworkControlCenter(ctk.CTk):
         # Update main window
         self.configure(fg_color=self.colors.background.main)
         update_widget_colors(self)
+
+    def _cleanup(self) -> None:
+        """Clean up resources before closing."""
+        try:
+            # Clean up AMD Settings window if it exists
+            if hasattr(self, 'amd_settings_window'):
+                try:
+                    self.amd_settings_window.window.destroy()
+                except Exception:
+                    pass
+                delattr(self, 'amd_settings_window')
+            
+            # Clean up other windows and resources
+            if hasattr(self, 'keyboard_config'):
+                try:
+                    self.keyboard_config.window.destroy()
+                except Exception:
+                    pass
+            
+            if hasattr(self, 'updates_manager'):
+                try:
+                    self.updates_manager.destroy()
+                except Exception:
+                    pass
+            
+            if hasattr(self, 'settings_window'):
+                try:
+                    self.settings_window.destroy()
+                except Exception:
+                    pass
+            
+            # Clean up async tasks
+            try:
+                for task in self.async_tasks:
+                    task.cancel()
+            except Exception as e:
+                logger.error(f"Error cleaning up async tasks: {e}")
+            
+            # Save window position
+            try:
+                self._save_window_position()
+            except Exception as e:
+                logger.error(f"Error saving window position: {e}")
+            
+            # Destroy system tray icon if it exists
+            if hasattr(self, 'tray_icon') and self.tray_icon:
+                try:
+                    self.tray_icon.stop()
+                except Exception as e:
+                    logger.error(f"Error destroying system tray icon: {e}")
+            
+            # Destroy the main window
+            self.quit()
+            
+        except Exception as e:
+            logger.error(f"Error during cleanup: {e}")
+            self.quit()
 
 
 class UpdatesManager(ctk.CTkToplevel):
