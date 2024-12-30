@@ -51,6 +51,44 @@ Framework Hub Mini is a powerful system management tool designed specifically fo
 
 ### ✨ Key Features
 
+### 🎨 Power Management
+
+#### Power Profiles
+- **Silent/ECO Mode**:
+  - Processor throttling: 5-30%
+  - Power saving graphics
+  - Aggressive power saving settings
+  - Optimized for battery life
+- **Balanced Mode**:
+  - Processor throttling: 10-99%
+  - Moderate boost settings
+  - Balanced power/performance
+  - Dynamic GPU switching
+- **Boost Mode**:
+  - Maximum processor performance
+  - Aggressive boost settings
+  - Maximum GPU performance
+  - No power limits
+
+#### Power Features
+- Windows power plan synchronization
+- RyzenAdj integration for AMD models
+- Automatic hardware detection
+- Real-time power monitoring
+- System tray integration
+
+### 💻 Hardware Monitoring
+
+#### Real-time Metrics
+- CPU usage and temperature
+- RAM usage monitoring
+- iGPU metrics (AMD Radeon)
+- dGPU metrics (if available)
+- Battery status and time remaining
+- LibreHardwareMonitor integration
+- Automatic sensor detection
+- 1-second refresh rate (by default)
+
 ### 🎨 Theme System
 
 #### Built-in Themes
@@ -67,7 +105,7 @@ Framework Hub Mini is a powerful system management tool designed specifically fo
 
 For detailed information about creating and customizing themes, check out our [Theming Guide](Theming_guide.md).
 
-### 🔋 Power Management
+### ⚡ System Features
 
 #### AMD Power Profiles
 - **Framework 13 AMD (7840U)**:
@@ -86,20 +124,65 @@ For detailed information about creating and customizing themes, check out our [T
 - VRM current control
 - Automatic hardware detection
 
-### 💻 Hardware Monitoring
 
-#### Real-time Metrics
-- CPU usage and temperature
-- RAM usage monitoring
-- iGPU usage and temperature
-- dGPU metrics (Framework 16)
-- Battery status and time remaining
+#### Updates Manager
+- System package tracking
+- Winget integration
+- Automatic updates detection
+- Batch update installation
+- Version comparison
+- Update history logging
 
-#### System Integration
+#### Power Management
+- **Silent/ECO Mode**:
+  - Processor throttling: 5-30%
+  - Power saving graphics
+  - Aggressive power saving settings
+  - Optimized for battery life
+- **Balanced Mode**:
+  - Processor throttling: 10-99%
+  - Moderate boost settings
+  - Balanced power/performance
+  - Dynamic GPU switching
+- **Boost Mode**:
+  - Maximum processor performance
+  - Aggressive boost settings
+  - Maximum GPU performance
+  - No power limits
+
+#### Advanced Power Features
+- Windows power plan synchronization
+- RyzenAdj integration for AMD models
+- Automatic hardware detection
+- Real-time power monitoring
+- System tray integration
+- PCI Express power management
+- Sleep/Hibernation control
+- GPU power optimization
+- Custom power profiles
+
+#### Hardware Monitoring
+- Real-time CPU metrics
+  - Usage percentage
+  - Temperature tracking
+  - Performance states
+- Memory monitoring
+  - RAM usage tracking
+  - Memory frequency
+  - Available memory
+- GPU monitoring
+  - iGPU metrics (AMD Radeon)
+  - dGPU metrics (if available)
+  - Temperature tracking
+  - Usage percentage
+- Battery monitoring
+  - Charge percentage
+  - Time remaining
+  - Charging status
 - LibreHardwareMonitor integration
 - Automatic sensor detection
-- Real-time metrics update
-- Progress bar visualizations
+- 1-second refresh rate
+- JSON-based sensor logging
 
 ### 🖥️ Display Management
 
@@ -108,38 +191,6 @@ For detailed information about creating and customizing themes, check out our [T
 - Hotkey support (F12)
 - System tray integration
 - Minimized mode operation
-
-### ⚡ System Features
-
-#### Core Features
-- Multi-language support (English/French/Italian/Spanish/German/Chinese/Klingon)
-- Automatic model detection
-- Configuration persistence
-- Logging system with rotation
-
-#### Updates & Tools
-- Built-in updates manager (winget integration)
-- Framework drivers shortcuts
-- AMD drivers shortcuts
-- System information display
-
-### 🛠️ Technical Details
-
-#### Dependencies
-```python
-customtkinter>=5.2.0    # Modern UI framework
-pydantic>=2.5.0        # Data validation
-requests>=2.31.0       # Network operations
-psutil>=5.9.0         # System monitoring
-Pillow>=10.0.0        # Image processing
-aiohttp>=3.9.0        # Async HTTP client
-pywin32>=306          # Windows API integration
-wmi>=1.5.1            # Hardware information
-comtypes>=1.2.0       # COM interface
-pythonnet>=3.0.3      # .NET integration
-pystray>=0.19.4       # System tray
-keyboard>=0.13.5      # Hotkey support
-```
 
 ### 🔧 Installation
 
@@ -211,6 +262,17 @@ Framework Hub Mini is a passion project that requires significant time and effor
 - Improve existing functionality
 - Provide faster support
 - Create better documentation
+
+### 🙏 Acknowledgments
+
+Special thanks to my current Patrons:
+
+- Jonathan Webber
+- retr0sp3kt
+- Lysithea2802
+- Peter Ansorg
+
+Your support makes this project possible! ❤️
 
 ### 📜 License
 
