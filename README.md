@@ -224,6 +224,23 @@ Download the all-in-one installer from [Patreon](https://patreon.com/Oganoth)
 - Help with translations
 - Create custom themes
 
+### 🔧 Need Help: AMD ADL/ADLX Integration
+
+I'm currently seeking assistance with the AMD ADL/ADLX integration in Framework Hub. While I've managed to implement basic functionality for controlling refresh rate and resolution settings, there's much more potential to unlock with AMD Adrenaline's capabilities.
+
+#### Current Status
+- Successfully build ADLXPybind.cp312-win_amd64.pyd by following ADLX SDK 
+- Basic resolution management
+- Limited access to AMD Adrenaline features
+
+#### What I'm Looking For
+I'm looking to implement a new "AMD Settings" button that would allow users to:
+- Customize AMD Graphics parameters based on selected profiles
+- Access and control the full range of AMD Adrenaline settings
+- Create profile-specific GPU configurations
+
+If you have experience with AMD ADL/ADLX SDK integration or similar GPU management implementations, your expertise would be invaluable to this project. This enhancement would significantly improve the user experience for AMD GPU owners.
+
 ### ❤️ Support
 
 <div align="center">
