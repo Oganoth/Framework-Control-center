@@ -24,42 +24,75 @@ class WindowsPowerPlanManager:
         "Boost": "e9a42b02-d5df-448d-aa00-03f14749eb61"      # Ultimate Performance
     }
     
-    # Paramètres de performance maximale pour le mode Boost
-    BOOST_SETTINGS = {
-        "SUB_PROCESSOR": {
-            "PROCTHROTTLEMIN": 100,             # Fréquence minimale du processeur à 100%
-            "PROCTHROTTLEMAX": 100,             # Fréquence maximale du processeur à 100%
-            "PERFBOOSTMODE": 2,                 # Mode Boost agressif
-            "PERFBOOSTPOL": 100                 # Politique de boost maximale
-        }
-    }
-    
-    # Paramètres équilibrés pour le mode Balanced
-    BALANCED_SETTINGS = {
-        "SUB_PROCESSOR": {
-            "PROCTHROTTLEMIN": 30,              # Fréquence minimale du processeur à 30%
-            "PROCTHROTTLEMAX": 95,              # Fréquence maximale du processeur à 95%
-            "PERFBOOSTMODE": 1,                 # Mode Boost modéré
-            "PERFBOOSTPOL": 50                  # Politique de boost équilibrée
-        }
-    }
-    
-    # Paramètres d'économie d'énergie pour le mode Silent
+    # Paramètres pour le plan Silent (économie d'énergie maximale)
     SILENT_SETTINGS = {
         "SUB_PROCESSOR": {
-            "PROCTHROTTLEMIN": 5,               # Fréquence minimale du processeur à 5%
-            "PROCTHROTTLEMAX": 50,              # Fréquence maximale du processeur à 50%
-            "PERFBOOSTMODE": 0,                 # Mode Boost désactivé
-            "PERFBOOSTPOL": 0                   # Politique de boost désactivée
-        },
-        "SUB_SLEEP": {
-            "STANDBYIDLE": 300,                 # Mise en veille après 5 minutes d'inactivité
-            "HYBRIDSLEEP": 1,                   # Active la mise en veille hybride
-            "HIBERNATEIDLE": 900                # Hibernation après 15 minutes
+            "PROCTHROTTLEMIN": {"ac": 5, "dc": 5},     # 5% for both states
+            "PROCTHROTTLEMAX": {"ac": 30, "dc": 30},   # 30% for both states
+            "PERFBOOSTMODE": 0,            # Disabled
+            "PERFBOOSTPOL": 0              # Disabled
         },
         "SUB_VIDEO": {
-            "VIDEOIDLE": 60,                    # Éteint l'écran après 1 minute
-            "ADAPTBRIGHT": 1                    # Active la luminosité adaptative
+            "VIDEOIDLE": {"ac": 180, "dc": 180}  # 3 minutes
+        },
+        "SUB_SLEEP": {
+            "STANDBYIDLE": {"ac": 180, "dc": 180},  # 3 minutes
+            "HYBRIDSLEEP": 0,
+            "HIBERNATEIDLE": 0
+        },
+        "e276e160-7cb0-43c6-b20b-73f5dce39954": {  # Switchable Dynamic Graphics
+            "a1662ab2-9d34-4e53-ba8b-2639b9e20857": 0  # Force power-saving graphics
+        },
+        "501a4d13-42af-4429-9fd1-a8218c268e20": {  # PCI Express
+            "ee12f906-d277-404b-b6da-e5fa1a576df5": {"ac": 2, "dc": 2}  # Link State Power Management: Maximum power savings
+        }
+    }
+    
+    # Paramètres pour le plan Balanced (utilisation quotidienne)
+    BALANCED_SETTINGS = {
+        "SUB_PROCESSOR": {
+            "PROCTHROTTLEMIN": {"ac": 10, "dc": 10},    # 10% for both states
+            "PROCTHROTTLEMAX": {"ac": 99, "dc": 99},    # 99% for both states
+            "PERFBOOSTMODE": 1,            # Enabled
+            "PERFBOOSTPOL": 50             # Moderate boost
+        },
+        "SUB_VIDEO": {
+            "VIDEOIDLE": {"ac": 3600, "dc": 600}  # 60 minutes plugged in, 10 minutes on battery
+        },
+        "SUB_SLEEP": {
+            "STANDBYIDLE": {"ac": 3600, "dc": 600},  # 60 minutes plugged in, 10 minutes on battery
+            "HYBRIDSLEEP": 0,
+            "HIBERNATEIDLE": 0
+        },
+        "e276e160-7cb0-43c6-b20b-73f5dce39954": {  # Switchable Dynamic Graphics
+            "a1662ab2-9d34-4e53-ba8b-2639b9e20857": 1  # Optimize power savings
+        },
+        "501a4d13-42af-4429-9fd1-a8218c268e20": {  # PCI Express
+            "ee12f906-d277-404b-b6da-e5fa1a576df5": {"ac": 1, "dc": 1}  # Link State Power Management: Moderate power savings
+        }
+    }
+    
+    # Paramètres pour le plan Boost (performances maximales)
+    BOOST_SETTINGS = {
+        "SUB_PROCESSOR": {
+            "PROCTHROTTLEMIN": {"ac": 100, "dc": 100},  # 100% for both states
+            "PROCTHROTTLEMAX": {"ac": 100, "dc": 100},  # 100% for both states
+            "PERFBOOSTMODE": 2,            # Aggressive
+            "PERFBOOSTPOL": 100            # Maximum boost
+        },
+        "SUB_VIDEO": {
+            "VIDEOIDLE": {"ac": 0, "dc": 0}  # Never
+        },
+        "SUB_SLEEP": {
+            "STANDBYIDLE": {"ac": 0, "dc": 0},  # Never
+            "HYBRIDSLEEP": 0,
+            "HIBERNATEIDLE": 0
+        },
+        "e276e160-7cb0-43c6-b20b-73f5dce39954": {  # Switchable Dynamic Graphics
+            "a1662ab2-9d34-4e53-ba8b-2639b9e20857": 2  # Force maximum performance
+        },
+        "501a4d13-42af-4429-9fd1-a8218c268e20": {  # PCI Express
+            "ee12f906-d277-404b-b6da-e5fa1a576df5": {"ac": 0, "dc": 0}  # Link State Power Management: Off
         }
     }
     
@@ -91,6 +124,31 @@ class WindowsPowerPlanManager:
             logger.error(f"Error running powercfg: {e}")
             return 1, "", str(e)
     
+    def _configure_power_settings(self, guid: str, settings: dict, subgroup: str) -> None:
+        """Configure both AC and DC power settings for a subgroup."""
+        for setting, value in settings.items():
+            if isinstance(value, dict) and "ac" in value and "dc" in value:
+                # Set AC power setting (plugged in)
+                returncode, stdout, stderr = self._run_powercfg(["/setacvalueindex", guid, subgroup, setting, str(value["ac"])])
+                if returncode == 0:
+                    logger.info(f"✓ {setting} (AC) configuré à {value['ac']}")
+                else:
+                    logger.error(f"✗ Échec configuration {setting} (AC): {stderr}")
+                
+                # Set DC power setting (on battery)
+                returncode, stdout, stderr = self._run_powercfg(["/setdcvalueindex", guid, subgroup, setting, str(value["dc"])])
+                if returncode == 0:
+                    logger.info(f"✓ {setting} (DC) configuré à {value['dc']}")
+                else:
+                    logger.error(f"✗ Échec configuration {setting} (DC): {stderr}")
+            else:
+                # Regular setting (same for both AC and DC)
+                returncode, stdout, stderr = self._run_powercfg(["/setacvalueindex", guid, subgroup, setting, str(value)])
+                if returncode == 0:
+                    logger.info(f"✓ {setting} configuré à {value}")
+                else:
+                    logger.error(f"✗ Échec configuration {setting}: {stderr}")
+    
     def _configure_boost_plan(self, guid: str) -> None:
         """Configure les paramètres de performance maximale pour le plan Boost."""
         try:
@@ -99,12 +157,25 @@ class WindowsPowerPlanManager:
             
             # Configurer les paramètres du processeur
             logger.info("Configuration des paramètres du processeur...")
-            for setting, value in self.BOOST_SETTINGS["SUB_PROCESSOR"].items():
-                returncode, stdout, stderr = self._run_powercfg(["/setacvalueindex", guid, "SUB_PROCESSOR", setting, str(value)])
-                if returncode == 0:
-                    logger.info(f"✓ {setting} configuré à {value}")
-                else:
-                    logger.error(f"✗ Échec configuration {setting}: {stderr}")
+            self._configure_power_settings(guid, self.BOOST_SETTINGS["SUB_PROCESSOR"], "SUB_PROCESSOR")
+            
+            # Configurer les paramètres GPU
+            logger.info("Configuration des paramètres GPU...")
+            gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
+            self._configure_power_settings(guid, self.BOOST_SETTINGS[gpu_subgroup], gpu_subgroup)
+            
+            # Configurer les paramètres d'affichage
+            logger.info("Configuration des paramètres d'affichage...")
+            self._configure_power_settings(guid, self.BOOST_SETTINGS["SUB_VIDEO"], "SUB_VIDEO")
+            
+            # Configurer les paramètres de mise en veille
+            logger.info("Configuration des paramètres de mise en veille...")
+            self._configure_power_settings(guid, self.BOOST_SETTINGS["SUB_SLEEP"], "SUB_SLEEP")
+            
+            # Configurer les paramètres PCI Express
+            logger.info("Configuration des paramètres PCI Express...")
+            pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c268e20"
+            self._configure_power_settings(guid, self.BOOST_SETTINGS[pci_subgroup], pci_subgroup)
             
             # Vérifier les paramètres appliqués
             logger.info("Vérification des paramètres appliqués...")
@@ -137,12 +208,26 @@ class WindowsPowerPlanManager:
             
             # Configurer les paramètres du processeur
             logger.info("Configuration des paramètres du processeur...")
-            for setting, value in self.BALANCED_SETTINGS["SUB_PROCESSOR"].items():
-                returncode, stdout, stderr = self._run_powercfg(["/setacvalueindex", guid, "SUB_PROCESSOR", setting, str(value)])
-                if returncode == 0:
-                    logger.info(f"✓ {setting} configuré à {value}")
-                else:
-                    logger.error(f"✗ Échec configuration {setting}: {stderr}")
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS["SUB_PROCESSOR"], "SUB_PROCESSOR")
+            
+            # Configurer les paramètres GPU
+            logger.info("Configuration des paramètres GPU...")
+            gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
+            gpu_settings = self.BALANCED_SETTINGS[gpu_subgroup]
+            self._configure_power_settings(guid, gpu_settings, gpu_subgroup)
+            
+            # Configurer les paramètres d'affichage
+            logger.info("Configuration des paramètres d'affichage...")
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS["SUB_VIDEO"], "SUB_VIDEO")
+            
+            # Configurer les paramètres de mise en veille
+            logger.info("Configuration des paramètres de mise en veille...")
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS["SUB_SLEEP"], "SUB_SLEEP")
+            
+            # Configurer les paramètres PCI Express
+            logger.info("Configuration des paramètres PCI Express...")
+            pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c268e20"
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS[pci_subgroup], pci_subgroup)
             
             # Vérifier les paramètres appliqués
             logger.info("Vérification des paramètres appliqués...")
@@ -175,30 +260,25 @@ class WindowsPowerPlanManager:
             
             # Configurer les paramètres du processeur
             logger.info("Configuration des paramètres du processeur...")
-            for setting, value in self.SILENT_SETTINGS["SUB_PROCESSOR"].items():
-                returncode, stdout, stderr = self._run_powercfg(["/setacvalueindex", guid, "SUB_PROCESSOR", setting, str(value)])
-                if returncode == 0:
-                    logger.info(f"✓ {setting} configuré à {value}")
-                else:
-                    logger.error(f"✗ Échec configuration {setting}: {stderr}")
+            self._configure_power_settings(guid, self.SILENT_SETTINGS["SUB_PROCESSOR"], "SUB_PROCESSOR")
             
-            # Configurer les paramètres de mise en veille
-            logger.info("Configuration des paramètres de mise en veille...")
-            for setting, value in self.SILENT_SETTINGS["SUB_SLEEP"].items():
-                returncode, stdout, stderr = self._run_powercfg(["/setacvalueindex", guid, "SUB_SLEEP", setting, str(value)])
-                if returncode == 0:
-                    logger.info(f"✓ {setting} configuré à {value}")
-                else:
-                    logger.error(f"✗ Échec configuration {setting}: {stderr}")
+            # Configurer les paramètres GPU
+            logger.info("Configuration des paramètres GPU...")
+            gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
+            self._configure_power_settings(guid, self.SILENT_SETTINGS[gpu_subgroup], gpu_subgroup)
             
             # Configurer les paramètres d'affichage
             logger.info("Configuration des paramètres d'affichage...")
-            for setting, value in self.SILENT_SETTINGS["SUB_VIDEO"].items():
-                returncode, stdout, stderr = self._run_powercfg(["/setacvalueindex", guid, "SUB_VIDEO", setting, str(value)])
-                if returncode == 0:
-                    logger.info(f"✓ {setting} configuré à {value}")
-                else:
-                    logger.error(f"✗ Échec configuration {setting}: {stderr}")
+            self._configure_power_settings(guid, self.SILENT_SETTINGS["SUB_VIDEO"], "SUB_VIDEO")
+            
+            # Configurer les paramètres de mise en veille
+            logger.info("Configuration des paramètres de mise en veille...")
+            self._configure_power_settings(guid, self.SILENT_SETTINGS["SUB_SLEEP"], "SUB_SLEEP")
+            
+            # Configurer les paramètres PCI Express
+            logger.info("Configuration des paramètres PCI Express...")
+            pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c268e20"
+            self._configure_power_settings(guid, self.SILENT_SETTINGS[pci_subgroup], pci_subgroup)
             
             # Vérifier les paramètres appliqués
             logger.info("Vérification des paramètres appliqués...")
