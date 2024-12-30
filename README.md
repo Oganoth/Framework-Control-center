@@ -52,25 +52,6 @@ Framework Hub Mini is a powerful system management tool designed specifically fo
 ### ✨ Key Features
 
 ### 🎨 Power Management
-
-#### Power Profiles
-- **Silent/ECO Mode**:
-  - Processor throttling: 5-30%
-  - Power saving graphics
-  - Aggressive power saving settings
-  - Optimized for battery life
-- **Balanced Mode**:
-  - Processor throttling: 10-99%
-  - Moderate boost settings
-  - Balanced power/performance
-  - Dynamic GPU switching
-- **Boost Mode**:
-  - Maximum processor performance
-  - Aggressive boost settings
-  - Maximum GPU performance
-  - No power limits
-
-#### Power Features
 - Windows power plan synchronization
 - RyzenAdj integration for AMD models
 - Automatic hardware detection
@@ -219,20 +200,14 @@ Download the all-in-one installer from [Patreon](https://patreon.com/Oganoth)
 ### 📋 Usage
 
 #### First Launch
-- Run as administrator
-- Hardware detection is automatic
-- Initial configuration wizard
+- Extract the Framework-Hub.zip at root of disk C:
+- Run Framework.exe
+- Enjoy 
 
 #### Daily Use
-- Access via system tray
+- Access via system tray or F12 key
 - Quick profile switching
 - Real-time monitoring
-
-#### Advanced Features
-- Create custom power profiles
-- Configure fan curves
-- Set up automation rules
-- Switch between themes
 
 ### 🤝 Contributing
 
