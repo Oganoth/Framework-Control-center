@@ -19,10 +19,12 @@ from framework_cc.logger import logger
 def hide_console():
     """Hide console window."""
     try:
-        # Get console window handle
-        console_window = win32gui.GetForegroundWindow()
-        # Hide console
-        win32gui.ShowWindow(console_window, win32con.SW_HIDE)
+        # Get the console window by its window class name
+        console_window = win32gui.FindWindow("ConsoleWindowClass", None)
+        if console_window:
+            # Only hide if it's actually a console window
+            win32gui.ShowWindow(console_window, win32con.SW_HIDE)
+            logger.debug("Console window hidden successfully")
     except Exception as e:
         logger.error(f"Failed to hide console: {e}")
 
