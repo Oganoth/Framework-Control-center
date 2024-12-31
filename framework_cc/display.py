@@ -47,18 +47,32 @@ class DisplayManager:
     async def set_refresh_rate(self, mode: str, max_rate: str) -> None:
         """Set display refresh rate."""
         try:
-            # Valider le mode
+            # Validate mode
             mode = mode.lower()
-            if mode not in ["auto", "60", "165"]:
+            valid_rates = ["auto", "60"]
+            
+            # Add model-specific refresh rates
+            if "16" in self.model.name:
+                valid_rates.append("165")
+            elif "13" in self.model.name:
+                valid_rates.append("120")
+            
+            if mode not in valid_rates:
                 logger.error(f"Invalid refresh rate mode: {mode}")
                 raise ValueError("Invalid refresh rate mode")
 
-            # Valider le taux maximum
-            if max_rate not in ["60", "165"]:
+            # Validate max rate based on model
+            valid_max_rates = ["60"]
+            if "16" in self.model.name:
+                valid_max_rates.append("165")
+            elif "13" in self.model.name:
+                valid_max_rates.append("120")
+                
+            if max_rate not in valid_max_rates:
                 logger.error(f"Invalid max refresh rate: {max_rate}")
                 raise ValueError("Invalid max refresh rate")
 
-            # Si le mode est auto, détecter l'alimentation
+            # If auto mode, detect power source
             if mode == "auto":
                 battery = psutil.sensors_battery()
                 is_plugged = battery.power_plugged if battery else True
@@ -67,10 +81,10 @@ class DisplayManager:
             else:
                 target_rate = int(mode)
             
-            # Obtenir les paramètres d'affichage actuels
+            # Get current display settings
             current_settings = win32api.EnumDisplaySettings(self._current_device, win32con.ENUM_CURRENT_SETTINGS)
             
-            # Chercher un mode correspondant
+            # Search for matching mode
             i = 0
             found = False
             while True:
@@ -81,7 +95,7 @@ class DisplayManager:
                         mode.BitsPerPel == current_settings.BitsPerPel and
                         mode.DisplayFrequency == target_rate):
                         
-                        # Appliquer le nouveau taux
+                        # Apply new rate
                         mode.Fields = win32con.DM_DISPLAYFREQUENCY
                         result = win32api.ChangeDisplaySettings(mode, 0)
                         
@@ -97,7 +111,7 @@ class DisplayManager:
                     
                 except pywintypes.error:
                     break
-            
+
             if not found:
                 logger.error(f"Could not find display mode with {target_rate}Hz")
                 raise ValueError(f"Could not find display mode with {target_rate}Hz")

@@ -419,13 +419,24 @@ class FrameworkControlCenter(ctk.CTk):
         refresh_frame = ctk.CTkFrame(self.container, fg_color=self.colors.background.main)
         refresh_frame.pack(fill="x", padx=10, pady=5)
 
-        # Créer un sous-frame pour les boutons avec distribution égale
+        # Create a sub-frame for buttons with equal distribution
         buttons_frame = ctk.CTkFrame(refresh_frame, fg_color=self.colors.background.main)
         buttons_frame.pack(fill="x", padx=5)
-        buttons_frame.grid_columnconfigure((0, 1, 2), weight=1)
+
+        # Determine available refresh rates based on model
+        refresh_rates = ["Auto", "60Hz"]
+        if "16" in self.model.name:
+            refresh_rates.append("165Hz")
+        elif "13" in self.model.name:
+            refresh_rates.append("120Hz")
+
+        # Configure grid columns based on number of buttons
+        num_buttons = len(refresh_rates)
+        for i in range(num_buttons):
+            buttons_frame.grid_columnconfigure(i, weight=1)
 
         self.refresh_buttons = {}
-        for i, mode in enumerate(["Auto", "60Hz", "165Hz"]):
+        for i, mode in enumerate(refresh_rates):
             btn = ctk.CTkButton(
                 buttons_frame,
                 text=mode,
@@ -442,7 +453,7 @@ class FrameworkControlCenter(ctk.CTk):
             btn.grid(row=0, column=i, padx=3)
             self.refresh_buttons[mode] = btn
 
-            # Définir le mode actif par défaut
+            # Set active mode by default
             if mode == self.config.refresh_rate_mode:
                 self._update_button_state("refresh", self.refresh_buttons[mode])
 
