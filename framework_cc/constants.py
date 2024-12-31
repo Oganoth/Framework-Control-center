@@ -22,22 +22,32 @@ LHM_DOWNLOAD_URL = "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor
 # Hardware monitoring settings
 METRICS_CACHE_TTL = 1.0  # Temps de cache des métriques en secondes
 
-SENSOR_IDS = {
-    # CPU
-    'cpu_temp': ('Cpu', 'Temperature', 'Core (Tctl/Tdie)'),
-    'cpu_load': ('Cpu', 'Load', 'CPU Total'),
-    
-    # RAM
-    'ram_load': ('Memory', 'Load', 'Memory'),
-    
-    # iGPU (AMD 760M/780M)
-    'igpu_temp': ('GpuAmd', 'Temperature', 'GPU Core'),
-    'igpu_load': ('GpuAmd', 'Load', 'D3D 3D'),
-    
-    # dGPU (RX 7700S)
-    'dgpu_temp': ('GpuAmd', 'Temperature', 'GPU Core'),
-    'dgpu_load': ('GpuAmd', 'Load', 'D3D 3D')
+# Sensor configurations for different models
+SENSOR_IDS_13_AMD = {
+    'cpu_temp': ('AMD Ryzen 7 7840U w/ Radeon 780M Graphics', 'Temperature', 'Core (Tctl/Tdie)'),
+    'cpu_load': ('AMD Ryzen 7 7840U w/ Radeon 780M Graphics', 'Load', 'CPU Total'),
+    'igpu_temp': ('AMD Radeon(TM) 780M', 'Temperature', 'GPU VR SoC'),
+    'igpu_load': ('AMD Radeon(TM) 780M', 'Load', 'D3D 3D'),
 }
+
+SENSOR_IDS_16_AMD = {
+    'cpu_temp': ('AMD Ryzen 7 7840HS', 'Temperature', 'Core (Tctl/Tdie)'),
+    'cpu_load': ('AMD Ryzen 7 7840HS', 'Load', 'CPU Total'),
+    'igpu_temp': ('AMD Radeon(TM) 780M', 'Temperature', 'GPU VR SoC'),
+    'igpu_load': ('AMD Radeon(TM) 780M', 'Load', 'D3D 3D'),
+    'dgpu_temp': ('AMD Radeon(TM) RX 7700S', 'Temperature', 'GPU Core'),
+    'dgpu_load': ('AMD Radeon(TM) RX 7700S', 'Load', 'GPU Core')
+}
+
+SENSOR_IDS_13_INTEL = {
+    'cpu_temp': ('12th Gen Intel Core i7-1280P', 'Temperature', 'CPU Package'),
+    'cpu_load': ('12th Gen Intel Core i7-1280P', 'Load', 'CPU Total'),
+    'igpu_temp': ('Intel Iris Xe Graphics', 'Temperature', 'GPU Core'),
+    'igpu_load': ('Intel Iris Xe Graphics', 'Load', 'GPU Core')
+}
+
+# Default to 13_AMD if no model specified
+SENSOR_IDS = SENSOR_IDS_13_AMD
 
 # RyzenAdj configuration
 RYZENADJ_PARAMS = [

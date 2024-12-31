@@ -152,6 +152,9 @@ class FrameworkControlCenter(ctk.CTk):
         self.config_path = Path.home() / ".framework_cc" / "config.json"
         self.config = self._load_config()
         
+        # Set default monitoring interval to 500ms
+        self.config.monitoring_interval = 500
+        
         # Setup theme and colors
         self._setup_theme()
         
@@ -186,7 +189,9 @@ class FrameworkControlCenter(ctk.CTk):
         self.current_font = load_custom_font(self.config.language)
         
         # Initialize managers with detected model
-        self.hardware = HardwareMonitor()
+        self.hardware = HardwareMonitor(model=self.model.name)
+        # Set initial update interval from config
+        self.hardware.set_update_interval(self.config.monitoring_interval)
         self.power = PowerManager(self.model)
         self.display = DisplayManager(model=self.model)
         
@@ -492,7 +497,13 @@ class FrameworkControlCenter(ctk.CTk):
             frame.pack(fill="x", pady=2)
 
             # Label with value
-            label_text = ctk.CTkLabel(frame, text=f"{label}: 0{unit}", text_color=self.colors.text.primary)
+            label_text = ctk.CTkLabel(
+                frame, 
+                text=f"{label}: 0{unit}", 
+                text_color=self.colors.text.primary,
+                anchor="w",  # Align text to the left
+                width=150  # Fixed width for consistent alignment
+            )
             label_text.pack(side="left", padx=5)
             self.metric_labels[key] = label_text
             logger.debug(f"Created metric label: {label} -> {key}")
@@ -509,6 +520,10 @@ class FrameworkControlCenter(ctk.CTk):
             progress.set(0)
             self.metric_bars[key] = progress
             logger.debug(f"Created progress bar for: {key}")
+            
+            # Add a small vertical spacer between metrics
+            spacer = ctk.CTkFrame(metrics_frame, fg_color=self.colors.background.main, height=2)
+            spacer.pack(fill="x", pady=1)
 
     def _create_utility_buttons(self) -> None:
         """Create utility buttons."""
@@ -576,27 +591,25 @@ class FrameworkControlCenter(ctk.CTk):
                     if value is not None:
                         if "temp" in key:
                             # Normalize temperature to 0-100 range for progress bar
-                            # Mais afficher la vraie valeur dans le label
                             normalized = min(100, max(0, value - 40) * 1.67)
                             bar.set(normalized / 100)
                             
-                            # Formater le label selon le type de température
+                            # Format label based on temperature type
                             if "cpu" in key:
-                                label_text = f"CPU: {value:.1f}°C"
+                                label_text = f"CPU TEMP: {value:.1f}°C"
                             elif "igpu" in key:
-                                label_text = f"iGPU: {value:.1f}°C"
+                                label_text = f"iGPU TEMP: {value:.1f}°C"
                             elif "dgpu" in key:
-                                label_text = f"dGPU: {value:.1f}°C"
+                                label_text = f"dGPU TEMP: {value:.1f}°C"
                             else:
-                                label_text = f"{key.split('_')[0].upper()}: {value:.1f}°C"
+                                label_text = f"{key.split('_')[0].upper()} TEMP: {value:.1f}°C"
                             
                             self.metric_labels[key].configure(text=label_text)
-                            logger.debug(f"Updated temperature metric: {label_text}")
                         else:
-                            # Pour les métriques de charge (load)
+                            # For load metrics
                             bar.set(value / 100)
                             
-                            # Formater le label selon le type de charge
+                            # Format label based on load type
                             if "cpu" in key:
                                 label_text = f"CPU: {value:.1f}%"
                             elif "igpu" in key:
@@ -609,9 +622,6 @@ class FrameworkControlCenter(ctk.CTk):
                                 label_text = f"{key.split('_')[0].upper()}: {value:.1f}%"
                             
                             self.metric_labels[key].configure(text=label_text)
-                            logger.debug(f"Updated load metric: {label_text}")
-                    else:
-                        logger.warning(f"No value for metric: {key}")
 
                 # Update battery indicator
                 self._update_battery_status(metrics)
@@ -1384,6 +1394,9 @@ class FrameworkControlCenter(ctk.CTk):
                 if hasattr(self, '_update_metrics'):
                     self.after_cancel(self._update_metrics)
                     self.after(self.config.monitoring_interval, self._update_metrics)
+                    # Update hardware monitor interval
+                    if hasattr(self, 'hardware'):
+                        self.hardware.set_update_interval(self.config.monitoring_interval)
                 
                 # Close settings window
                 if hasattr(self, 'settings_window') and self.settings_window.winfo_exists():

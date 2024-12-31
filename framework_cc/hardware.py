@@ -6,33 +6,47 @@ import time
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, Any
+import threading
 
 import clr
 import psutil
 
 from .models import HardwareMetrics
 from .logger import logger
-from .constants import HARDWARE_DLL_PATH, CONFIGS_DIR, SENSOR_IDS
+from .constants import HARDWARE_DLL_PATH, CONFIGS_DIR, SENSOR_IDS, SENSOR_IDS_16_AMD, SENSOR_IDS_13_INTEL, SENSOR_IDS_13_AMD
 
 class HardwareMonitor:
     """Hardware monitoring for Framework laptops."""
     
-    def __init__(self) -> None:
+    def __init__(self, model: str = None) -> None:
         """Initialize hardware monitor."""
         self._metrics_cache = None
         self._last_update = 0
-        self._update_interval = 1.0  # 1 second
+        self._update_interval = 1.0  # Default to 1 second, will be updated from config
         self.computer = None
         self.igpu_hardware = None
         self.dgpu_hardware = None
-        self.sensor_ids = SENSOR_IDS
+        
+        # Select sensor configuration based on model
+        if model == "16_AMD":
+            logger.info("Using Framework 16 AMD sensor configuration")
+            self.sensor_ids = SENSOR_IDS_16_AMD
+        elif model == "13_INTEL":
+            logger.info("Using Framework 13 Intel sensor configuration")
+            self.sensor_ids = SENSOR_IDS_13_INTEL
+        else:  # Default to 13_AMD
+            logger.info("Using Framework 13 AMD sensor configuration")
+            self.sensor_ids = SENSOR_IDS_13_AMD
+            
         self.json_file_path = CONFIGS_DIR / "sensors.json"
         
         # Setup LibreHardwareMonitor
         self._setup_lhm()
         
-        # Initial sensors update
-        self._update_sensors()
+        # Start continuous sensor updates in a separate thread
+        self._stop_update = False
+        self._update_thread = threading.Thread(target=self._continuous_update, daemon=True)
+        self._update_thread.start()
 
     def _download_lhm(self) -> None:
         """Download and extract LibreHardwareMonitor DLL."""
@@ -106,12 +120,16 @@ class HardwareMonitor:
                 logger.info(f"Hardware: {hardware.Name}")
                 for sensor in hardware.Sensors:
                     logger.info(f"  - {sensor.Name} ({sensor.SensorType}): {sensor.Value}")
+                    if "GPU" in hardware.Name or "Radeon" in hardware.Name:
+                        logger.info(f"    Full sensor info: Hardware={hardware.Name}, Type={sensor.SensorType}, Value={sensor.Value}")
             
             logger.info("LibreHardwareMonitor initialized successfully")
             
         except Exception as e:
             logger.error("Error setting up LibreHardwareMonitor: %s", e)
             logger.error("Make sure .NET Framework 4.7.2 or later is installed")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
             raise
 
     def _update_sensors(self) -> None:
@@ -170,24 +188,40 @@ class HardwareMonitor:
             with open(self.json_file_path, "r", encoding="utf-8") as f:
                 sensors_data = json.load(f)
             
+            # Log all sensors for debugging
+            logger.debug("All available sensors:")
+            for sensor in sensors_data:
+                logger.debug(f"  {sensor['Hardware']} - {sensor['Name']} ({sensor['Type']}): {sensor['Value']}")
+            
             # Find the matching sensor
             for sensor in sensors_data:
-                # Pour les GPU intégrés, vérifie les deux modèles
-                if gpu_type == "Integrated":
-                    if ("760M" in sensor["Hardware"] or "780M" in sensor["Hardware"]) and sensor_type == sensor["Type"] and sensor_name == sensor["Name"]:
-                        logger.debug(f"Found iGPU sensor: {sensor}")
-                        return sensor["Value"]
-                # Pour les autres capteurs, comportement normal
-                elif hardware_type in sensor["Hardware"] and sensor_type == sensor["Type"] and sensor_name == sensor["Name"]:
-                    if hardware_type == "Cpu":
-                        logger.debug(f"Found CPU sensor: {sensor}")
-                    elif hardware_type == "Memory":
-                        logger.debug(f"Found RAM sensor: {sensor}")
-                    elif gpu_type == "Dedicated":
-                        logger.debug(f"Found dGPU sensor: {sensor}")
+                # Convert sensor type to match expected format
+                current_type = sensor["Type"].split('.')[-1]  # Extract last part of type string
+                
+                # Log the comparison for debugging
+                logger.debug(f"Comparing - Looking for: {hardware_type}/{sensor_type}/{sensor_name}")
+                logger.debug(f"           Found: {sensor['Hardware']}/{current_type}/{sensor['Name']}")
+                
+                # Direct match for exact hardware name, type and sensor name
+                if (sensor["Hardware"] == hardware_type and 
+                    current_type.lower() == sensor_type.lower() and 
+                    sensor["Name"] == sensor_name):
+                    logger.debug(f"Found exact match sensor: {sensor}")
                     return sensor["Value"]
+                
+                # Special case for CPU sensors
+                if hardware_type == "Cpu" and "CPU" in sensor["Hardware"]:
+                    if current_type.lower() == sensor_type.lower() and sensor["Name"].lower() == sensor_name.lower():
+                        logger.debug(f"Found CPU sensor: {sensor}")
+                        return sensor["Value"]
+                
+                # Special case for GPU sensors
+                if hardware_type in sensor["Hardware"]:
+                    if current_type.lower() == sensor_type.lower() and sensor["Name"] == sensor_name:
+                        logger.debug(f"Found GPU sensor: {sensor}")
+                        return sensor["Value"]
             
-            logger.debug(f"No sensor found for {hardware_type}/{sensor_type}/{sensor_name} (gpu_type={gpu_type})")
+            logger.debug(f"No sensor found for {hardware_type}/{sensor_type}/{sensor_name}")
             return None
             
         except Exception as e:
@@ -196,78 +230,115 @@ class HardwareMonitor:
             logger.error(f"Traceback: {traceback.format_exc()}")
             return None
 
-    async def get_metrics(self) -> HardwareMetrics:
-        """Get current hardware metrics with caching."""
-        current_time = time.time()
-        
-        # Check cache
-        if (self._metrics_cache and 
-            (current_time - self._last_update) < self._update_interval):
-            return self._metrics_cache
-
-        try:
-            # Update sensors
-            self._update_sensors()
-            
-            # Get CPU metrics
-            cpu_temp = self._get_sensor_value(*self.sensor_ids['cpu_temp'])
-            cpu_load = self._get_sensor_value(*self.sensor_ids['cpu_load'])
-            
-            if cpu_load is None:
-                cpu_load = psutil.cpu_percent()
-                logger.debug(f"Using psutil CPU load: {cpu_load}")
-
-            # Get RAM usage
-            ram_usage = psutil.virtual_memory().percent
-            logger.debug(f"RAM usage: {ram_usage}%")
-
-            # Get GPU metrics
-            igpu_temp = self._get_sensor_value(*self.sensor_ids['igpu_temp'], gpu_type="Integrated")
-            igpu_load = self._get_sensor_value(*self.sensor_ids['igpu_load'], gpu_type="Integrated")
-            logger.debug(f"iGPU metrics - Temp: {igpu_temp}, Load: {igpu_load}")
-
-            dgpu_temp = self._get_sensor_value(*self.sensor_ids['dgpu_temp'], gpu_type="Dedicated")
-            dgpu_load = self._get_sensor_value(*self.sensor_ids['dgpu_load'], gpu_type="Dedicated")
-            logger.debug(f"dGPU metrics - Temp: {dgpu_temp}, Load: {dgpu_load}")
-
-            # Get battery info
-            battery = psutil.sensors_battery()
-            battery_percentage = int(battery.percent) if battery else 100
-            is_charging = battery.power_plugged if battery else True
-            battery_time = battery.secsleft if battery and battery.secsleft > 0 else 0
-            logger.debug(f"Battery: {battery_percentage}%, Charging: {is_charging}")
-
-            metrics = HardwareMetrics(
-                cpu_temp=cpu_temp or 0.0,
-                cpu_load=cpu_load or 0.0,
-                ram_usage=ram_usage,
-                igpu_temp=igpu_temp or 0.0,
-                igpu_load=igpu_load or 0.0,
-                dgpu_temp=dgpu_temp or 0.0,
-                dgpu_load=dgpu_load or 0.0,
-                battery_percentage=battery_percentage,
-                battery_time_remaining=battery_time / 60 if battery_time > 0 else 0.0,
-                is_charging=is_charging
-            )
-            
-            # Update cache
-            self._metrics_cache = metrics
-            self._last_update = current_time
-            
-            return metrics
-            
-        except Exception as e:
-            logger.error(f"Error getting metrics: {e}")
-            import traceback
-            logger.error(f"Traceback: {traceback.format_exc()}")
-            return self._metrics_cache if self._metrics_cache else HardwareMetrics()
+    def _continuous_update(self) -> None:
+        """Continuously update sensors in a separate thread."""
+        while not self._stop_update:
+            try:
+                self._update_sensors()
+                time.sleep(self._update_interval)
+            except Exception as e:
+                logger.error(f"Error in continuous update: {e}")
+                time.sleep(1)  # Wait a bit longer on error
 
     def cleanup(self) -> None:
         """Cleanup resources."""
         try:
+            self._stop_update = True
+            if hasattr(self, '_update_thread'):
+                self._update_thread.join(timeout=1)
             if hasattr(self, 'computer'):
                 self.computer.Close()
             if self.json_file_path.exists():
                 self.json_file_path.unlink()
         except Exception as e:
             logger.error(f"Error during cleanup: {e}")
+
+    async def get_metrics(self) -> HardwareMetrics:
+        """Get current hardware metrics from sensors.json."""
+        try:
+            if not self.json_file_path.exists():
+                return HardwareMetrics()
+
+            with open(self.json_file_path, "r", encoding="utf-8") as f:
+                sensors_data = json.load(f)
+
+            # Initialize metrics with default values
+            metrics = {
+                'cpu_temp': 0.0,
+                'cpu_load': 0.0,
+                'ram_usage': 0.0,
+                'igpu_temp': 0.0,
+                'igpu_load': 0.0,
+                'dgpu_temp': 0.0,
+                'dgpu_load': 0.0
+            }
+
+            # Process CPU metrics
+            cpu_loads = []
+            for sensor in sensors_data:
+                if "AMD Ryzen" in sensor["Hardware"] and sensor["Type"] == "Load":
+                    if "CPU Core" in sensor["Name"]:
+                        cpu_loads.append(sensor["Value"])
+                    elif sensor["Name"] == "CPU Total":
+                        metrics['cpu_load'] = sensor["Value"]
+                elif "AMD Ryzen" in sensor["Hardware"] and sensor["Type"] == "Temperature":
+                    if sensor["Name"] == "Core (Tctl/Tdie)":
+                        metrics['cpu_temp'] = sensor["Value"]
+
+            # Use average core load if total is not available
+            if metrics['cpu_load'] == 0.0 and cpu_loads:
+                metrics['cpu_load'] = sum(cpu_loads) / len(cpu_loads)
+
+            # Process RAM metrics
+            for sensor in sensors_data:
+                if sensor["Hardware"] == "Generic Memory" and sensor["Type"] == "Load":
+                    if sensor["Name"] == "Memory":
+                        metrics['ram_usage'] = sensor["Value"]
+
+            # Process GPU metrics
+            for sensor in sensors_data:
+                if "AMD Radeon(TM) 780M" in sensor["Hardware"]:
+                    if sensor["Type"] == "Temperature" and sensor["Name"] == "GPU VR SoC":
+                        metrics['igpu_temp'] = sensor["Value"]
+                    elif sensor["Type"] == "Load" and sensor["Name"] == "D3D 3D":
+                        metrics['igpu_load'] = sensor["Value"]
+                elif "AMD Radeon(TM) RX 7700S" in sensor["Hardware"]:
+                    if sensor["Type"] == "Temperature" and sensor["Name"] == "GPU Core":
+                        metrics['dgpu_temp'] = sensor["Value"]
+                    elif sensor["Type"] == "Load" and sensor["Name"] == "GPU Core":
+                        metrics['dgpu_load'] = sensor["Value"]
+
+            # Get battery info
+            try:
+                battery = psutil.sensors_battery()
+                battery_percentage = int(battery.percent) if battery else 100
+                is_charging = battery.power_plugged if battery else True
+                battery_time = battery.secsleft if battery and battery.secsleft > 0 else 0
+            except Exception as e:
+                logger.error(f"Error getting battery info: {e}")
+                battery_percentage = 100
+                is_charging = True
+                battery_time = 0
+
+            return HardwareMetrics(
+                cpu_temp=metrics['cpu_temp'],
+                cpu_load=metrics['cpu_load'],
+                ram_usage=metrics['ram_usage'],
+                igpu_temp=metrics['igpu_temp'],
+                igpu_load=metrics['igpu_load'],
+                dgpu_temp=metrics['dgpu_temp'],
+                dgpu_load=metrics['dgpu_load'],
+                battery_percentage=battery_percentage,
+                battery_time_remaining=battery_time / 60 if battery_time > 0 else 0.0,
+                is_charging=is_charging
+            )
+
+        except Exception as e:
+            logger.error(f"Error getting metrics from sensors.json: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return HardwareMetrics()
+
+    def set_update_interval(self, interval_ms: int) -> None:
+        """Update the sensor update interval."""
+        self._update_interval = interval_ms / 1000.0  # Convert ms to seconds
