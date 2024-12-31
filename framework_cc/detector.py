@@ -57,9 +57,12 @@ class ModelDetector:
         gpu_names = [gpu.Name.strip() for gpu in gpus]
         # Vérification plus précise des GPUs
         has_dgpu = any("RX" in gpu.Name and "7700S" in gpu.Name for gpu in gpus)
-        has_igpu = any(("760M" in gpu.Name or "780M" in gpu.Name) and "Radeon" in gpu.Name for gpu in gpus)
+        has_760m = any("760M" in gpu.Name and "Radeon" in gpu.Name for gpu in gpus)
+        has_780m = any("780M" in gpu.Name and "Radeon" in gpu.Name for gpu in gpus)
+        has_igpu = has_760m or has_780m
         logger.info("Detected GPUs: %s", gpu_names)
-        logger.debug("Has dedicated GPU: %s, Has integrated GPU: %s", has_dgpu, has_igpu)
+        logger.debug("Has dedicated GPU: %s, Has integrated GPU: %s (760M: %s, 780M: %s)", 
+                    has_dgpu, has_igpu, has_760m, has_780m)
         
         # Check each model's specifications
         for model_id, specs in self.models.items():
@@ -73,7 +76,8 @@ class ModelDetector:
                         logger.info("Detected Framework 16 AMD with dGPU")
                         return LaptopModel(**specs)
                     elif has_igpu and not has_dgpu and "13_AMD" in model_id:
-                        logger.info("Detected Framework 13 AMD")
+                        igpu_type = "780M" if has_780m else "760M"
+                        logger.info(f"Detected Framework 13 AMD with {igpu_type}")
                         return LaptopModel(**specs)
                 # Pour les modèles Intel
                 elif "Intel" in cpu_name and "13_INTEL" in model_id:

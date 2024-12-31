@@ -30,7 +30,7 @@ SENSOR_IDS = {
     # RAM
     'ram_load': ('Memory', 'Load', 'Memory'),
     
-    # iGPU (AMD 780M)
+    # iGPU (AMD 760M/780M)
     'igpu_temp': ('GpuAmd', 'Temperature', 'GPU VR SoC'),
     'igpu_load': ('GpuAmd', 'Load', 'D3D 3D'),
     
