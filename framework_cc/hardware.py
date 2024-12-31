@@ -158,17 +158,43 @@ class HardwareMonitor:
             logger.error(f"Traceback: {traceback.format_exc()}")
 
     def _get_sensor_value(self, hardware_type: str, sensor_type: str, sensor_name: str, gpu_type: str = None) -> Optional[float]:
-        """Get sensor value."""
-        for sensor in self._sensors:
-            # Pour les GPU intégrés, vérifie les deux modèles
-            if gpu_type == "Integrated":
-                if ("760M" in sensor["Hardware"] or "780M" in sensor["Hardware"]) and sensor_type == sensor["Type"] and sensor_name == sensor["Name"]:
-                    logger.debug(f"Found iGPU sensor: {sensor}")
+        """Get sensor value from JSON file."""
+        try:
+            # Force update sensors before reading
+            self._update_sensors()
+            
+            # Read the JSON file
+            if not self.json_file_path.exists():
+                return None
+            
+            with open(self.json_file_path, "r", encoding="utf-8") as f:
+                sensors_data = json.load(f)
+            
+            # Find the matching sensor
+            for sensor in sensors_data:
+                # Pour les GPU intégrés, vérifie les deux modèles
+                if gpu_type == "Integrated":
+                    if ("760M" in sensor["Hardware"] or "780M" in sensor["Hardware"]) and sensor_type == sensor["Type"] and sensor_name == sensor["Name"]:
+                        logger.debug(f"Found iGPU sensor: {sensor}")
+                        return sensor["Value"]
+                # Pour les autres capteurs, comportement normal
+                elif hardware_type in sensor["Hardware"] and sensor_type == sensor["Type"] and sensor_name == sensor["Name"]:
+                    if hardware_type == "Cpu":
+                        logger.debug(f"Found CPU sensor: {sensor}")
+                    elif hardware_type == "Memory":
+                        logger.debug(f"Found RAM sensor: {sensor}")
+                    elif gpu_type == "Dedicated":
+                        logger.debug(f"Found dGPU sensor: {sensor}")
                     return sensor["Value"]
-            # Pour les autres capteurs, comportement normal
-            elif hardware_type in sensor["Hardware"] and sensor_type == sensor["Type"] and sensor_name == sensor["Name"]:
-                return sensor["Value"]
-        return None
+            
+            logger.debug(f"No sensor found for {hardware_type}/{sensor_type}/{sensor_name} (gpu_type={gpu_type})")
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error getting sensor value: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return None
 
     async def get_metrics(self) -> HardwareMetrics:
         """Get current hardware metrics with caching."""
