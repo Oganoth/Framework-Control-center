@@ -49,35 +49,47 @@ class ModelDetector:
         """Detect the Framework laptop model."""
         # Get CPU information
         cpu = self.wmi.Win32_Processor()[0]
-        logger.info("Detected CPU: %s", cpu.Name)
+        cpu_name = cpu.Name.strip()
+        logger.info("Detected CPU: %s", cpu_name)
         
         # Get GPU information
         gpus = self.wmi.Win32_VideoController()
-        gpu_names = [gpu.Name for gpu in gpus]
-        has_dgpu = any("Radeon" in gpu.Name for gpu in gpus)
+        gpu_names = [gpu.Name.strip() for gpu in gpus]
+        # Vérification plus précise des GPUs
+        has_dgpu = any("RX" in gpu.Name and "7700S" in gpu.Name for gpu in gpus)
+        has_igpu = any(("760M" in gpu.Name or "780M" in gpu.Name) and "Radeon" in gpu.Name for gpu in gpus)
         logger.info("Detected GPUs: %s", gpu_names)
-        logger.debug("Has dedicated GPU: %s", has_dgpu)
+        logger.debug("Has dedicated GPU: %s, Has integrated GPU: %s", has_dgpu, has_igpu)
         
         # Check each model's specifications
         for model_id, specs in self.models.items():
             logger.debug("Checking model %s", model_id)
-            # Check if CPU matches
-            if any(proc.lower() in cpu.Name.lower() for proc in specs["processors"]):
+            # Vérification plus précise du CPU
+            if any(proc in cpu_name for proc in specs["processors"]):
                 logger.debug("CPU matches model %s", model_id)
-                # For AMD models
-                if "AMD" in cpu.Name:
+                # Pour les modèles AMD
+                if "AMD" in cpu_name:
                     if has_dgpu and "16_AMD" in model_id:
                         logger.info("Detected Framework 16 AMD with dGPU")
                         return LaptopModel(**specs)
-                    elif not has_dgpu and "13_AMD" in model_id:
+                    elif has_igpu and not has_dgpu and "13_AMD" in model_id:
                         logger.info("Detected Framework 13 AMD")
                         return LaptopModel(**specs)
-                # For Intel models
-                elif "Intel" in cpu.Name and "13_INTEL" in model_id:
+                # Pour les modèles Intel
+                elif "Intel" in cpu_name and "13_INTEL" in model_id:
                     logger.info("Detected Framework 13 Intel")
                     return LaptopModel(**specs)
         
+        # Si aucun modèle n'est détecté mais que nous avons un CPU AMD connu
+        if "7640U" in cpu_name and has_igpu and not has_dgpu:
+            logger.info("Forcing Framework 13 AMD detection based on 7640U CPU")
+            return LaptopModel(**self.models["13_AMD"])
+        elif "7840HS" in cpu_name and has_dgpu:
+            logger.info("Forcing Framework 16 AMD detection based on 7840HS CPU")
+            return LaptopModel(**self.models["16_AMD"])
+            
         logger.warning("Could not detect Framework laptop model")
+        logger.debug("CPU: %s, GPUs: %s", cpu_name, gpu_names)
         return None
 
     def get_model_by_id(self, model_id: str) -> Optional[LaptopModel]:
