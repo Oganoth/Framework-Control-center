@@ -1,0 +1,822 @@
+2024-12-31 16:07:54,886 - framework_cc - INFO - Requesting administrator privileges...
+2024-12-31 16:07:57,380 - framework_cc - DEBUG - Directory already exists: configs
+2024-12-31 16:07:57,380 - framework_cc - DEBUG - Directory already exists: libs
+2024-12-31 16:07:57,380 - framework_cc - DEBUG - Directory already exists: assets
+2024-12-31 16:07:57,380 - framework_cc - DEBUG - Directory already exists: fonts
+2024-12-31 16:07:57,380 - framework_cc - INFO - Starting Framework Control Center...
+2024-12-31 16:07:57,468 - framework_cc.gui - DEBUG - Font already installed: Ubuntu-Regular.ttf
+2024-12-31 16:07:57,468 - framework_cc.gui - DEBUG - Font already installed: klingon font.ttf
+2024-12-31 16:07:58,745 - framework_cc.gui - DEBUG - Looking for icon at: C:\GitHub\Framework-Hub-PY\assets\logo.ico
+2024-12-31 16:07:58,794 - framework_cc.gui - DEBUG - Looking for fonts at: C:\GitHub\Framework-Hub-PY\fonts\Ubuntu-Regular.ttf and C:\GitHub\Framework-Hub-PY\fonts\klingon font.ttf
+2024-12-31 16:07:58,795 - framework_cc.gui - INFO - Loaded Ubuntu font from: C:\GitHub\Framework-Hub-PY\fonts\Ubuntu-Regular.ttf
+2024-12-31 16:07:58,795 - framework_cc.gui - INFO - Configuration loaded with language: en
+2024-12-31 16:07:58,827 - framework_cc.gui - DEBUG - Screen dimensions: 2880x1920
+2024-12-31 16:07:58,827 - framework_cc.gui - DEBUG - Window position: 2410,840
+2024-12-31 16:07:58,859 - framework_cc - DEBUG - Loaded model configurations: ['13_AMD', '13_Intel', '16_AMD']
+2024-12-31 16:07:58,860 - framework_cc - INFO - Model detector initialized with 3 models
+2024-12-31 16:08:00,215 - framework_cc - INFO - Detected CPU: AMD Ryzen 7 7840U w/ Radeon  780M Graphics
+2024-12-31 16:08:00,271 - framework_cc - INFO - Detected GPUs: ['AMD Radeon(TM) 780M']
+2024-12-31 16:08:00,271 - framework_cc - DEBUG - Has dedicated GPU: False, Has integrated GPU: True (760M: False, 780M: True)
+2024-12-31 16:08:00,271 - framework_cc - DEBUG - Checking model 13_AMD
+2024-12-31 16:08:00,271 - framework_cc - DEBUG - CPU matches model 13_AMD
+2024-12-31 16:08:00,271 - framework_cc - INFO - Detected Framework 13 AMD with 780M
+2024-12-31 16:08:00,271 - framework_cc.gui - DEBUG - Looking for fonts at: C:\GitHub\Framework-Hub-PY\fonts\Ubuntu-Regular.ttf and C:\GitHub\Framework-Hub-PY\fonts\klingon font.ttf
+2024-12-31 16:08:00,271 - framework_cc.gui - INFO - Loaded Ubuntu font from: C:\GitHub\Framework-Hub-PY\fonts\Ubuntu-Regular.ttf
+2024-12-31 16:08:00,271 - framework_cc - INFO - Using Framework 13 AMD sensor configuration
+2024-12-31 16:08:00,271 - framework_cc - INFO - Loading LibreHardwareMonitor from: C:\GitHub\Framework-Hub-PY\libs\LibreHardwareMonitorLib.dll
+2024-12-31 16:08:02,133 - framework_cc - INFO - Available hardware sensors:
+2024-12-31 16:08:02,133 - framework_cc - INFO - Hardware: FRANMDCP07
+2024-12-31 16:08:02,134 - framework_cc - INFO - Hardware: AMD Ryzen 7 7840U w/ Radeon 780M Graphics
+2024-12-31 16:08:02,136 - framework_cc - INFO -   - CPU Core #1 (Load): 8.638954162597656
+2024-12-31 16:08:02,137 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=8.638954162597656
+2024-12-31 16:08:02,137 - framework_cc - INFO -   - CPU Core #2 (Load): 5.051589012145996
+2024-12-31 16:08:02,137 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=5.051589012145996
+2024-12-31 16:08:02,137 - framework_cc - INFO -   - CPU Core #3 (Load): 32.17445755004883
+2024-12-31 16:08:02,137 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=32.17445755004883
+2024-12-31 16:08:02,137 - framework_cc - INFO -   - CPU Core #4 (Load): 28.632312774658203
+2024-12-31 16:08:02,137 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=28.632312774658203
+2024-12-31 16:08:02,137 - framework_cc - INFO -   - CPU Core #5 (Load): 5.348443984985352
+2024-12-31 16:08:02,137 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=5.348443984985352
+2024-12-31 16:08:02,137 - framework_cc - INFO -   - CPU Core #6 (Load): 5.047857761383057
+2024-12-31 16:08:02,137 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=5.047857761383057
+2024-12-31 16:08:02,137 - framework_cc - INFO -   - CPU Core #7 (Load): 35.17449951171875
+2024-12-31 16:08:02,138 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=35.17449951171875
+2024-12-31 16:08:02,138 - framework_cc - INFO -   - CPU Core #8 (Load): 25.075244903564453
+2024-12-31 16:08:02,138 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=25.075244903564453
+2024-12-31 16:08:02,138 - framework_cc - INFO -   - CPU Core #9 (Load): 0.47034621238708496
+2024-12-31 16:08:02,139 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=0.47034621238708496
+2024-12-31 16:08:02,139 - framework_cc - INFO -   - CPU Core #10 (Load): 0.4606187343597412
+2024-12-31 16:08:02,139 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=0.4606187343597412
+2024-12-31 16:08:02,139 - framework_cc - INFO -   - CPU Core #11 (Load): 0.47666430473327637
+2024-12-31 16:08:02,139 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=0.47666430473327637
+2024-12-31 16:08:02,139 - framework_cc - INFO -   - CPU Core #12 (Load): 0.46012401580810547
+2024-12-31 16:08:02,139 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=0.46012401580810547
+2024-12-31 16:08:02,139 - framework_cc - INFO -   - CPU Core #13 (Load): 0.47416090965270996
+2024-12-31 16:08:02,141 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=0.47416090965270996
+2024-12-31 16:08:02,141 - framework_cc - INFO -   - CPU Core #14 (Load): 0.46032071113586426
+2024-12-31 16:08:02,141 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=0.46032071113586426
+2024-12-31 16:08:02,141 - framework_cc - INFO -   - CPU Core #15 (Load): 0.9824812412261963
+2024-12-31 16:08:02,141 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=0.9824812412261963
+2024-12-31 16:08:02,141 - framework_cc - INFO -   - CPU Core #16 (Load): 0.4862785339355469
+2024-12-31 16:08:02,141 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=0.4862785339355469
+2024-12-31 16:08:02,141 - framework_cc - INFO -   - CPU Total (Load): 9.338397026062012
+2024-12-31 16:08:02,142 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=9.338397026062012
+2024-12-31 16:08:02,142 - framework_cc - INFO -   - CPU Core Max (Load): 35.17449951171875
+2024-12-31 16:08:02,142 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Load, Value=35.17449951171875
+2024-12-31 16:08:02,142 - framework_cc - INFO -   - Package (Power): 8.677810668945312
+2024-12-31 16:08:02,142 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Power, Value=8.677810668945312
+2024-12-31 16:08:02,142 - framework_cc - INFO -   - Core #1 (Clock): 1297.4853515625
+2024-12-31 16:08:02,142 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Clock, Value=1297.4853515625
+2024-12-31 16:08:02,142 - framework_cc - INFO -   - Core #1 (Factor): 13.0
+2024-12-31 16:08:02,144 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Factor, Value=13.0
+2024-12-31 16:08:02,144 - framework_cc - INFO -   - Core #1 (SMU) (Power): 0.21786659955978394
+2024-12-31 16:08:02,144 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Power, Value=0.21786659955978394
+2024-12-31 16:08:02,144 - framework_cc - INFO -   - Core #1 VID (Voltage): 0.7875000238418579
+2024-12-31 16:08:02,144 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Voltage, Value=0.7875000238418579
+2024-12-31 16:08:02,144 - framework_cc - INFO -   - Core #2 (Clock): 3243.71337890625
+2024-12-31 16:08:02,144 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Clock, Value=3243.71337890625
+2024-12-31 16:08:02,144 - framework_cc - INFO -   - Core #2 (Factor): 32.5
+2024-12-31 16:08:02,145 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Factor, Value=32.5
+2024-12-31 16:08:02,145 - framework_cc - INFO -   - Core #2 (SMU) (Power): 1.315848708152771
+2024-12-31 16:08:02,145 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Power, Value=1.315848708152771
+2024-12-31 16:08:02,145 - framework_cc - INFO -   - Core #2 VID (Voltage): 0.7875000238418579
+2024-12-31 16:08:02,145 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Voltage, Value=0.7875000238418579
+2024-12-31 16:08:02,145 - framework_cc - INFO -   - Core #3 (Clock): 1297.4853515625
+2024-12-31 16:08:02,145 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Clock, Value=1297.4853515625
+2024-12-31 16:08:02,145 - framework_cc - INFO -   - Core #3 (Factor): 13.0
+2024-12-31 16:08:02,146 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Factor, Value=13.0
+2024-12-31 16:08:02,146 - framework_cc - INFO -   - Core #3 (SMU) (Power): 0.16806147992610931
+2024-12-31 16:08:02,146 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Power, Value=0.16806147992610931
+2024-12-31 16:08:02,146 - framework_cc - INFO -   - Core #3 VID (Voltage): 0.7875000238418579
+2024-12-31 16:08:02,146 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Voltage, Value=0.7875000238418579
+2024-12-31 16:08:02,146 - framework_cc - INFO -   - Core #4 (Clock): 1297.4853515625
+2024-12-31 16:08:02,146 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Clock, Value=1297.4853515625
+2024-12-31 16:08:02,146 - framework_cc - INFO -   - Core #4 (Factor): 13.0
+2024-12-31 16:08:02,148 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Factor, Value=13.0
+2024-12-31 16:08:02,148 - framework_cc - INFO -   - Core #4 (SMU) (Power): 1.3738704919815063
+2024-12-31 16:08:02,148 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Power, Value=1.3738704919815063
+2024-12-31 16:08:02,148 - framework_cc - INFO -   - Core #4 VID (Voltage): 0.7875000238418579
+2024-12-31 16:08:02,148 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Voltage, Value=0.7875000238418579
+2024-12-31 16:08:02,148 - framework_cc - INFO -   - Core #5 (Clock): 1297.4853515625
+2024-12-31 16:08:02,148 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Clock, Value=1297.4853515625
+2024-12-31 16:08:02,148 - framework_cc - INFO -   - Core #5 (Factor): 13.0
+2024-12-31 16:08:02,148 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Factor, Value=13.0
+2024-12-31 16:08:02,148 - framework_cc - INFO -   - Core #5 (SMU) (Power): 2.3559468900202774e-05
+2024-12-31 16:08:02,149 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Power, Value=2.3559468900202774e-05
+2024-12-31 16:08:02,149 - framework_cc - INFO -   - Core #5 VID (Voltage): 0.7875000238418579
+2024-12-31 16:08:02,149 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Voltage, Value=0.7875000238418579
+2024-12-31 16:08:02,149 - framework_cc - INFO -   - Core #6 (Clock): 1297.4853515625
+2024-12-31 16:08:02,149 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Clock, Value=1297.4853515625
+2024-12-31 16:08:02,149 - framework_cc - INFO -   - Core #6 (Factor): 13.0
+2024-12-31 16:08:02,149 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Factor, Value=13.0
+2024-12-31 16:08:02,149 - framework_cc - INFO -   - Core #6 (SMU) (Power): 2.3559468900202774e-05
+2024-12-31 16:08:02,149 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Power, Value=2.3559468900202774e-05
+2024-12-31 16:08:02,150 - framework_cc - INFO -   - Core #6 VID (Voltage): 0.7875000238418579
+2024-12-31 16:08:02,150 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Voltage, Value=0.7875000238418579
+2024-12-31 16:08:02,150 - framework_cc - INFO -   - Core #7 (Clock): 1297.4853515625
+2024-12-31 16:08:02,150 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Clock, Value=1297.4853515625
+2024-12-31 16:08:02,150 - framework_cc - INFO -   - Core #7 (Factor): 13.0
+2024-12-31 16:08:02,150 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Factor, Value=13.0
+2024-12-31 16:08:02,150 - framework_cc - INFO -   - Core #7 (SMU) (Power): 0.0007774624973535538
+2024-12-31 16:08:02,150 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Power, Value=0.0007774624973535538
+2024-12-31 16:08:02,150 - framework_cc - INFO -   - Core #7 VID (Voltage): 0.7875000238418579
+2024-12-31 16:08:02,152 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Voltage, Value=0.7875000238418579
+2024-12-31 16:08:02,152 - framework_cc - INFO -   - Core #8 (Clock): 1297.4853515625
+2024-12-31 16:08:02,152 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Clock, Value=1297.4853515625
+2024-12-31 16:08:02,152 - framework_cc - INFO -   - Core #8 (Factor): 13.0
+2024-12-31 16:08:02,152 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Factor, Value=13.0
+2024-12-31 16:08:02,152 - framework_cc - INFO -   - Core #8 (SMU) (Power): 0.011449902318418026
+2024-12-31 16:08:02,152 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Power, Value=0.011449902318418026
+2024-12-31 16:08:02,153 - framework_cc - INFO -   - Core #8 VID (Voltage): 0.7875000238418579
+2024-12-31 16:08:02,153 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Voltage, Value=0.7875000238418579
+2024-12-31 16:08:02,153 - framework_cc - INFO -   - Core (Tctl/Tdie) (Temperature): 35.50000762939453
+2024-12-31 16:08:02,153 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Temperature, Value=35.50000762939453
+2024-12-31 16:08:02,153 - framework_cc - INFO -   - Core (SVI2 TFN) (Voltage): 1.5499999523162842
+2024-12-31 16:08:02,153 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Voltage, Value=1.5499999523162842
+2024-12-31 16:08:02,153 - framework_cc - INFO -   - SoC (SVI2 TFN) (Voltage): 1.5499999523162842
+2024-12-31 16:08:02,153 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Voltage, Value=1.5499999523162842
+2024-12-31 16:08:02,153 - framework_cc - INFO -   - Bus Speed (Clock): 99.80656433105469
+2024-12-31 16:08:02,155 - framework_cc - INFO -     Full sensor info: Hardware=AMD Ryzen 7 7840U w/ Radeon 780M Graphics, Type=Clock, Value=99.80656433105469
+2024-12-31 16:08:02,155 - framework_cc - INFO - Hardware: Generic Memory
+2024-12-31 16:08:02,155 - framework_cc - INFO -   - Memory Used (Data): 12.402725219726562
+2024-12-31 16:08:02,155 - framework_cc - INFO -   - Memory Available (Data): 15.40671157836914
+2024-12-31 16:08:02,155 - framework_cc - INFO -   - Memory (Load): 44.59897994995117
+2024-12-31 16:08:02,155 - framework_cc - INFO -   - Virtual Memory Used (Data): 15.476337432861328
+2024-12-31 16:08:02,156 - framework_cc - INFO -   - Virtual Memory Available (Data): 37.333099365234375
+2024-12-31 16:08:02,156 - framework_cc - INFO -   - Virtual Memory (Load): 29.306007385253906
+2024-12-31 16:08:02,156 - framework_cc - INFO - Hardware: AMD Radeon(TM) 780M
+2024-12-31 16:08:02,156 - framework_cc - INFO -   - GPU Memory Total (SmallData): 4096.0
+2024-12-31 16:08:02,156 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=SmallData, Value=4096.0
+2024-12-31 16:08:02,156 - framework_cc - INFO -   - Fullscreen FPS (Factor): 0.0
+2024-12-31 16:08:02,156 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Factor, Value=0.0
+2024-12-31 16:08:02,156 - framework_cc - INFO -   - D3D Dedicated Memory Total (SmallData): 4001.75390625
+2024-12-31 16:08:02,158 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=SmallData, Value=4001.75390625
+2024-12-31 16:08:02,158 - framework_cc - INFO -   - D3D Dedicated Memory Free (SmallData): 3292.29296875
+2024-12-31 16:08:02,158 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=SmallData, Value=3292.29296875
+2024-12-31 16:08:02,158 - framework_cc - INFO -   - D3D Dedicated Memory Used (SmallData): 709.4609375
+2024-12-31 16:08:02,158 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=SmallData, Value=709.4609375
+2024-12-31 16:08:02,158 - framework_cc - INFO -   - D3D Shared Memory Used (SmallData): 317.453125
+2024-12-31 16:08:02,158 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=SmallData, Value=317.453125
+2024-12-31 16:08:02,158 - framework_cc - INFO -   - D3D Shared Memory Free (SmallData): 13920.978515625
+2024-12-31 16:08:02,158 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=SmallData, Value=13920.978515625
+2024-12-31 16:08:02,159 - framework_cc - INFO -   - D3D Shared Memory Total (SmallData): 14238.431640625
+2024-12-31 16:08:02,159 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=SmallData, Value=14238.431640625
+2024-12-31 16:08:02,159 - framework_cc - INFO -   - D3D 3D (Load): 0.3844718635082245
+2024-12-31 16:08:02,159 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.3844718635082245
+2024-12-31 16:08:02,159 - framework_cc - INFO -   - D3D High Priority 3D (Load): 0.0
+2024-12-31 16:08:02,159 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,159 - framework_cc - INFO -   - D3D Compute 0 (Load): 0.0
+2024-12-31 16:08:02,159 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,160 - framework_cc - INFO -   - D3D Compute 1 (Load): 0.0
+2024-12-31 16:08:02,160 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,160 - framework_cc - INFO -   - D3D High Priority Compute (Load): 0.0
+2024-12-31 16:08:02,160 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,160 - framework_cc - INFO -   - D3D True Audio 0 (Load): 0.0
+2024-12-31 16:08:02,160 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,160 - framework_cc - INFO -   - D3D True Audio 1 (Load): 0.0
+2024-12-31 16:08:02,160 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,162 - framework_cc - INFO -   - D3D Video Codec 0 (Load): 0.0
+2024-12-31 16:08:02,162 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,162 - framework_cc - INFO -   - D3D Video JPEG (Load): 0.0
+2024-12-31 16:08:02,162 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,162 - framework_cc - INFO -   - D3D Copy (Load): 0.0
+2024-12-31 16:08:02,162 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,162 - framework_cc - INFO -   - D3D Timer 0 (Load): 0.0
+2024-12-31 16:08:02,162 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,162 - framework_cc - INFO -   - D3D Security 1 (Load): 0.0
+2024-12-31 16:08:02,162 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=Load, Value=0.0
+2024-12-31 16:08:02,163 - framework_cc - INFO -   - GPU Memory Used (SmallData): 709.0
+2024-12-31 16:08:02,163 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=SmallData, Value=709.0
+2024-12-31 16:08:02,163 - framework_cc - INFO -   - GPU Memory Free (SmallData): 3387.0
+2024-12-31 16:08:02,163 - framework_cc - INFO -     Full sensor info: Hardware=AMD Radeon(TM) 780M, Type=SmallData, Value=3387.0
+2024-12-31 16:08:02,163 - framework_cc - INFO - Hardware: SHPP41-2000GM
+2024-12-31 16:08:02,163 - framework_cc - INFO -   - Temperature (Temperature): 36.0
+2024-12-31 16:08:02,163 - framework_cc - INFO -   - Available Spare (Level): 100.0
+2024-12-31 16:08:02,163 - framework_cc - INFO -   - Available Spare Threshold (Level): 10.0
+2024-12-31 16:08:02,165 - framework_cc - INFO -   - Percentage Used (Level): 0.0
+2024-12-31 16:08:02,165 - framework_cc - INFO -   - Data Read (Data): 17394.0
+2024-12-31 16:08:02,165 - framework_cc - INFO -   - Data Written (Data): 9751.0
+2024-12-31 16:08:02,165 - framework_cc - INFO -   - Temperature 1 (Temperature): 30.0
+2024-12-31 16:08:02,165 - framework_cc - INFO -   - Temperature 2 (Temperature): 40.0
+2024-12-31 16:08:02,165 - framework_cc - INFO -   - Used Space (Load): 73.5401382446289
+2024-12-31 16:08:02,165 - framework_cc - INFO -   - Read Activity (Load): 5.132042588229524e-06
+2024-12-31 16:08:02,165 - framework_cc - INFO -   - Write Activity (Load): 3.0143519325065427e-06
+2024-12-31 16:08:02,165 - framework_cc - INFO -   - Total Activity (Load): 99.99987030029297
+2024-12-31 16:08:02,166 - framework_cc - INFO -   - Read Rate (Throughput): None
+2024-12-31 16:08:02,166 - framework_cc - INFO -   - Write Rate (Throughput): None
+2024-12-31 16:08:02,166 - framework_cc - INFO - Hardware: Connessione alla rete locale (LAN)
+2024-12-31 16:08:02,166 - framework_cc - INFO -   - Data Uploaded (Data): 0.0
+2024-12-31 16:08:02,166 - framework_cc - INFO -   - Data Downloaded (Data): 0.0
+2024-12-31 16:08:02,166 - framework_cc - INFO -   - Upload Speed (Throughput): 0.0
+2024-12-31 16:08:02,166 - framework_cc - INFO -   - Download Speed (Throughput): 0.0
+2024-12-31 16:08:02,166 - framework_cc - INFO -   - Network Utilization (Load): 0.0
+2024-12-31 16:08:02,166 - framework_cc - INFO - Hardware: Connessione alla rete locale (LAN)* 10
+2024-12-31 16:08:02,167 - framework_cc - INFO -   - Data Uploaded (Data): 0.0
+2024-12-31 16:08:02,167 - framework_cc - INFO -   - Data Downloaded (Data): 0.0
+2024-12-31 16:08:02,167 - framework_cc - INFO -   - Upload Speed (Throughput): 0.0
+2024-12-31 16:08:02,167 - framework_cc - INFO -   - Download Speed (Throughput): 0.0
+2024-12-31 16:08:02,167 - framework_cc - INFO -   - Network Utilization (Load): 0.0
+2024-12-31 16:08:02,167 - framework_cc - INFO - Hardware: Connessione alla rete locale (LAN)* 9
+2024-12-31 16:08:02,167 - framework_cc - INFO -   - Data Uploaded (Data): 0.0
+2024-12-31 16:08:02,169 - framework_cc - INFO -   - Data Downloaded (Data): 0.0
+2024-12-31 16:08:02,169 - framework_cc - INFO -   - Upload Speed (Throughput): 0.0
+2024-12-31 16:08:02,169 - framework_cc - INFO -   - Download Speed (Throughput): 0.0
+2024-12-31 16:08:02,169 - framework_cc - INFO -   - Network Utilization (Load): 0.0
+2024-12-31 16:08:02,169 - framework_cc - INFO - Hardware: Connessione di rete Bluetooth
+2024-12-31 16:08:02,169 - framework_cc - INFO -   - Data Uploaded (Data): 0.0
+2024-12-31 16:08:02,170 - framework_cc - INFO -   - Data Downloaded (Data): 0.0
+2024-12-31 16:08:02,170 - framework_cc - INFO -   - Upload Speed (Throughput): 0.0
+2024-12-31 16:08:02,170 - framework_cc - INFO -   - Download Speed (Throughput): 0.0
+2024-12-31 16:08:02,170 - framework_cc - INFO -   - Network Utilization (Load): 0.0
+2024-12-31 16:08:02,170 - framework_cc - INFO - Hardware: Tailscale
+2024-12-31 16:08:02,170 - framework_cc - INFO -   - Data Uploaded (Data): 0.00023791193962097168
+2024-12-31 16:08:02,170 - framework_cc - INFO -   - Data Downloaded (Data): 3.3307820558547974e-05
+2024-12-31 16:08:02,170 - framework_cc - INFO -   - Upload Speed (Throughput): 0.0
+2024-12-31 16:08:02,172 - framework_cc - INFO -   - Download Speed (Throughput): 0.0
+2024-12-31 16:08:02,172 - framework_cc - INFO -   - Network Utilization (Load): 0.0
+2024-12-31 16:08:02,172 - framework_cc - INFO - Hardware: vEthernet (Default Switch)
+2024-12-31 16:08:02,172 - framework_cc - INFO -   - Data Uploaded (Data): 0.000211312435567379
+2024-12-31 16:08:02,172 - framework_cc - INFO -   - Data Downloaded (Data): 0.0
+2024-12-31 16:08:02,172 - framework_cc - INFO -   - Upload Speed (Throughput): 0.0
+2024-12-31 16:08:02,172 - framework_cc - INFO -   - Download Speed (Throughput): 0.0
+2024-12-31 16:08:02,173 - framework_cc - INFO -   - Network Utilization (Load): 0.0
+2024-12-31 16:08:02,173 - framework_cc - INFO - Hardware: Wi-Fi
+2024-12-31 16:08:02,173 - framework_cc - INFO -   - Data Uploaded (Data): 0.0012137452140450478
+2024-12-31 16:08:02,173 - framework_cc - INFO -   - Data Downloaded (Data): 0.0021549388766288757
+2024-12-31 16:08:02,173 - framework_cc - INFO -   - Upload Speed (Throughput): 698.5652465820312
+2024-12-31 16:08:02,173 - framework_cc - INFO -   - Download Speed (Throughput): 667.8590698242188
+2024-12-31 16:08:02,173 - framework_cc - INFO -   - Network Utilization (Load): 0.001261266297660768
+2024-12-31 16:08:02,173 - framework_cc - INFO - LibreHardwareMonitor initialized successfully
+2024-12-31 16:08:02,194 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:02,266 - framework_cc.power_plan - INFO - === Configuration du plan Boost pour performances maximales ===
+2024-12-31 16:08:02,266 - framework_cc.power_plan - INFO - GUID du plan: energia:
+2024-12-31 16:08:02,266 - framework_cc.power_plan - INFO - Configuration des paramètres du processeur...
+2024-12-31 16:08:02,282 - framework_cc.power_plan - ERROR - ✗ Échec configuration PROCTHROTTLEMIN (AC): Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,301 - framework_cc.power_plan - ERROR - ✗ Échec configuration PROCTHROTTLEMIN (DC): Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,314 - framework_cc.power_plan - ERROR - ✗ Échec configuration PROCTHROTTLEMAX (AC): Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,330 - framework_cc.power_plan - ERROR - ✗ Échec configuration PROCTHROTTLEMAX (DC): Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,343 - framework_cc.power_plan - ERROR - ✗ Échec configuration PERFBOOSTMODE: Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,357 - framework_cc.power_plan - ERROR - ✗ Échec configuration PERFBOOSTPOL: Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,357 - framework_cc.power_plan - INFO - Configuration des paramètres GPU...
+2024-12-31 16:08:02,373 - framework_cc.power_plan - ERROR - ✗ Échec configuration a1662ab2-9d34-4e53-ba8b-2639b9e20857: Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,373 - framework_cc.power_plan - INFO - Configuration des paramètres d'affichage...
+2024-12-31 16:08:02,386 - framework_cc.power_plan - ERROR - ✗ Échec configuration VIDEOIDLE (AC): Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,400 - framework_cc.power_plan - ERROR - ✗ Échec configuration VIDEOIDLE (DC): Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,400 - framework_cc.power_plan - INFO - Configuration des paramètres de mise en veille...
+2024-12-31 16:08:02,417 - framework_cc.power_plan - ERROR - ✗ Échec configuration STANDBYIDLE (AC): Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,433 - framework_cc.power_plan - ERROR - ✗ Échec configuration STANDBYIDLE (DC): Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,447 - framework_cc.power_plan - ERROR - ✗ Échec configuration HYBRIDSLEEP: Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,463 - framework_cc.power_plan - ERROR - ✗ Échec configuration HIBERNATEIDLE: Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,463 - framework_cc.power_plan - INFO - Configuration des paramètres PCI Express...
+2024-12-31 16:08:02,479 - framework_cc.power_plan - ERROR - ✗ Échec configuration ee12f906-d277-404b-b6da-e5fa1a576df5 (AC): Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,495 - framework_cc.power_plan - ERROR - ✗ Échec configuration ee12f906-d277-404b-b6da-e5fa1a576df5 (DC): Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,496 - framework_cc.power_plan - INFO - Vérification des paramètres appliqués...
+2024-12-31 16:08:02,510 - framework_cc.power_plan - ERROR - Échec de la vérification: Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,528 - framework_cc.power_plan - ERROR - ✗ Échec activation du plan: Parametri non validi. Per ulteriori informazioni, provare "/?"
+
+2024-12-31 16:08:02,528 - framework_cc.power_plan - INFO - === Configuration du plan Boost terminée ===
+2024-12-31 16:08:02,528 - framework_cc.power_plan - INFO - RyzenAdj configured successfully
+2024-12-31 16:08:02,529 - framework_cc - INFO - Initialized DisplayManager for model: Framework 13 AMD
+2024-12-31 16:08:02,602 - framework_cc.gui - INFO - Model Framework 13 AMD has no dGPU, skipping dGPU metrics
+2024-12-31 16:08:02,604 - framework_cc.gui - DEBUG - Created metric label: CPU -> cpu_load
+2024-12-31 16:08:02,607 - framework_cc.gui - DEBUG - Created progress bar for: cpu_load
+2024-12-31 16:08:02,613 - framework_cc.gui - DEBUG - Created metric label: CPU TEMP -> cpu_temp
+2024-12-31 16:08:02,615 - framework_cc.gui - DEBUG - Created progress bar for: cpu_temp
+2024-12-31 16:08:02,617 - framework_cc.gui - DEBUG - Created metric label: RAM -> ram_usage
+2024-12-31 16:08:02,619 - framework_cc.gui - DEBUG - Created progress bar for: ram_usage
+2024-12-31 16:08:02,622 - framework_cc.gui - DEBUG - Created metric label: iGPU -> igpu_load
+2024-12-31 16:08:02,624 - framework_cc.gui - DEBUG - Created progress bar for: igpu_load
+2024-12-31 16:08:02,626 - framework_cc.gui - DEBUG - Created metric label: iGPU TEMP -> igpu_temp
+2024-12-31 16:08:02,628 - framework_cc.gui - DEBUG - Created progress bar for: igpu_temp
+2024-12-31 16:08:02,719 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:02,746 - framework_cc.gui - DEBUG - Window text updated to language: en
+2024-12-31 16:08:02,763 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 13.706201553344727, 'cpu_temp': 36.00000762939453, 'ram_usage': 44.65155792236328, 'igpu_load': 0.5191745758056641, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:03,248 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:03,260 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.844515800476074, 'cpu_temp': 35.87500762939453, 'ram_usage': 44.51109313964844, 'igpu_load': 2.175442934036255, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:03,268 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.844515800476074, 'cpu_temp': 35.87500762939453, 'ram_usage': 44.51109313964844, 'igpu_load': 2.175442934036255, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:03,748 - framework_cc.power_plan - INFO - === Application du profil Balanced ===
+2024-12-31 16:08:03,748 - framework_cc.power_plan - INFO - GUID: 381b4222-f694-41f0-9685-ff5bb260df2e
+2024-12-31 16:08:03,749 - framework_cc.power_plan - INFO - Profil Balanced détecté - Configuration des paramètres équilibrés
+2024-12-31 16:08:03,749 - framework_cc.power_plan - INFO - === Configuration du plan Balanced pour utilisation quotidienne ===
+2024-12-31 16:08:03,749 - framework_cc.power_plan - INFO - GUID du plan: 381b4222-f694-41f0-9685-ff5bb260df2e
+2024-12-31 16:08:03,749 - framework_cc.power_plan - INFO - Configuration des paramètres du processeur...
+2024-12-31 16:08:03,770 - framework_cc.power_plan - INFO - ✓ PROCTHROTTLEMIN (AC) configuré à 10
+2024-12-31 16:08:03,781 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:03,791 - framework_cc.power_plan - INFO - ✓ PROCTHROTTLEMIN (DC) configuré à 10
+2024-12-31 16:08:03,809 - framework_cc.power_plan - INFO - ✓ PROCTHROTTLEMAX (AC) configuré à 99
+2024-12-31 16:08:03,826 - framework_cc.power_plan - INFO - ✓ PROCTHROTTLEMAX (DC) configuré à 99
+2024-12-31 16:08:03,843 - framework_cc.power_plan - INFO - ✓ PERFBOOSTMODE configuré à 1
+2024-12-31 16:08:03,861 - framework_cc.power_plan - INFO - ✓ PERFBOOSTPOL configuré à 50
+2024-12-31 16:08:03,862 - framework_cc.power_plan - INFO - Configuration des paramètres GPU...
+2024-12-31 16:08:03,881 - framework_cc.power_plan - ERROR - ✗ Échec configuration a1662ab2-9d34-4e53-ba8b-2639b9e20857: Il valore specificato ha formato non corretto o non Š compreso nell'intervallo dell'impostazione di risparmio energia di destinazione.
+
+2024-12-31 16:08:03,881 - framework_cc.power_plan - INFO - Configuration des paramètres d'affichage...
+2024-12-31 16:08:03,899 - framework_cc.power_plan - INFO - ✓ VIDEOIDLE (AC) configuré à 3600
+2024-12-31 16:08:03,919 - framework_cc.power_plan - INFO - ✓ VIDEOIDLE (DC) configuré à 600
+2024-12-31 16:08:03,919 - framework_cc.power_plan - INFO - Configuration des paramètres de mise en veille...
+2024-12-31 16:08:03,940 - framework_cc.power_plan - INFO - ✓ STANDBYIDLE (AC) configuré à 3600
+2024-12-31 16:08:03,960 - framework_cc.power_plan - INFO - ✓ STANDBYIDLE (DC) configuré à 600
+2024-12-31 16:08:03,981 - framework_cc.power_plan - INFO - ✓ HYBRIDSLEEP configuré à 0
+2024-12-31 16:08:03,997 - framework_cc.power_plan - INFO - ✓ HIBERNATEIDLE configuré à 0
+2024-12-31 16:08:03,997 - framework_cc.power_plan - INFO - Configuration des paramètres PCI Express...
+2024-12-31 16:08:04,014 - framework_cc.power_plan - INFO - ✓ ee12f906-d277-404b-b6da-e5fa1a576df5 (AC) configuré à 1
+2024-12-31 16:08:04,034 - framework_cc.power_plan - INFO - ✓ ee12f906-d277-404b-b6da-e5fa1a576df5 (DC) configuré à 1
+2024-12-31 16:08:04,034 - framework_cc.power_plan - INFO - Vérification des paramètres appliqués...
+2024-12-31 16:08:04,235 - framework_cc.power_plan - INFO - Configuration actuelle du plan Balanced:
+2024-12-31 16:08:04,235 - framework_cc.power_plan - INFO - GUID combinazione risparmio energia: 381b4222-f694-41f0-9685-ff5bb260df2e  (Bilanciato)
+  Alias GUID: SCHEME_BALANCED
+  GUID sottogruppo: 0012ee47-9041-4b5d-9b77-535fba8b1442  (Disco rigido)
+    Alias GUID: SUB_DISK
+    GUID impostazioni risparmio energia: 6738e2c4-e8a5-4a42-b16a-e040e769756e  (Disattiva disco rigido dopo)
+      Alias GUID: DISKIDLE
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0xffffffff
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: Secondi
+    Indice impostazione alimentazione CA corrente: 0x0000001e
+    Indice impostazione alimentazione CC corrente: 0x0000001e
+
+  GUID sottogruppo: 02f815b5-a5cf-4c84-bf20-649d1f75d3d8  (Internet Explorer)
+    GUID impostazioni risparmio energia: 4c793e7d-a264-42e1-87d3-7a0d2f523ccd  (Frequenza timer JavaScript)
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Risparmio energia massimo
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Prestazioni massime
+    Indice impostazione alimentazione CA corrente: 0x00000001
+    Indice impostazione alimentazione CC corrente: 0x00000000
+
+  GUID sottogruppo: 0d7dbae2-4294-402a-ba8e-26777e8488cd  (Impostazioni sfondo del desktop)
+    GUID impostazioni risparmio energia: 309dce9b-bef4-4119-9921-a851fb12f0f4  (Presentazione)
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Disponibile
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Sospesa
+    Indice impostazione alimentazione CA corrente: 0x00000000
+    Indice impostazione alimentazione CC corrente: 0x00000001
+
+  GUID sottogruppo: 19cbb8fa-5279-450e-9fac-8a3d5fedd0c1  (Impostazioni scheda wireless)
+    GUID impostazioni risparmio energia: 12bbebe6-58d6-4636-95bb-3217ef867c1a  (Modalit… risparmio energia)
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Prestazioni massime
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Risparmio energia minimo
+      Indice impostazione possibile: 002
+      Nome descrittivo impostazione possibile: Risparmio energia medio
+      Indice impostazione possibile: 003
+      Nome descrittivo impostazione possibile: Risparmio energia massimo
+    Indice impostazione alimentazione CA corrente: 0x00000000
+    Indice impostazione alimentazione CC corrente: 0x00000002
+
+  GUID sottogruppo: 238c9fa8-0aad-41ed-83f4-97be242c8f20  (Sospensione)
+    Alias GUID: SUB_SLEEP
+    GUID impostazioni risparmio energia: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da  (Entra in sospensione dopo)
+      Alias GUID: STANDBYIDLE
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0xffffffff
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: Secondi
+    Indice impostazione alimentazione CA corrente: 0x00000e10
+    Indice impostazione alimentazione CC corrente: 0x00000258
+
+    GUID impostazioni risparmio energia: 94ac6d29-73ce-41a6-809f-6363ba21b47e  (Consenti sospensione ibrida)
+      Alias GUID: HYBRIDSLEEP
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Disattivata
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Attivata
+    Indice impostazione alimentazione CA corrente: 0x00000000
+    Indice impostazione alimentazione CC corrente: 0x00000001
+
+    GUID impostazioni risparmio energia: 9d7815a6-7ee4-497e-8888-515a05f02364  (Metti in stato di ibernazione dopo)
+      Alias GUID: HIBERNATEIDLE
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0xffffffff
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: Secondi
+    Indice impostazione alimentazione CA corrente: 0x00000000
+    Indice impostazione alimentazione CC corrente: 0x7fffffff
+
+    GUID impostazioni risparmio energia: bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d  (Consenti timer di riattivazione)
+      Alias GUID: RTCWAKE
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Disabilita
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Abilita
+      Indice impostazione possibile: 002
+      Nome descrittivo impostazione possibile: Solo timer di riattivazione importanti
+    Indice impostazione alimentazione CA corrente: 0x00000000
+    Indice impostazione alimentazione CC corrente: 0x00000000
+
+  GUID sottogruppo: 2a737441-1930-4402-8d77-b2bebba308a3  (Impostazioni USB)
+    GUID impostazioni risparmio energia: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226  (Impostazione sospensione selettiva USB)
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Disabilitata
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Abilitata
+    Indice impostazione alimentazione CA corrente: 0x00000001
+    Indice impostazione alimentazione CC corrente: 0x00000001
+
+  GUID sottogruppo: 4f971e89-eebd-4455-a8de-9e59040e7347  (Pulsanti di alimentazione e coperchio)
+    Alias GUID: SUB_BUTTONS
+    GUID impostazioni risparmio energia: a7066653-8d6c-40a8-910e-a1f54b84c7e5  (Pulsante di alimentazione menu Start)
+      Alias GUID: UIBUTTON_ACTION
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Sospendi
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Iberna
+      Indice impostazione possibile: 002
+      Nome descrittivo impostazione possibile: Arresta il sistema
+    Indice impostazione alimentazione CA corrente: 0x00000000
+    Indice impostazione alimentazione CC corrente: 0x00000000
+
+  GUID sottogruppo: 501a4d13-42af-4429-9fd1-a8218c268e20  (PCI Express)
+    Alias GUID: SUB_PCIEXPRESS
+    GUID impostazioni risparmio energia: ee12f906-d277-404b-b6da-e5fa1a576df5  (Risparmio energia stato collegamento)
+      Alias GUID: ASPM
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Inattivo
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Risparmio energia moderato
+      Indice impostazione possibile: 002
+      Nome descrittivo impostazione possibile: Risparmio energia massimo
+    Indice impostazione alimentazione CA corrente: 0x00000001
+    Indice impostazione alimentazione CC corrente: 0x00000001
+
+  GUID sottogruppo: 54533251-82be-4824-96c1-47b60b740d00  (Risparmio energia del processore)
+    Alias GUID: SUB_PROCESSOR
+    GUID impostazioni risparmio energia: 893dee8e-2bef-41e0-89c6-b55d0929964c  (Livello minimo prestazioni del processore)
+      Alias GUID: PROCTHROTTLEMIN
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0x00000064
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: %
+    Indice impostazione alimentazione CA corrente: 0x0000000a
+    Indice impostazione alimentazione CC corrente: 0x0000000a
+
+    GUID impostazioni risparmio energia: bc5038f7-23e0-4960-96da-33abaf5935ec  (Livello massimo prestazioni del processore)
+      Alias GUID: PROCTHROTTLEMAX
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0x00000064
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: %
+    Indice impostazione alimentazione CA corrente: 0x00000063
+    Indice impostazione alimentazione CC corrente: 0x00000063
+
+  GUID sottogruppo: 7516b95f-f776-4464-8c53-06167f40cc99  (Schermo)
+    Alias GUID: SUB_VIDEO
+    GUID impostazioni risparmio energia: 3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e  (Disattiva schermo dopo)
+      Alias GUID: VIDEOIDLE
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0xffffffff
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: Secondi
+    Indice impostazione alimentazione CA corrente: 0x00000e10
+    Indice impostazione alimentazione CC corrente: 0x00000258
+
+    GUID impostazioni risparmio energia: aded5e82-b909-4619-9949-f5d71dac0bcb  (Luminosit… schermo)
+      Alias GUID: VIDEONORMALLEVEL
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0x00000064
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: %
+    Indice impostazione alimentazione CA corrente: 0x00000000
+    Indice impostazione alimentazione CC corrente: 0x00000000
+
+    GUID impostazioni risparmio energia: f1fbfde2-a960-4165-9f88-50667911ce96  (Luminosit… attenuazione schermo)
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0x00000064
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: %
+    Indice impostazione alimentazione CA corrente: 0x00000032
+    Indice impostazione alimentazione CC corrente: 0x00000032
+
+    GUID impostazioni risparmio energia: fbd9aa66-9553-4097-ba44-ed6e9d65eab8  (Attiva luminosit… adattiva)
+      Alias GUID: ADAPTBRIGHT
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Disattivata
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Attivata
+    Indice impostazione alimentazione CA corrente: 0x00000000
+    Indice impostazione alimentazione CC corrente: 0x00000000
+
+  GUID sottogruppo: 9596fb26-9850-41fd-ac3e-f7c3c00afd4b  (Impostazioni multimediali)
+    GUID impostazioni risparmio energia: 03680956-93bc-4294-bba6-4e0f09bb717f  (In caso di condivisione di contenuti multimediali)
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Consenti al computer di passare allo stato di sospensione
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Impedisci al computer di passare allo stato di sospensione per inattivit…
+      Indice impostazione possibile: 002
+      Nome descrittivo impostazione possibile: Consenti al computer di passare alla modalit… Utente assente
+    Indice impostazione alimentazione CA corrente: 0x00000001
+    Indice impostazione alimentazione CC corrente: 0x00000000
+
+    GUID impostazioni risparmio energia: 10778347-1370-4ee0-8bbd-33bdacaade49  (Differenza qualit… della riproduzione video)
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Differenza risparmio energia della riproduzione video
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Differenza prestazioni della riproduzione video
+    Indice impostazione alimentazione CA corrente: 0x00000001
+    Indice impostazione alimentazione CC corrente: 0x00000000
+
+    GUID impostazioni risparmio energia: 34c7b99f-9a6d-4b3c-8dc7-b6693b78cef4  (Durante la riproduzione di video)
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Ottimizza qualit… video
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Bilanciato
+      Indice impostazione possibile: 002
+      Nome descrittivo impostazione possibile: Ottimizza risparmio energia
+    Indice impostazione alimentazione CA corrente: 0x00000000
+    Indice impostazione alimentazione CC corrente: 0x00000001
+
+  GUID sottogruppo: c763b4ec-0e50-4b6b-9bed-2b92a6ee884e  (AMD Power Slider)
+    GUID impostazioni risparmio energia: 38cab4d5-db09-449f-9db5-1c91c909b6d4  (PMF Controller)
+    Indice impostazione alimentazione CA corrente: 0x00000002
+    Indice impostazione alimentazione CC corrente: 0x00000002
+
+    GUID impostazioni risparmio energia: 7ec1751b-60ed-4588-afb5-9819d3d77d90  (Overlay)
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Battery saver
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Better battery
+      Indice impostazione possibile: 002
+      Nome descrittivo impostazione possibile: Better performance
+      Indice impostazione possibile: 003
+      Nome descrittivo impostazione possibile: Best performance
+    Indice impostazione alimentazione CA corrente: 0x00000002
+    Indice impostazione alimentazione CC corrente: 0x00000002
+
+  GUID sottogruppo: e73a048d-bf27-4f12-9731-8b2076e8891f  (Batteria)
+    Alias GUID: SUB_BATTERY
+    GUID impostazioni risparmio energia: 5dbb7c9f-38e9-40d2-9749-4f8a0e9f640f  (Notifica batteria quasi scarica)
+      Alias GUID: BATFLAGSCRIT
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Disattivata
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Attivata
+    Indice impostazione alimentazione CA corrente: 0x00000001
+    Indice impostazione alimentazione CC corrente: 0x00000001
+
+    GUID impostazioni risparmio energia: 637ea02f-bbcb-4015-8e2c-a1c7b9c0b546  (Operazione per batteria quasi scarica)
+      Alias GUID: BATACTIONCRIT
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Non intervenire
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Sospendi
+      Indice impostazione possibile: 002
+      Nome descrittivo impostazione possibile: Iberna
+      Indice impostazione possibile: 003
+      Nome descrittivo impostazione possibile: Arresta il sistema
+    Indice impostazione alimentazione CA corrente: 0x00000002
+    Indice impostazione alimentazione CC corrente: 0x00000002
+
+    GUID impostazioni risparmio energia: 8183ba9a-e910-48da-8769-14ae6dc1170a  (Livello di batteria in esaurimento)
+      Alias GUID: BATLEVELLOW
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0x00000064
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: %
+    Indice impostazione alimentazione CA corrente: 0x00000006
+    Indice impostazione alimentazione CC corrente: 0x00000006
+
+    GUID impostazioni risparmio energia: 9a66d8d7-4ff7-4ef9-b5a2-5a326ca2a469  (Livello di batteria quasi scarica)
+      Alias GUID: BATLEVELCRIT
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0x00000064
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: %
+    Indice impostazione alimentazione CA corrente: 0x00000002
+    Indice impostazione alimentazione CC corrente: 0x00000002
+
+    GUID impostazioni risparmio energia: bcded951-187b-4d05-bccc-f7e51960c258  (Notifica di batteria in esaurimento)
+      Alias GUID: BATFLAGSLOW
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Disattivata
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Attivata
+    Indice impostazione alimentazione CA corrente: 0x00000001
+    Indice impostazione alimentazione CC corrente: 0x00000001
+
+    GUID impostazioni risparmio energia: d8742dcb-3e6a-4b3c-b3fe-374623cdcf06  (Operazione per batteria in esaurimento)
+      Alias GUID: BATACTIONLOW
+      Indice impostazione possibile: 000
+      Nome descrittivo impostazione possibile: Non intervenire
+      Indice impostazione possibile: 001
+      Nome descrittivo impostazione possibile: Sospendi
+      Indice impostazione possibile: 002
+      Nome descrittivo impostazione possibile: Iberna
+      Indice impostazione possibile: 003
+      Nome descrittivo impostazione possibile: Arresta il sistema
+    Indice impostazione alimentazione CA corrente: 0x00000000
+    Indice impostazione alimentazione CC corrente: 0x00000000
+
+    GUID impostazioni risparmio energia: f3c5027d-cd16-4930-aa6b-90db844a8f00  (Livello batteria di riserva)
+      Minima impostazione possibile: 0x00000000
+      Massima impostazione possibile: 0x00000064
+      Incremento impostazioni possibile: 0x00000001
+      Unit… impostazioni possibili: %
+    Indice impostazione alimentazione CA corrente: 0x00000004
+    Indice impostazione alimentazione CC corrente: 0x00000004
+
+
+2024-12-31 16:08:04,279 - framework_cc.power_plan - INFO - ✓ Plan Balanced activé avec succès
+2024-12-31 16:08:04,280 - framework_cc.power_plan - INFO - === Configuration du plan Balanced terminée ===
+2024-12-31 16:08:04,319 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:04,321 - framework_cc.power_plan - INFO - ✓ Plan Balanced appliqué avec succès
+2024-12-31 16:08:04,343 - framework_cc.power_plan - INFO - Plan actif après application: GUID combinazione risparmio energia: 381b4222-f694-41f0-9685-ff5bb260df2e  (Bilanciato)
+2024-12-31 16:08:04,852 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:05,376 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:05,629 - framework_cc.power_plan - INFO - RyzenAdj profile applied successfully
+2024-12-31 16:08:05,629 - framework_cc.power_plan - INFO - Successfully applied complete power profile: Balanced
+2024-12-31 16:08:05,633 - framework_cc.gui - DEBUG - Setting refresh rate: mode=auto, max_rate=60
+2024-12-31 16:08:05,633 - framework_cc - INFO - Auto mode: Power unplugged, setting to 60Hz
+2024-12-31 16:08:05,647 - framework_cc - INFO - Successfully set refresh rate to 60Hz
+2024-12-31 16:08:05,652 - framework_cc.gui - INFO - Default profiles initialized: Balanced power profile and Auto refresh rate
+2024-12-31 16:08:05,653 - framework_cc.gui - DEBUG - Window text updated to language: en
+2024-12-31 16:08:05,671 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 0.7593333721160889, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.598419189453125, 'igpu_load': 0.5284873843193054, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:05,676 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 0.7593333721160889, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.598419189453125, 'igpu_load': 0.5284873843193054, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:05,893 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:06,189 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.116392135620117, 'cpu_temp': 35.37500762939453, 'ram_usage': 44.51304244995117, 'igpu_load': 1.5519109964370728, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:06,193 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.116392135620117, 'cpu_temp': 35.37500762939453, 'ram_usage': 44.51304244995117, 'igpu_load': 1.5519109964370728, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:06,414 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:06,706 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.849382162094116, 'cpu_temp': 35.12500762939453, 'ram_usage': 44.501861572265625, 'igpu_load': 1.4670968055725098, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:06,711 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.849382162094116, 'cpu_temp': 35.12500762939453, 'ram_usage': 44.501861572265625, 'igpu_load': 1.4670968055725098, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:06,945 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:07,224 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.3221373558044434, 'cpu_temp': 35.00000762939453, 'ram_usage': 44.53434371948242, 'igpu_load': 0.8507458567619324, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:07,224 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.3221373558044434, 'cpu_temp': 35.00000762939453, 'ram_usage': 44.53434371948242, 'igpu_load': 0.8507458567619324, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:07,474 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:07,744 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 7.943832874298096, 'cpu_temp': 34.87500762939453, 'ram_usage': 44.532081604003906, 'igpu_load': 3.5960609912872314, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:07,753 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 7.943832874298096, 'cpu_temp': 34.87500762939453, 'ram_usage': 44.532081604003906, 'igpu_load': 3.5960609912872314, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:07,999 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:08,260 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 7.155364990234375, 'cpu_temp': 34.87500762939453, 'ram_usage': 44.530517578125, 'igpu_load': 3.6361911296844482, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:08,267 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 7.155364990234375, 'cpu_temp': 34.87500762939453, 'ram_usage': 44.530517578125, 'igpu_load': 3.6361911296844482, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:08,524 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:08,777 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 7.4515700340271, 'cpu_temp': 34.87500762939453, 'ram_usage': 44.50637435913086, 'igpu_load': 3.397385835647583, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:08,790 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 7.4515700340271, 'cpu_temp': 34.87500762939453, 'ram_usage': 44.50637435913086, 'igpu_load': 3.397385835647583, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:09,047 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:09,303 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.898082256317139, 'cpu_temp': 34.75000762939453, 'ram_usage': 44.504581451416016, 'igpu_load': 2.6578125953674316, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:09,309 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.898082256317139, 'cpu_temp': 34.75000762939453, 'ram_usage': 44.504581451416016, 'igpu_load': 2.6578125953674316, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:09,581 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:09,828 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.92193603515625, 'cpu_temp': 34.75000762939453, 'ram_usage': 44.493316650390625, 'igpu_load': 2.3420143127441406, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:09,833 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.92193603515625, 'cpu_temp': 34.75000762939453, 'ram_usage': 44.493316650390625, 'igpu_load': 2.3420143127441406, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:10,111 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:10,355 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.1433939933776855, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.49576950073242, 'igpu_load': 1.810681939125061, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:10,360 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.1433939933776855, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.49576950073242, 'igpu_load': 1.810681939125061, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:10,640 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:10,882 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.8713583946228027, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.48225784301758, 'igpu_load': 0.3978986442089081, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:10,887 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.8713583946228027, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.48225784301758, 'igpu_load': 0.3978986442089081, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:11,173 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:11,398 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.4465620517730713, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.5006103515625, 'igpu_load': 0.9674162864685059, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:11,405 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.4465620517730713, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.5006103515625, 'igpu_load': 0.9674162864685059, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:11,697 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:11,929 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.868311643600464, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.49696350097656, 'igpu_load': 0.45055827498435974, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:11,941 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.868311643600464, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.49696350097656, 'igpu_load': 0.45055827498435974, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:12,221 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:12,465 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.23557186126709, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.51740646362305, 'igpu_load': 1.2040067911148071, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:12,473 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.23557186126709, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.51740646362305, 'igpu_load': 1.2040067911148071, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:12,749 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:12,977 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.2608866691589355, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.50849914550781, 'igpu_load': 1.1640175580978394, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:12,993 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.2608866691589355, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.50849914550781, 'igpu_load': 1.1640175580978394, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:13,281 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:13,523 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.6093533039093018, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.51239776611328, 'igpu_load': 1.9955171346664429, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:13,529 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.6093533039093018, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.51239776611328, 'igpu_load': 1.9955171346664429, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:13,801 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:14,048 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.421103000640869, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.50294494628906, 'igpu_load': 1.6120377779006958, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:14,054 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.421103000640869, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.50294494628906, 'igpu_load': 1.6120377779006958, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:14,333 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:14,577 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.177229881286621, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.37305450439453, 'igpu_load': 1.243883490562439, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:14,582 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.177229881286621, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.37305450439453, 'igpu_load': 1.243883490562439, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:14,864 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:15,096 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.5039732456207275, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.39319610595703, 'igpu_load': 1.230453372001648, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:15,107 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.5039732456207275, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.39319610595703, 'igpu_load': 1.230453372001648, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:15,395 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:15,621 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.2886862754821777, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.38339614868164, 'igpu_load': 0.7174240350723267, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:15,635 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.2886862754821777, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.38339614868164, 'igpu_load': 0.7174240350723267, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:15,922 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:16,151 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.2642245292663574, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.38431930541992, 'igpu_load': 1.784283995628357, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:16,156 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.2642245292663574, 'cpu_temp': 34.62500762939453, 'ram_usage': 44.38431930541992, 'igpu_load': 1.784283995628357, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:16,441 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:16,663 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 23.664093017578125, 'cpu_temp': 35.87500762939453, 'ram_usage': 44.49296188354492, 'igpu_load': 3.6665704250335693, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:16,663 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 23.664093017578125, 'cpu_temp': 35.87500762939453, 'ram_usage': 44.49296188354492, 'igpu_load': 3.6665704250335693, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:16,971 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:17,193 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 6.357222557067871, 'cpu_temp': 36.12500762939453, 'ram_usage': 44.50423812866211, 'igpu_load': 0.8492962121963501, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:17,199 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 6.357222557067871, 'cpu_temp': 36.12500762939453, 'ram_usage': 44.50423812866211, 'igpu_load': 0.8492962121963501, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:17,507 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:17,721 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.931605815887451, 'cpu_temp': 36.00000762939453, 'ram_usage': 44.49696350097656, 'igpu_load': 1.3031587600708008, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:17,727 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.931605815887451, 'cpu_temp': 36.00000762939453, 'ram_usage': 44.49696350097656, 'igpu_load': 1.3031587600708008, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:18,036 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:18,251 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.3782958984375, 'cpu_temp': 35.75000762939453, 'ram_usage': 44.48577117919922, 'igpu_load': 1.4548778533935547, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:18,257 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.3782958984375, 'cpu_temp': 35.75000762939453, 'ram_usage': 44.48577117919922, 'igpu_load': 1.4548778533935547, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:18,568 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:18,771 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.5637974739074707, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.51175308227539, 'igpu_load': 1.8354135751724243, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:18,778 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.5637974739074707, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.51175308227539, 'igpu_load': 1.8354135751724243, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:19,104 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:19,298 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.6279778480529785, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.49679946899414, 'igpu_load': 1.2100883722305298, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:19,303 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.6279778480529785, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.49679946899414, 'igpu_load': 1.2100883722305298, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:19,629 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:19,823 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.00409197807312, 'cpu_temp': 35.37500762939453, 'ram_usage': 44.494903564453125, 'igpu_load': 1.6368485689163208, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:19,828 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.00409197807312, 'cpu_temp': 35.37500762939453, 'ram_usage': 44.494903564453125, 'igpu_load': 1.6368485689163208, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:20,157 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:20,351 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.2041261196136475, 'cpu_temp': 35.25000762939453, 'ram_usage': 44.485660552978516, 'igpu_load': 0.8764961361885071, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:20,369 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.2041261196136475, 'cpu_temp': 35.25000762939453, 'ram_usage': 44.485660552978516, 'igpu_load': 0.8764961361885071, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:20,722 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:20,888 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 9.162605285644531, 'cpu_temp': 35.75000762939453, 'ram_usage': 44.48256301879883, 'igpu_load': 1.6422380208969116, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:20,894 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 9.162605285644531, 'cpu_temp': 35.75000762939453, 'ram_usage': 44.48256301879883, 'igpu_load': 1.6422380208969116, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:21,262 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:21,427 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 17.62050437927246, 'cpu_temp': 36.25000762939453, 'ram_usage': 44.58702087402344, 'igpu_load': 1.7480039596557617, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:21,432 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 17.62050437927246, 'cpu_temp': 36.25000762939453, 'ram_usage': 44.58702087402344, 'igpu_load': 1.7480039596557617, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:21,782 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:21,950 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 24.98750114440918, 'cpu_temp': 37.25000762939453, 'ram_usage': 44.72037887573242, 'igpu_load': 1.975852608680725, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:21,955 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 24.98750114440918, 'cpu_temp': 37.25000762939453, 'ram_usage': 44.72037887573242, 'igpu_load': 1.975852608680725, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:22,309 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:22,473 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.944986343383789, 'cpu_temp': 36.87500762939453, 'ram_usage': 44.69563293457031, 'igpu_load': 2.5905792713165283, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:22,479 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.944986343383789, 'cpu_temp': 36.87500762939453, 'ram_usage': 44.69563293457031, 'igpu_load': 2.5905792713165283, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:22,841 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:23,009 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 12.66232681274414, 'cpu_temp': 36.87500762939453, 'ram_usage': 44.707576751708984, 'igpu_load': 1.7101595401763916, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:23,016 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 12.66232681274414, 'cpu_temp': 36.87500762939453, 'ram_usage': 44.707576751708984, 'igpu_load': 1.7101595401763916, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:23,365 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:23,525 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 6.677585601806641, 'cpu_temp': 36.62500762939453, 'ram_usage': 44.68678283691406, 'igpu_load': 2.554821252822876, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:23,540 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 6.677585601806641, 'cpu_temp': 36.62500762939453, 'ram_usage': 44.68678283691406, 'igpu_load': 2.554821252822876, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:23,892 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:24,064 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.7523279190063477, 'cpu_temp': 36.37500762939453, 'ram_usage': 44.67543029785156, 'igpu_load': 1.8430460691452026, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:24,070 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.7523279190063477, 'cpu_temp': 36.37500762939453, 'ram_usage': 44.67543029785156, 'igpu_load': 1.8430460691452026, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:24,421 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:24,591 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 1.5692472457885742, 'cpu_temp': 36.12500762939453, 'ram_usage': 44.66715621948242, 'igpu_load': 1.2108865976333618, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:24,597 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 1.5692472457885742, 'cpu_temp': 36.12500762939453, 'ram_usage': 44.66715621948242, 'igpu_load': 1.2108865976333618, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:24,948 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:25,121 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.618405342102051, 'cpu_temp': 36.00000762939453, 'ram_usage': 44.66658020019531, 'igpu_load': 1.2567164897918701, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:25,128 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 5.618405342102051, 'cpu_temp': 36.00000762939453, 'ram_usage': 44.66658020019531, 'igpu_load': 1.2567164897918701, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:25,475 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:25,641 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.607582092285156, 'cpu_temp': 35.87500762939453, 'ram_usage': 44.65876007080078, 'igpu_load': 1.0862282514572144, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:25,646 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.607582092285156, 'cpu_temp': 35.87500762939453, 'ram_usage': 44.65876007080078, 'igpu_load': 1.0862282514572144, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:26,006 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:26,171 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.70656156539917, 'cpu_temp': 35.75000762939453, 'ram_usage': 44.6910514831543, 'igpu_load': 1.71970534324646, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:26,176 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.70656156539917, 'cpu_temp': 35.75000762939453, 'ram_usage': 44.6910514831543, 'igpu_load': 1.71970534324646, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:26,534 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:26,691 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.5420427322387695, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.67666244506836, 'igpu_load': 0.7958518862724304, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:26,696 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.5420427322387695, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.67666244506836, 'igpu_load': 0.7958518862724304, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:27,064 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:27,215 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.014213800430298, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.67348098754883, 'igpu_load': 0.43443796038627625, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:27,221 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.014213800430298, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.67348098754883, 'igpu_load': 0.43443796038627625, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:27,585 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:27,737 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.6058425903320312, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.66059494018555, 'igpu_load': 1.548872709274292, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:27,742 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.6058425903320312, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.66059494018555, 'igpu_load': 1.548872709274292, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:28,112 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:28,267 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.8993427753448486, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.64103698730469, 'igpu_load': 1.3707982301712036, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:28,272 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.8993427753448486, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.64103698730469, 'igpu_load': 1.3707982301712036, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:28,643 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:28,802 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.485208749771118, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.631656646728516, 'igpu_load': 1.3134013414382935, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:28,807 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.485208749771118, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.631656646728516, 'igpu_load': 1.3134013414382935, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:29,173 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:29,322 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.408670425415039, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.631378173828125, 'igpu_load': 1.1395134925842285, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:29,332 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.408670425415039, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.631378173828125, 'igpu_load': 1.1395134925842285, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:29,703 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:29,842 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.439617156982422, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.62062454223633, 'igpu_load': 0.8135563731193542, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:29,849 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.439617156982422, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.62062454223633, 'igpu_load': 0.8135563731193542, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:30,215 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:30,348 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.6630094051361084, 'cpu_temp': 35.37500762939453, 'ram_usage': 44.62068176269531, 'igpu_load': 1.3216294050216675, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:30,366 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.6630094051361084, 'cpu_temp': 35.37500762939453, 'ram_usage': 44.62068176269531, 'igpu_load': 1.3216294050216675, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:30,746 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:30,873 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.364049434661865, 'cpu_temp': 35.37500762939453, 'ram_usage': 44.6079216003418, 'igpu_load': 3.263277053833008, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:30,873 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.364049434661865, 'cpu_temp': 35.37500762939453, 'ram_usage': 44.6079216003418, 'igpu_load': 3.263277053833008, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:31,272 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:31,395 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.149312734603882, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.6405029296875, 'igpu_load': 0.8364120721817017, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:31,403 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.149312734603882, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.6405029296875, 'igpu_load': 0.8364120721817017, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:31,798 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:31,912 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.659229278564453, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.633522033691406, 'igpu_load': 0.7788081169128418, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:31,919 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 4.659229278564453, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.633522033691406, 'igpu_load': 0.7788081169128418, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:32,330 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:32,434 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 0.34436583518981934, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.63264465332031, 'igpu_load': 0.3537660837173462, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:32,439 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 0.34436583518981934, 'cpu_temp': 35.50000762939453, 'ram_usage': 44.63264465332031, 'igpu_load': 0.3537660837173462, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:32,860 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:32,948 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.4764349460601807, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.623878479003906, 'igpu_load': 0.5459339618682861, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:32,953 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.4764349460601807, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.623878479003906, 'igpu_load': 0.5459339618682861, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:33,378 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:33,465 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.5161852836608887, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.6225471496582, 'igpu_load': 0.4786524474620819, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:33,471 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 3.5161852836608887, 'cpu_temp': 35.62500762939453, 'ram_usage': 44.6225471496582, 'igpu_load': 0.4786524474620819, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:33,907 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:33,996 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.1351993083953857, 'cpu_temp': 35.75000762939453, 'ram_usage': 44.64246368408203, 'igpu_load': 0.9167222380638123, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:34,001 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.1351993083953857, 'cpu_temp': 35.75000762939453, 'ram_usage': 44.64246368408203, 'igpu_load': 0.9167222380638123, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:34,437 - framework_cc - DEBUG - Sensors data updated in configs\sensors.json
+2024-12-31 16:08:34,524 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.2551000118255615, 'cpu_temp': 35.75000762939453, 'ram_usage': 44.64066696166992, 'igpu_load': 0.6863211393356323, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:34,529 - framework_cc.gui - DEBUG - Got metrics update: {'cpu_load': 2.2551000118255615, 'cpu_temp': 35.75000762939453, 'ram_usage': 44.64066696166992, 'igpu_load': 0.6863211393356323, 'igpu_temp': 0.0, 'dgpu_load': 0.0, 'dgpu_temp': 0.0, 'battery_percentage': 62.0, 'battery_time_remaining': 236.55, 'is_charging': False}
+2024-12-31 16:08:35,577 - framework_cc - ERROR - Error updating sensors: 'PropertyObject' object is not iterable
+2024-12-31 16:08:35,577 - framework_cc - ERROR - Traceback: Traceback (most recent call last):
+  File "C:\GitHub\Framework-Hub-PY\framework_cc\hardware.py", line 142, in _update_sensors
+    for hardware in self.computer.Hardware:
+TypeError: 'PropertyObject' object is not iterable

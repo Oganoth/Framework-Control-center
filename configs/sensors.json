@@ -3,313 +3,313 @@
         "Name": "CPU Core #1",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 2.3819267749786377
+        "Value": 0.28336644172668457
     },
     {
         "Name": "CPU Core #2",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 0.2355515956878662
     },
     {
         "Name": "CPU Core #3",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 15.03612995147705
     },
     {
         "Name": "CPU Core #4",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.7320821285247803
+        "Value": 8.855128288269043
     },
     {
         "Name": "CPU Core #5",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 0.2366185188293457
     },
     {
         "Name": "CPU Core #6",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 0.22765398025512695
     },
     {
         "Name": "CPU Core #7",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 6.244874000549316
+        "Value": 10.6334867477417
     },
     {
         "Name": "CPU Core #8",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 8.405089378356934
     },
     {
         "Name": "CPU Core #9",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 0.23979544639587402
     },
     {
         "Name": "CPU Core #10",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 0.2307891845703125
     },
     {
         "Name": "CPU Core #11",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 0.24121999740600586
     },
     {
         "Name": "CPU Core #12",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 0.23077726364135742
     },
     {
         "Name": "CPU Core #13",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 1.4649391174316406
+        "Value": 1.4872610569000244
     },
     {
         "Name": "CPU Core #14",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 2.434825897216797
+        "Value": 0.583118200302124
     },
     {
         "Name": "CPU Core #15",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.8019566535949707
+        "Value": 2.2502481937408447
     },
     {
         "Name": "CPU Core #16",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 0.23082494735717773
     },
     {
         "Name": "CPU Total",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 3.0879318714141846
     },
     {
         "Name": "CPU Core Max",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Load",
-        "Value": 6.244874000549316
+        "Value": 15.03612995147705
     },
     {
         "Name": "Package",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Power",
-        "Value": 10.605019569396973
+        "Value": 10.332636833190918
     },
     {
         "Name": "Core #1",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Clock",
-        "Value": 3767.99609375
+        "Value": 1397.40283203125
     },
     {
         "Name": "Core #1",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Factor",
-        "Value": 37.75
+        "Value": 14.0
     },
     {
         "Name": "Core #1 (SMU)",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Power",
-        "Value": 0.22692519426345825
+        "Value": 5.947559839114547e-05
     },
     {
         "Name": "Core #1 VID",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Voltage",
-        "Value": 0.625
+        "Value": 0.9624999761581421
     },
     {
         "Name": "Core #2",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Clock",
-        "Value": 3767.99609375
+        "Value": 1397.40283203125
     },
     {
         "Name": "Core #2",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Factor",
-        "Value": 37.75
+        "Value": 14.0
     },
     {
         "Name": "Core #2 (SMU)",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Power",
-        "Value": 0.5658546090126038
+        "Value": 0.3160087466239929
     },
     {
         "Name": "Core #2 VID",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Voltage",
-        "Value": 0.625
+        "Value": 0.9624999761581421
     },
     {
         "Name": "Core #3",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Clock",
-        "Value": 3767.99609375
+        "Value": 1397.40283203125
     },
     {
         "Name": "Core #3",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Factor",
-        "Value": 37.75
+        "Value": 14.0
     },
     {
         "Name": "Core #3 (SMU)",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Power",
-        "Value": 0.09572859853506088
+        "Value": 1.4868899597786367e-05
     },
     {
         "Name": "Core #3 VID",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Voltage",
-        "Value": 0.625
+        "Value": 0.9624999761581421
     },
     {
         "Name": "Core #4",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Clock",
-        "Value": 3767.99609375
+        "Value": 1397.40283203125
     },
     {
         "Name": "Core #4",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Factor",
-        "Value": 37.75
+        "Value": 14.0
     },
     {
         "Name": "Core #4 (SMU)",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Power",
-        "Value": 0.7027389407157898
+        "Value": 0.3003666400909424
     },
     {
         "Name": "Core #4 VID",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Voltage",
-        "Value": 0.625
+        "Value": 0.9624999761581421
     },
     {
         "Name": "Core #5",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Clock",
-        "Value": 3767.99609375
+        "Value": 1397.40283203125
     },
     {
         "Name": "Core #5",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Factor",
-        "Value": 37.75
+        "Value": 14.0
     },
     {
         "Name": "Core #5 (SMU)",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Power",
-        "Value": 0.04993521049618721
+        "Value": 1.4868899597786367e-05
     },
     {
         "Name": "Core #5 VID",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Voltage",
-        "Value": 0.625
+        "Value": 0.9624999761581421
     },
     {
         "Name": "Core #6",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Clock",
-        "Value": 3767.99609375
+        "Value": 1397.40283203125
     },
     {
         "Name": "Core #6",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Factor",
-        "Value": 37.75
+        "Value": 14.0
     },
     {
         "Name": "Core #6 (SMU)",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Power",
-        "Value": 0.116962730884552
+        "Value": 1.4868899597786367e-05
     },
     {
         "Name": "Core #6 VID",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Voltage",
-        "Value": 0.625
+        "Value": 0.9624999761581421
     },
     {
         "Name": "Core #7",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Clock",
-        "Value": 3767.99609375
+        "Value": 1397.40283203125
     },
     {
         "Name": "Core #7",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Factor",
-        "Value": 37.75
+        "Value": 14.0
     },
     {
         "Name": "Core #7 (SMU)",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Power",
-        "Value": 0.5667588114738464
+        "Value": 0.0518181174993515
     },
     {
         "Name": "Core #7 VID",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Voltage",
-        "Value": 0.625
+        "Value": 0.9624999761581421
     },
     {
         "Name": "Core #8",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Clock",
-        "Value": 3767.99609375
+        "Value": 1277.6253662109375
     },
     {
         "Name": "Core #8",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Factor",
-        "Value": 37.75
+        "Value": 12.800000190734863
     },
     {
         "Name": "Core #8 (SMU)",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Power",
-        "Value": 0.2067994475364685
+        "Value": 0.008579355664551258
     },
     {
         "Name": "Core #8 VID",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Voltage",
-        "Value": 0.625
+        "Value": 0.9624999761581421
     },
     {
         "Name": "Core (Tctl/Tdie)",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Temperature",
-        "Value": 55.87500762939453
+        "Value": 45.75000762939453
     },
     {
         "Name": "Core (SVI2 TFN)",
@@ -327,43 +327,43 @@
         "Name": "Bus Speed",
         "Hardware": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
         "Type": "Clock",
-        "Value": 99.81446838378906
+        "Value": 99.81448364257812
     },
     {
         "Name": "Memory Used",
         "Hardware": "Generic Memory",
         "Type": "Data",
-        "Value": 10.232219696044922
+        "Value": 8.36984634399414
     },
     {
         "Name": "Memory Available",
         "Hardware": "Generic Memory",
         "Type": "Data",
-        "Value": 17.57721710205078
+        "Value": 19.439590454101562
     },
     {
         "Name": "Memory",
         "Hardware": "Generic Memory",
         "Type": "Load",
-        "Value": 36.7940559387207
+        "Value": 30.097145080566406
     },
     {
         "Name": "Virtual Memory Used",
         "Hardware": "Generic Memory",
         "Type": "Data",
-        "Value": 15.415279388427734
+        "Value": 12.706626892089844
     },
     {
         "Name": "Virtual Memory Available",
         "Hardware": "Generic Memory",
         "Type": "Data",
-        "Value": 16.89415740966797
+        "Value": 19.60280990600586
     },
     {
         "Name": "Virtual Memory",
         "Hardware": "Generic Memory",
         "Type": "Load",
-        "Value": 47.71138381958008
+        "Value": 39.327911376953125
     },
     {
         "Name": "GPU Memory Total",
@@ -387,25 +387,25 @@
         "Name": "D3D Dedicated Memory Free",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "SmallData",
-        "Value": 3105.9765625
+        "Value": 2844.0859375
     },
     {
         "Name": "D3D Dedicated Memory Used",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "SmallData",
-        "Value": 843.24609375
+        "Value": 1105.13671875
     },
     {
         "Name": "D3D Shared Memory Used",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "SmallData",
-        "Value": 378.1484375
+        "Value": 325.24609375
     },
     {
         "Name": "D3D Shared Memory Free",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "SmallData",
-        "Value": 13860.283203125
+        "Value": 13913.185546875
     },
     {
         "Name": "D3D Shared Memory Total",
@@ -417,13 +417,13 @@
         "Name": "D3D 3D",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "Load",
-        "Value": 1.901013731956482
+        "Value": 1.6367160081863403
     },
     {
         "Name": "D3D Copy",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 0.017317894846200943
     },
     {
         "Name": "D3D Compute 0",
@@ -477,13 +477,13 @@
         "Name": "GPU Memory Used",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "SmallData",
-        "Value": 843.0
+        "Value": 1105.0
     },
     {
         "Name": "GPU Memory Free",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "SmallData",
-        "Value": 3253.0
+        "Value": 2991.0
     },
     {
         "Name": "GPU Core",
@@ -501,25 +501,25 @@
         "Name": "GPU Memory",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "Clock",
-        "Value": 1000.0
+        "Value": 2800.0
     },
     {
         "Name": "GPU VR SoC",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "Temperature",
-        "Value": 49.0
+        "Value": 46.0
     },
     {
         "Name": "GPU Core",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "Voltage",
-        "Value": 0.9830000400543213
+        "Value": 0.7520000338554382
     },
     {
         "Name": "GPU SoC",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "Voltage",
-        "Value": 0.6550000309944153
+        "Value": 0.9740000367164612
     },
     {
         "Name": "GPU Core",
@@ -531,13 +531,13 @@
         "Name": "GPU Core",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "Power",
-        "Value": 1.0
+        "Value": 0.0
     },
     {
         "Name": "GPU SoC",
         "Hardware": "AMD Radeon(TM) 780M",
         "Type": "Power",
-        "Value": 1.0
+        "Value": 2.0
     },
     {
         "Name": "GPU Memory Total",
@@ -657,25 +657,25 @@
         "Name": "GPU Memory",
         "Hardware": "AMD Radeon(TM) RX 7700S",
         "Type": "Clock",
-        "Value": 122.0
+        "Value": 3.0
     },
     {
         "Name": "GPU Core",
         "Hardware": "AMD Radeon(TM) RX 7700S",
         "Type": "Temperature",
-        "Value": 34.0
+        "Value": 43.0
     },
     {
         "Name": "GPU Memory",
         "Hardware": "AMD Radeon(TM) RX 7700S",
         "Type": "Temperature",
-        "Value": 44.0
+        "Value": 52.0
     },
     {
         "Name": "GPU Hot Spot",
         "Hardware": "AMD Radeon(TM) RX 7700S",
         "Type": "Temperature",
-        "Value": 35.0
+        "Value": 44.0
     },
     {
         "Name": "GPU Fan",
@@ -711,7 +711,7 @@
         "Name": "Temperature",
         "Hardware": "Corsair MP600 CORE MINI",
         "Type": "Temperature",
-        "Value": 44.0
+        "Value": 45.0
     },
     {
         "Name": "Available Spare",
@@ -747,13 +747,13 @@
         "Name": "Temperature 1",
         "Hardware": "Corsair MP600 CORE MINI",
         "Type": "Temperature",
-        "Value": 44.0
+        "Value": 45.0
     },
     {
         "Name": "Used Space",
         "Hardware": "Corsair MP600 CORE MINI",
         "Type": "Load",
-        "Value": 12.196403503417969
+        "Value": 12.1973876953125
     },
     {
         "Name": "Read Activity",
@@ -765,13 +765,13 @@
         "Name": "Write Activity",
         "Hardware": "Corsair MP600 CORE MINI",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 4.96324348449707
     },
     {
         "Name": "Total Activity",
         "Hardware": "Corsair MP600 CORE MINI",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 1.9305498600006104
     },
     {
         "Name": "Read Rate",
@@ -783,13 +783,13 @@
         "Name": "Write Rate",
         "Hardware": "Corsair MP600 CORE MINI",
         "Type": "Throughput",
-        "Value": 0.0
+        "Value": 83685.46875
     },
     {
         "Name": "Temperature",
         "Hardware": "WD_BLACK SN850X 1000GB",
         "Type": "Temperature",
-        "Value": 49.0
+        "Value": 44.0
     },
     {
         "Name": "Available Spare",
@@ -813,31 +813,31 @@
         "Name": "Data Read",
         "Hardware": "WD_BLACK SN850X 1000GB",
         "Type": "Data",
-        "Value": 9825.0
+        "Value": 9838.0
     },
     {
         "Name": "Data Written",
         "Hardware": "WD_BLACK SN850X 1000GB",
         "Type": "Data",
-        "Value": 10485.0
+        "Value": 10499.0
     },
     {
         "Name": "Used Space",
         "Hardware": "WD_BLACK SN850X 1000GB",
         "Type": "Load",
-        "Value": 25.3050537109375
+        "Value": 25.472816467285156
     },
     {
         "Name": "Read Activity",
         "Hardware": "WD_BLACK SN850X 1000GB",
         "Type": "Load",
-        "Value": 0.0
+        "Value": 0.1287550926208496
     },
     {
         "Name": "Write Activity",
         "Hardware": "WD_BLACK SN850X 1000GB",
         "Type": "Load",
-        "Value": 0.05518340691924095
+        "Value": 0.0
     },
     {
         "Name": "Total Activity",
@@ -849,13 +849,43 @@
         "Name": "Read Rate",
         "Hardware": "WD_BLACK SN850X 1000GB",
         "Type": "Throughput",
-        "Value": 0.0
+        "Value": 63760.76171875
     },
     {
         "Name": "Write Rate",
         "Hardware": "WD_BLACK SN850X 1000GB",
         "Type": "Throughput",
-        "Value": 109656.6875
+        "Value": 0.0
+    },
+    {
+        "Name": "Data Uploaded",
+        "Hardware": "Bluetooth Network Connection",
+        "Type": "Data",
+        "Value": 0.0
+    },
+    {
+        "Name": "Data Downloaded",
+        "Hardware": "Bluetooth Network Connection",
+        "Type": "Data",
+        "Value": 0.0
+    },
+    {
+        "Name": "Upload Speed",
+        "Hardware": "Bluetooth Network Connection",
+        "Type": "Throughput",
+        "Value": 0.0
+    },
+    {
+        "Name": "Download Speed",
+        "Hardware": "Bluetooth Network Connection",
+        "Type": "Throughput",
+        "Value": 0.0
+    },
+    {
+        "Name": "Network Utilization",
+        "Hardware": "Bluetooth Network Connection",
+        "Type": "Load",
+        "Value": 0.0
     },
     {
         "Name": "Data Uploaded",
@@ -951,7 +981,7 @@
         "Name": "Data Uploaded",
         "Hardware": "vEthernet (Default Switch)",
         "Type": "Data",
-        "Value": 0.00013459566980600357
+        "Value": 1.7072074115276337e-05
     },
     {
         "Name": "Data Downloaded",
@@ -981,30 +1011,30 @@
         "Name": "Data Uploaded",
         "Hardware": "Wi-Fi",
         "Type": "Data",
-        "Value": 0.10489826649427414
+        "Value": 0.02054010145366192
     },
     {
         "Name": "Data Downloaded",
         "Hardware": "Wi-Fi",
         "Type": "Data",
-        "Value": 0.72354656457901
+        "Value": 0.3707157075405121
     },
     {
         "Name": "Upload Speed",
         "Hardware": "Wi-Fi",
         "Type": "Throughput",
-        "Value": 6174.83837890625
+        "Value": 271.2882385253906
     },
     {
         "Name": "Download Speed",
         "Hardware": "Wi-Fi",
         "Type": "Throughput",
-        "Value": 607.92529296875
+        "Value": 169.19052124023438
     },
     {
         "Name": "Network Utilization",
         "Hardware": "Wi-Fi",
         "Type": "Load",
-        "Value": 0.013565527275204659
+        "Value": 0.0002934079966507852
     }
 ]

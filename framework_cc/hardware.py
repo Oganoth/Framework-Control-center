@@ -273,17 +273,18 @@ class HardwareMonitor:
                 'dgpu_load': 0.0
             }
 
-            # Process CPU metrics
+            # Process CPU metrics for AMD processors
             cpu_loads = []
             for sensor in sensors_data:
-                if "AMD Ryzen" in sensor["Hardware"] and sensor["Type"] == "Load":
-                    if "CPU Core" in sensor["Name"]:
-                        cpu_loads.append(sensor["Value"])
-                    elif sensor["Name"] == "CPU Total":
-                        metrics['cpu_load'] = sensor["Value"]
-                elif "AMD Ryzen" in sensor["Hardware"] and sensor["Type"] == "Temperature":
-                    if sensor["Name"] == "Core (Tctl/Tdie)":
-                        metrics['cpu_temp'] = sensor["Value"]
+                if "AMD Ryzen" in sensor["Hardware"]:
+                    if sensor["Type"] == "Load":
+                        if "CPU Core" in sensor["Name"]:
+                            cpu_loads.append(sensor["Value"])
+                        elif sensor["Name"] == "CPU Total":
+                            metrics['cpu_load'] = sensor["Value"]
+                    elif sensor["Type"] == "Temperature":
+                        if sensor["Name"] == "Core (Tctl/Tdie)":
+                            metrics['cpu_temp'] = sensor["Value"]
 
             # Use average core load if total is not available
             if metrics['cpu_load'] == 0.0 and cpu_loads:
@@ -297,11 +298,17 @@ class HardwareMonitor:
 
             # Process GPU metrics
             for sensor in sensors_data:
+                # Integrated GPU (780M)
                 if "AMD Radeon(TM) 780M" in sensor["Hardware"]:
                     if sensor["Type"] == "Temperature" and sensor["Name"] == "GPU VR SoC":
                         metrics['igpu_temp'] = sensor["Value"]
                     elif sensor["Type"] == "Load" and sensor["Name"] == "D3D 3D":
                         metrics['igpu_load'] = sensor["Value"]
+                    # Fallback to CPU temp if GPU temp not available (for 13_AMD)
+                    if metrics['igpu_temp'] == 0.0:
+                        metrics['igpu_temp'] = metrics['cpu_temp']
+                
+                # Discrete GPU (7700S) - for 16_AMD
                 elif "AMD Radeon(TM) RX 7700S" in sensor["Hardware"]:
                     if sensor["Type"] == "Temperature" and sensor["Name"] == "GPU Core":
                         metrics['dgpu_temp'] = sensor["Value"]
