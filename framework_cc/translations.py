@@ -12,6 +12,7 @@ en = {
     "refresh_rates": {
         "auto": "Auto",
         "60hz": "60Hz",
+        "120hz": "120Hz",
         "165hz": "165Hz"
     },
     "utility_buttons": {
@@ -74,6 +75,7 @@ fr = {
     "refresh_rates": {
         "auto": "Auto",
         "60hz": "60Hz",
+        "120hz": "120Hz",
         "165hz": "165Hz"
     },
     "utility_buttons": {
@@ -133,6 +135,7 @@ it = {
     "refresh_rates": {
         "auto": "Auto",
         "60hz": "60Hz",
+        "120hz": "120Hz",
         "165hz": "165Hz"
     },
     "utility_buttons": {
@@ -192,6 +195,7 @@ nl = {
     "refresh_rates": {
         "auto": "Auto",
         "60hz": "60Hz",
+        "120hz": "120Hz",
         "165hz": "165Hz"
     },
     "utility_buttons": {
@@ -251,6 +255,7 @@ zh = {
     "refresh_rates": {
         "auto": "自动",
         "60hz": "60Hz",
+        "120hz": "120Hz",
         "165hz": "165Hz"
     },
     "utility_buttons": {
@@ -310,6 +315,7 @@ es = {
     "refresh_rates": {
         "auto": "Auto",
         "60hz": "60Hz",
+        "120hz": "120Hz",
         "165hz": "165Hz"
     },
     "utility_buttons": {
@@ -369,6 +375,7 @@ tlh = {
     "refresh_rates": {
         "auto": "auto",
         "60hz": "60Hz",
+        "120hz": "120Hz",
         "165hz": "165Hz"
     },
     "utility_buttons": {

@@ -31,7 +31,7 @@ SENSOR_IDS = {
     'ram_load': ('Memory', 'Load', 'Memory'),
     
     # iGPU (AMD 760M/780M)
-    'igpu_temp': ('GpuAmd', 'Temperature', 'GPU VR SoC'),
+    'igpu_temp': ('GpuAmd', 'Temperature', 'GPU Core'),
     'igpu_load': ('GpuAmd', 'Load', 'D3D 3D'),
     
     # dGPU (RX 7700S)
