@@ -12,9 +12,15 @@ import time
 from .logger import logger
 
 class DisplayManager:
-    def __init__(self):
-        """Initialize display manager."""
+    def __init__(self, model=None):
+        """Initialize display manager.
+        
+        Args:
+            model: The laptop model information
+        """
         self._current_device = win32api.EnumDisplayDevices(None, 0).DeviceName
+        self.model = model
+        logger.info(f"Initialized DisplayManager for model: {model.name if model else 'Unknown'}")
 
     async def set_brightness(self, value: int) -> None:
         """Set display brightness."""

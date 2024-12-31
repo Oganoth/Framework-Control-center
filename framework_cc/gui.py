@@ -188,7 +188,7 @@ class FrameworkControlCenter(ctk.CTk):
         # Initialize managers with detected model
         self.hardware = HardwareMonitor()
         self.power = PowerManager(self.model)
-        self.display = DisplayManager()
+        self.display = DisplayManager(model=self.model)
         
         # Setup window
         self.protocol("WM_DELETE_WINDOW", self._on_close)
