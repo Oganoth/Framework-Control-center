@@ -21,12 +21,12 @@
 
 A heartfelt thank you to those who make this project possible:
 
-- **Nirav Patel** (Founder of Framework Laptop) - Your support as a patron is a great honor. Without you, this project would not be possible.
-- Jonathan Webber
-- retr0sp3kt
-- Lysithea2802
-- Peter Ansorg
-- Jake Rogers
+  - **Nirav Patel** (Founder of Framework Laptop) - Your support as a patron is a great honor. Without you, this project would not be possible.
+  - Jonathan Webber
+  - retr0sp3kt
+  - Lysithea2802
+  - Peter Ansorg
+  - Jake Rogers
 
 [![Become a Patron](https://img.shields.io/badge/Patreon-Support%20Framework%20Hub-FF424D?style=for-the-badge&logo=patreon)](https://patreon.com/Oganoth)
 
