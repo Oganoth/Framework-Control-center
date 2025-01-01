@@ -263,6 +263,8 @@ Special thanks to my current Patrons:
 - retr0sp3kt
 - Lysithea2802
 - Peter Ansorg
+- Jake Rogers
+- Nirav Patel (Founder of Framework Laptop) Seriously, without you this project would not be possible and having you as a patron is a great honor.
 
 Your support makes this project possible! ❤️
 
