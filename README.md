@@ -9,6 +9,30 @@
 ![Status](https://img.shields.io/badge/Status-Beta-yellow.svg)
 ![RyzenADJ](https://img.shields.io/badge/RyzenADJ-v0.14.0-purple.svg)
 
+</div>
+
+<div align="center">
+  <sub>Built with ❤️ by <a href="https://patreon.com/Oganoth">Oganoth</a></sub>
+</div>
+
+<div align="center">
+
+### 🙏 Special Thanks to Our Amazing Patrons
+
+A heartfelt thank you to those who make this project possible:
+
+- **Nirav Patel** (Founder of Framework Laptop) - Your support as a patron is a great honor. Without you, this project would not be possible.
+- Jonathan Webber
+- retr0sp3kt
+- Lysithea2802
+- Peter Ansorg
+- Jake Rogers
+
+[![Become a Patron](https://img.shields.io/badge/Patreon-Support%20Framework%20Hub-FF424D?style=for-the-badge&logo=patreon)](https://patreon.com/Oganoth)
+
+</div>
+
+<div align="center">
 <p align="center">
   <a href="#english">English</a> •
   <a href="#français">Français</a> •
@@ -18,11 +42,6 @@
   <a href="#-contributing">Contribute</a> •
   <a href="#-support">Support</a>
 </p>
-
-</div>
-
-<div align="center">
-  <sub>Built with ❤️ by <a href="https://patreon.com/Oganoth">Oganoth</a> and <a href="#-acknowledgments">contributors</a></sub>
 </div>
 
 <hr>
@@ -243,30 +262,11 @@ If you have experience with AMD ADL/ADLX SDK integration or similar GPU manageme
 
 ### ❤️ Support
 
-<div align="center">
-
-[![Become a Patron](https://img.shields.io/badge/Patreon-Support%20Framework%20Hub-FF424D?style=for-the-badge&logo=patreon)](https://patreon.com/Oganoth)
-
-</div>
-
 Framework Hub Mini is a passion project that requires significant time and effort. Your support helps:
 - Develop new features
 - Improve existing functionality
 - Provide faster support
 - Create better documentation
-
-### 🙏 Acknowledgments
-
-Special thanks to my current Patrons:
-
-- Jonathan Webber
-- retr0sp3kt
-- Lysithea2802
-- Peter Ansorg
-- Jake Rogers
-- Nirav Patel (Founder of Framework Laptop) Seriously, without you this project would not be possible and having you as a patron is a great honor.
-
-Your support makes this project possible! ❤️
 
 ### 📜 License
 
