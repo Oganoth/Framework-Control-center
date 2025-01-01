@@ -135,44 +135,44 @@ class HardwareMonitor:
     def _update_sensors(self) -> None:
         """Update all hardware sensors and write to JSON file."""
         try:
-            if not hasattr(self, 'computer'):
+            if not hasattr(self, 'computer') or not self.computer:
                 return
 
             # Force update all hardware
-            for hardware in self.computer.Hardware:
-                hardware.Update()
-                for subHardware in hardware.SubHardware:
-                    subHardware.Update()
+            hardware_list = list(self.computer.Hardware)  # Convert to list first
+            for hardware in hardware_list:
+                if hasattr(hardware, 'Update'):
+                    hardware.Update()
+                    if hasattr(hardware, 'SubHardware'):
+                        sub_hardware_list = list(hardware.SubHardware)  # Convert to list
+                        for subHardware in sub_hardware_list:
+                            if hasattr(subHardware, 'Update'):
+                                subHardware.Update()
 
             # Collect sensor data
             sensors_data = []
-            for hardware in self.computer.Hardware:
-                for sensor in hardware.Sensors:
-                    if sensor.Value is not None:
-                        sensors_data.append({
-                            "Name": sensor.Name,
-                            "Hardware": hardware.Name,
-                            "Type": str(sensor.SensorType),
-                            "Value": float(sensor.Value)
-                        })
+            for hardware in hardware_list:
+                if hasattr(hardware, 'Sensors'):
+                    sensors = list(hardware.Sensors)  # Convert to list
+                    for sensor in sensors:
+                        if sensor and sensor.Value is not None:
+                            sensor_data = {
+                                'Name': sensor.Name,
+                                'Hardware': hardware.Name,
+                                'Type': str(sensor.SensorType),
+                                'Value': float(sensor.Value)
+                            }
+                            sensors_data.append(sensor_data)
+                            logger.debug(f"Sensor updated: {sensor.Name} ({sensor.SensorType}): {sensor.Value}")
 
-            # Write to JSON file
+            # Save sensors data to file
             self.json_file_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(self.json_file_path, "w", encoding="utf-8") as json_file:
-                json.dump(sensors_data, json_file, indent=4, ensure_ascii=False)
-
-            # Log update
+            with open(self.json_file_path, "w", encoding="utf-8") as f:
+                json.dump(sensors_data, f, indent=4)
             logger.debug(f"Sensors data updated in {self.json_file_path}")
-
-            # Check file size and recreate if too large
-            if self.json_file_path.stat().st_size > 10 * 1024 * 1024:  # 10MB
-                self.json_file_path.unlink()
-                logger.warning("Sensors file too large, recreating...")
-                self._update_sensors()
 
         except Exception as e:
             logger.error(f"Error updating sensors: {e}")
-            import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
 
     def _get_sensor_value(self, hardware_type: str, sensor_type: str, sensor_name: str, gpu_type: str = None) -> Optional[float]:

@@ -1,10 +1,14 @@
 {
-    "current_model": "13_AMD",
-    "current_profile": "Balanced",
-    "theme": "dark",
     "language": "en",
+    "current_theme": "default_theme",
     "minimize_to_tray": true,
-    "start_minimized": true,
+    "start_minimized": false,
+    "start_with_windows": false,
     "monitoring_interval": 1000,
-    "refresh_rate_mode": "Auto"
+    "current_profile": "Boost",
+    "refresh_rate_mode": "Auto",
+    "window_position": {
+        "x": 3522,
+        "y": 640
+    }
 }

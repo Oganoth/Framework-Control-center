@@ -17,6 +17,7 @@ from datetime import datetime
 import shutil
 import winreg
 import ctypes
+import tkinter.messagebox as messagebox
 
 from .models import SystemConfig, HardwareMetrics
 from .hardware import HardwareMonitor
@@ -148,12 +149,9 @@ class FrameworkControlCenter(ctk.CTk):
         # Initialize tweaks manager first
         self.tweaks = WindowsTweaks()
         
-        # Load configuration
-        self.config_path = Path.home() / ".framework_cc" / "config.json"
+        # Load configuration from settings.json
+        self.config_path = Path("configs") / "settings.json"
         self.config = self._load_config()
-        
-        # Set default monitoring interval to 500ms
-        self.config.monitoring_interval = 500
         
         # Setup theme and colors
         self._setup_theme()
@@ -173,7 +171,11 @@ class FrameworkControlCenter(ctk.CTk):
             logger.error(f"Failed to set window icon: {e}")
         
         # Configurer le style de la fenêtre
-        self.configure(fg_color=self.colors.background.main, corner_radius=10)
+        self.configure(fg_color=self.colors.background.main)
+        
+        # Bind minimize to tray for the window minimize button
+        self.protocol("WM_DELETE_WINDOW", self._on_close)
+        self.bind("<Unmap>", lambda e: self._minimize_to_tray() if self.config.minimize_to_tray else None)
         
         # Positionner la fenêtre dans le coin inférieur droit
         self._position_window()
@@ -189,14 +191,10 @@ class FrameworkControlCenter(ctk.CTk):
         self.current_font = load_custom_font(self.config.language)
         
         # Initialize managers with detected model
-        self.hardware = HardwareMonitor(model=self.model.name)
-        # Set initial update interval from config
+        self.hardware = HardwareMonitor(self.model.name)
         self.hardware.set_update_interval(self.config.monitoring_interval)
         self.power = PowerManager(self.model)
         self.display = DisplayManager(model=self.model)
-        
-        # Setup window
-        self.protocol("WM_DELETE_WINDOW", self._on_close)
 
         # Setup UI
         self._create_widgets()
@@ -214,50 +212,104 @@ class FrameworkControlCenter(ctk.CTk):
         # Start log file check timer
         self._check_log_file_size()
 
-    def _position_window(self) -> None:
-        """Positionner la fenêtre dans le coin inférieur droit."""
-        # Dimensions fixes de la fenêtre
-        window_width = 300
-        window_height = 700  # Updated from 650 to 700
-        
+    def _get_dpi_scale(self) -> float:
+        """Get the current DPI scale factor."""
         try:
-            # Désactiver le DPI awareness pour obtenir les vraies dimensions
             import ctypes
+            user32 = ctypes.windll.user32
+            user32.SetProcessDPIAware()
             awareness = ctypes.c_int()
             ctypes.windll.shcore.GetProcessDpiAwareness(0, ctypes.byref(awareness))
-            ctypes.windll.shcore.SetProcessDpiAwareness(0)
+            dpi = user32.GetDpiForSystem()
+            return dpi / 96.0  # 96 is the base DPI
+        except Exception as e:
+            logger.error(f"Error getting DPI scale: {e}")
+            return 1.0
+
+    def _position_window(self) -> None:
+        """Position the window in the bottom right corner."""
+        try:
+            # Get DPI scale
+            dpi_scale = self._get_dpi_scale()
             
-            # Obtenir les dimensions réelles de l'écran
-            screen_width = ctypes.windll.user32.GetSystemMetrics(0)  # SM_CXSCREEN
-            screen_height = ctypes.windll.user32.GetSystemMetrics(1)  # SM_CYSCREEN
+            # Get screen dimensions (in actual pixels)
+            screen_width = int(self.winfo_screenwidth() * dpi_scale)
+            screen_height = int(self.winfo_screenheight() * dpi_scale)
             
-            # Restaurer le DPI awareness original
-            ctypes.windll.shcore.SetProcessDpiAwareness(awareness.value)
+            # Get window dimensions
+            window_width = 300
+            window_height = 700
             
-            # Position dans le coin inférieur droit avec marges ajustées
-            x = screen_width - window_width - 170  # 170 pixels de marge à droite
-            y = screen_height - window_height - 380  # 380 pixels de marge en bas
+            # Use saved position if available, otherwise calculate default position
+            if self.config.window_position["x"] == 0 and self.config.window_position["y"] == 0:
+                # Calculate default position (bottom right)
+                # Increased right margin to align with system tray
+                x = int((screen_width - window_width - 170) / dpi_scale)  # Changed from 20 to 170
+                y = int((screen_height - window_height - 60) / dpi_scale)
+                self.config.window_position = {"x": x, "y": y}
+            else:
+                # Convert saved position from logical to physical coordinates
+                x = int(self.config.window_position["x"] / dpi_scale)
+                y = int(self.config.window_position["y"] / dpi_scale)
             
-            logger.debug(f"Screen dimensions: {screen_width}x{screen_height}")
-            logger.debug(f"Window position: {x},{y}")
+            # Ensure window is visible on screen
+            x = max(0, min(x, int((screen_width - window_width) / dpi_scale)))
+            y = max(0, min(y, int((screen_height - window_height) / dpi_scale)))
+            
+            # Set window position
+            self.geometry(f"{window_width}x{window_height}+{x}+{y}")
             
         except Exception as e:
-            logger.error(f"Error getting screen metrics: {e}")
-            # Fallback en cas d'erreur
-            screen_width = self.winfo_screenwidth()
-            screen_height = self.winfo_screenheight()
-            x = screen_width - window_width - 170
-            y = screen_height - window_height - 380
-        
-        # Définir la géométrie
-        self.geometry(f"{window_width}x{window_height}+{x}+{y}")
-        
-        # Toujours au premier plan et sans barre de titre
-        self.attributes('-topmost', True)
-        self.overrideredirect(True)
-        
-        # Configurer la couleur de fond sombre
-        self.configure(fg_color=self.colors.background.main)
+            logger.error(f"Error positioning window: {e}")
+            # Use default center position as fallback
+            self.center_window()
+
+    def _save_window_position(self) -> None:
+        """Save current window position to config."""
+        try:
+            # Get DPI scale
+            dpi_scale = self._get_dpi_scale()
+            
+            # Get window geometry
+            geometry = self.geometry()
+            # Parse geometry string (format: 'widthxheight+x+y')
+            x = int(geometry.split('+')[1])
+            y = int(geometry.split('+')[2])
+            
+            # Convert physical coordinates to logical coordinates
+            x = int(x * dpi_scale)
+            y = int(y * dpi_scale)
+            
+            # Update config
+            self.config.window_position = {"x": x, "y": y}
+            self._save_config()
+            
+            # Show confirmation message
+            messagebox.showinfo(
+                get_text(self.config.language, "success"),
+                "Window position saved successfully"
+            )
+            
+            logger.debug(f"Window position saved: x={x}, y={y} (DPI scale: {dpi_scale})")
+        except Exception as e:
+            logger.error(f"Error saving window position: {e}")
+            messagebox.showerror(
+                get_text(self.config.language, "error"),
+                "Failed to save window position"
+            )
+
+    def _start_drag(self, event) -> None:
+        """Start window drag."""
+        self._drag_start_x = event.x_root - self.winfo_x()
+        self._drag_start_y = event.y_root - self.winfo_y()
+
+    def _on_drag(self, event) -> None:
+        """Handle window drag."""
+        x = event.x_root - self._drag_start_x
+        y = event.y_root - self._drag_start_y
+        self.geometry(f"+{x}+{y}")
+        # Save position after drag
+        self._save_window_position()
 
     def _setup_theme(self) -> None:
         """Setup the application theme."""
@@ -286,63 +338,6 @@ class FrameworkControlCenter(ctk.CTk):
             corner_radius=10
         )
         self.container.pack(fill="both", expand=True, padx=0, pady=0)
-
-        # Ajouter la barre de titre personnalisée
-        title_bar = ctk.CTkFrame(
-            self.container,
-            fg_color=self.colors.background.main,
-            height=30,
-            corner_radius=10
-        )
-        title_bar.pack(fill="x", padx=2, pady=(2, 0))
-        title_bar.pack_propagate(False)
-
-        # Titre
-        title_label = ctk.CTkLabel(
-            title_bar,
-            text="Framework Control Center",
-            text_color=self.colors.text.primary,
-            font=("Roboto", 11, "bold")
-        )
-        title_label.pack(side="left", padx=10)
-
-        # Boutons de contrôle (dans un frame pour les garder ensemble)
-        control_buttons = ctk.CTkFrame(title_bar, fg_color="transparent")
-        control_buttons.pack(side="right", padx=5)
-
-        # Bouton réduire
-        minimize_button = ctk.CTkButton(
-            control_buttons,
-            text="−",
-            width=20,
-            height=20,
-            command=self._minimize_to_tray,
-            fg_color="transparent",
-            hover_color=self.colors.hover,
-            text_color=self.colors.text.primary,
-            corner_radius=5
-        )
-        minimize_button.pack(side="left", padx=2)
-
-        # Bouton fermer
-        close_button = ctk.CTkButton(
-            control_buttons,
-            text="×",
-            width=20,
-            height=20,
-            command=self._on_close,
-            fg_color=self.colors.button.danger,
-            hover_color=self.colors.status.error,
-            text_color=self.colors.text.primary,
-            corner_radius=5
-        )
-        close_button.pack(side="left", padx=2)
-
-        # Permettre de déplacer la fenêtre en cliquant sur la barre de titre
-        title_bar.bind("<Button-1>", self._start_drag)
-        title_bar.bind("<B1-Motion>", self._on_drag)
-        title_label.bind("<Button-1>", self._start_drag)
-        title_label.bind("<B1-Motion>", self._on_drag)
 
         # Create event loop for async operations
         self.loop = asyncio.new_event_loop()
@@ -397,9 +392,10 @@ class FrameworkControlCenter(ctk.CTk):
 
         self.profile_buttons = {}
         for i, profile in enumerate(["Silent", "Balanced", "Boost"]):
+            translated_text = get_text(self.config.language, f"power_profiles.{profile.lower()}")
             btn = ctk.CTkButton(
                 buttons_frame,
-                text=profile,
+                text=translated_text,
                 image=icons[profile],
                 compound="top",  # Place l'icône au-dessus du texte
                 command=lambda p=profile: self._set_power_profile_sync(p),
@@ -442,9 +438,11 @@ class FrameworkControlCenter(ctk.CTk):
 
         self.refresh_buttons = {}
         for i, mode in enumerate(refresh_rates):
+            mode_key = mode.lower().replace("hz", "hz")  # Ensure correct format
+            translated_text = get_text(self.config.language, f"refresh_rates.{mode_key}")
             btn = ctk.CTkButton(
                 buttons_frame,
-                text=mode,
+                text=translated_text,
                 command=lambda m=mode: self._set_refresh_rate_sync(m),
                 fg_color=self.colors.button.primary,
                 hover_color=self.colors.hover,
@@ -460,7 +458,7 @@ class FrameworkControlCenter(ctk.CTk):
 
             # Set active mode by default
             if mode == self.config.refresh_rate_mode:
-                self._update_button_state("refresh", self.refresh_buttons[mode])
+                self._update_button_state("refresh", btn)
 
     def _create_metrics_display(self) -> None:
         """Create system metrics display."""
@@ -729,56 +727,19 @@ class FrameworkControlCenter(ctk.CTk):
             self.quit()
 
     def _load_config(self) -> SystemConfig:
-        """Load configuration from file or create default."""
+        """Load configuration from file."""
         try:
             if self.config_path.exists():
-                with open(self.config_path, encoding="utf-8") as f:
+                with open(self.config_path, "r", encoding="utf-8") as f:
                     config_data = json.load(f)
-                
-                # Create config object from loaded data
-                config = SystemConfig(**config_data)
-                
-                # Check if startup task exists and update config accordingly
-                config.start_with_windows = self.tweaks.is_startup_task_exists()
-                
-                # Apply settings immediately
-                if config.start_minimized:
-                    self.withdraw()
-                
-                if config.minimize_to_tray:
-                    self._setup_tray()
-                
-                # Apply monitoring interval
-                if hasattr(self, '_update_metrics'):
-                    self.after_cancel(self._update_metrics)
-                    self.after(config.monitoring_interval, self._update_metrics)
-                
-                # Load and apply font based on configured language
-                self.current_font = load_custom_font(config.language)
-                self.after(100, self._update_widgets_font)  # Update fonts after a short delay
-                self.after(100, self._update_window_text)   # Update text after a short delay
-                
-                logger.info(f"Configuration loaded with language: {config.language}")
-                return config
+                return SystemConfig(**config_data)
             else:
-                # Create default config if file doesn't exist
-                config = SystemConfig()
-                # Save default config
-                self.config_path.parent.mkdir(parents=True, exist_ok=True)
-                with open(self.config_path, "w", encoding="utf-8") as f:
-                    json.dump(config.dict(), f, indent=4)
-                    
-                # Load and apply default font
-                self.current_font = load_custom_font(config.language)
-                self.after(100, self._update_widgets_font)  # Update fonts after a short delay
-                self.after(100, self._update_window_text)   # Update text after a short delay
-                
-                logger.info("Created default configuration")
-                return config
-                
+                logger.info("No configuration file found, using defaults")
+                return SystemConfig()
         except Exception as e:
-            logger.error(f"Error loading config: {e}")
-            return SystemConfig()  # Return default config if loading fails
+            logger.error(f"Error loading configuration: {e}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return SystemConfig()
 
     def _create_default_icon(self) -> None:
         """Create a default tray icon."""
@@ -797,39 +758,134 @@ class FrameworkControlCenter(ctk.CTk):
     def _set_power_profile_sync(self, profile_name: str) -> None:
         """Synchronous wrapper for _set_power_profile."""
         try:
+            logger.info(f"Applying power profile: {profile_name}")
+            logger.debug(f"Current model: {self.model.name}")
+            
             if not hasattr(self, 'loop'):
                 self.loop = asyncio.new_event_loop()
                 asyncio.set_event_loop(self.loop)
-            self.loop.run_until_complete(self._set_power_profile(profile_name))
-        except Exception as e:
-            logger.error(f"Error in _set_power_profile_sync: {e}")
-
-    async def _set_power_profile(self, profile_name: str) -> None:
-        """Set power profile."""
-        try:
-            defaults_path = get_resource_path("configs/defaults.json")
-            if not Path(defaults_path).exists():
-                logger.error("Defaults configuration file not found")
+            
+            # Load profile configuration
+            profiles_path = Path("configs/profiles.json")
+            if not profiles_path.exists():
+                logger.error("Profiles configuration file not found")
                 return
 
-            with open(defaults_path) as f:
+            with open(profiles_path) as f:
                 config = json.load(f)
-                if "profiles" not in config or profile_name not in config["profiles"]:
-                    logger.error(f"Profile {profile_name} not found in defaults.json")
+                logger.debug(f"Available AMD profiles: {list(config['amd_profiles'].keys())}")
+                
+                # Get the correct profile based on laptop model
+                model_name = str(self.model.name).strip()  # Ensure clean string
+                logger.debug(f"Cleaned model name: '{model_name}'")
+                
+                # Map full model names to profile keys
+                model_map = {
+                    "Framework 16 AMD": "16_AMD",
+                    "Framework 13 AMD": "13_AMD",
+                    "Framework 13 Intel": "13_INTEL"
+                }
+                
+                profile_key = model_map.get(model_name)
+                if not profile_key:
+                    logger.error(f"Unsupported model: '{model_name}'")
                     return
-                profile_data = config["profiles"][profile_name]
+                
+                logger.debug(f"Using profile key: {profile_key}")
+                
+                if profile_key == "16_AMD":
+                    if profile_name.lower() not in config["amd_profiles"]["16_AMD"]:
+                        logger.error(f"Profile {profile_name} not found for 16_AMD")
+                        return
+                    profile_data = config["amd_profiles"]["16_AMD"][profile_name.lower()]
+                    logger.debug("Selected 16_AMD profile configuration")
+                elif profile_key == "13_AMD":
+                    if profile_name.lower() not in config["amd_profiles"]["13_AMD"]:
+                        logger.error(f"Profile {profile_name} not found for 13_AMD")
+                        return
+                    profile_data = config["amd_profiles"]["13_AMD"][profile_name.lower()]
+                    logger.debug("Selected 13_AMD profile configuration")
+                elif profile_key == "13_INTEL":
+                    if profile_name.lower() not in config["intel_profiles"]["13_INTEL"]:
+                        logger.error(f"Profile {profile_name} not found for 13_INTEL")
+                        return
+                    profile_data = config["intel_profiles"]["13_INTEL"][profile_name.lower()]
+                    logger.debug("Selected 13_INTEL profile configuration")
+                
+                logger.info(f"Profile configuration loaded: {profile_data}")
+                # Remove 'name' from profile_data if it exists to avoid duplicate
+                if 'name' in profile_data:
+                    del profile_data['name']
+                
+                # Add required parameters with default values based on profile
+                default_params = {
+                    'tdp': profile_data.get('stapm_limit', 45000) // 1000,  # Convert from mW to W
+                    'cpu_power': profile_data.get('fast_limit', 45000) // 1000,  # Convert from mW to W
+                    'gpu_power': 25,  # Default GPU power
+                    'boost_enabled': profile_name.lower() != 'silent',  # Disable boost only for silent profile
+                    'fan_mode': 'auto',  # Default fan mode
+                    'fan_curve': {  # Default fan curve
+                        '30': 0,
+                        '40': 10,
+                        '50': 20,
+                        '60': 40,
+                        '70': 60,
+                        '80': 80,
+                        '90': 100
+                    }
+                }
+                
+                # Merge default params with profile data
+                profile_data.update(default_params)
+                
                 profile = PowerProfile(
                     name=profile_name,
                     **profile_data
                 )
             
-            success = await self.power.apply_profile(profile)
+            # Log AMD-specific parameters
+            if hasattr(profile, 'stapm_limit'):
+                logger.info(f"STAPM Limit: {profile.stapm_limit} mW")
+            if hasattr(profile, 'fast_limit'):
+                logger.info(f"Fast Limit: {profile.fast_limit} mW")
+            if hasattr(profile, 'slow_limit'):
+                logger.info(f"Slow Limit: {profile.slow_limit} mW")
+            if hasattr(profile, 'tctl_temp'):
+                logger.info(f"TCTL Temp: {profile.tctl_temp}°C")
+            if hasattr(profile, 'vrm_current'):
+                logger.info(f"VRM Current: {profile.vrm_current} mA")
+            if hasattr(profile, 'vrmmax_current'):
+                logger.info(f"VRM Max Current: {profile.vrmmax_current} mA")
+            if hasattr(profile, 'vrmsoc_current'):
+                logger.info(f"VRM SoC Current: {profile.vrmsoc_current} mA")
+            if hasattr(profile, 'vrmsocmax_current'):
+                logger.info(f"VRM SoC Max Current: {profile.vrmsocmax_current} mA")
+            
+            # Log Intel-specific parameters
+            if hasattr(profile, 'pl1'):
+                logger.info(f"PL1: {profile.pl1} W")
+            if hasattr(profile, 'pl2'):
+                logger.info(f"PL2: {profile.pl2} W")
+            if hasattr(profile, 'tau'):
+                logger.info(f"Tau: {profile.tau} s")
+            if hasattr(profile, 'cpu_core_offset'):
+                logger.info(f"CPU Core Offset: {profile.cpu_core_offset} mV")
+            if hasattr(profile, 'gpu_core_offset'):
+                logger.info(f"GPU Core Offset: {profile.gpu_core_offset} mV")
+            if hasattr(profile, 'max_frequency'):
+                logger.info(f"Max Frequency: {profile.max_frequency}")
+            
+            # Apply profile
+            success = self.loop.run_until_complete(self.power.apply_profile(profile))
+            
             if success:
+                logger.info(f"Successfully applied power profile: {profile_name}")
                 self.config.current_profile = profile_name
                 
                 # Update button states
                 if profile_name in self.profile_buttons:
                     self._update_button_state("profile", self.profile_buttons[profile_name])
+                    logger.debug(f"Updated button state for profile: {profile_name}")
                 
                 # Show notification if minimized
                 if not self.winfo_viewable():
@@ -847,6 +903,8 @@ class FrameworkControlCenter(ctk.CTk):
                 
         except Exception as e:
             logger.error(f"Error setting power profile: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
 
     def _set_refresh_rate_sync(self, mode: str) -> None:
         """Synchronous wrapper for _set_refresh_rate."""
@@ -950,30 +1008,6 @@ class FrameworkControlCenter(ctk.CTk):
                 FrameworkControlCenter._tray_instance = None
                 self.tray_icon = None
 
-    def _start_drag(self, event):
-        """Commencer le déplacement de la fenêtre."""
-        self._drag_x = event.x_root - self.winfo_x()
-        self._drag_y = event.y_root - self.winfo_y()
-        
-    def _on_drag(self, event):
-        """Déplacer la fenêtre."""
-        x = event.x_root - self._drag_x
-        y = event.y_root - self._drag_y
-        self.geometry(f"+{x}+{y}")
-        
-    def _minimize_to_tray(self) -> None:
-        """Minimize window to system tray."""
-        self.withdraw()
-        with self._tray_lock:
-            if self.tray_icon is not None:
-                try:
-                    self.tray_icon.notify(
-                        title="Framework Control Center",
-                        message="Application minimized to tray"
-                    )
-                except Exception as e:
-                    logger.error(f"Error showing tray notification: {e}")
-
     def _create_battery_status(self) -> None:
         """Create battery status display."""
         battery_frame = ctk.CTkFrame(self.container, fg_color=self.colors.background.main)
@@ -1023,60 +1057,38 @@ class FrameworkControlCenter(ctk.CTk):
         self.active_buttons[button_type] = active_button
 
     def _update_window_text(self) -> None:
-        """Update all text in the window with the current language."""
+        """Update all window text with current language."""
         try:
             # Update window title
             self.title(get_text(self.config.language, "window_title"))
             
-            # Update power profile buttons
-            for profile, btn in self.profile_buttons.items():
-                btn.configure(text=get_text(self.config.language, f"power_profiles.{profile.lower()}"))
+            # Update profile buttons if they exist
+            if hasattr(self, 'profile_buttons') and self.profile_buttons:
+                for profile in self.profile_buttons:
+                    button = self.profile_buttons[profile]
+                    translated_text = get_text(self.config.language, f"power_profiles.{profile.lower()}")
+                    button.configure(text=translated_text)
             
-            # Update refresh rate buttons
-            for mode, btn in self.refresh_buttons.items():
-                btn.configure(text=get_text(self.config.language, f"refresh_rates.{mode.lower()}"))
+            # Update refresh rate buttons if they exist
+            if hasattr(self, 'refresh_buttons') and self.refresh_buttons:
+                for mode in self.refresh_buttons:
+                    button = self.refresh_buttons[mode]
+                    mode_key = mode.lower().replace("hz", "hz")  # Ensure correct format
+                    translated_text = get_text(self.config.language, f"refresh_rates.{mode_key}")
+                    button.configure(text=translated_text)
             
-            # Update all buttons in the container
-            for widget in self.container.winfo_children():
-                if isinstance(widget, ctk.CTkButton):
-                    text = widget.cget("text")
-                    # Keyboard button
-                    if text.lower() in ["keyboard", "clavier"]:
-                        widget.configure(text=get_text(self.config.language, "utility_buttons.keyboard"))
-                    # Updates manager button
-                    elif text.lower() in ["updates manager", "gestionnaire de mises à jour", "qon"]:
-                        widget.configure(text=get_text(self.config.language, "utility_buttons.updates_manager"))
-                    # Tweaks button
-                    elif text.lower() in ["tweaks", "optimisations", "choH"]:
-                        widget.configure(text=get_text(self.config.language, "utility_buttons.tweaks"))
-                    # Settings button
-                    elif text.lower() in ["settings", "paramètres", "SeH"]:
-                        widget.configure(text=get_text(self.config.language, "utility_buttons.settings"))
+            # Update utility buttons if they exist
+            if hasattr(self, 'keyboard_button'):
+                self.keyboard_button.configure(text=get_text(self.config.language, "utility_buttons.keyboard"))
+            if hasattr(self, 'updates_button'):
+                self.updates_button.configure(text=get_text(self.config.language, "utility_buttons.updates_manager"))
+            if hasattr(self, 'settings_button'):
+                self.settings_button.configure(text=get_text(self.config.language, "utility_buttons.settings"))
             
-            # Update brightness labels
-            for widget in self.container.winfo_children():
-                if isinstance(widget, ctk.CTkLabel):
-                    text = widget.cget("text")
-                    if text.startswith(("BRIGHTNESS:", "LUMINOSITÉ:", "HoS:")):
-                        widget.configure(text=get_text(self.config.language, "brightness"))
-                    elif text.startswith(("ACTUEL:", "CURRENT:", "DaH:")):
-                        current_value = text.split(":")[-1].strip()
-                        widget.configure(text=f"{get_text(self.config.language, 'current')} {current_value}")
-                    elif text.startswith(("BATTERY:", "BATTERIE:", "HoS:")):
-                        battery_value = text.split(":")[-1].strip()
-                        widget.configure(text=f"{get_text(self.config.language, 'battery')} {battery_value}")
-                    elif text.startswith(("Time remaining:", "Temps restant:", "poH:")):
-                        if any(x in text for x in ["Plugged In", "Branché", "cha'"]):
-                            widget.configure(text=get_text(self.config.language, "plugged_in"))
-                        else:
-                            time_value = text.split(":")[-1].strip()
-                            widget.configure(text=f"{get_text(self.config.language, 'time_remaining')} {time_value}")
-            
-            logger.debug(f"Window text updated to language: {self.config.language}")
+            logger.debug("Window text updated to language: " + self.config.language)
             
         except Exception as e:
             logger.error(f"Error updating window text: {e}")
-            import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
 
     def _initialize_default_profiles(self) -> None:
@@ -1230,6 +1242,7 @@ class FrameworkControlCenter(ctk.CTk):
             container,
             values=list(language_names.keys()),
             variable=lang_var,
+            command=self._on_language_change,
             fg_color=self.colors.background.secondary,
             button_color=self.colors.button.primary,
             button_hover_color=self.colors.hover,
@@ -1297,6 +1310,19 @@ class FrameworkControlCenter(ctk.CTk):
             border_color=self.colors.border.inactive
         )
         interval_entry.pack(fill="x", pady=(0, 15))
+
+        # Save window position button
+        save_pos_btn = ctk.CTkButton(
+            container,
+            text="Save current window position",
+            command=self._save_window_position,
+            fg_color=self.colors.button.primary,
+            hover_color=self.colors.hover,
+            text_color=self.colors.text.primary,
+            height=35,
+            corner_radius=6
+        )
+        save_pos_btn.pack(fill="x", pady=(0, 15))
         
         # Save button
         save_btn = ctk.CTkButton(
@@ -1316,7 +1342,7 @@ class FrameworkControlCenter(ctk.CTk):
             height=35,
             corner_radius=6
         )
-        save_btn.pack(fill="x", pady=(20, 0))
+        save_btn.pack(fill="x", pady=(0, 15))
 
     def _save_settings(self, theme: str, language: str, minimize_to_tray: bool,
                       start_minimized: bool, start_with_windows: bool, monitoring_interval: str) -> None:
@@ -1338,78 +1364,73 @@ class FrameworkControlCenter(ctk.CTk):
                 self.config.minimize_to_tray = minimize_to_tray
                 self.config.start_minimized = start_minimized
                 self.config.start_with_windows = start_with_windows
-                self.config.monitoring_interval = int(monitoring_interval)
+                
+                # Convert and validate monitoring interval
+                try:
+                    interval = int(monitoring_interval)
+                    if interval < 100:  # Minimum 100ms
+                        interval = 100
+                    elif interval > 10000:  # Maximum 10 seconds
+                        interval = 10000
+                    self.config.monitoring_interval = interval
+                except ValueError:
+                    logger.error(f"Invalid monitoring interval: {monitoring_interval}")
+                    self.config.monitoring_interval = 1000  # Default to 1 second
                 
                 # Save to file
-                self.config_path.parent.mkdir(parents=True, exist_ok=True)
-                with open(self.config_path, "w", encoding="utf-8") as f:
-                    json.dump(self.config.dict(), f, indent=4)
+                self._save_config()
                 
+                # Apply settings immediately
+                if minimize_to_tray and not hasattr(self, '_tray_icon'):
+                    self._setup_tray()
+                elif not minimize_to_tray and hasattr(self, '_tray_icon'):
+                    self._tray_icon.stop()
+
+                # Update startup task
+                if start_with_windows:
+                    self.tweaks.create_startup_task()
+                else:
+                    self.tweaks.remove_startup_task()
+
+                # Update monitoring interval in hardware monitor
+                if hasattr(self, 'hardware'):
+                    self.hardware.set_update_interval(self.config.monitoring_interval)
+
+                # Update monitoring interval for metrics display
+                if hasattr(self, '_update_metrics'):
+                    self.after_cancel(self._update_metrics)
+                    self._update_metrics()  # Redémarrer immédiatement avec le nouvel intervalle
+
                 # Load and apply new theme
                 theme = self.config.load_theme()
                 self.colors = theme.colors
-                self.theme_fonts = theme.fonts
-                self.spacing = theme.spacing
-                self.radius = theme.radius
-                
-                # Update all windows
-                for window in FrameworkControlCenter._open_windows:
-                    if window.winfo_exists():
-                        if hasattr(window, 'colors'):
-                            window.colors = self.colors
-                        window._update_window_colors()
-                    else:
-                        FrameworkControlCenter._open_windows.remove(window)
-                
-                # Update other settings
+                self._update_window_colors()
+
+                # Update language
                 self.current_font = load_custom_font(language)
-                self._update_window_text()
                 self._update_widgets_font()
-                
-                # Update startup task if needed
-                if start_with_windows:
-                    if getattr(sys, 'frozen', False):
-                        exe_path = sys.executable
-                    else:
-                        exe_path = os.path.abspath(sys.argv[0])
-                    
-                    success = self.tweaks.create_startup_task(exe_path)
-                    if not success:
-                        logger.error("Failed to create startup task")
-                else:
-                    success = self.tweaks.remove_startup_task()
-                    if not success:
-                        logger.error("Failed to remove startup task")
-                
-                # Apply minimize_to_tray setting immediately
-                if minimize_to_tray and not hasattr(self, 'tray_icon'):
-                    self._setup_tray()
-                elif not minimize_to_tray and hasattr(self, 'tray_icon'):
-                    with self._tray_lock:
-                        if self.tray_icon is not None:
-                            self.tray_icon.stop()
-                            self.tray_icon = None
-                
-                # Apply monitoring interval immediately
-                if hasattr(self, '_update_metrics'):
-                    self.after_cancel(self._update_metrics)
-                    self.after(self.config.monitoring_interval, self._update_metrics)
-                    # Update hardware monitor interval
-                    if hasattr(self, 'hardware'):
-                        self.hardware.set_update_interval(self.config.monitoring_interval)
-                
-                # Close settings window
-                if hasattr(self, 'settings_window') and self.settings_window.winfo_exists():
-                    self.settings_window.destroy()
-                
-                logger.info("Settings saved successfully")
+                self._update_window_text()
+
+                logger.info("Settings saved and applied successfully")
+                messagebox.showinfo(
+                    get_text(self.config.language, "success"),
+                    get_text(self.config.language, "settings_saved")
+                )
+
             else:
-                logger.error(f"Theme file not found for: {theme}")
-            
+                logger.error("Theme file not found")
+                messagebox.showerror(
+                    get_text(self.config.language, "error"),
+                    get_text(self.config.language, "theme_not_found")
+                )
+                
         except Exception as e:
             logger.error(f"Error saving settings: {e}")
-            import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
+            messagebox.showerror(
+                get_text(self.config.language, "error"),
+                get_text(self.config.language, "settings_save_error")
+            )
 
     def _update_theme(self, value: str) -> None:
         """Handle theme change."""
@@ -1485,19 +1506,18 @@ class FrameworkControlCenter(ctk.CTk):
             self.after(300000, self._check_log_file_size)
 
     def _save_config(self) -> None:
-        """Save current configuration to file."""
+        """Save configuration to file."""
         try:
             # Ensure config directory exists
             self.config_path.parent.mkdir(parents=True, exist_ok=True)
             
-            # Save to file
+            # Save configuration
             with open(self.config_path, "w", encoding="utf-8") as f:
                 json.dump(self.config.dict(), f, indent=4)
                 
-            logger.debug("Configuration saved successfully")
+            logger.debug(f"Configuration saved to {self.config_path}")
         except Exception as e:
             logger.error(f"Error saving configuration: {e}")
-            import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
 
     def _on_theme_change(self, theme_name: str) -> None:
@@ -1631,6 +1651,19 @@ class FrameworkControlCenter(ctk.CTk):
         # Update main window
         self.configure(fg_color=self.colors.background.main)
         update_widget_colors(self)
+
+    def _minimize_to_tray(self) -> None:
+        """Minimize window to system tray."""
+        self.withdraw()
+        with self._tray_lock:
+            if self.tray_icon is not None:
+                try:
+                    self.tray_icon.notify(
+                        title="Framework Control Center",
+                        message="Application minimized to tray"
+                    )
+                except Exception as e:
+                    logger.error(f"Error showing tray notification: {e}")
 
 
 class UpdatesManager(ctk.CTkToplevel):

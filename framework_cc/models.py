@@ -184,6 +184,7 @@ class SystemConfig(BaseModel):
     monitoring_interval: int = 1000
     current_profile: str = "Balanced"
     refresh_rate_mode: str = "Auto"
+    window_position: dict = {"x": 0, "y": 0}  # Position de la fenêtre
 
     def load_theme(self) -> ThemeConfig:
         """Charger le thème actuel."""
