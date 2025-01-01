@@ -139,6 +139,11 @@ class FrameworkControlCenter(ctk.CTk):
     _open_windows = []  # Track all open windows
     
     def __init__(self):
+        # Hide console window on Windows
+        if sys.platform.startswith('win'):
+            import ctypes
+            ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
+        
         super().__init__()
         
         # Install system fonts if needed
@@ -160,6 +165,7 @@ class FrameworkControlCenter(ctk.CTk):
         self.title("Framework Control Center")
         self.geometry("300x700")  # Increased height from 650 to 700
         self.resizable(False, False)
+        self.attributes('-topmost', True)  # Keep window on top when active
         
         # Configurer l'icône
         try:

@@ -112,7 +112,8 @@ class WindowsPowerPlanManager:
                 ["powercfg"] + args,
                 capture_output=True,
                 text=True,
-                startupinfo=startupinfo
+                startupinfo=startupinfo,
+                creationflags=subprocess.CREATE_NO_WINDOW
             )
             
             stdout = process.stdout if process.stdout else ""

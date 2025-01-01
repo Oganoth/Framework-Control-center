@@ -4,7 +4,7 @@
     "minimize_to_tray": true,
     "start_minimized": false,
     "start_with_windows": false,
-    "monitoring_interval": 1000,
+    "monitoring_interval": 5000,
     "current_profile": "Boost",
     "refresh_rate_mode": "Auto",
     "window_position": {

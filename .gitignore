@@ -19993,3 +19993,10 @@ build.py
 logs/2024-12-30.log
 dist/Framework-Hub.zip
 logs/2024-12-31.log
+build.bat
+package.bat
+Framework Hub.spec
+file_version_info.txt
+framework.spec
+dist/Framework Hub.exe
+logs/2025-01-01.log
