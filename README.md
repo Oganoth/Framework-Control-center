@@ -2,42 +2,39 @@
 
 <div align="center">
 
-<div style="background-color: #1a1b1e; padding: 20px; border-radius: 8px;">
+<div style="background-color: #1a1b1e; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square)
-![Platform](https://img.shields.io/badge/Platform-Windows%2011-orange?style=flat-square)
-![License](https://img.shields.io/badge/License-GPL--3.0-green?style=flat-square)
-![Framework](https://img.shields.io/badge/Framework-AMD%20Only-red?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Beta-yellow?style=flat-square)
-![RyzenADJ](https://img.shields.io/badge/RyzenADJ-v0.14.0-purple?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.10+-0D76A8?style=flat&labelColor=1a1b1e)
+![Platform](https://img.shields.io/badge/Platform-Windows%2011-FF8C00?style=flat&labelColor=1a1b1e)
+![License](https://img.shields.io/badge/License-GPL--3.0-4CAF50?style=flat&labelColor=1a1b1e)
+![Framework](https://img.shields.io/badge/Framework-AMD%20Only-FF4444?style=flat&labelColor=1a1b1e)
+![Status](https://img.shields.io/badge/Status-Beta-FFD700?style=flat&labelColor=1a1b1e)
+![RyzenADJ](https://img.shields.io/badge/RyzenADJ-v0.14.0-9B30FF?style=flat&labelColor=1a1b1e)
 
 </div>
 
-<div style="margin: 20px 0;">
-Built with ❤️ by <a href="https://patreon.com/Oganoth">Oganoth</a>
+<div style="margin: 25px 0;">
+Built with ❤️ by <a href="https://patreon.com/Oganoth" style="color: #0D76A8; text-decoration: none; font-weight: 600;">Oganoth</a>
 </div>
 
-<div style="margin: 30px 0;">
+<div style="margin: 40px 0;">
 
-## 🙏 Special Thanks to Our Amazing Patrons
+# 🙏 Special Thanks to Our Amazing Patrons
 
 A heartfelt thank you to those who make this project possible:
 
-- **Nirav Patel** _(Founder of Framework Laptop)_ - Your support as a patron is a great honor. Without you, this project would not be possible.
-- Jonathan Webber
+- **Nirav Patel** _(Founder of Framework Laptop)_ - Your support as a patron is a great honor. Without you, this project would not be possible, Jonathan Webber, retr0sp3kt, Lysithea2802, Peter Ansorg, Jake Rogers 
 - retr0sp3kt
-- Lysithea2802
-- Peter Ansorg
-- Jake Rogers
 
-
+<div style="margin: 30px 0;">
 <a href="https://patreon.com/Oganoth">
   <img src="https://img.shields.io/badge/SUPPORT_FRAMEWORK_HUB-FF424D?style=for-the-badge&logo=patreon&logoColor=white" alt="Support Framework Hub on Patreon" />
 </a>
+</div>
 
 </div>
 
-<div style="margin: 20px 0;">
+<div style="margin: 30px 0; font-size: 16px;">
 
 [English](#english) • 
 [Français](#français) • 
@@ -51,7 +48,7 @@ A heartfelt thank you to those who make this project possible:
 
 </div>
 
-<hr>
+<hr style="margin: 40px 0; border: 0; height: 1px; background: linear-gradient(to right, transparent, #666, transparent);">
 
 ## English
 
