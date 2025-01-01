@@ -18,6 +18,7 @@ import shutil
 import winreg
 import ctypes
 import tkinter.messagebox as messagebox
+import time
 
 from .models import SystemConfig, HardwareMetrics
 from .hardware import HardwareMonitor
@@ -137,6 +138,8 @@ class FrameworkControlCenter(ctk.CTk):
     _tray_lock = threading.Lock()
     _tray_instance = None
     _open_windows = []  # Track all open windows
+    _last_notification_time = 0  # Track last notification time
+    _notification_cooldown = 5  # Cooldown in seconds
     
     def __init__(self):
         # Hide console window on Windows
@@ -688,7 +691,16 @@ class FrameworkControlCenter(ctk.CTk):
     def _toggle_window(self) -> None:
         """Toggle window visibility."""
         if self.winfo_viewable():
-            self._minimize_to_tray()
+            self.withdraw()
+            with self._tray_lock:
+                if self.tray_icon is not None:
+                    try:
+                        self.tray_icon.notify(
+                            title="Framework Control Center",
+                            message="Application minimized to tray"
+                        )
+                    except Exception as e:
+                        logger.error(f"Error showing tray notification: {e}")
         else:
             self.deiconify()
             self.lift()
@@ -1661,15 +1673,23 @@ class FrameworkControlCenter(ctk.CTk):
     def _minimize_to_tray(self) -> None:
         """Minimize window to system tray."""
         self.withdraw()
-        with self._tray_lock:
-            if self.tray_icon is not None:
-                try:
-                    self.tray_icon.notify(
-                        title="Framework Control Center",
-                        message="Application minimized to tray"
-                    )
-                except Exception as e:
-                    logger.error(f"Error showing tray notification: {e}")
+
+    def _toggle_window(self) -> None:
+        """Toggle window visibility."""
+        if self.winfo_viewable():
+            self.withdraw()
+            with self._tray_lock:
+                if self.tray_icon is not None:
+                    try:
+                        self.tray_icon.notify(
+                            title="Framework Control Center",
+                            message="Application minimized to tray"
+                        )
+                    except Exception as e:
+                        logger.error(f"Error showing tray notification: {e}")
+        else:
+            self.deiconify()
+            self.lift()
 
 
 class UpdatesManager(ctk.CTkToplevel):

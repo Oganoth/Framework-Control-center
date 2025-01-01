@@ -11,3 +11,4 @@ comtypes>=1.2.0
 pythonnet>=3.0.3
 pystray>=0.19.4
 keyboard>=0.13.5 
+pyinstaller>=6.3.0 
