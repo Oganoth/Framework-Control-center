@@ -149,6 +149,10 @@ class FrameworkControlCenter(ctk.CTk):
         
         super().__init__()
         
+        # Ensure we're in the correct directory
+        if getattr(sys, 'frozen', False):
+            os.chdir(os.path.dirname(sys.executable))
+        
         # Install system fonts if needed
         install_system_fonts()
         
@@ -170,12 +174,17 @@ class FrameworkControlCenter(ctk.CTk):
         self.resizable(False, False)
         self.attributes('-topmost', True)  # Keep window on top when active
         
-        # Configurer l'icône
+        # Configurer l'icône - Use absolute path and add delay
         try:
-            if sys.platform.startswith('win'):
-                self.after(200, lambda: self.iconbitmap(str(Path("assets/logo.ico").absolute())))
+            icon_path = os.path.abspath("assets/logo.ico")
+            if os.path.exists(icon_path):
+                if sys.platform.startswith('win'):
+                    self.after(500, lambda: self.iconbitmap(icon_path))
+                else:
+                    self.iconbitmap(icon_path)
+                logger.info(f"Icon set successfully from: {icon_path}")
             else:
-                self.iconbitmap(str(Path("assets/logo.ico")))
+                logger.error(f"Icon file not found at: {icon_path}")
         except Exception as e:
             logger.error(f"Failed to set window icon: {e}")
         
@@ -187,7 +196,7 @@ class FrameworkControlCenter(ctk.CTk):
         self.bind("<Unmap>", lambda e: self._minimize_to_tray() if self.config.minimize_to_tray else None)
         
         # Positionner la fenêtre dans le coin inférieur droit
-        self._position_window()
+        self.after(1000, self._position_window)  # Delay window positioning
         
         # Initialize model detection first
         detector = ModelDetector()
@@ -209,17 +218,17 @@ class FrameworkControlCenter(ctk.CTk):
         self._create_widgets()
         self._setup_hotkeys()
         
-        # Setup tray icon
-        self._setup_tray()
+        # Setup tray icon with delay
+        self.after(1500, self._setup_tray)
 
-        # Start monitoring
-        self.after(self.config.monitoring_interval, self._update_metrics)
+        # Start monitoring with delay
+        self.after(2000, lambda: self.after(self.config.monitoring_interval, self._update_metrics))
         
-        # Initialize default profiles after a short delay to ensure all components are loaded
-        self.after(1000, self._initialize_default_profiles)
+        # Initialize default profiles after a delay
+        self.after(2500, self._initialize_default_profiles)
 
-        # Start log file check timer
-        self._check_log_file_size()
+        # Start log file check timer with delay
+        self.after(3000, self._check_log_file_size)
 
     def _get_dpi_scale(self) -> float:
         """Get the current DPI scale factor."""

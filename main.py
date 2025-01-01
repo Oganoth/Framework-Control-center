@@ -30,23 +30,41 @@ def hide_console():
 
 def setup_environment():
     """Setup the application environment."""
-    # Create necessary directories if they don't exist
-    for directory in ["configs", "libs", "assets", "fonts"]:
-        try:
-            path = Path(directory)
-            if not path.exists():
-                path.mkdir(parents=True)
-                logger.info(f"Created directory: {directory}")
-            else:
-                logger.debug(f"Directory already exists: {directory}")
-        except Exception as e:
-            logger.warning(f"Could not create directory {directory}: {e}")
-            # Continue even if directory creation fails as it might already exist
-            pass
+    try:
+        # Get the directory where the executable/script is located
+        if getattr(sys, 'frozen', False):
+            # If running as compiled executable
+            app_dir = os.path.dirname(sys.executable)
+        else:
+            # If running as script
+            app_dir = os.path.dirname(os.path.abspath(__file__))
+        
+        # Change working directory to app directory
+        os.chdir(app_dir)
+        logger.info(f"Working directory set to: {app_dir}")
+        
+        # Create necessary directories if they don't exist
+        for directory in ["configs", "libs", "assets", "fonts", "logs"]:
+            try:
+                path = Path(directory)
+                if not path.exists():
+                    path.mkdir(parents=True)
+                    logger.info(f"Created directory: {directory}")
+                else:
+                    logger.debug(f"Directory already exists: {directory}")
+            except Exception as e:
+                logger.warning(f"Could not create directory {directory}: {e}")
+                pass
+    except Exception as e:
+        logger.error(f"Error in setup_environment: {e}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
 
 def main():
     """Main entry point."""
     try:
+        # Setup environment first
+        setup_environment()
+        
         # Hide console window if running as exe
         if getattr(sys, 'frozen', False):
             hide_console()
@@ -67,9 +85,6 @@ def main():
             except Exception as e:
                 logger.error(f"Failed to obtain administrator privileges: {e}")
                 sys.exit(1)
-
-        # Setup environment
-        setup_environment()
         
         # Create and run application
         logger.info("Starting Framework Control Center...")
