@@ -19,7 +19,7 @@ Built with ❤️ by <a href="https://patreon.com/Oganoth" style="color: #0D76A8
 
 <div style="margin: 40px 0;">
 
-# 🙏 Special Thanks to Our Amazing Patrons
+# 🙏 Special Thanks to my Amazing Patrons
 
 A heartfelt thank you to those who make this project possible:
 
