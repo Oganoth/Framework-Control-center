@@ -24,7 +24,6 @@ Built with ❤️ by <a href="https://patreon.com/Oganoth" style="color: #0D76A8
 A heartfelt thank you to those who make this project possible:
 
 - **Nirav Patel** _(Founder of Framework Laptop)_ - Your support as a patron is a great honor. Without you, this project would not be possible, Jonathan Webber, retr0sp3kt, Lysithea2802, Peter Ansorg, Jake Rogers 
-- retr0sp3kt
 
 <div style="margin: 30px 0;">
 <a href="https://patreon.com/Oganoth">
