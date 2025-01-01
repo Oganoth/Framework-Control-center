@@ -2,46 +2,52 @@
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
-![Platform](https://img.shields.io/badge/Platform-Windows%2011-orange.svg)
-![License](https://img.shields.io/badge/License-GPL--3.0-green.svg)
-![Framework](https://img.shields.io/badge/Framework-AMD%20Only-red.svg)
-![Status](https://img.shields.io/badge/Status-Beta-yellow.svg)
-![RyzenADJ](https://img.shields.io/badge/RyzenADJ-v0.14.0-purple.svg)
+<div style="background-color: #1a1b1e; padding: 20px; border-radius: 8px;">
+
+![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-Windows%2011-orange?style=flat-square)
+![License](https://img.shields.io/badge/License-GPL--3.0-green?style=flat-square)
+![Framework](https://img.shields.io/badge/Framework-AMD%20Only-red?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Beta-yellow?style=flat-square)
+![RyzenADJ](https://img.shields.io/badge/RyzenADJ-v0.14.0-purple?style=flat-square)
 
 </div>
 
-<div align="center">
-  <sub>Built with ❤️ by <a href="https://patreon.com/Oganoth">Oganoth</a></sub>
+<div style="margin: 20px 0;">
+Built with ❤️ by <a href="https://patreon.com/Oganoth">Oganoth</a>
 </div>
 
-<div align="center">
+<div style="margin: 30px 0;">
 
-### 🙏 Special Thanks to Our Amazing Patrons
+## 🙏 Special Thanks to Our Amazing Patrons
 
 A heartfelt thank you to those who make this project possible:
 
-- **Nirav Patel** (Founder of Framework Laptop) - Your support as a patron is a great honor. Without you, this project would not be possible.
+- **Nirav Patel** _(Founder of Framework Laptop)_ - Your support as a patron is a great honor. Without you, this project would not be possible.
 - Jonathan Webber
 - retr0sp3kt
 - Lysithea2802
 - Peter Ansorg
 - Jake Rogers
 
-[![Become a Patron](https://img.shields.io/badge/Patreon-Support%20Framework%20Hub-FF424D?style=for-the-badge&logo=patreon)](https://patreon.com/Oganoth)
+<a href="https://patreon.com/Oganoth">
+  <img src="https://img.shields.io/badge/SUPPORT_FRAMEWORK_HUB-FF424D?style=for-the-badge&logo=patreon&logoColor=white" alt="Support Framework Hub on Patreon" />
+</a>
 
 </div>
 
-<div align="center">
-<p align="center">
-  <a href="#english">English</a> •
-  <a href="#français">Français</a> •
-  <a href="#-key-features">Features</a> •
-  <a href="#-installation">Install</a> •
-  <a href="#-usage">Usage</a> •
-  <a href="#-contributing">Contribute</a> •
-  <a href="#-support">Support</a>
-</p>
+<div style="margin: 20px 0;">
+
+[English](#english) • 
+[Français](#français) • 
+[Features](#-key-features) • 
+[Install](#-installation) • 
+[Usage](#-usage) • 
+[Contribute](#-contributing) • 
+[Support](#-support)
+
+</div>
+
 </div>
 
 <hr>
