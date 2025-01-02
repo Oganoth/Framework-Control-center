@@ -25,7 +25,6 @@ from .hardware import HardwareMonitor
 from .display import DisplayManager
 from .detector import ModelDetector
 from .logger import logger, check_and_rotate_log
-from .tweaks import WindowsTweaks
 from .translations import get_text, language_names
 from .power_plan import PowerManager, PowerProfile
 
@@ -157,9 +156,6 @@ class FrameworkControlCenter(ctk.CTk):
         install_system_fonts()
         
         FrameworkControlCenter._open_windows.append(self)  # Add main window to list
-        
-        # Initialize tweaks manager first
-        self.tweaks = WindowsTweaks()
         
         # Load configuration from settings.json
         self.config_path = Path("configs") / "settings.json"
@@ -1403,7 +1399,7 @@ class FrameworkControlCenter(ctk.CTk):
                 except ValueError:
                     logger.error(f"Invalid monitoring interval: {monitoring_interval}")
                     self.config.monitoring_interval = 1000  # Default to 1 second
-                
+
                 # Save to file
                 self._save_config()
                 
@@ -1412,12 +1408,6 @@ class FrameworkControlCenter(ctk.CTk):
                     self._setup_tray()
                 elif not minimize_to_tray and hasattr(self, '_tray_icon'):
                     self._tray_icon.stop()
-
-                # Update startup task
-                if start_with_windows:
-                    self.tweaks.create_startup_task()
-                else:
-                    self.tweaks.remove_startup_task()
 
                 # Update monitoring interval in hardware monitor
                 if hasattr(self, 'hardware'):
@@ -1484,9 +1474,9 @@ class FrameworkControlCenter(ctk.CTk):
                     # Running as script
                     exe_path = os.path.abspath(sys.argv[0])
 
-                success = self.tweaks.create_startup_task(exe_path)
+                success = self._create_startup_shortcut(exe_path)
             else:
-                success = self.tweaks.remove_startup_task()
+                success = self._remove_startup_shortcut()
 
             if success:
                 self.config.start_with_windows = value
@@ -1501,25 +1491,6 @@ class FrameworkControlCenter(ctk.CTk):
                             widget.deselect() if value else widget.select()
         except Exception as e:
             logger.error(f"Error updating start with Windows setting: {e}")
-
-    def _restore_services(self) -> None:
-        """Restore services to automatic startup."""
-        try:
-            tweaks = WindowsTweaks()
-            self._add_log("\nRestoring services to automatic startup...\n")
-            
-            success = tweaks.restore_services()
-            
-            if success:
-                self._add_log("✅ Services restored successfully\n")
-                # Re-enable all service-related checkboxes
-                for checkbox in self.system_checkboxes.values():
-                    checkbox.configure(state="normal")
-            else:
-                self._add_log("❌ Failed to restore services\n")
-        except Exception as e:
-            logger.error(f"Error restoring services: {e}")
-            self._add_log(f"❌ Error restoring services: {e}\n") 
 
     def _check_log_file_size(self) -> None:
         """Periodically check and rotate log file if needed."""
