@@ -151,156 +151,176 @@ class WindowsPowerPlanManager:
                     logger.error(f"✗ Échec configuration {setting}: {stderr}")
     
     def _configure_boost_plan(self, guid: str) -> None:
-        """Configure les paramètres de performance maximale pour le plan Boost."""
+        """Configure maximum performance settings for Boost plan."""
         try:
-            logger.info("=== Configuration du plan Boost pour performances maximales ===")
-            logger.info(f"GUID du plan: {guid}")
+            logger.info("=== Configuring Boost power plan for maximum performance ===")
+            logger.info("Profile description:")
+            logger.info("- CPU: Maximum performance (100% min/max)")
+            logger.info("- CPU Boost: Aggressive mode with maximum boost")
+            logger.info("- GPU: Maximum performance mode")
+            logger.info("- Display: Never turn off")
+            logger.info("- Sleep: Never sleep")
+            logger.info("- PCI Express: Maximum performance (power saving off)")
+            logger.info(f"Power plan GUID: {guid}")
             
-            # Configurer les paramètres du processeur
-            logger.info("Configuration des paramètres du processeur...")
+            # Configure processor settings
+            logger.info("Configuring processor settings...")
             self._configure_power_settings(guid, self.BOOST_SETTINGS["SUB_PROCESSOR"], "SUB_PROCESSOR")
             
-            # Configurer les paramètres GPU
-            logger.info("Configuration des paramètres GPU...")
+            # Configure GPU settings
+            logger.info("Configuring GPU settings...")
             gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
             self._configure_power_settings(guid, self.BOOST_SETTINGS[gpu_subgroup], gpu_subgroup)
             
-            # Configurer les paramètres d'affichage
-            logger.info("Configuration des paramètres d'affichage...")
+            # Configure display settings
+            logger.info("Configuring display settings...")
             self._configure_power_settings(guid, self.BOOST_SETTINGS["SUB_VIDEO"], "SUB_VIDEO")
             
-            # Configurer les paramètres de mise en veille
-            logger.info("Configuration des paramètres de mise en veille...")
+            # Configure sleep settings
+            logger.info("Configuring sleep settings...")
             self._configure_power_settings(guid, self.BOOST_SETTINGS["SUB_SLEEP"], "SUB_SLEEP")
             
-            # Configurer les paramètres PCI Express
-            logger.info("Configuration des paramètres PCI Express...")
+            # Configure PCI Express settings
+            logger.info("Configuring PCI Express settings...")
             pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c268e20"
             self._configure_power_settings(guid, self.BOOST_SETTINGS[pci_subgroup], pci_subgroup)
             
-            # Vérifier les paramètres appliqués
-            logger.info("Vérification des paramètres appliqués...")
+            # Verify applied settings
+            logger.info("Verifying applied settings...")
             returncode, stdout, stderr = self._run_powercfg(["/query", guid])
             if returncode == 0:
-                logger.info("Configuration actuelle du plan Boost:")
+                logger.info("Current Boost plan configuration:")
                 logger.info(stdout)
             else:
-                logger.error(f"Échec de la vérification: {stderr}")
+                logger.error(f"Verification failed: {stderr}")
             
-            # Appliquer les changements
+            # Apply changes
             returncode, stdout, stderr = self._run_powercfg(["/setactive", guid])
             if returncode == 0:
-                logger.info("✓ Plan Boost activé avec succès")
+                logger.info("✓ Boost plan activated successfully")
             else:
-                logger.error(f"✗ Échec activation du plan: {stderr}")
+                logger.error(f"✗ Failed to activate plan: {stderr}")
             
-            logger.info("=== Configuration du plan Boost terminée ===")
+            logger.info("=== Boost plan configuration completed ===")
             
         except Exception as e:
-            logger.error(f"Erreur lors de la configuration du plan Boost: {e}")
+            logger.error(f"Error configuring Boost plan: {e}")
             import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
     
     def _configure_balanced_plan(self, guid: str) -> None:
-        """Configure les paramètres équilibrés pour le plan Balanced."""
+        """Configure balanced settings for Balanced plan."""
         try:
-            logger.info("=== Configuration du plan Balanced pour utilisation quotidienne ===")
-            logger.info(f"GUID du plan: {guid}")
+            logger.info("=== Configuring Balanced power plan for daily use ===")
+            logger.info("Profile description:")
+            logger.info("- CPU: Balanced performance (10% min, 99% max)")
+            logger.info("- CPU Boost: Enabled with moderate boost")
+            logger.info("- GPU: Optimized power savings")
+            logger.info("- Display: Turn off after 60min (AC) / 10min (battery)")
+            logger.info("- Sleep: Sleep after 60min (AC) / 10min (battery)")
+            logger.info("- PCI Express: Moderate power savings")
+            logger.info(f"Power plan GUID: {guid}")
             
-            # Configurer les paramètres du processeur
-            logger.info("Configuration des paramètres du processeur...")
+            # Configure processor settings
+            logger.info("Configuring processor settings...")
             self._configure_power_settings(guid, self.BALANCED_SETTINGS["SUB_PROCESSOR"], "SUB_PROCESSOR")
             
-            # Configurer les paramètres GPU
-            logger.info("Configuration des paramètres GPU...")
+            # Configure GPU settings
+            logger.info("Configuring GPU settings...")
             gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
-            gpu_settings = self.BALANCED_SETTINGS[gpu_subgroup]
-            self._configure_power_settings(guid, gpu_settings, gpu_subgroup)
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS[gpu_subgroup], gpu_subgroup)
             
-            # Configurer les paramètres d'affichage
-            logger.info("Configuration des paramètres d'affichage...")
+            # Configure display settings
+            logger.info("Configuring display settings...")
             self._configure_power_settings(guid, self.BALANCED_SETTINGS["SUB_VIDEO"], "SUB_VIDEO")
             
-            # Configurer les paramètres de mise en veille
-            logger.info("Configuration des paramètres de mise en veille...")
+            # Configure sleep settings
+            logger.info("Configuring sleep settings...")
             self._configure_power_settings(guid, self.BALANCED_SETTINGS["SUB_SLEEP"], "SUB_SLEEP")
             
-            # Configurer les paramètres PCI Express
-            logger.info("Configuration des paramètres PCI Express...")
+            # Configure PCI Express settings
+            logger.info("Configuring PCI Express settings...")
             pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c268e20"
             self._configure_power_settings(guid, self.BALANCED_SETTINGS[pci_subgroup], pci_subgroup)
             
-            # Vérifier les paramètres appliqués
-            logger.info("Vérification des paramètres appliqués...")
+            # Verify applied settings
+            logger.info("Verifying applied settings...")
             returncode, stdout, stderr = self._run_powercfg(["/query", guid])
             if returncode == 0:
-                logger.info("Configuration actuelle du plan Balanced:")
+                logger.info("Current Balanced plan configuration:")
                 logger.info(stdout)
             else:
-                logger.error(f"Échec de la vérification: {stderr}")
+                logger.error(f"Verification failed: {stderr}")
             
-            # Appliquer les changements
+            # Apply changes
             returncode, stdout, stderr = self._run_powercfg(["/setactive", guid])
             if returncode == 0:
-                logger.info("✓ Plan Balanced activé avec succès")
+                logger.info("✓ Balanced plan activated successfully")
             else:
-                logger.error(f"✗ Échec activation du plan: {stderr}")
+                logger.error(f"✗ Failed to activate plan: {stderr}")
             
-            logger.info("=== Configuration du plan Balanced terminée ===")
+            logger.info("=== Balanced plan configuration completed ===")
             
         except Exception as e:
-            logger.error(f"Erreur lors de la configuration du plan Balanced: {e}")
+            logger.error(f"Error configuring Balanced plan: {e}")
             import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
     
     def _configure_silent_plan(self, guid: str) -> None:
-        """Configure les paramètres d'économie d'énergie maximale pour le plan Silent."""
+        """Configure maximum power saving settings for Silent plan."""
         try:
-            logger.info("=== Configuration du plan Silent pour économie d'énergie maximale ===")
-            logger.info(f"GUID du plan: {guid}")
+            logger.info("=== Configuring Silent power plan for maximum power saving ===")
+            logger.info("Profile description:")
+            logger.info("- CPU: Power saving mode (5% min/30% max)")
+            logger.info("- CPU Boost: Disabled")
+            logger.info("- GPU: Force power-saving mode")
+            logger.info("- Display: Turn off after 3min")
+            logger.info("- Sleep: Sleep after 3min")
+            logger.info("- PCI Express: Maximum power savings")
+            logger.info(f"Power plan GUID: {guid}")
             
-            # Configurer les paramètres du processeur
-            logger.info("Configuration des paramètres du processeur...")
+            # Configure processor settings
+            logger.info("Configuring processor settings...")
             self._configure_power_settings(guid, self.SILENT_SETTINGS["SUB_PROCESSOR"], "SUB_PROCESSOR")
             
-            # Configurer les paramètres GPU
-            logger.info("Configuration des paramètres GPU...")
+            # Configure GPU settings
+            logger.info("Configuring GPU settings...")
             gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
             self._configure_power_settings(guid, self.SILENT_SETTINGS[gpu_subgroup], gpu_subgroup)
             
-            # Configurer les paramètres d'affichage
-            logger.info("Configuration des paramètres d'affichage...")
+            # Configure display settings
+            logger.info("Configuring display settings...")
             self._configure_power_settings(guid, self.SILENT_SETTINGS["SUB_VIDEO"], "SUB_VIDEO")
             
-            # Configurer les paramètres de mise en veille
-            logger.info("Configuration des paramètres de mise en veille...")
+            # Configure sleep settings
+            logger.info("Configuring sleep settings...")
             self._configure_power_settings(guid, self.SILENT_SETTINGS["SUB_SLEEP"], "SUB_SLEEP")
             
-            # Configurer les paramètres PCI Express
-            logger.info("Configuration des paramètres PCI Express...")
+            # Configure PCI Express settings
+            logger.info("Configuring PCI Express settings...")
             pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c268e20"
             self._configure_power_settings(guid, self.SILENT_SETTINGS[pci_subgroup], pci_subgroup)
             
-            # Vérifier les paramètres appliqués
-            logger.info("Vérification des paramètres appliqués...")
+            # Verify applied settings
+            logger.info("Verifying applied settings...")
             returncode, stdout, stderr = self._run_powercfg(["/query", guid])
             if returncode == 0:
-                logger.info("Configuration actuelle du plan Silent:")
+                logger.info("Current Silent plan configuration:")
                 logger.info(stdout)
             else:
-                logger.error(f"Échec de la vérification: {stderr}")
+                logger.error(f"Verification failed: {stderr}")
             
-            # Appliquer les changements
+            # Apply changes
             returncode, stdout, stderr = self._run_powercfg(["/setactive", guid])
             if returncode == 0:
-                logger.info("✓ Plan Silent activé avec succès")
+                logger.info("✓ Silent plan activated successfully")
             else:
-                logger.error(f"✗ Échec activation du plan: {stderr}")
+                logger.error(f"✗ Failed to activate plan: {stderr}")
             
-            logger.info("=== Configuration du plan Silent terminée ===")
+            logger.info("=== Silent plan configuration completed ===")
             
         except Exception as e:
-            logger.error(f"Erreur lors de la configuration du plan Silent: {e}")
+            logger.error(f"Error configuring Silent plan: {e}")
             import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
     
@@ -417,14 +437,38 @@ class PowerManager:
             logger.error(f"Error setting up RyzenAdj: {e}")
 
     async def apply_profile(self, profile: PowerProfile) -> bool:
-        """Applique un profil complet incluant le plan d'alimentation Windows."""
+        """Apply a complete profile including Windows power plan."""
         try:
-            # Applique d'abord le plan d'alimentation Windows
+            logger.info(f"\n=== Applying {profile.name} Profile ===")
+            
+            # Log AMD-specific parameters if available
+            if hasattr(profile, 'stapm_limit'):
+                logger.info("AMD Power Settings:")
+                logger.info(f"- STAPM Limit: {profile.stapm_limit} mW")
+                logger.info(f"- Fast Limit: {profile.fast_limit} mW")
+                logger.info(f"- Slow Limit: {profile.slow_limit} mW")
+                logger.info(f"- TCTL Temp: {profile.tctl_temp}°C")
+                logger.info(f"- VRM Current: {profile.vrm_current} mA")
+                logger.info(f"- VRM Max Current: {profile.vrmmax_current} mA")
+                logger.info(f"- VRM SoC Current: {profile.vrmsoc_current} mA")
+                logger.info(f"- VRM SoC Max Current: {profile.vrmsocmax_current} mA")
+            
+            # Log Intel-specific parameters if available
+            if hasattr(profile, 'pl1'):
+                logger.info("Intel Power Settings:")
+                logger.info(f"- PL1 (Sustained): {profile.pl1} W")
+                logger.info(f"- PL2 (Boost): {profile.pl2} W")
+                logger.info(f"- Tau: {profile.tau} seconds")
+                logger.info(f"- CPU Core Offset: {profile.cpu_core_offset} mV")
+                logger.info(f"- GPU Core Offset: {profile.gpu_core_offset} mV")
+                logger.info(f"- Max Frequency: {profile.max_frequency}")
+
+            # Apply Windows power plan first
             if not self.windows_power.apply_power_plan(profile.name):
                 logger.error(f"Failed to apply Windows power plan for profile: {profile.name}")
                 return False
 
-            # Applique les paramètres spécifiques au modèle
+            # Apply model-specific settings
             if "AMD" in self.model.name and self.ryzenadj:
                 success = await self._apply_ryzenadj_profile(profile)
                 if not success:
@@ -434,7 +478,8 @@ class PowerManager:
                 await self._apply_throttlestop_profile(profile)
             
             self.current_profile = profile
-            logger.info(f"Successfully applied complete power profile: {profile.name}")
+            logger.info(f"✓ Successfully applied complete power profile: {profile.name}")
+            logger.info("=== Profile application completed ===\n")
             return True
 
         except Exception as e:

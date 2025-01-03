@@ -148,6 +148,10 @@ class FrameworkControlCenter(ctk.CTk):
         
         super().__init__()
         
+        # Initialize event loop first
+        self.loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(self.loop)
+        
         # Ensure we're in the correct directory
         if getattr(sys, 'frozen', False):
             os.chdir(os.path.dirname(sys.executable))
@@ -438,13 +442,9 @@ class FrameworkControlCenter(ctk.CTk):
         buttons_frame = ctk.CTkFrame(refresh_frame, fg_color=self.colors.background.main)
         buttons_frame.pack(fill="x", padx=5)
 
-        # Determine available refresh rates based on model
-        refresh_rates = ["Auto", "60Hz"]
-        if "16" in self.model.name:
-            refresh_rates.append("165Hz")
-        elif "13" in self.model.name:
-            refresh_rates.append("120Hz")
-
+        # Get valid refresh rates from display manager
+        refresh_rates = ["Auto"] + self.display._valid_rates
+        
         # Configure grid columns based on number of buttons
         num_buttons = len(refresh_rates)
         for i in range(num_buttons):
@@ -452,8 +452,12 @@ class FrameworkControlCenter(ctk.CTk):
 
         self.refresh_buttons = {}
         for i, mode in enumerate(refresh_rates):
-            mode_key = mode.lower().replace("hz", "hz")  # Ensure correct format
+            # Convert mode to correct translation key format
+            mode_key = mode.lower()
+            if mode_key != "auto":
+                mode_key = f"{mode_key}hz"  # Add 'hz' suffix for numeric rates
             translated_text = get_text(self.config.language, f"refresh_rates.{mode_key}")
+            
             btn = ctk.CTkButton(
                 buttons_frame,
                 text=translated_text,
@@ -592,10 +596,14 @@ class FrameworkControlCenter(ctk.CTk):
 
     def _update_metrics(self) -> None:
         """Update system metrics display."""
+        if not hasattr(self, 'loop') or not self.winfo_exists():
+            logger.warning("Skipping metrics update - window destroyed or loop not initialized")
+            return
+
         async def update():
             try:
                 metrics = await self.hardware.get_metrics()
-                logger.debug("Got metrics update: %s", metrics.dict())
+                logger.debug("Got metrics update")
 
                 # Update progress bars and labels
                 for key, bar in self.metric_bars.items():
@@ -637,17 +645,50 @@ class FrameworkControlCenter(ctk.CTk):
 
                 # Update battery indicator
                 self._update_battery_status(metrics)
+
             except Exception as e:
                 logger.error(f"Error updating metrics: {e}")
                 import traceback
                 logger.error("Traceback: %s", traceback.format_exc())
 
-        # Run coroutine in the event loop
-        if hasattr(self, 'loop'):
-            self.loop.run_until_complete(update())
+        def schedule_next():
+            """Schedule the next update if window still exists"""
+            if self.winfo_exists():
+                self._metrics_after_id = self.after(
+                    self.config.monitoring_interval,
+                    self._update_metrics
+                )
 
-        # Schedule next update
-        self.after(self.config.monitoring_interval, self._update_metrics)
+        try:
+            # Run the update coroutine
+            self.loop.run_until_complete(update())
+            # Schedule next update
+            schedule_next()
+        except Exception as e:
+            logger.error(f"Critical error in metrics update: {e}")
+            # Try to recover by scheduling next update
+            schedule_next()
+
+    def _restart_metrics_update(self) -> None:
+        """Restart the metrics update cycle with current interval."""
+        try:
+            # Cancel existing update if any
+            if hasattr(self, '_metrics_after_id'):
+                self.after_cancel(self._metrics_after_id)
+                delattr(self, '_metrics_after_id')
+                
+            # Update hardware monitor interval
+            if hasattr(self, 'hardware'):
+                self.hardware.set_update_interval(self.config.monitoring_interval)
+            
+            # Start a new update cycle immediately
+            self._update_metrics()
+            logger.info(f"Metrics update restarted with interval: {self.config.monitoring_interval}ms")
+            
+        except Exception as e:
+            logger.error(f"Error restarting metrics update: {e}")
+            # Try to recover by starting a new update cycle
+            self._update_metrics()
 
     def _update_battery_status(self, metrics: HardwareMetrics) -> None:
         """Update battery status display."""
@@ -937,35 +978,40 @@ class FrameworkControlCenter(ctk.CTk):
     async def _set_refresh_rate(self, mode: str) -> None:
         """Set display refresh rate."""
         try:
-            # Déterminer le taux de rafraîchissement maximum en fonction du modèle
+            # Get max rate based on model
             max_rate = "165" if "16" in self.model.name else "60"
             
-            # Traiter le mode
+            # Process mode
             if mode == "Auto":
                 actual_mode = "auto"
             else:
-                # Si le mode est déjà en Hz, on le nettoie
+                # Clean up mode if it already has Hz
                 actual_mode = mode.replace("Hz", "")
             
             logger.debug(f"Setting refresh rate: mode={actual_mode}, max_rate={max_rate}")
-            await self.display.set_refresh_rate(actual_mode, max_rate)
-            self.config.refresh_rate_mode = mode
+            success = await self.display.set_refresh_rate(actual_mode, max_rate)
             
-            # Mettre à jour l'état des boutons
-            if mode in self.refresh_buttons:
-                self._update_button_state("refresh", self.refresh_buttons[mode])
-            
-            # Show notification if minimized
-            if not self.winfo_viewable():
-                with self._tray_lock:
-                    if self.tray_icon is not None:
-                        try:
-                            self.tray_icon.notify(
-                                title="Refresh Rate Changed",
-                                message=f"Display refresh rate mode changed to {mode}"
-                            )
-                        except Exception as e:
-                            logger.error(f"Error showing tray notification: {e}")
+            if success:
+                self.config.refresh_rate_mode = mode
+                
+                # Update button states
+                if mode in self.refresh_buttons:
+                    self._update_button_state("refresh", self.refresh_buttons[mode])
+                
+                # Show notification if minimized
+                if not self.winfo_viewable():
+                    with self._tray_lock:
+                        if self.tray_icon is not None:
+                            try:
+                                self.tray_icon.notify(
+                                    title="Refresh Rate Changed",
+                                    message=f"Display refresh rate mode changed to {mode}"
+                                )
+                            except Exception as e:
+                                logger.error(f"Error showing tray notification: {e}")
+            else:
+                logger.error(f"Failed to set refresh rate to {mode}")
+                
         except Exception as e:
             logger.error(f"Error setting refresh rate: {e}")
             import traceback
@@ -1096,7 +1142,10 @@ class FrameworkControlCenter(ctk.CTk):
             if hasattr(self, 'refresh_buttons') and self.refresh_buttons:
                 for mode in self.refresh_buttons:
                     button = self.refresh_buttons[mode]
-                    mode_key = mode.lower().replace("hz", "hz")  # Ensure correct format
+                    # Convert mode to correct translation key format
+                    mode_key = mode.lower()
+                    if mode_key != "auto":
+                        mode_key = f"{mode_key}hz"  # Add 'hz' suffix for numeric rates
                     translated_text = get_text(self.config.language, f"refresh_rates.{mode_key}")
                     button.configure(text=translated_text)
             
@@ -1112,6 +1161,7 @@ class FrameworkControlCenter(ctk.CTk):
             
         except Exception as e:
             logger.error(f"Error updating window text: {e}")
+            import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
 
     def _initialize_default_profiles(self) -> None:
@@ -1395,7 +1445,15 @@ class FrameworkControlCenter(ctk.CTk):
                         interval = 100
                     elif interval > 10000:  # Maximum 10 seconds
                         interval = 10000
+                    
+                    # Store old interval for comparison
+                    old_interval = self.config.monitoring_interval
                     self.config.monitoring_interval = interval
+                    
+                    # Restart metrics update if interval changed
+                    if old_interval != interval:
+                        self._restart_metrics_update()
+                        
                 except ValueError:
                     logger.error(f"Invalid monitoring interval: {monitoring_interval}")
                     self.config.monitoring_interval = 1000  # Default to 1 second
@@ -1408,15 +1466,6 @@ class FrameworkControlCenter(ctk.CTk):
                     self._setup_tray()
                 elif not minimize_to_tray and hasattr(self, '_tray_icon'):
                     self._tray_icon.stop()
-
-                # Update monitoring interval in hardware monitor
-                if hasattr(self, 'hardware'):
-                    self.hardware.set_update_interval(self.config.monitoring_interval)
-
-                # Update monitoring interval for metrics display
-                if hasattr(self, '_update_metrics'):
-                    self.after_cancel(self._update_metrics)
-                    self._update_metrics()  # Redémarrer immédiatement avec le nouvel intervalle
 
                 # Load and apply new theme
                 theme = self.config.load_theme()
@@ -1670,6 +1719,26 @@ class FrameworkControlCenter(ctk.CTk):
         else:
             self.deiconify()
             self.lift()
+
+    def on_closing(self) -> None:
+        """Handle window closing."""
+        try:
+            # Cancel any pending metrics update
+            if hasattr(self, '_metrics_after_id'):
+                self.after_cancel(self._metrics_after_id)
+                delattr(self, '_metrics_after_id')
+
+            # Close event loop
+            if hasattr(self, 'loop'):
+                self.loop.close()
+                delattr(self, 'loop')
+
+            # Destroy window
+            self.destroy()
+            
+        except Exception as e:
+            logger.error(f"Error during cleanup: {e}")
+            self.destroy()
 
 
 class UpdatesManager(ctk.CTkToplevel):

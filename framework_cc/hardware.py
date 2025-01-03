@@ -7,6 +7,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, Any
 import threading
+import atexit
 
 import clr
 import psutil
@@ -16,13 +17,15 @@ from .logger import logger
 from .constants import HARDWARE_DLL_PATH, CONFIGS_DIR, SENSOR_IDS, SENSOR_IDS_16_AMD, SENSOR_IDS_13_INTEL, SENSOR_IDS_13_AMD
 
 class HardwareMonitor:
-    """Hardware monitoring for Framework laptops."""
+    """Hardware monitoring class with improved thread safety."""
     
     def __init__(self, model: str = None) -> None:
         """Initialize hardware monitor."""
         self._metrics_cache = None
         self._last_update = 0
-        self._update_interval = 1.0  # Default to 1 second, will be updated from config
+        self._update_interval = 1.0  # Default to 1 second
+        self._stop_event = threading.Event()
+        self._metrics_lock = threading.Lock()
         self.computer = None
         self.igpu_hardware = None
         self.dgpu_hardware = None
@@ -44,9 +47,11 @@ class HardwareMonitor:
         self._setup_lhm()
         
         # Start continuous sensor updates in a separate thread
-        self._stop_update = False
         self._update_thread = threading.Thread(target=self._continuous_update, daemon=True)
         self._update_thread.start()
+        
+        # Register cleanup on exit
+        atexit.register(self.cleanup)
 
     def _download_lhm(self) -> None:
         """Download and extract LibreHardwareMonitor DLL."""
@@ -133,43 +138,44 @@ class HardwareMonitor:
             raise
 
     def _update_sensors(self) -> None:
-        """Update all hardware sensors and write to JSON file."""
+        """Update all hardware sensors and write to JSON file with thread safety."""
+        if not hasattr(self, 'computer') or not self.computer:
+            return
+
         try:
-            if not hasattr(self, 'computer') or not self.computer:
-                return
+            with self._metrics_lock:
+                # Force update all hardware
+                hardware_list = list(self.computer.Hardware)
+                for hardware in hardware_list:
+                    if hasattr(hardware, 'Update'):
+                        hardware.Update()
+                        if hasattr(hardware, 'SubHardware'):
+                            sub_hardware_list = list(hardware.SubHardware)
+                            for subHardware in sub_hardware_list:
+                                if hasattr(subHardware, 'Update'):
+                                    subHardware.Update()
 
-            # Force update all hardware
-            hardware_list = list(self.computer.Hardware)  # Convert to list first
-            for hardware in hardware_list:
-                if hasattr(hardware, 'Update'):
-                    hardware.Update()
-                    if hasattr(hardware, 'SubHardware'):
-                        sub_hardware_list = list(hardware.SubHardware)  # Convert to list
-                        for subHardware in sub_hardware_list:
-                            if hasattr(subHardware, 'Update'):
-                                subHardware.Update()
+                # Collect sensor data
+                sensors_data = []
+                for hardware in hardware_list:
+                    if hasattr(hardware, 'Sensors'):
+                        sensors = list(hardware.Sensors)
+                        for sensor in sensors:
+                            if sensor and sensor.Value is not None:
+                                sensor_data = {
+                                    'Hardware': str(hardware.Name),
+                                    'Name': str(sensor.Name),
+                                    'Type': str(sensor.SensorType),
+                                    'Value': float(sensor.Value)
+                                }
+                                sensors_data.append(sensor_data)
 
-            # Collect sensor data
-            sensors_data = []
-            for hardware in hardware_list:
-                if hasattr(hardware, 'Sensors'):
-                    sensors = list(hardware.Sensors)  # Convert to list
-                    for sensor in sensors:
-                        if sensor and sensor.Value is not None:
-                            sensor_data = {
-                                'Name': sensor.Name,
-                                'Hardware': hardware.Name,
-                                'Type': str(sensor.SensorType),
-                                'Value': float(sensor.Value)
-                            }
-                            sensors_data.append(sensor_data)
-                            logger.debug(f"Sensor updated: {sensor.Name} ({sensor.SensorType}): {sensor.Value}")
-
-            # Save sensors data to file
-            self.json_file_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(self.json_file_path, "w", encoding="utf-8") as f:
-                json.dump(sensors_data, f, indent=4)
-            logger.debug(f"Sensors data updated in {self.json_file_path}")
+                # Save sensors data to file
+                self.json_file_path.parent.mkdir(parents=True, exist_ok=True)
+                temp_file = self.json_file_path.with_suffix('.tmp')
+                with open(temp_file, "w", encoding="utf-8") as f:
+                    json.dump(sensors_data, f, indent=4)
+                temp_file.replace(self.json_file_path)  # Atomic write
 
         except Exception as e:
             logger.error(f"Error updating sensors: {e}")
@@ -232,26 +238,43 @@ class HardwareMonitor:
 
     def _continuous_update(self) -> None:
         """Continuously update sensors in a separate thread."""
-        while not self._stop_update:
+        while not self._stop_event.is_set():
             try:
+                start_time = time.time()
                 self._update_sensors()
-                time.sleep(self._update_interval)
+                
+                # Calculate sleep time to maintain precise interval
+                elapsed = time.time() - start_time
+                sleep_time = max(0, self._update_interval - elapsed)
+                if sleep_time > 0:
+                    time.sleep(sleep_time)
+                    
             except Exception as e:
                 logger.error(f"Error in continuous update: {e}")
-                time.sleep(1)  # Wait a bit longer on error
+                time.sleep(1)  # Prevent rapid retries on error
+
+    def set_update_interval(self, interval: float) -> None:
+        """Set the update interval for sensor monitoring.
+        
+        Args:
+            interval: The update interval in milliseconds.
+        """
+        # Convert milliseconds to seconds and ensure minimum interval
+        interval_seconds = max(0.1, interval / 1000.0)  # Minimum 100ms
+        self._update_interval = interval_seconds
+        logger.info(f"Sensor update interval set to {interval_seconds:.3f} seconds ({interval}ms)")
 
     def cleanup(self) -> None:
-        """Cleanup resources."""
-        try:
-            self._stop_update = True
-            if hasattr(self, '_update_thread'):
-                self._update_thread.join(timeout=1)
-            if hasattr(self, 'computer'):
-                self.computer.Close()
-            if self.json_file_path.exists():
-                self.json_file_path.unlink()
-        except Exception as e:
-            logger.error(f"Error during cleanup: {e}")
+        """Clean up resources and stop monitoring."""
+        logger.info("Cleaning up hardware monitor...")
+        self._stop_event.set()
+        if hasattr(self, '_update_thread') and self._update_thread.is_alive():
+            self._update_thread.join(timeout=2.0)
+        if hasattr(self, 'computer'):
+            for hardware in self.computer.Hardware:
+                hardware.Close()
+            self.computer = None
+        logger.info("Hardware monitor cleanup complete")
 
     async def get_metrics(self) -> HardwareMetrics:
         """Get current hardware metrics from sensors.json."""
@@ -345,7 +368,3 @@ class HardwareMonitor:
             import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
             return HardwareMetrics()
-
-    def set_update_interval(self, interval_ms: int) -> None:
-        """Update the sensor update interval."""
-        self._update_interval = interval_ms / 1000.0  # Convert ms to seconds

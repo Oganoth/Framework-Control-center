@@ -26535,3 +26535,16 @@ build/Framework Hub/localpycs/zipp/glob.pyc
 build/Framework Hub/localpycs/zipp/compat/__init__.pyc
 build/Framework Hub/localpycs/zipp/compat/py310.pyc
 logs/2025-01-02.log
+framework_cc/__pycache__/__init__.cpython-312.pyc
+framework_cc/__pycache__/constants.cpython-312.pyc
+framework_cc/__pycache__/detector.cpython-312.pyc
+framework_cc/__pycache__/display.cpython-312.pyc
+framework_cc/__pycache__/gui.cpython-312.pyc
+framework_cc/__pycache__/hardware.cpython-312.pyc
+framework_cc/__pycache__/logger.cpython-312.pyc
+framework_cc/__pycache__/models.cpython-312.pyc
+framework_cc/__pycache__/power_plan.cpython-312.pyc
+framework_cc/__pycache__/translations.cpython-312.pyc
+framework_cc/__pycache__/utils.cpython-312.pyc
+logs/framework_cc.log
+.tasks

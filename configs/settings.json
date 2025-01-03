@@ -1,14 +1,14 @@
 {
     "language": "en",
-    "current_theme": "fedora_dark_theme",
+    "current_theme": "default_theme",
     "minimize_to_tray": true,
     "start_minimized": false,
     "start_with_windows": false,
     "monitoring_interval": 5000,
-    "current_profile": "Boost",
+    "current_profile": "Balanced",
     "refresh_rate_mode": "Auto",
     "window_position": {
-        "x": 3522,
-        "y": 640
+        "x": 3069,
+        "y": 627
     }
 }
