@@ -26,73 +26,130 @@ class WindowsPowerPlanManager:
     
     # Paramètres pour le plan Silent (économie d'énergie maximale)
     SILENT_SETTINGS = {
-        "SUB_PROCESSOR": {
-            "PROCTHROTTLEMIN": {"ac": 5, "dc": 5},     # 5% for both states
-            "PROCTHROTTLEMAX": {"ac": 30, "dc": 30},   # 30% for both states
-            "PERFBOOSTMODE": 0,            # Disabled
-            "PERFBOOSTPOL": 0              # Disabled
+        "54533251-82be-4824-96c1-47b60b740d00": {  # Processor Power Management
+            "893dee8e-2bef-41e0-89c6-b55d0929964c": {"ac": 5, "dc": 5},  # Minimum processor state
+            "bc5038f7-23e0-4960-96da-33abaf5935ec": {"ac": 30, "dc": 30},  # Maximum processor state
+            "be337238-0d82-4146-a960-4f3749d470c7": {"ac": 0, "dc": 0},  # Performance boost mode
+            "45bcc044-d885-43e2-8605-ee0ec6e96b59": {"ac": 0, "dc": 0}  # Performance boost policy
         },
-        "SUB_VIDEO": {
-            "VIDEOIDLE": {"ac": 180, "dc": 180}  # 3 minutes
+        "3c0bc021-c8a8-4e07-a973-6b14bcb2b7e": {  # Display Settings
+            "90959d22-d6a1-49b9-af93-bce885ad335b": {"ac": 1, "dc": 1},  # Adaptive display
+            "a9ceb8da-cd46-44fb-a98b-02af69de4623": {"ac": 1, "dc": 1},  # Allow display required policy
+            "aded5e82-b909-4619-9949-f5d71dac0bcb": {"ac": 30, "dc": 30},  # Display brightness
+            "f1fbfde2-a960-4165-9f88-50667911ce96": {"ac": 50, "dc": 50},  # Dimmed display brightness
+            "fbd9aa66-9553-4097-ba44-ed6e9d65eab8": {"ac": 1, "dc": 1}   # Enable adaptive brightness
         },
-        "SUB_SLEEP": {
-            "STANDBYIDLE": {"ac": 180, "dc": 180},  # 3 minutes
-            "HYBRIDSLEEP": 0,
-            "HIBERNATEIDLE": 0
+        "238c9fa8-0aad-41ed-83f4-97be242c8f20": {  # Sleep Settings
+            "29f6c1db-86da-48c5-9fad-628d2a5290dc": {"ac": 180, "dc": 180},  # Sleep idle timeout
+            "9d7815a6-7ee4-497e-8888-515a05f02364": {"ac": 3600, "dc": 1800},  # Hibernate timeout
+            "94ac6d29-73ce-41a6-809f-6363ba21b47e": {"ac": 0, "dc": 0}  # Hybrid sleep
         },
-        "e276e160-7cb0-43c6-b20b-73f5dce39954": {  # Switchable Dynamic Graphics
-            "a1662ab2-9d34-4e53-ba8b-2639b9e20857": 0  # Force power-saving graphics
+        "501a4d13-42af-4429-9fd1-a8218c2682e0": {  # PCI Express
+            "ee12f906-d277-404b-b6da-e5fa1a576df5": {"ac": 2, "dc": 2}  # Link State Power Management
         },
-        "501a4d13-42af-4429-9fd1-a8218c268e20": {  # PCI Express
-            "ee12f906-d277-404b-b6da-e5fa1a576df5": {"ac": 2, "dc": 2}  # Link State Power Management: Maximum power savings
+        "e276e160-7cb0-43c6-b20b-73f5dce39954": {  # Graphics Power Management
+            "a1662ab2-9d34-4e53-ba8b-2639b9e20857": {"ac": 0, "dc": 0}  # Force power-saving graphics
+        },
+        "de830923-a562-41af-a086-e3a2c6bad2da": {  # Energy Saver settings
+            "13d09884-f74e-474a-a852-b6bde8ad03a8": {"ac": 30, "dc": 30},  # Display brightness weight
+            "5c5bb349-ad29-4ee2-9d0b-2b25270f7a81": {"ac": 1, "dc": 1},     # Energy Saver Policy (1 = Aggressive)
+            "e69653ca-cf7f-4f05-aa73-cb833fa90ad4": {"ac": 100, "dc": 100}  # Charge level
+        },
+        "2a737441-1930-4402-8d77-b2bebba308a": {  # USB Power Management
+            "48e6b7a6-50f5-4782-a5d4-53bb80f7e226": {"ac": 2, "dc": 2}  # USB selective suspend
+        },
+        "7516b95f-f776-4464-bc83-06167f40cc99": {  # Adaptive Display
+            "fbd9aa66-9553-4097-ba44-ed6e9d65eab8": {"ac": 1, "dc": 1}  # Adaptive brightness
+        },
+        "c763b4ec-0e50-4b6b-9bed-2b92a6ee884e": {  # AMD Power Slider
+            "38cab4d5-db09-449f-9db5-1c91c909b6d4": {"ac": 0, "dc": 0},  # PMF Controller - Battery saver
+            "7ec1751b-60ed-4588-afb5-9819d3d77d90": {"ac": 0, "dc": 0}   # Overlay - Battery saver
         }
     }
     
     # Paramètres pour le plan Balanced (utilisation quotidienne)
     BALANCED_SETTINGS = {
-        "SUB_PROCESSOR": {
-            "PROCTHROTTLEMIN": {"ac": 10, "dc": 10},    # 10% for both states
-            "PROCTHROTTLEMAX": {"ac": 99, "dc": 99},    # 99% for both states
-            "PERFBOOSTMODE": 1,            # Enabled
-            "PERFBOOSTPOL": 50             # Moderate boost
+        "54533251-82be-4824-96c1-47b60b740d00": {  # Processor Power Management
+            "893dee8e-2bef-41e0-89c6-b55d0929964c": {"ac": 10, "dc": 10},  # Minimum processor state
+            "bc5038f7-23e0-4960-96da-33abaf5935ec": {"ac": 99, "dc": 99},  # Maximum processor state
+            "be337238-0d82-4146-a960-4f3749d470c7": {"ac": 1, "dc": 1},    # Performance boost mode
+            "45bcc044-d885-43e2-8605-ee0ec6e96b59": {"ac": 50, "dc": 50}   # Performance boost policy
         },
-        "SUB_VIDEO": {
-            "VIDEOIDLE": {"ac": 3600, "dc": 600}  # 60 minutes plugged in, 10 minutes on battery
+        "3c0bc021-c8a8-4e07-a973-6b14bcb2b7e": {  # Display Settings
+            "90959d22-d6a1-49b9-af93-bce885ad335b": {"ac": 1, "dc": 1},  # Adaptive display
+            "a9ceb8da-cd46-44fb-a98b-02af69de4623": {"ac": 1, "dc": 1},  # Allow display required policy
+            "aded5e82-b909-4619-9949-f5d71dac0bcb": {"ac": 70, "dc": 50},  # Display brightness
+            "f1fbfde2-a960-4165-9f88-50667911ce96": {"ac": 70, "dc": 50},  # Dimmed display brightness
+            "fbd9aa66-9553-4097-ba44-ed6e9d65eab8": {"ac": 1, "dc": 1}   # Enable adaptive brightness
         },
-        "SUB_SLEEP": {
-            "STANDBYIDLE": {"ac": 3600, "dc": 600},  # 60 minutes plugged in, 10 minutes on battery
-            "HYBRIDSLEEP": 0,
-            "HIBERNATEIDLE": 0
+        "238c9fa8-0aad-41ed-83f4-97be242c8f20": {  # Sleep Settings
+            "29f6c1db-86da-48c5-9fad-628d2a5290dc": {"ac": 3600, "dc": 600},  # Sleep idle timeout
+            "9d7815a6-7ee4-497e-8888-515a05f02364": {"ac": 14400, "dc": 3600},  # Hibernate timeout
+            "94ac6d29-73ce-41a6-809f-6363ba21b47e": {"ac": 0, "dc": 0}  # Hybrid sleep
         },
-        "e276e160-7cb0-43c6-b20b-73f5dce39954": {  # Switchable Dynamic Graphics
-            "a1662ab2-9d34-4e53-ba8b-2639b9e20857": 1  # Optimize power savings
+        "501a4d13-42af-4429-9fd1-a8218c2682e0": {  # PCI Express
+            "ee12f906-d277-404b-b6da-e5fa1a576df5": {"ac": 1, "dc": 1}  # Link State Power Management
         },
-        "501a4d13-42af-4429-9fd1-a8218c268e20": {  # PCI Express
-            "ee12f906-d277-404b-b6da-e5fa1a576df5": {"ac": 1, "dc": 1}  # Link State Power Management: Moderate power savings
+        "e276e160-7cb0-43c6-b20b-73f5dce39954": {  # Graphics Power Management
+            "a1662ab2-9d34-4e53-ba8b-2639b9e20857": {"ac": 1, "dc": 1}  # Optimize power savings
+        },
+        "de830923-a562-41af-a086-e3a2c6bad2da": {  # Energy Saver settings
+            "13d09884-f74e-474a-a852-b6bde8ad03a8": {"ac": 70, "dc": 50},  # Display brightness weight
+            "5c5bb349-ad29-4ee2-9d0b-2b25270f7a81": {"ac": 0, "dc": 1},     # Energy Saver Policy
+            "e69653ca-cf7f-4f05-aa73-cb833fa90ad4": {"ac": 100, "dc": 100}  # Charge level
+        },
+        "2a737441-1930-4402-8d77-b2bebba308a": {  # USB Power Management
+            "48e6b7a6-50f5-4782-a5d4-53bb80f7e226": {"ac": 1, "dc": 1}  # USB selective suspend
+        },
+        "7516b95f-f776-4464-bc83-06167f40cc99": {  # Adaptive Display
+            "fbd9aa66-9553-4097-ba44-ed6e9d65eab8": {"ac": 1, "dc": 1}  # Adaptive brightness
+        },
+        "c763b4ec-0e50-4b6b-9bed-2b92a6ee884e": {  # AMD Power Slider
+            "38cab4d5-db09-449f-9db5-1c91c909b6d4": {"ac": 2, "dc": 1},  # PMF Controller - Better performance/Better battery
+            "7ec1751b-60ed-4588-afb5-9819d3d77d90": {"ac": 2, "dc": 1}   # Overlay - Better performance/Better battery
         }
     }
     
     # Paramètres pour le plan Boost (performances maximales)
     BOOST_SETTINGS = {
-        "SUB_PROCESSOR": {
-            "PROCTHROTTLEMIN": {"ac": 100, "dc": 100},  # 100% for both states
-            "PROCTHROTTLEMAX": {"ac": 100, "dc": 100},  # 100% for both states
-            "PERFBOOSTMODE": 2,            # Aggressive
-            "PERFBOOSTPOL": 100            # Maximum boost
+        "54533251-82be-4824-96c1-47b60b740d00": {  # Processor Power Management
+            "893dee8e-2bef-41e0-89c6-b55d0929964c": {"ac": 100, "dc": 100},  # Minimum processor state
+            "bc5038f7-23e0-4960-96da-33abaf5935ec": {"ac": 100, "dc": 100},  # Maximum processor state
+            "be337238-0d82-4146-a960-4f3749d470c7": {"ac": 2, "dc": 2},      # Performance boost mode (Aggressive)
+            "45bcc044-d885-43e2-8605-ee0ec6e96b59": {"ac": 100, "dc": 100}   # Performance boost policy
         },
-        "SUB_VIDEO": {
-            "VIDEOIDLE": {"ac": 0, "dc": 0}  # Never
+        "3c0bc021-c8a8-4e07-a973-6b14bcb2b7e": {  # Display Settings
+            "90959d22-d6a1-49b9-af93-bce885ad335b": {"ac": 0, "dc": 0},  # Adaptive display
+            "a9ceb8da-cd46-44fb-a98b-02af69de4623": {"ac": 1, "dc": 1},  # Allow display required policy
+            "aded5e82-b909-4619-9949-f5d71dac0bcb": {"ac": 100, "dc": 100},  # Display brightness
+            "f1fbfde2-a960-4165-9f88-50667911ce96": {"ac": 100, "dc": 100},  # Dimmed display brightness
+            "fbd9aa66-9553-4097-ba44-ed6e9d65eab8": {"ac": 0, "dc": 0}   # Enable adaptive brightness
         },
-        "SUB_SLEEP": {
-            "STANDBYIDLE": {"ac": 0, "dc": 0},  # Never
-            "HYBRIDSLEEP": 0,
-            "HIBERNATEIDLE": 0
+        "238c9fa8-0aad-41ed-83f4-97be242c8f20": {  # Sleep Settings
+            "29f6c1db-86da-48c5-9fad-628d2a5290dc": {"ac": 0, "dc": 0},  # Sleep idle timeout (Never)
+            "9d7815a6-7ee4-497e-8888-515a05f02364": {"ac": 0, "dc": 0},  # Hibernate timeout (Never)
+            "94ac6d29-73ce-41a6-809f-6363ba21b47e": {"ac": 0, "dc": 0}  # Hybrid sleep
         },
-        "e276e160-7cb0-43c6-b20b-73f5dce39954": {  # Switchable Dynamic Graphics
-            "a1662ab2-9d34-4e53-ba8b-2639b9e20857": 2  # Force maximum performance
+        "501a4d13-42af-4429-9fd1-a8218c2682e0": {  # PCI Express
+            "ee12f906-d277-404b-b6da-e5fa1a576df5": {"ac": 0, "dc": 0}  # Link State Power Management (Off)
         },
-        "501a4d13-42af-4429-9fd1-a8218c268e20": {  # PCI Express
-            "ee12f906-d277-404b-b6da-e5fa1a576df5": {"ac": 0, "dc": 0}  # Link State Power Management: Off
+        "e276e160-7cb0-43c6-b20b-73f5dce39954": {  # Graphics Power Management
+            "a1662ab2-9d34-4e53-ba8b-2639b9e20857": {"ac": 3, "dc": 3}  # Maximize performance
+        },
+        "de830923-a562-41af-a086-e3a2c6bad2da": {  # Energy Saver settings
+            "13d09884-f74e-474a-a852-b6bde8ad03a8": {"ac": 100, "dc": 100},  # Display brightness weight
+            "5c5bb349-ad29-4ee2-9d0b-2b25270f7a81": {"ac": 0, "dc": 0},      # Energy Saver Policy (Off)
+            "e69653ca-cf7f-4f05-aa73-cb833fa90ad4": {"ac": 100, "dc": 100}   # Charge level
+        },
+        "2a737441-1930-4402-8d77-b2bebba308a": {  # USB Power Management
+            "48e6b7a6-50f5-4782-a5d4-53bb80f7e226": {"ac": 0, "dc": 0}  # USB selective suspend (Off)
+        },
+        "7516b95f-f776-4464-bc83-06167f40cc99": {  # Adaptive Display
+            "fbd9aa66-9553-4097-ba44-ed6e9d65eab8": {"ac": 0, "dc": 0}  # Adaptive brightness (Off)
+        },
+        "c763b4ec-0e50-4b6b-9bed-2b92a6ee884e": {  # AMD Power Slider
+            "38cab4d5-db09-449f-9db5-1c91c909b6d4": {"ac": 3, "dc": 3},  # PMF Controller - Best performance
+            "7ec1751b-60ed-4588-afb5-9819d3d77d90": {"ac": 3, "dc": 3}   # Overlay - Best performance
         }
     }
     
@@ -157,33 +214,59 @@ class WindowsPowerPlanManager:
             logger.info("Profile description:")
             logger.info("- CPU: Maximum performance (100% min/max)")
             logger.info("- CPU Boost: Aggressive mode with maximum boost")
-            logger.info("- GPU: Maximum performance mode")
-            logger.info("- Display: Never turn off")
-            logger.info("- Sleep: Never sleep")
-            logger.info("- PCI Express: Maximum performance (power saving off)")
+            logger.info("- GPU: Maximum performance")
+            logger.info("- Display: Adaptive off, 100% brightness")
+            logger.info("- Sleep: Never")
+            logger.info("- PCI Express: Maximum performance")
+            logger.info("- Energy Saver: Disabled")
+            logger.info("- USB: Maximum performance")
+            logger.info("- AMD Power: Best performance")
             logger.info(f"Power plan GUID: {guid}")
             
             # Configure processor settings
             logger.info("Configuring processor settings...")
-            self._configure_power_settings(guid, self.BOOST_SETTINGS["SUB_PROCESSOR"], "SUB_PROCESSOR")
-            
-            # Configure GPU settings
-            logger.info("Configuring GPU settings...")
-            gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
-            self._configure_power_settings(guid, self.BOOST_SETTINGS[gpu_subgroup], gpu_subgroup)
+            processor_subgroup = "54533251-82be-4824-96c1-47b60b740d00"
+            self._configure_power_settings(guid, self.BOOST_SETTINGS[processor_subgroup], processor_subgroup)
             
             # Configure display settings
             logger.info("Configuring display settings...")
-            self._configure_power_settings(guid, self.BOOST_SETTINGS["SUB_VIDEO"], "SUB_VIDEO")
+            display_subgroup = "3c0bc021-c8a8-4e07-a973-6b14bcb2b7e"
+            self._configure_power_settings(guid, self.BOOST_SETTINGS[display_subgroup], display_subgroup)
             
             # Configure sleep settings
             logger.info("Configuring sleep settings...")
-            self._configure_power_settings(guid, self.BOOST_SETTINGS["SUB_SLEEP"], "SUB_SLEEP")
+            sleep_subgroup = "238c9fa8-0aad-41ed-83f4-97be242c8f20"
+            self._configure_power_settings(guid, self.BOOST_SETTINGS[sleep_subgroup], sleep_subgroup)
             
             # Configure PCI Express settings
             logger.info("Configuring PCI Express settings...")
-            pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c268e20"
+            pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c2682e0"
             self._configure_power_settings(guid, self.BOOST_SETTINGS[pci_subgroup], pci_subgroup)
+            
+            # Configure Graphics Power Management
+            logger.info("Configuring Graphics Power Management...")
+            gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
+            self._configure_power_settings(guid, self.BOOST_SETTINGS[gpu_subgroup], gpu_subgroup)
+            
+            # Configure Energy Saver settings
+            logger.info("Configuring Energy Saver settings...")
+            energy_subgroup = "de830923-a562-41af-a086-e3a2c6bad2da"
+            self._configure_power_settings(guid, self.BOOST_SETTINGS[energy_subgroup], energy_subgroup)
+            
+            # Configure USB Power Management
+            logger.info("Configuring USB Power Management...")
+            usb_subgroup = "2a737441-1930-4402-8d77-b2bebba308a"
+            self._configure_power_settings(guid, self.BOOST_SETTINGS[usb_subgroup], usb_subgroup)
+            
+            # Configure Adaptive Display
+            logger.info("Configuring Adaptive Display...")
+            adaptive_subgroup = "7516b95f-f776-4464-bc83-06167f40cc99"
+            self._configure_power_settings(guid, self.BOOST_SETTINGS[adaptive_subgroup], adaptive_subgroup)
+            
+            # Configure AMD Power Slider
+            logger.info("Configuring AMD Power Slider...")
+            amd_subgroup = "c763b4ec-0e50-4b6b-9bed-2b92a6ee884e"
+            self._configure_power_settings(guid, self.BOOST_SETTINGS[amd_subgroup], amd_subgroup)
             
             # Verify applied settings
             logger.info("Verifying applied settings...")
@@ -216,32 +299,58 @@ class WindowsPowerPlanManager:
             logger.info("- CPU: Balanced performance (10% min, 99% max)")
             logger.info("- CPU Boost: Enabled with moderate boost")
             logger.info("- GPU: Optimized power savings")
-            logger.info("- Display: Turn off after 60min (AC) / 10min (battery)")
-            logger.info("- Sleep: Sleep after 60min (AC) / 10min (battery)")
+            logger.info("- Display: Adaptive enabled, 70% brightness on AC, 50% on battery")
+            logger.info("- Sleep: 60min on AC, 10min on battery")
             logger.info("- PCI Express: Moderate power savings")
+            logger.info("- Energy Saver: Aggressive on battery only")
+            logger.info("- USB: Moderate power savings")
+            logger.info("- AMD Power: Better performance on AC, Better battery on DC")
             logger.info(f"Power plan GUID: {guid}")
             
             # Configure processor settings
             logger.info("Configuring processor settings...")
-            self._configure_power_settings(guid, self.BALANCED_SETTINGS["SUB_PROCESSOR"], "SUB_PROCESSOR")
-            
-            # Configure GPU settings
-            logger.info("Configuring GPU settings...")
-            gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
-            self._configure_power_settings(guid, self.BALANCED_SETTINGS[gpu_subgroup], gpu_subgroup)
+            processor_subgroup = "54533251-82be-4824-96c1-47b60b740d00"
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS[processor_subgroup], processor_subgroup)
             
             # Configure display settings
             logger.info("Configuring display settings...")
-            self._configure_power_settings(guid, self.BALANCED_SETTINGS["SUB_VIDEO"], "SUB_VIDEO")
+            display_subgroup = "3c0bc021-c8a8-4e07-a973-6b14bcb2b7e"
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS[display_subgroup], display_subgroup)
             
             # Configure sleep settings
             logger.info("Configuring sleep settings...")
-            self._configure_power_settings(guid, self.BALANCED_SETTINGS["SUB_SLEEP"], "SUB_SLEEP")
+            sleep_subgroup = "238c9fa8-0aad-41ed-83f4-97be242c8f20"
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS[sleep_subgroup], sleep_subgroup)
             
             # Configure PCI Express settings
             logger.info("Configuring PCI Express settings...")
-            pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c268e20"
+            pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c2682e0"
             self._configure_power_settings(guid, self.BALANCED_SETTINGS[pci_subgroup], pci_subgroup)
+            
+            # Configure Graphics Power Management
+            logger.info("Configuring Graphics Power Management...")
+            gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS[gpu_subgroup], gpu_subgroup)
+            
+            # Configure Energy Saver settings
+            logger.info("Configuring Energy Saver settings...")
+            energy_subgroup = "de830923-a562-41af-a086-e3a2c6bad2da"
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS[energy_subgroup], energy_subgroup)
+            
+            # Configure USB Power Management
+            logger.info("Configuring USB Power Management...")
+            usb_subgroup = "2a737441-1930-4402-8d77-b2bebba308a"
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS[usb_subgroup], usb_subgroup)
+            
+            # Configure Adaptive Display
+            logger.info("Configuring Adaptive Display...")
+            adaptive_subgroup = "7516b95f-f776-4464-bc83-06167f40cc99"
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS[adaptive_subgroup], adaptive_subgroup)
+            
+            # Configure AMD Power Slider
+            logger.info("Configuring AMD Power Slider...")
+            amd_subgroup = "c763b4ec-0e50-4b6b-9bed-2b92a6ee884e"
+            self._configure_power_settings(guid, self.BALANCED_SETTINGS[amd_subgroup], amd_subgroup)
             
             # Verify applied settings
             logger.info("Verifying applied settings...")
@@ -277,29 +386,50 @@ class WindowsPowerPlanManager:
             logger.info("- Display: Turn off after 3min")
             logger.info("- Sleep: Sleep after 3min")
             logger.info("- PCI Express: Maximum power savings")
+            logger.info("- Energy Saver: Aggressive power saving")
+            logger.info("- USB: Maximum power savings")
+            logger.info("- Adaptive Display: Enabled")
             logger.info(f"Power plan GUID: {guid}")
             
             # Configure processor settings
             logger.info("Configuring processor settings...")
-            self._configure_power_settings(guid, self.SILENT_SETTINGS["SUB_PROCESSOR"], "SUB_PROCESSOR")
-            
-            # Configure GPU settings
-            logger.info("Configuring GPU settings...")
-            gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
-            self._configure_power_settings(guid, self.SILENT_SETTINGS[gpu_subgroup], gpu_subgroup)
+            processor_subgroup = "54533251-82be-4824-96c1-47b60b740d00"
+            self._configure_power_settings(guid, self.SILENT_SETTINGS[processor_subgroup], processor_subgroup)
             
             # Configure display settings
             logger.info("Configuring display settings...")
-            self._configure_power_settings(guid, self.SILENT_SETTINGS["SUB_VIDEO"], "SUB_VIDEO")
+            display_subgroup = "3c0bc021-c8a8-4e07-a973-6b14bcb2b7e"
+            self._configure_power_settings(guid, self.SILENT_SETTINGS[display_subgroup], display_subgroup)
             
             # Configure sleep settings
             logger.info("Configuring sleep settings...")
-            self._configure_power_settings(guid, self.SILENT_SETTINGS["SUB_SLEEP"], "SUB_SLEEP")
+            sleep_subgroup = "238c9fa8-0aad-41ed-83f4-97be242c8f20"
+            self._configure_power_settings(guid, self.SILENT_SETTINGS[sleep_subgroup], sleep_subgroup)
             
             # Configure PCI Express settings
             logger.info("Configuring PCI Express settings...")
-            pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c268e20"
+            pci_subgroup = "501a4d13-42af-4429-9fd1-a8218c2682e0"
             self._configure_power_settings(guid, self.SILENT_SETTINGS[pci_subgroup], pci_subgroup)
+            
+            # Configure Graphics Power Management
+            logger.info("Configuring Graphics Power Management...")
+            gpu_subgroup = "e276e160-7cb0-43c6-b20b-73f5dce39954"
+            self._configure_power_settings(guid, self.SILENT_SETTINGS[gpu_subgroup], gpu_subgroup)
+            
+            # Configure Energy Saver settings
+            logger.info("Configuring Energy Saver settings...")
+            energy_subgroup = "de830923-a562-41af-a086-e3a2c6bad2da"
+            self._configure_power_settings(guid, self.SILENT_SETTINGS[energy_subgroup], energy_subgroup)
+            
+            # Configure USB Power Management
+            logger.info("Configuring USB Power Management...")
+            usb_subgroup = "2a737441-1930-4402-8d77-b2bebba308a"
+            self._configure_power_settings(guid, self.SILENT_SETTINGS[usb_subgroup], usb_subgroup)
+            
+            # Configure Adaptive Display
+            logger.info("Configuring Adaptive Display...")
+            adaptive_subgroup = "7516b95f-f776-4464-bc83-06167f40cc99"
+            self._configure_power_settings(guid, self.SILENT_SETTINGS[adaptive_subgroup], adaptive_subgroup)
             
             # Verify applied settings
             logger.info("Verifying applied settings...")
