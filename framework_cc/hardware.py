@@ -368,3 +368,13 @@ class HardwareMonitor:
             import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
             return HardwareMetrics()
+
+    def pause_monitoring(self) -> None:
+        """Pause the monitoring of hardware metrics."""
+        self._is_paused = True
+        logger.info("Hardware monitoring paused")
+
+    def resume_monitoring(self) -> None:
+        """Resume the monitoring of hardware metrics."""
+        self._is_paused = False
+        logger.info("Hardware monitoring resumed")

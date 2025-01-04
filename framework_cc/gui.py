@@ -26,7 +26,7 @@ from .display import DisplayManager
 from .detector import ModelDetector
 from .logger import logger, check_and_rotate_log
 from .translations import get_text, language_names
-from .power_plan import PowerPlanManager
+from .power_plan import PowerManager
 from .models import PowerProfile
 
 logger = logging.getLogger(__name__)
@@ -212,7 +212,7 @@ class FrameworkControlCenter(ctk.CTk):
         # Initialize managers with detected model
         self.hardware = HardwareMonitor(self.model.name)
         self.hardware.set_update_interval(self.config.monitoring_interval)
-        self.power = PowerPlanManager()
+        self.power = PowerManager()
         self.display = DisplayManager(model=self.model)
 
         # Setup UI
@@ -230,6 +230,13 @@ class FrameworkControlCenter(ctk.CTk):
 
         # Start log file check timer with delay
         self.after(3000, self._check_log_file_size)
+
+        # Initialize power manager
+        try:
+            self.loop.run_until_complete(self.power.initialize())
+            logger.info("Power manager initialized")
+        except Exception as e:
+            logger.error(f"Failed to initialize power manager: {e}")
 
     def _get_dpi_scale(self) -> float:
         """Get the current DPI scale factor."""
@@ -739,6 +746,13 @@ class FrameworkControlCenter(ctk.CTk):
         """Toggle window visibility."""
         if self.winfo_viewable():
             self.withdraw()
+            # Pause monitoring when hidden
+            if hasattr(self, '_metrics_after_id'):
+                self.after_cancel(self._metrics_after_id)
+                logger.info("Monitoring paused - window hidden")
+            if hasattr(self, 'hardware'):
+                self.hardware.pause_monitoring()
+            
             with self._tray_lock:
                 if self.tray_icon is not None:
                     try:
@@ -751,6 +765,11 @@ class FrameworkControlCenter(ctk.CTk):
         else:
             self.deiconify()
             self.lift()
+            # Resume monitoring when shown
+            if hasattr(self, 'hardware'):
+                self.hardware.resume_monitoring()
+            self._update_metrics()
+            logger.info("Monitoring resumed - window shown")
 
     def _on_close(self) -> None:
         """Gérer la fermeture de l'application."""
@@ -940,6 +959,14 @@ class FrameworkControlCenter(ctk.CTk):
             if hasattr(profile, 'max_frequency'):
                 logger.info(f"Max Frequency: {profile.max_frequency}")
             
+            # Apply Windows power plan
+            windows_plan_name = f"Framework-{profile_name}"
+            try:
+                self.loop.run_until_complete(self.power.set_power_plan(windows_plan_name))
+                logger.info(f"Applied Windows power plan: {windows_plan_name}")
+            except Exception as e:
+                logger.error(f"Failed to apply Windows power plan: {e}")
+
             # Apply profile
             success = self.loop.run_until_complete(self.power.apply_profile(profile))
             
@@ -1703,11 +1730,24 @@ class FrameworkControlCenter(ctk.CTk):
     def _minimize_to_tray(self) -> None:
         """Minimize window to system tray."""
         self.withdraw()
+        # Pause monitoring when minimized
+        if hasattr(self, '_metrics_after_id'):
+            self.after_cancel(self._metrics_after_id)
+            logger.info("Monitoring paused - window minimized")
+        if hasattr(self, 'hardware'):
+            self.hardware.pause_monitoring()
 
     def _toggle_window(self) -> None:
         """Toggle window visibility."""
         if self.winfo_viewable():
             self.withdraw()
+            # Pause monitoring when hidden
+            if hasattr(self, '_metrics_after_id'):
+                self.after_cancel(self._metrics_after_id)
+                logger.info("Monitoring paused - window hidden")
+            if hasattr(self, 'hardware'):
+                self.hardware.pause_monitoring()
+            
             with self._tray_lock:
                 if self.tray_icon is not None:
                     try:
@@ -1720,6 +1760,11 @@ class FrameworkControlCenter(ctk.CTk):
         else:
             self.deiconify()
             self.lift()
+            # Resume monitoring when shown
+            if hasattr(self, 'hardware'):
+                self.hardware.resume_monitoring()
+            self._update_metrics()
+            logger.info("Monitoring resumed - window shown")
 
     def on_closing(self) -> None:
         """Handle window closing."""
