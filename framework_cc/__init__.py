@@ -2,7 +2,7 @@
 
 from .logger import logger, check_and_rotate_log
 from .models import SystemConfig, PowerProfile, LaptopModel
-from .power_plan import PowerManager, WindowsPowerPlanManager
+from .power_plan import PowerPlanManager
 from .hardware import HardwareMonitor
 from .display import DisplayManager
 from .detector import ModelDetector

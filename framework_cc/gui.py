@@ -26,7 +26,8 @@ from .display import DisplayManager
 from .detector import ModelDetector
 from .logger import logger, check_and_rotate_log
 from .translations import get_text, language_names
-from .power_plan import PowerManager, PowerProfile
+from .power_plan import PowerPlanManager
+from .models import PowerProfile
 
 logger = logging.getLogger(__name__)
 
@@ -211,7 +212,7 @@ class FrameworkControlCenter(ctk.CTk):
         # Initialize managers with detected model
         self.hardware = HardwareMonitor(self.model.name)
         self.hardware.set_update_interval(self.config.monitoring_interval)
-        self.power = PowerManager(self.model)
+        self.power = PowerPlanManager()
         self.display = DisplayManager(model=self.model)
 
         # Setup UI
