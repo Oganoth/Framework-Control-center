@@ -1,0 +1,180 @@
+{
+    "amd_profiles": {
+        "7840HS_AMD": {
+            "eco": {
+                "name": "eco",
+                "tctl_temp": 95,
+                "chtc_temp": 95,
+                "apu_skin_temp": 45,
+                "stapm_limit": 30000,
+                "fast_limit": 35000,
+                "slow_limit": 30000,
+                "vrm_current": 180000,
+                "vrmmax_current": 180000,
+                "vrmsoc_current": 180000,
+                "vrmsocmax_current": 180000,
+                "vrmgfx_current": 180000
+            },
+            "balanced": {
+                "name": "balanced",
+                "tctl_temp": 95,
+                "chtc_temp": 95,
+                "apu_skin_temp": 50,
+                "stapm_limit": 95000,
+                "fast_limit": 95000,
+                "slow_limit": 95000,
+                "vrm_current": 180000,
+                "vrmmax_current": 180000,
+                "vrmsoc_current": 180000,
+                "vrmsocmax_current": 180000,
+                "vrmgfx_current": 180000
+            },
+            "boost": {
+                "name": "boost",
+                "tctl_temp": 100,
+                "chtc_temp": 100,
+                "apu_skin_temp": 50,
+                "stapm_limit": 120000,
+                "fast_limit": 140000,
+                "slow_limit": 120000,
+                "vrm_current": 200000,
+                "vrmmax_current": 200000,
+                "vrmsoc_current": 200000,
+                "vrmsocmax_current": 200000,
+                "vrmgfx_current": 200000
+            }
+        },
+        "7940HS_AMD": {
+            "eco": {
+                "name": "eco",
+                "tctl_temp": 95,
+                "chtc_temp": 95,
+                "apu_skin_temp": 45,
+                "stapm_limit": 30000,
+                "fast_limit": 35000,
+                "slow_limit": 30000,
+                "vrm_current": 180000,
+                "vrmmax_current": 180000,
+                "vrmsoc_current": 180000,
+                "vrmsocmax_current": 180000,
+                "vrmgfx_current": 180000
+            },
+            "balanced": {
+                "name": "balanced",
+                "tctl_temp": 95,
+                "chtc_temp": 95,
+                "apu_skin_temp": 50,
+                "stapm_limit": 95000,
+                "fast_limit": 95000,
+                "slow_limit": 95000,
+                "vrm_current": 180000,
+                "vrmmax_current": 180000,
+                "vrmsoc_current": 180000,
+                "vrmsocmax_current": 180000,
+                "vrmgfx_current": 180000
+            },
+            "boost": {
+                "name": "boost",
+                "tctl_temp": 100,
+                "chtc_temp": 100,
+                "apu_skin_temp": 50,
+                "stapm_limit": 120000,
+                "fast_limit": 140000,
+                "slow_limit": 120000,
+                "vrm_current": 200000,
+                "vrmmax_current": 200000,
+                "vrmsoc_current": 200000,
+                "vrmsocmax_current": 200000,
+                "vrmgfx_current": 200000
+            }
+        },
+        "7640U_AMD": {
+            "eco": {
+                "name": "eco",
+                "tctl_temp": 85,
+                "chtc_temp": 85,
+                "apu_skin_temp": 45,
+                "stapm_limit": 15000,
+                "fast_limit": 20000,
+                "slow_limit": 15000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000,
+                "vrmgfx_current": 120000
+            },
+            "balanced": {
+                "name": "balanced",
+                "tctl_temp": 90,
+                "chtc_temp": 90,
+                "apu_skin_temp": 50,
+                "stapm_limit": 28000,
+                "fast_limit": 35000,
+                "slow_limit": 28000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000,
+                "vrmgfx_current": 120000
+            },
+            "boost": {
+                "name": "boost",
+                "tctl_temp": 95,
+                "chtc_temp": 95,
+                "apu_skin_temp": 55,
+                "stapm_limit": 30000,
+                "fast_limit": 40000,
+                "slow_limit": 30000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000,
+                "vrmgfx_current": 120000
+            }
+        },
+        "7840U_AMD": {
+            "eco": {
+                "name": "eco",
+                "tctl_temp": 85,
+                "chtc_temp": 85,
+                "apu_skin_temp": 45,
+                "stapm_limit": 15000,
+                "fast_limit": 20000,
+                "slow_limit": 15000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000,
+                "vrmgfx_current": 120000
+            },
+            "balanced": {
+                "name": "balanced",
+                "tctl_temp": 90,
+                "chtc_temp": 90,
+                "apu_skin_temp": 50,
+                "stapm_limit": 28000,
+                "fast_limit": 35000,
+                "slow_limit": 28000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000,
+                "vrmgfx_current": 120000
+            },
+            "boost": {
+                "name": "boost",
+                "tctl_temp": 95,
+                "chtc_temp": 95,
+                "apu_skin_temp": 55,
+                "stapm_limit": 30000,
+                "fast_limit": 42000,
+                "slow_limit": 30000,
+                "vrm_current": 120000,
+                "vrmmax_current": 120000,
+                "vrmsoc_current": 120000,
+                "vrmsocmax_current": 120000,
+                "vrmgfx_current": 120000
+            }
+        }
+    }
+}

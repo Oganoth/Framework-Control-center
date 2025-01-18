@@ -1,0 +1,25 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FrameworkControl"
+             x:Class="FrameworkControl.App"
+             x:DataType="local:App">
+    <Application.Styles>
+        <FluentTheme DensityStyle="Compact" />
+        <StyleInclude Source="avares://FrameworkControl/Styles/GlobalStyles.axaml"/>
+    </Application.Styles>
+
+    <TrayIcon.Icons>
+        <TrayIcons>
+            <TrayIcon Icon="avares://FrameworkControl/Assets/icon.png" 
+                      ToolTipText="Framework Control Center">
+                <TrayIcon.Menu>
+                    <NativeMenu>
+                        <NativeMenuItem Header="Show/Hide" Command="{Binding ToggleWindowCommand}"/>
+                        <NativeMenuItemSeparator/>
+                        <NativeMenuItem Header="Exit" Command="{Binding ExitApplicationCommand}"/>
+                    </NativeMenu>
+                </TrayIcon.Menu>
+            </TrayIcon>
+        </TrayIcons>
+    </TrayIcon.Icons>
+</Application>

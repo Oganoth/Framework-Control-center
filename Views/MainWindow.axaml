@@ -1,0 +1,702 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="FrameworkControl.MainWindow"
+        Title="Framework Control Center"
+        SizeToContent="Height"
+        Width="320"
+        MinWidth="320"
+        MaxWidth="320"
+        Background="Transparent"
+        WindowStartupLocation="Manual"
+        UseLayoutRounding="True"
+        CanResize="False"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        TransparencyLevelHint="AcrylicBlur"
+        Icon="avares://FrameworkControl/Assets/icon.png"
+        SystemDecorations="None"
+        Topmost="True">
+
+    <Window.Styles>
+        <Style Selector="Window">
+            <Setter Property="UseLayoutRounding" Value="True"/>
+        </Style>
+        
+        <Style Selector="Button">
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+            <Setter Property="RenderTransform" Value="scale(1.02)"/>
+        </Style>
+        
+        <Style Selector="Button:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.98)"/>
+        </Style>
+        
+        <Style Selector="Button.active">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundActive}"/>
+        </Style>
+
+        <Style Selector="Button.mode">
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="52"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" Easing="ExponentialEaseOut"/>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="ExponentialEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        
+        <Style Selector="Button.mode:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+            <Setter Property="RenderTransform" Value="scale(1.02) translateY(-1px)"/>
+        </Style>
+        
+        <Style Selector="Button.mode:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.98) translateY(1px)"/>
+        </Style>
+        
+        <Style Selector="Button.mode.active">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundActive}"/>
+            <Setter Property="RenderTransform" Value="scale(1.03) translateY(-2px)"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2" Easing="ExponentialEaseOut"/>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2" Easing="ExponentialEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.windowControl">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Panel>
+                        <Border Name="PART_Background"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="4">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <BrushTransition Property="Background" Duration="0:0:0.1"/>
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                    </Panel>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        
+        <Style Selector="Button.windowControl:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="#20FFFFFF"/>
+        </Style>
+        
+        <Style Selector="Button.windowControl:pressed /template/ Border#PART_Background">
+            <Setter Property="Background" Value="#40FFFFFF"/>
+        </Style>
+
+        <Style Selector="RadioButton">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:checked">
+                <Setter Property="Background" Value="{DynamicResource ButtonBackgroundActive}"/>
+                <Setter Property="RenderTransform" Value="scale(1.02)"/>
+            </Style>
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+                <Setter Property="RenderTransform" Value="scale(1.02)"/>
+            </Style>
+            <Style Selector="^:pressed">
+                <Setter Property="RenderTransform" Value="scale(0.98)"/>
+            </Style>
+        </Style>
+
+        <Style Selector="Slider">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="Background" Value="#40FFFFFF"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="Slider /template/ RepeatButton#PART_DecreaseButton">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="FocusTarget"
+                            Background="{TemplateBinding Background}"
+                            Height="4"
+                            CornerRadius="2"
+                            Margin="0,10"/>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="Slider /template/ RepeatButton#PART_IncreaseButton">
+            <Setter Property="Background" Value="#40FFFFFF"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="FocusTarget"
+                            Background="{TemplateBinding Background}"
+                            Height="4"
+                            CornerRadius="2"
+                            Margin="0,10"/>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="Slider /template/ Thumb">
+            <Setter Property="MinWidth" Value="6"/>
+            <Setter Property="MinHeight" Value="6"/>
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Ellipse Width="6" 
+                             Height="6" 
+                             Fill="{TemplateBinding Background}"/>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="ProgressBar">
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="Background" Value="{DynamicResource ProgressBarBackground}"/>
+            <Setter Property="Height" Value="2"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="CornerRadius" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
+        <Style Selector="Image">
+            <Setter Property="Width" Value="24"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+            <Setter Property="Opacity" Value="0.9"/>
+        </Style>
+
+        <Style Selector="Border.batteryOutline">
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="#20FFFFFF"/>
+            <Setter Property="CornerRadius" Value="2"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="Margin" Value="0,0,2,0"/>
+        </Style>
+
+        <Style Selector="Border.batteryTip">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Width" Value="2"/>
+            <Setter Property="Height" Value="8"/>
+            <Setter Property="CornerRadius" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Border.batteryFill">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="CornerRadius" Value="1"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="12"/>
+        </Style>
+    </Window.Styles>
+
+    <Window.Resources>
+        <Color x:Key="WindowBackground">#1A1A1A</Color>
+        <SolidColorBrush x:Key="ButtonBackground" Color="{DynamicResource SystemAccentColor}"/>
+        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{DynamicResource SystemAccentColorLight1}"/>
+        <SolidColorBrush x:Key="ButtonBackgroundActive" Color="{DynamicResource SystemAccentColorDark1}"/>
+        <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#FF404040"/>
+        <SolidColorBrush x:Key="ProgressBarBackground" Color="#333333"/>
+        <SolidColorBrush x:Key="ButtonForeground" Color="White"/>
+    </Window.Resources>
+
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="{StaticResource WindowBackground}"
+                    TintOpacity="1"
+                    MaterialOpacity="0.65"/>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+
+        <Border Padding="15" ClipToBounds="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Barre de titre -->
+                <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Grid.ColumnSpan="2" 
+                              Orientation="Horizontal" 
+                              VerticalAlignment="Center">
+                        <Image Source="avares://FrameworkControl/Assets/icon.png" 
+                               Width="20" Height="20" 
+                               Margin="0,0,10,0"/>
+                        <TextBlock Text="Framework Control Center" 
+                                 VerticalAlignment="Center"
+                                 Foreground="White"/>
+                    </StackPanel>
+
+                    <Button Grid.Column="2"
+                            Name="MinimizeButton"
+                            Width="32" Height="32"
+                            Padding="0"
+                            Margin="0,0,5,0"
+                            Background="Transparent"
+                            Classes="windowControl">
+                        <Path Data="M 0,8 H 16"
+                              Stroke="White"
+                              StrokeThickness="1"
+                              Width="16"
+                              Height="16"
+                              Stretch="None"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+
+                    <Button Grid.Column="3"
+                            Name="CloseButton"
+                            Width="32" Height="32"
+                            Padding="0"
+                            Background="Transparent"
+                            Classes="windowControl">
+                        <Path Data="M 0,0 L 16,16 M 0,16 L 16,0"
+                              Stroke="White"
+                              StrokeThickness="1"
+                              Width="16"
+                              Height="16"
+                              Stretch="None"/>
+                    </Button>
+                </Grid>
+
+                <!-- Mode Selection -->
+                <UniformGrid Grid.Row="1" 
+                           Columns="3" 
+                           Margin="0,0,0,10">
+                    <Button Classes="mode" Click="EcoButton_Click" Name="EcoButton">
+                        <Panel>
+                            <Border Background="{DynamicResource SystemAccentColor}"
+                                    Opacity="0.1"
+                                    CornerRadius="8"/>
+                            <StackPanel VerticalAlignment="Center" 
+                                      HorizontalAlignment="Center"
+                                      Spacing="4">
+                                <Path Data="M16.663,1.573c-0.378-0.335-0.947-0.335-1.325,0c-0.077,0.068-0.145,0.129-0.192,0.171C12.582,4.07,5,11.577,5,18.996c0,4.048,5.011,6.721,7.998,7.953c0.458,0.189,1.789,0.93,2.502,1.334v2.213c0,0.276,0.224,0.5,0.5,0.5h0c0.276,0,0.5-0.224,0.5-0.5v-2.213c0.713-0.404,2.043-1.145,2.502-1.333C21.989,25.717,27,23.045,27,18.996c0-7.418-7.581-14.925-10.145-17.252C16.808,1.702,16.74,1.641,16.663,1.573z M16.5,9.279l3.933-2.36c0.849,1.017,1.7,2.143,2.479,3.346L16.5,14.113V9.279z M15.5,14.113l-6.412-3.847c0.779-1.203,1.63-2.33,2.479-3.347l3.933,2.36V14.113z M15.5,15.279v5.834l-8.994-5.397c0.454-1.586,1.174-3.142,2.047-4.605L15.5,15.279z M16.5,15.279l6.947-4.168c0.874,1.463,1.594,3.02,2.047,4.605L16.5,21.113V15.279z M19.775,6.149L16.5,8.113V2.776C17.323,3.539,18.515,4.711,19.775,6.149z M15.5,2.776v5.337l-3.274-1.965C13.486,4.711,14.677,3.539,15.5,2.776z M13.38,26.025C10.624,24.888,6,22.462,6,18.996c0-0.754,0.101-1.51,0.256-2.263l9.244,5.547v4.856C14.803,26.746,13.813,26.204,13.38,26.025z M18.62,26.026c-0.434,0.179-1.424,0.721-2.12,1.11v-4.856l9.244-5.547C25.899,17.486,26,18.242,26,18.996C26,22.462,21.376,24.888,18.62,26.026z"
+                                      Fill="{DynamicResource ButtonForeground}"
+                                      Stroke="{DynamicResource ButtonForeground}"
+                                      StrokeThickness="0.5"
+                                      Width="24"
+                                      Height="24"
+                                      Stretch="Uniform"/>
+                                <TextBlock Text="Eco" 
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Panel>
+                    </Button>
+                    <Button Classes="mode" Click="BalancedButton_Click" Name="BalancedButton">
+                        <Panel>
+                            <Border Background="{DynamicResource SystemAccentColor}"
+                                    Opacity="0.1"
+                                    CornerRadius="8"/>
+                            <StackPanel VerticalAlignment="Center" 
+                                      HorizontalAlignment="Center"
+                                      Spacing="4">
+                                <Path Data="M29.898,16h-0.454L25.55,8.99C25.802,8.964,26,8.759,26,8.5C26,8.224,25.776,8,25.5,8h-9V7.929C17.361,7.706,18,6.931,18,6c0-1.105-0.895-2-2-2s-2,0.895-2,2c0,0.931,0.639,1.706,1.5,1.929V8h-9C6.224,8,6,8.224,6,8.5c0,0.259,0.198,0.464,0.45,0.49L2.556,16H2.102c-0.612,0-1.108,0.551-0.991,1.152C1.648,19.914,4.08,22,7,22s5.352-2.086,5.89-4.848C13.006,16.551,12.511,16,11.898,16h-0.454L7.556,9h7.394l-0.9,18H10.5c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h11c0.276,0,0.5-0.224,0.5-0.5S21.776,27,21.5,27h-3.55l-0.9-18h7.394l-3.889,7h-0.454c-0.612,0-1.108,0.551-0.991,1.152C19.648,19.914,22.08,22,25,22s5.352-2.086,5.89-4.848C31.006,16.551,30.511,16,29.898,16z M11.897,17C11.426,19.32,9.375,21,7,21c-2.389,0-4.453-1.699-4.898-4H11.897z M10.3,16H3.7L7,10.059L10.3,16z M15,6c0-0.551,0.449-1,1-1s1,0.449,1,1s-0.449,1-1,1S15,6.551,15,6z M15.051,27l0.9-18h0.098l0.9,18H15.051z M25,10.059L28.3,16H21.7L25,10.059z M25,21c-2.389,0-4.453-1.699-4.898-4h9.795C29.426,19.32,27.375,21,25,21z"
+                                      Fill="{DynamicResource ButtonForeground}"
+                                      Stroke="{DynamicResource ButtonForeground}"
+                                      StrokeThickness="0.5"
+                                      Width="24"
+                                      Height="24"
+                                      Stretch="Uniform"/>
+                                <TextBlock Text="Balanced" 
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Panel>
+                    </Button>
+                    <Button Classes="mode" Click="BoostButton_Click" Name="BoostButton">
+                        <Panel>
+                            <Border Background="{DynamicResource SystemAccentColor}"
+                                    Opacity="0.1"
+                                    CornerRadius="8"/>
+                            <StackPanel VerticalAlignment="Center" 
+                                      HorizontalAlignment="Center"
+                                      Spacing="4">
+                                <Path Data="M9.32 15.653a.812.812 0 0 1-.086-.855c.176-.342.245-.733.2-1.118a2.106 2.106 0 0 0-.267-.779 2.027 2.027 0 0 0-.541-.606 3.96 3.96 0 0 1-1.481-2.282c-1.708 2.239-1.053 3.51-.235 4.63a.748.748 0 0 1-.014.901.87.87 0 0 1-.394.283.838.838 0 0 1-.478.023c-1.105-.27-2.145-.784-2.85-1.603a4.686 4.686 0 0 1-.906-1.555 4.811 4.811 0 0 1-.263-1.797s-.133-2.463 2.837-4.876c0 0 3.51-2.978 2.292-5.18a.621.621 0 0 1 .112-.653.558.558 0 0 1 .623-.147l.146.058a7.63 7.63 0 0 1 2.96 3.5c.58 1.413.576 3.06.184 4.527.325-.292.596-.641.801-1.033l.029-.064c.198-.477.821-.325 1.055-.013.086.137 2.292 3.343 1.107 6.048a5.516 5.516 0 0 1-1.84 2.027 6.127 6.127 0 0 1-2.138.893.834.834 0 0 1-.472-.038.867.867 0 0 1-.381-.29zM7.554 7.892a.422.422 0 0 1 .55.146c.04.059.066.126.075.198l.045.349c.02.511.014 1.045.213 1.536.206.504.526.95.932 1.298a3.06 3.06 0 0 1 1.16 1.422c.22.564.25 1.19.084 1.773a4.123 4.123 0 0 0 1.39-.757l.103-.084c.336-.277.613-.623.813-1.017.201-.393.322-.825.354-1.269.065-1.025-.284-2.054-.827-2.972-.248.36-.59.639-.985.804-.247.105-.509.17-.776.19a.792.792 0 0 1-.439-.1.832.832 0 0 1-.321-.328.825.825 0 0 1-.035-.729c.412-.972.54-2.05.365-3.097a5.874 5.874 0 0 0-1.642-3.16c-.156 2.205-2.417 4.258-2.881 4.7a3.537 3.537 0 0 1-.224.194c-2.426 1.965-2.26 3.755-2.26 3.834a3.678 3.678 0 0 0 .459 2.043c.365.645.89 1.177 1.52 1.54C4.5 12.808 4.5 10.89 7.183 8.14l.372-.25z"
+                                      Fill="{DynamicResource ButtonForeground}"
+                                      Stroke="{DynamicResource ButtonForeground}"
+                                      StrokeThickness="0.5"
+                                      Width="24"
+                                      Height="24"
+                                      Stretch="Uniform"/>
+                                <TextBlock Text="Boost" 
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Panel>
+                    </Button>
+                </UniformGrid>
+
+                <!-- Refresh Rate -->
+                <Border Grid.Row="2" 
+                       Background="#20FFFFFF"
+                       CornerRadius="12"
+                       Padding="5"
+                       Margin="0,0,0,10">
+                    <UniformGrid Columns="3">
+                        <RadioButton Content="Auto" 
+                                   Name="AutoRefreshRate"
+                                   IsChecked="True" 
+                                   GroupName="RefreshRate"
+                                   HorizontalAlignment="Stretch"
+                                   Margin="2"/>
+                        <RadioButton Content="60Hz" 
+                                   Name="Rate60Hz"
+                                   GroupName="RefreshRate"
+                                   HorizontalAlignment="Stretch"
+                                   Margin="2"/>
+                        <RadioButton Name="RateMaxHz"
+                                   GroupName="RefreshRate"
+                                   HorizontalAlignment="Stretch"
+                                   Margin="2">
+                            <RadioButton.Content>
+                                <TextBlock Name="MaxRefreshRateText" Text="165Hz"/>
+                            </RadioButton.Content>
+                        </RadioButton>
+                    </UniformGrid>
+                </Border>
+
+                <!-- Batterie -->
+                <Border Grid.Row="3"
+                        Background="#10FFFFFF"
+                        CornerRadius="12"
+                        Padding="15,10"
+                        Margin="0,0,0,10">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <!-- Icône de batterie -->
+                        <Grid Grid.Column="0" Width="36">
+                            <Border Classes="batteryOutline">
+                                <Border Name="BatteryLevel" 
+                                        Classes="batteryFill"
+                                        Width="28"/>
+                            </Border>
+                            <Border Classes="batteryTip"/>
+                        </Grid>
+                        <!-- Info batterie -->
+                        <Grid Grid.Column="1" 
+                              Margin="8,0,0,0">
+                            <TextBlock Name="BatteryStatusText"
+                                     Text="Updating..."
+                                     FontSize="11"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!-- Brightness & Battery -->
+                <Border Grid.Row="4"
+                        Background="#10FFFFFF"
+                        CornerRadius="12"
+                        Margin="0,0,0,10">
+                    <StackPanel Margin="10">
+                        <!-- Zone Brightness -->
+                        <Border Background="#15FFFFFF"
+                                CornerRadius="10"
+                                Padding="15,6"
+                                Margin="0">
+                            <Grid RowDefinitions="Auto,Auto">
+                                <TextBlock Text="BRIGHTNESS" 
+                                         FontSize="11"
+                                         Margin="0,0,0,2"/>
+                                <Grid Grid.Row="1" 
+                                      ColumnDefinitions="*,Auto"
+                                      Height="24"
+                                      VerticalAlignment="Center">
+                                    <Slider Name="BrightnessSlider"
+                                            Grid.Column="0"
+                                            Minimum="0"
+                                            Maximum="100"
+                                            VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" 
+                                             Name="BrightnessValue"
+                                             Text="100%"
+                                             FontSize="11"
+                                             MinWidth="35"
+                                             TextAlignment="Right"
+                                             Margin="8,0,0,0"
+                                             VerticalAlignment="Center"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- System Metrics -->
+                <Border Grid.Row="5"
+                        Background="#10FFFFFF"
+                        CornerRadius="12"
+                        Padding="15,10"
+                        Margin="0,0,0,10">
+                    <StackPanel Spacing="12">
+                        <!-- CPU -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <TextBlock x:Name="cpuUsageText" 
+                                         Text="CPU: 0.0%" 
+                                         HorizontalAlignment="Left"/>
+                                <TextBlock x:Name="cpuTempText" 
+                                         Text="0.0°C" 
+                                         Foreground="{DynamicResource ButtonBackground}"
+                                         HorizontalAlignment="Right"/>
+                            </Grid>
+                            <ProgressBar x:Name="cpuUsageBar" 
+                                       Grid.Row="1"
+                                       Value="0" 
+                                       Height="3"
+                                       Margin="0,3,0,0"/>
+                        </Grid>
+
+                        <!-- iGPU -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <TextBlock x:Name="igpuUsageText" 
+                                         Text="iGPU: 0.0%" 
+                                         HorizontalAlignment="Left"/>
+                                <TextBlock x:Name="igpuTempText" 
+                                         Text="0.0°C"
+                                         Foreground="{DynamicResource ButtonBackground}"
+                                         HorizontalAlignment="Right"/>
+                            </Grid>
+                            <ProgressBar x:Name="igpuUsageBar" 
+                                       Grid.Row="1"
+                                       Value="0" 
+                                       Height="3"
+                                       Margin="0,3,0,0"/>
+                        </Grid>
+
+                        <!-- dGPU -->
+                        <Border Name="DgpuBorder"
+                                Background="Transparent"
+                                Padding="0"
+                                Margin="0"
+                                IsVisible="False">
+                            <Grid Name="DgpuGrid">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <TextBlock x:Name="dgpuUsageText" 
+                                             Text="dGPU: 0.0%" 
+                                             HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="dgpuTempText" 
+                                             Text="0.0°C"
+                                             Foreground="{DynamicResource ButtonBackground}"
+                                             HorizontalAlignment="Right"/>
+                                </Grid>
+                                <ProgressBar x:Name="dgpuUsageBar" 
+                                           Grid.Row="1"
+                                           Value="0" 
+                                           Height="3"
+                                           Margin="0,3,0,0"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- RAM -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="ramUsageText" 
+                                     Text="RAM: 0.0%" 
+                                     HorizontalAlignment="Left"/>
+                            <ProgressBar x:Name="ramUsageBar" 
+                                       Grid.Row="1"
+                                       Value="0"
+                                       Height="3"
+                                       Margin="0,3,0,0"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Bottom Buttons -->
+                <Grid Grid.Row="6" 
+                      ColumnDefinitions="Auto,Auto,Auto,*,Auto,Auto,Auto"
+                      Margin="0,10,0,0">
+                    <Button Grid.Column="0"
+                            Name="KeyboardButton"
+                            Classes="icon"
+                            Width="32" Height="32"
+                            ToolTip.Tip="Framework Keyboard Configuration">
+                        <Panel Width="20" Height="20">
+                            <Path Data="M0 4v16c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H2C.9 2 0 2.9 0 4zm2 16V4h20v16H2zm9-3h2v-3h-2v3zm-4 0h2v-3H7v3zm-4 0h2v-3H3v3zm12 0h2v-3h-2v3zm4 0h2v-3h-2v3zM3 9h2V6H3v3zm4 0h2V6H7v3zm4 0h2V6h-2v3zm4 0h2V6h-2v3zm4 0h2V6h-2v3zM3 13h2v-2H3v2zm4 0h2v-2H7v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zM3 15h18v-1H3v1z"
+                                      Fill="{DynamicResource ButtonForeground}"
+                                      Stretch="Uniform"/>
+                        </Panel>
+                    </Button>
+                    <Button Grid.Column="1"
+                            Name="UpdatesButton"
+                            Classes="icon"
+                            Width="32" Height="32"
+                            Margin="5,0,0,0"
+                            ToolTip.Tip="Check for Updates">
+                        <Panel Width="20" Height="20">
+                            <Path Data="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z"
+                                      Fill="{DynamicResource ButtonForeground}"
+                                      Stretch="Uniform"/>
+                        </Panel>
+                    </Button>
+                    <Button Grid.Column="2"
+                            Name="SettingsButton"
+                            Classes="icon"
+                            Width="32" Height="32"
+                            Margin="5,0,0,0"
+                            ToolTip.Tip="Settings">
+                        <Panel Width="20" Height="20">
+                            <Path Data="M12 8c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm8.3-3.6l1.5 1.5c.1.1.1.3 0 .4l-1.4 1.4c-.1.1-.3.1-.4 0l-1.5-1.5c-.4.2-.8.4-1.2.5V14c0 .1-.1.2-.2.2h-2c-.1 0-.2-.1-.2-.2v-1.3c-.4-.1-.8-.3-1.2-.5l-1.5 1.5c-.1.1-.3.1-.4 0l-1.4-1.4c-.1-.1-.1-.3 0-.4l1.5-1.5c-.2-.4-.4-.8-.5-1.2H9.2c-.1 0-.2-.1-.2-.2v-2c0-.1.1-.2.2-.2h1.3c.1-.4.3-.8.5-1.2L9.3 5.7c-.1-.1-.1-.3 0-.4l1.4-1.4c.1-.1.3-.1.4 0l1.5 1.5c.4-.2.8-.4 1.2-.5V3.2c0-.1.1-.2.2-.2h2c.1 0 .2.1.2.2v1.3c.4.1.8.3 1.2.5l1.5-1.5c.1-.1.3-.1.4 0l1.4 1.4c.1.1.1.3 0 .4l-1.5 1.5c.2.4.4.8.5 1.2h1.3c.1 0 .2.1.2.2v2c0 .1-.1.2-.2.2h-1.3c-.1.4-.3.8-.5 1.2zM12 6c3.3 0 6 2.7 6 6s-2.7 6-6 6-6-2.7-6-6 2.7-6 6-6z"
+                                      Fill="{DynamicResource ButtonForeground}"
+                                      Stretch="Uniform"/>
+                        </Panel>
+                    </Button>
+                    <Button Grid.Column="4"
+                            Name="AutoProfileButton"
+                            Classes="icon"
+                            Width="32" Height="32"
+                            Margin="5,0,0,0"
+                            Click="AutoProfileButton_Click"
+                            ToolTip.Tip="Auto Profile Settings">
+                        <Panel Width="20" Height="20">
+                            <Path Data="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                                  Fill="{DynamicResource ButtonForeground}"
+                                  Stretch="Uniform"/>
+                        </Panel>
+                    </Button>
+                </Grid>
+
+                <Popup Name="AutoProfilePopup"
+                       PlacementTarget="{Binding #AutoProfileButton}"
+                       Placement="Top"
+                       IsLightDismissEnabled="True"
+                       Width="300">
+                    <Border Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                            BorderBrush="{DynamicResource SystemControlBackgroundBaseLowBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="16">
+                        <StackPanel Spacing="16">
+                            <TextBlock Text="Automatic Profile Selection"
+                                     FontWeight="Bold"
+                                     FontSize="16"/>
+                            
+                            <CheckBox Name="AutoSwitchEnabled"
+                                    Content="Enable automatic profile switching"
+                                    IsChecked="True"
+                                    Checked="AutoSwitchEnabled_CheckedChanged"
+                                    Unchecked="AutoSwitchEnabled_CheckedChanged"/>
+                            
+                            <StackPanel Name="ProfileSelectionPanel" Spacing="16">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="When plugged in:"/>
+                                    <ComboBox Name="AcProfileSelector"
+                                            HorizontalAlignment="Stretch"
+                                            SelectionChanged="AcProfileSelector_SelectionChanged">
+                                        <ComboBoxItem Content="Eco"/>
+                                        <ComboBoxItem Content="Balanced"/>
+                                        <ComboBoxItem Content="Boost"/>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="When on battery:"/>
+                                    <ComboBox Name="DcProfileSelector"
+                                            HorizontalAlignment="Stretch"
+                                            SelectionChanged="DcProfileSelector_SelectionChanged">
+                                        <ComboBoxItem Content="Eco"/>
+                                        <ComboBoxItem Content="Balanced"/>
+                                        <ComboBoxItem Content="Boost"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+            </Grid>
+        </Border>
+    </Panel>
+</Window>

@@ -1,0 +1,823 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="FrameworkControl.Views.SettingsWindow"
+        Title="Settings"
+        Width="800"
+        Height="600"
+        WindowStartupLocation="CenterScreen"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        UseLayoutRounding="True"
+        RenderOptions.BitmapInterpolationMode="HighQuality"
+        Background="{DynamicResource SystemChromeMediumColor}">
+
+    <Window.Styles>
+        <Style Selector="Window">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        
+        <Style Selector="TabControl">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <ThicknessTransition Property="Margin" Duration="0:0:0.2"/>
+                    <ThicknessTransition Property="Padding" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="TabItem">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="NumericUpDown">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="ComboBox">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.help">
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="Margin" Value="4,0,0,0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Content" Value="?"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.help:pointerover">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.help:pressed">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="12,8"/>
+        </Style>
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button:pressed">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="12,8"/>
+        </Style>
+        <Style Selector="ComboBox:pointerover">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}"/>
+        </Style>
+        <Style Selector="ComboBoxItem">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="12,8"/>
+        </Style>
+        <Style Selector="ComboBoxItem:pointerover">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="ComboBoxItem:selected">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="NumericUpDown">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="NumericUpDown:pointerover /template/ TextBox#PART_TextBox">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="NumericUpDown /template/ TextBox#PART_TextBox">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="NumericUpDown /template/ Button">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="NumericUpDown /template/ Button:pointerover">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}"/>
+        </Style>
+        <Style Selector="NumericUpDown /template/ Button:pressed">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}"/>
+        </Style>
+        <Style Selector="TextBlock.h1">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+        <Style Selector="TextBlock.description">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Opacity" Value="0.7"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="24,0,0,10"/>
+        </Style>
+        <Style Selector="CheckBox">
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+        <Style Selector="NumericUpDown">
+            <Setter Property="Margin" Value="24,5,0,15"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseLowBrush}"/>
+        </Style>
+        <Style Selector="Button.social">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="0"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <PathIcon Grid.Column="0" 
+                                     Data="{TemplateBinding Tag}" 
+                                     Width="16" 
+                                     Height="16" 
+                                     Foreground="White"
+                                     Margin="0,0,10,0"/>
+                            <ContentPresenter Grid.Column="1" 
+                                            Content="{TemplateBinding Content}"
+                                            TextBlock.Foreground="{TemplateBinding Foreground}"
+                                            VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="Button.social:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+            <Setter Property="RenderTransform" Value="scale(1.02)"/>
+        </Style>
+        <Style Selector="Button.social:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.98)"/>
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundActive}"/>
+        </Style>
+
+        <Style Selector="TabControl">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="-20"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+
+        <Style Selector="TabItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style Selector="TabItem:selected">
+            <Setter Property="Background" Value="#40FFFFFF"/>
+        </Style>
+
+        <Style Selector="TabItem:pointerover">
+            <Setter Property="Background" Value="#20FFFFFF"/>
+        </Style>
+
+        <Style Selector="ComboBox">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="ComboBox:pointerover">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}"/>
+        </Style>
+
+        <Style Selector="ComboBox:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.98)"/>
+        </Style>
+
+        <Style Selector="ComboBoxItem">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="ComboBoxItem:pointerover">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="ComboBoxItem:selected">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Grid">
+            <Setter Property="Margin" Value="0,5"/>
+        </Style>
+
+        <Style Selector="TextBlock.h2">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <Style Selector="TextBlock.supporter">
+            <Setter Property="Margin" Value="0,5,15,5"/>
+            <Setter Property="Opacity" Value="0.9"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style Selector="Image.circle">
+            <Setter Property="ClipToBounds" Value="True"/>
+            <Setter Property="Stretch" Value="UniformToFill"/>
+        </Style>
+
+        <Style Selector="Border.circle">
+            <Setter Property="CornerRadius" Value="75"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="150"/>
+        </Style>
+    </Window.Styles>
+
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="{DynamicResource SystemAltHighColor}"
+                    TintOpacity="0.8"
+                    MaterialOpacity="0.65"/>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+
+        <Border Padding="20">
+            <DockPanel>
+                <!-- Save Button -->
+                <StackPanel Orientation="Horizontal" 
+                          HorizontalAlignment="Right" 
+                          Margin="0,20,0,0"
+                          DockPanel.Dock="Bottom"
+                          Spacing="10">
+                    <Button Name="CloseButton"
+                            Content="Close"
+                            Padding="20,10"/>
+                    <Button Name="SaveButton"
+                            Content="Save Changes"
+                            Click="SaveButton_Click"
+                            Padding="20,10"/>
+                </StackPanel>
+
+                <!-- TabControl -->
+                <TabControl>
+                    <!-- General Settings Tab -->
+                    <TabItem Header="General">
+                        <ScrollViewer>
+                            <StackPanel>
+                                <TextBlock Classes="h1" Text="General Settings"/>
+
+                                <!-- Startup Options -->
+                                <CheckBox Name="StartWithWindowsCheck" Content="Start with Windows"/>
+                                <TextBlock Classes="description" Text="Launch the application automatically when Windows starts"/>
+
+                                <CheckBox Name="StartMinimizedCheck" Content="Start Minimized"/>
+                                <TextBlock Classes="description" Text="Start the application minimized in the system tray"/>
+
+                                <!-- Startup Profile -->
+                                <TextBlock Text="Startup Profile" Margin="0,20,0,5"/>
+                                <ComboBox Name="StartupProfileSelector" Width="200" HorizontalAlignment="Left">
+                                    <ComboBoxItem Content="Eco"/>
+                                    <ComboBoxItem Content="Balanced"/>
+                                    <ComboBoxItem Content="Boost"/>
+                                </ComboBox>
+                                <TextBlock Classes="description" Text="Select which power profile to apply when the application starts"/>
+
+                                <!-- GUI Update Interval -->
+                                <TextBlock Text="GUI Update Interval" Margin="0,20,0,5"/>
+                                <NumericUpDown Name="UpdateIntervalUpDown" 
+                                        Minimum="100" 
+                                        Maximum="5000"
+                                        Increment="100"
+                                        FormatString="0 ms"/>
+                                <TextBlock Classes="description" Text="Time interval (in milliseconds) between GUI updates. Lower values mean more frequent updates but higher CPU usage."/>
+
+                                <!-- Toggle Window Hotkey -->
+                                <TextBlock Text="Toggle Window Hotkey" Margin="0,20,0,5"/>
+                                <Button Name="HotkeyButton"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        HorizontalContentAlignment="Center"
+                                        Content="Click to set key (Current: F12)"/>
+                                <TextBlock Classes="description" Text="Click the button and press any key to set the shortcut for showing/hiding the main window"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <!-- RyzenADJ Settings Tab -->
+                    <TabItem Header="RyzenADJ" Name="RyzenADJTab">
+                        <ScrollViewer>
+                            <StackPanel>
+                                <TextBlock Classes="h1" Name="RyzenADJTitle" Text="RyzenADJ Profiles"/>
+                                <TextBlock Classes="description" Text="Configure power profiles for your AMD Ryzen processor. Changes will be applied when switching between Eco, Balanced, and Boost modes."/>
+
+                                <!-- Profile Selector -->
+                                <ComboBox Name="ProfileSelector" 
+                                        Margin="0,10,0,20"
+                                        HorizontalAlignment="Left"
+                                        Width="200">
+                                    <ComboBoxItem Content="Eco Profile"/>
+                                    <ComboBoxItem Content="Balanced Profile"/>
+                                    <ComboBoxItem Content="Boost Profile"/>
+                                </ComboBox>
+
+                                <!-- Profile Settings -->
+                                <Grid ColumnDefinitions="Auto,*,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="0,0,0,20">
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="TCTL Temperature Limit" VerticalAlignment="Center"/>
+                                    <NumericUpDown Grid.Row="0" Grid.Column="1" Name="TctlTemp" Minimum="50" Maximum="100" FormatString="0°C"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="2" Name="TctlTempDefault" Margin="10,0,0,0" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="3" Name="TctlTempSaved" Margin="10,0,0,0" Foreground="{DynamicResource SystemAccentColor}" VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="CHTC Temperature Limit" VerticalAlignment="Center"/>
+                                    <NumericUpDown Grid.Row="1" Grid.Column="1" Name="ChtcTemp" Minimum="50" Maximum="100" FormatString="0°C"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Name="ChtcTempDefault" Margin="10,0,0,0" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="3" Name="ChtcTempSaved" Margin="10,0,0,0" Foreground="{DynamicResource SystemAccentColor}" VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="APU Skin Temperature Limit" VerticalAlignment="Center"/>
+                                    <NumericUpDown Grid.Row="2" Grid.Column="1" Name="ApuSkinTemp" Minimum="40" Maximum="70" FormatString="0°C"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="2" Name="ApuSkinTempDefault" Margin="10,0,0,0" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="3" Name="ApuSkinTempSaved" Margin="10,0,0,0" Foreground="{DynamicResource SystemAccentColor}" VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="STAPM Power Limit" VerticalAlignment="Center"/>
+                                    <NumericUpDown Grid.Row="3" Grid.Column="1" Name="StapmLimit" Minimum="15" Maximum="140" FormatString="0W"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="2" Name="StapmLimitDefault" Margin="10,0,0,0" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="3" Name="StapmLimitSaved" Margin="10,0,0,0" Foreground="{DynamicResource SystemAccentColor}" VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Fast PPT Power Limit" VerticalAlignment="Center"/>
+                                    <NumericUpDown Grid.Row="4" Grid.Column="1" Name="FastLimit" Minimum="15" Maximum="140" FormatString="0W"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="2" Name="FastLimitDefault" Margin="10,0,0,0" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="3" Name="FastLimitSaved" Margin="10,0,0,0" Foreground="{DynamicResource SystemAccentColor}" VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Slow PPT Power Limit" VerticalAlignment="Center"/>
+                                    <NumericUpDown Grid.Row="5" Grid.Column="1" Name="SlowLimit" Minimum="15" Maximum="140" FormatString="0W"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="2" Name="SlowLimitDefault" Margin="10,0,0,0" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="3" Name="SlowLimitSaved" Margin="10,0,0,0" Foreground="{DynamicResource SystemAccentColor}" VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Row="6" Grid.Column="0" Text="VRM Current Limit" VerticalAlignment="Center"/>
+                                    <NumericUpDown Grid.Row="6" Grid.Column="1" Name="VrmCurrent" Minimum="30" Maximum="200" FormatString="0A"/>
+                                    <TextBlock Grid.Row="6" Grid.Column="2" Name="VrmCurrentDefault" Margin="10,0,0,0" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="6" Grid.Column="3" Name="VrmCurrentSaved" Margin="10,0,0,0" Foreground="{DynamicResource SystemAccentColor}" VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Row="7" Grid.Column="0" Text="VRM Max Current Limit" VerticalAlignment="Center"/>
+                                    <NumericUpDown Grid.Row="7" Grid.Column="1" Name="VrmMaxCurrent" Minimum="30" Maximum="200" FormatString="0A"/>
+                                    <TextBlock Grid.Row="7" Grid.Column="2" Name="VrmMaxCurrentDefault" Margin="10,0,0,0" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="7" Grid.Column="3" Name="VrmMaxCurrentSaved" Margin="10,0,0,0" Foreground="{DynamicResource SystemAccentColor}" VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Row="8" Grid.Column="0" Text="VRM SoC Current Limit" VerticalAlignment="Center"/>
+                                    <NumericUpDown Grid.Row="8" Grid.Column="1" Name="VrmSocCurrent" Minimum="5" Maximum="200" FormatString="0A"/>
+                                    <TextBlock Grid.Row="8" Grid.Column="2" Name="VrmSocCurrentDefault" Margin="10,0,0,0" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="8" Grid.Column="3" Name="VrmSocCurrentSaved" Margin="10,0,0,0" Foreground="{DynamicResource SystemAccentColor}" VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Row="9" Grid.Column="0" Text="VRM SoC Max Current Limit" VerticalAlignment="Center"/>
+                                    <NumericUpDown Grid.Row="9" Grid.Column="1" Name="VrmSocMaxCurrent" Minimum="5" Maximum="200" FormatString="0A"/>
+                                    <TextBlock Grid.Row="9" Grid.Column="2" Name="VrmSocMaxCurrentDefault" Margin="10,0,0,0" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="9" Grid.Column="3" Name="VrmSocMaxCurrentSaved" Margin="10,0,0,0" Foreground="{DynamicResource SystemAccentColor}" VerticalAlignment="Center"/>
+                                </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <!-- PowerCFG Settings Tab -->
+                    <TabItem Header="PowerCFG" Name="PowerCFGTab">
+                        <ScrollViewer>
+                            <StackPanel>
+                                <TextBlock Classes="h1" Name="PowerCFGTitle" Text="PowerCFG Profiles"/>
+                                <TextBlock Classes="description" Text="Configure Windows power profiles for both AC and DC (battery) power. Changes will be applied when switching between Eco, Balanced, and Boost modes."/>
+
+                                <!-- Profile Selector -->
+                                <ComboBox Name="PowerProfileSelector" 
+                                        Margin="0,10,0,20"
+                                        HorizontalAlignment="Left"
+                                        Width="200">
+                                    <ComboBoxItem Content="Eco Profile"/>
+                                    <ComboBoxItem Content="Balanced Profile"/>
+                                    <ComboBoxItem Content="Boost Profile"/>
+                                </ComboBox>
+
+                                <!-- Power Mode Tabs -->
+                                <TabControl Margin="0,0,0,20">
+                                    <!-- AC Power Settings -->
+                                    <TabItem Header="AC Power">
+                                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto" Margin="0,10,0,0">
+                                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Processor Minimum State (%)" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="0" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Sets the minimum processor frequency state as a percentage.&#x0a;&#x0a;Recommended:&#x0a;- Eco: 2-5%&#x0a;- Balanced: 5%&#x0a;- Boost: 5-100%&#x0a;&#x0a;A higher value will prevent the processor from reducing its frequency to save power."/>
+                                            <NumericUpDown Grid.Row="0" Grid.Column="1" Name="AcProcessorMinimumState" Minimum="0" Maximum="100" FormatString="F0"/>
+
+                                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Processor Maximum State (%)" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="1" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Sets the maximum processor frequency state as a percentage.&#x0a;&#x0a;Recommended:&#x0a;- Eco: 50-75%&#x0a;- Balanced: 75-100%&#x0a;- Boost: 100%&#x0a;&#x0a;Reducing this value will limit performance but save power."/>
+                                            <NumericUpDown Grid.Row="1" Grid.Column="1" Name="AcProcessorMaximumState" Minimum="0" Maximum="100" FormatString="F0"/>
+
+                                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Processor Performance Boost Policy (%)" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="2" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Controls how aggressively Turbo Boost is applied.&#x0a;&#x0a;Recommended:&#x0a;- Eco: 15-25%&#x0a;- Balanced: 35-50%&#x0a;- Boost: 75-100%&#x0a;&#x0a;A higher value allows reaching Turbo frequencies more quickly but consumes more power."/>
+                                            <NumericUpDown Grid.Row="2" Grid.Column="1" Name="AcProcessorBoostPolicy" Minimum="0" Maximum="100" FormatString="F0"/>
+
+                                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Processor Performance Boost Mode" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="3" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Determines how Turbo Boost is activated.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Disabled&#x0a;- Balanced: Efficient Enabled/Aggressive&#x0a;- Boost: Aggressive&#x0a;&#x0a;'Efficient' modes prioritize power efficiency, 'Aggressive' modes prioritize performance."/>
+                                            <ComboBox Grid.Row="3" Grid.Column="1" Name="AcProcessorBoostMode" Width="200" HorizontalAlignment="Left">
+                                                <ComboBoxItem Content="Disabled"/>
+                                                <ComboBoxItem Content="Enabled"/>
+                                                <ComboBoxItem Content="Aggressive"/>
+                                                <ComboBoxItem Content="Efficient Enabled"/>
+                                                <ComboBoxItem Content="Efficient Aggressive"/>
+                                                <ComboBoxItem Content="Aggressive at Guaranteed"/>
+                                                <ComboBoxItem Content="Efficient Aggressive at Guaranteed"/>
+                                            </ComboBox>
+
+                                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Performance Increase Policy" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="4" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Sets the performance increase strategy.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Ideal&#x0a;- Balanced: Single&#x0a;- Boost: Rocket/Ideal Aggressive&#x0a;&#x0a;- Ideal: Balanced approach&#x0a;- Single: Gradual increase&#x0a;- Rocket: Rapid increase&#x0a;- Ideal Aggressive: Balanced but more responsive"/>
+                                            <ComboBox Grid.Row="4" Grid.Column="1" Name="AcProcessorPerformanceIncreasePolicy" Width="200" HorizontalAlignment="Left">
+                                                <ComboBoxItem Content="Ideal"/>
+                                                <ComboBoxItem Content="Single"/>
+                                                <ComboBoxItem Content="Rocket"/>
+                                                <ComboBoxItem Content="Ideal Aggressive"/>
+                                            </ComboBox>
+
+                                            <TextBlock Grid.Row="5" Grid.Column="0" Text="System Cooling Policy" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="5" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Controls the system cooling strategy.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Passive (on battery), Active (on AC)&#x0a;- Balanced: Active&#x0a;- Boost: Active&#x0a;&#x0a;- Passive: Favors reducing processor speed for cooling&#x0a;- Active: Favors increasing fan speed"/>
+                                            <ComboBox Grid.Row="5" Grid.Column="1" Name="AcSystemCoolingPolicy" Width="200" HorizontalAlignment="Left">
+                                                <ComboBoxItem Content="Passive"/>
+                                                <ComboBoxItem Content="Active"/>
+                                            </ComboBox>
+
+                                            <!-- AMD Dynamic Graphics Settings -->
+                                            <TextBlock Grid.Row="6" Grid.Column="0" Text="AMD Dynamic Graphics Mode" VerticalAlignment="Center" IsVisible="{Binding IsAmdCpu}"/>
+                                            <Button Grid.Row="6" Grid.Column="0" Classes="help" HorizontalAlignment="Right" IsVisible="{Binding IsAmdCpu}"
+                                                    ToolTip.Tip="Controls the integrated AMD GPU behavior.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Force power-saving/Optimize power savings&#x0a;- Balanced: Optimize power savings/performance&#x0a;- Boost: Optimize/Maximize performance&#x0a;&#x0a;Affects the balance between graphics performance and power consumption."/>
+                                            <ComboBox Grid.Row="6" Grid.Column="1" Name="AcDynamicGraphicsMode" HorizontalAlignment="Stretch" IsVisible="{Binding IsAmdCpu}">
+                                                <ComboBoxItem Content="Force power-saving graphics"/>
+                                                <ComboBoxItem Content="Optimize power savings"/>
+                                                <ComboBoxItem Content="Optimize performance"/>
+                                                <ComboBoxItem Content="Maximize performance"/>
+                                            </ComboBox>
+
+                                            <!-- Adaptive Brightness Settings -->
+                                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Adaptive Brightness" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="7" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Automatically adjusts brightness based on ambient light.&#x0a;&#x0a;Recommended:&#x0a;- Eco: On&#x0a;- Balanced: On&#x0a;- Boost: Off&#x0a;&#x0a;Can save power but some users find the adjustments distracting."/>
+                                            <ComboBox Grid.Row="7" Grid.Column="1" Name="AcAdaptiveBrightness" HorizontalAlignment="Stretch">
+                                                <ComboBoxItem Content="Off"/>
+                                                <ComboBoxItem Content="On"/>
+                                            </ComboBox>
+
+                                            <!-- Advanced Color Quality Bias Settings -->
+                                            <TextBlock Grid.Row="8" Grid.Column="0" Text="Advanced Color Quality Bias" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="8" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Adjusts color quality settings.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Power saving bias&#x0a;- Balanced: Visual quality bias&#x0a;- Boost: Visual quality bias&#x0a;&#x0a;Power saving mode may slightly reduce visual quality."/>
+                                            <ComboBox Grid.Row="8" Grid.Column="1" Name="AcAdvancedColorQualityBias" HorizontalAlignment="Stretch">
+                                                <ComboBoxItem Content="Power saving bias"/>
+                                                <ComboBoxItem Content="Visual quality bias"/>
+                                            </ComboBox>
+
+                                            <!-- Hard Disk Idle Timeout Settings -->
+                                            <TextBlock Grid.Row="9" Grid.Column="0" Text="Hard Disk Idle Timeout" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="9" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Time before hard drive enters sleep mode.&#x0a;&#x0a;Recommended:&#x0a;- Eco: 30-60s&#x0a;- Balanced: 60-120s&#x0a;- Boost: 0-300s&#x0a;&#x0a;Lower values save power but may cause delays when accessing the drive."/>
+                                            <NumericUpDown Grid.Row="9" Grid.Column="1" Name="AcDiskIdleTimeout" 
+                                                         Minimum="0" 
+                                                         Maximum="3600" 
+                                                         FormatString="0s"
+                                                         HorizontalAlignment="Stretch"/>
+
+                                            <!-- USB Settings -->
+                                            <TextBlock Grid.Row="10" Grid.Column="0" Text="USB Hub Suspend Timeout" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="10" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Time before USB ports enter sleep mode.&#x0a;&#x0a;Recommended:&#x0a;- Eco: 20-50ms&#x0a;- Balanced: 50-100ms&#x0a;- Boost: 100-200ms&#x0a;&#x0a;Lower values save power but may affect USB device responsiveness."/>
+                                            <NumericUpDown Grid.Row="10" Grid.Column="1" Name="AcUsbHubTimeout" 
+                                                         Minimum="0" 
+                                                         Maximum="100000" 
+                                                         FormatString="0ms"
+                                                         HorizontalAlignment="Stretch"/>
+
+                                            <TextBlock Grid.Row="11" Grid.Column="0" Text="USB Selective Suspend" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="11" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Allows selective suspension of USB devices.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Enabled&#x0a;- Balanced: Enabled&#x0a;- Boost: Disabled&#x0a;&#x0a;Disabling keeps USB devices active permanently."/>
+                                            <ComboBox Grid.Row="11" Grid.Column="1" Name="AcUsbSuspend" HorizontalAlignment="Stretch">
+                                                <ComboBoxItem Content="Disabled"/>
+                                                <ComboBoxItem Content="Enabled"/>
+                                            </ComboBox>
+
+                                            <TextBlock Grid.Row="12" Grid.Column="0" Text="USB IOC Setting" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="12" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Enables/disables Idle Out Control for USB devices.&#x0a;&#x0a;Recommended: Enabled for all profiles&#x0a;&#x0a;This feature helps manage power consumption of USB devices."/>
+                                            <ComboBox Grid.Row="12" Grid.Column="1" Name="AcUsbIoc" HorizontalAlignment="Stretch">
+                                                <ComboBoxItem Content="Disabled"/>
+                                                <ComboBoxItem Content="Enabled"/>
+                                            </ComboBox>
+
+                                            <TextBlock Grid.Row="13" Grid.Column="0" Text="USB 3 Link Power Management" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="13" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Controls power management for USB 3.0 ports.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Maximum power savings&#x0a;- Balanced: Moderate power savings&#x0a;- Boost: Off/Minimum&#x0a;&#x0a;More aggressive power savings may reduce USB 3.0 performance."/>
+                                            <ComboBox Grid.Row="13" Grid.Column="1" Name="AcUsbLinkPower" HorizontalAlignment="Stretch">
+                                                <ComboBoxItem Content="Off"/>
+                                                <ComboBoxItem Content="Minimum power savings"/>
+                                                <ComboBoxItem Content="Moderate power savings"/>
+                                                <ComboBoxItem Content="Maximum power savings"/>
+                                            </ComboBox>
+                                        </Grid>
+                                    </TabItem>
+
+                                    <!-- DC Power Settings -->
+                                    <TabItem Header="DC Power">
+                                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto" Margin="0,10,0,0">
+                                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Processor Minimum State (%)" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="0" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Sets the minimum processor frequency state as a percentage.&#x0a;&#x0a;Recommended:&#x0a;- Eco: 2-5%&#x0a;- Balanced: 5%&#x0a;- Boost: 5-100%&#x0a;&#x0a;A higher value will prevent the processor from reducing its frequency to save power."/>
+                                            <NumericUpDown Grid.Row="0" Grid.Column="1" Name="DcProcessorMinimumState" Minimum="0" Maximum="100" FormatString="F0"/>
+
+                                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Processor Maximum State (%)" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="1" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Sets the maximum processor frequency state as a percentage.&#x0a;&#x0a;Recommended:&#x0a;- Eco: 50-75%&#x0a;- Balanced: 75-100%&#x0a;- Boost: 100%&#x0a;&#x0a;Reducing this value will limit performance but save power."/>
+                                            <NumericUpDown Grid.Row="1" Grid.Column="1" Name="DcProcessorMaximumState" Minimum="0" Maximum="100" FormatString="F0"/>
+
+                                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Processor Performance Boost Policy (%)" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="2" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Controls how aggressively Turbo Boost is applied.&#x0a;&#x0a;Recommended:&#x0a;- Eco: 15-25%&#x0a;- Balanced: 35-50%&#x0a;- Boost: 75-100%&#x0a;&#x0a;A higher value allows reaching Turbo frequencies more quickly but consumes more power."/>
+                                            <NumericUpDown Grid.Row="2" Grid.Column="1" Name="DcProcessorBoostPolicy" Minimum="0" Maximum="100" FormatString="F0"/>
+
+                                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Processor Performance Boost Mode" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="3" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Determines how Turbo Boost is activated.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Disabled&#x0a;- Balanced: Efficient Enabled/Aggressive&#x0a;- Boost: Aggressive&#x0a;&#x0a;'Efficient' modes prioritize power efficiency, 'Aggressive' modes prioritize performance."/>
+                                            <ComboBox Grid.Row="3" Grid.Column="1" Name="DcProcessorBoostMode" Width="200" HorizontalAlignment="Left">
+                                                <ComboBoxItem Content="Disabled"/>
+                                                <ComboBoxItem Content="Enabled"/>
+                                                <ComboBoxItem Content="Aggressive"/>
+                                                <ComboBoxItem Content="Efficient Enabled"/>
+                                                <ComboBoxItem Content="Efficient Aggressive"/>
+                                                <ComboBoxItem Content="Aggressive at Guaranteed"/>
+                                                <ComboBoxItem Content="Efficient Aggressive at Guaranteed"/>
+                                            </ComboBox>
+
+                                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Performance Increase Policy" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="4" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Sets the performance increase strategy.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Ideal&#x0a;- Balanced: Single&#x0a;- Boost: Rocket/Ideal Aggressive&#x0a;&#x0a;- Ideal: Balanced approach&#x0a;- Single: Gradual increase&#x0a;- Rocket: Rapid increase&#x0a;- Ideal Aggressive: Balanced but more responsive"/>
+                                            <ComboBox Grid.Row="4" Grid.Column="1" Name="DcProcessorPerformanceIncreasePolicy" Width="200" HorizontalAlignment="Left">
+                                                <ComboBoxItem Content="Ideal"/>
+                                                <ComboBoxItem Content="Single"/>
+                                                <ComboBoxItem Content="Rocket"/>
+                                                <ComboBoxItem Content="Ideal Aggressive"/>
+                                            </ComboBox>
+
+                                            <TextBlock Grid.Row="5" Grid.Column="0" Text="System Cooling Policy" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="5" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Controls the system cooling strategy.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Passive (on battery), Active (on AC)&#x0a;- Balanced: Active&#x0a;- Boost: Active&#x0a;&#x0a;- Passive: Favors reducing processor speed for cooling&#x0a;- Active: Favors increasing fan speed"/>
+                                            <ComboBox Grid.Row="5" Grid.Column="1" Name="DcSystemCoolingPolicy" Width="200" HorizontalAlignment="Left">
+                                                <ComboBoxItem Content="Passive"/>
+                                                <ComboBoxItem Content="Active"/>
+                                            </ComboBox>
+
+                                            <!-- AMD Dynamic Graphics Settings -->
+                                            <TextBlock Grid.Row="6" Grid.Column="0" Text="AMD Dynamic Graphics Mode" VerticalAlignment="Center" IsVisible="{Binding IsAmdCpu}"/>
+                                            <Button Grid.Row="6" Grid.Column="0" Classes="help" HorizontalAlignment="Right" IsVisible="{Binding IsAmdCpu}"
+                                                    ToolTip.Tip="Controls the integrated AMD GPU behavior.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Force power-saving/Optimize power savings&#x0a;- Balanced: Optimize power savings/performance&#x0a;- Boost: Optimize/Maximize performance&#x0a;&#x0a;Affects the balance between graphics performance and power consumption."/>
+                                            <ComboBox Grid.Row="6" Grid.Column="1" Name="DcDynamicGraphicsMode" HorizontalAlignment="Stretch" IsVisible="{Binding IsAmdCpu}">
+                                                <ComboBoxItem Content="Force power-saving graphics"/>
+                                                <ComboBoxItem Content="Optimize power savings"/>
+                                                <ComboBoxItem Content="Optimize performance"/>
+                                                <ComboBoxItem Content="Maximize performance"/>
+                                            </ComboBox>
+
+                                            <!-- Adaptive Brightness Settings -->
+                                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Adaptive Brightness" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="7" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Automatically adjusts brightness based on ambient light.&#x0a;&#x0a;Recommended:&#x0a;- Eco: On&#x0a;- Balanced: On&#x0a;- Boost: Off&#x0a;&#x0a;Can save power but some users find the adjustments distracting."/>
+                                            <ComboBox Grid.Row="7" Grid.Column="1" Name="DcAdaptiveBrightness" HorizontalAlignment="Stretch">
+                                                <ComboBoxItem Content="Off"/>
+                                                <ComboBoxItem Content="On"/>
+                                            </ComboBox>
+
+                                            <!-- Advanced Color Quality Bias Settings -->
+                                            <TextBlock Grid.Row="8" Grid.Column="0" Text="Advanced Color Quality Bias" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="8" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Adjusts color quality settings.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Power saving bias&#x0a;- Balanced: Visual quality bias&#x0a;- Boost: Visual quality bias&#x0a;&#x0a;Power saving mode may slightly reduce visual quality."/>
+                                            <ComboBox Grid.Row="8" Grid.Column="1" Name="DcAdvancedColorQualityBias" HorizontalAlignment="Stretch">
+                                                <ComboBoxItem Content="Power saving bias"/>
+                                                <ComboBoxItem Content="Visual quality bias"/>
+                                            </ComboBox>
+
+                                            <!-- Hard Disk Idle Timeout Settings -->
+                                            <TextBlock Grid.Row="9" Grid.Column="0" Text="Hard Disk Idle Timeout" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="9" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Time before hard drive enters sleep mode.&#x0a;&#x0a;Recommended:&#x0a;- Eco: 30-60s&#x0a;- Balanced: 60-120s&#x0a;- Boost: 0-300s&#x0a;&#x0a;Lower values save power but may cause delays when accessing the drive."/>
+                                            <NumericUpDown Grid.Row="9" Grid.Column="1" Name="DcDiskIdleTimeout" 
+                                                         Minimum="0" 
+                                                         Maximum="3600" 
+                                                         FormatString="0s"
+                                                         HorizontalAlignment="Stretch"/>
+
+                                            <!-- USB Settings -->
+                                            <TextBlock Grid.Row="10" Grid.Column="0" Text="USB Hub Suspend Timeout" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="10" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Time before USB ports enter sleep mode.&#x0a;&#x0a;Recommended:&#x0a;- Eco: 20-50ms&#x0a;- Balanced: 50-100ms&#x0a;- Boost: 100-200ms&#x0a;&#x0a;Lower values save power but may affect USB device responsiveness."/>
+                                            <NumericUpDown Grid.Row="10" Grid.Column="1" Name="DcUsbHubTimeout" 
+                                                         Minimum="0" 
+                                                         Maximum="100000" 
+                                                         FormatString="0ms"
+                                                         HorizontalAlignment="Stretch"/>
+
+                                            <TextBlock Grid.Row="11" Grid.Column="0" Text="USB Selective Suspend" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="11" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Allows selective suspension of USB devices.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Enabled&#x0a;- Balanced: Enabled&#x0a;- Boost: Disabled&#x0a;&#x0a;Disabling keeps USB devices active permanently."/>
+                                            <ComboBox Grid.Row="11" Grid.Column="1" Name="DcUsbSuspend" HorizontalAlignment="Stretch">
+                                                <ComboBoxItem Content="Disabled"/>
+                                                <ComboBoxItem Content="Enabled"/>
+                                            </ComboBox>
+
+                                            <TextBlock Grid.Row="12" Grid.Column="0" Text="USB IOC Setting" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="12" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Enables/disables Idle Out Control for USB devices.&#x0a;&#x0a;Recommended: Enabled for all profiles&#x0a;&#x0a;This feature helps manage power consumption of USB devices."/>
+                                            <ComboBox Grid.Row="12" Grid.Column="1" Name="DcUsbIoc" HorizontalAlignment="Stretch">
+                                                <ComboBoxItem Content="Disabled"/>
+                                                <ComboBoxItem Content="Enabled"/>
+                                            </ComboBox>
+
+                                            <TextBlock Grid.Row="13" Grid.Column="0" Text="USB 3 Link Power Management" VerticalAlignment="Center"/>
+                                            <Button Grid.Row="13" Grid.Column="0" Classes="help" HorizontalAlignment="Right"
+                                                    ToolTip.Tip="Controls power management for USB 3.0 ports.&#x0a;&#x0a;Recommended:&#x0a;- Eco: Maximum power savings&#x0a;- Balanced: Moderate power savings&#x0a;- Boost: Off/Minimum&#x0a;&#x0a;More aggressive power savings may reduce USB 3.0 performance."/>
+                                            <ComboBox Grid.Row="13" Grid.Column="1" Name="DcUsbLinkPower" HorizontalAlignment="Stretch">
+                                                <ComboBoxItem Content="Off"/>
+                                                <ComboBoxItem Content="Minimum power savings"/>
+                                                <ComboBoxItem Content="Moderate power savings"/>
+                                                <ComboBoxItem Content="Maximum power savings"/>
+                                            </ComboBox>
+                                        </Grid>
+                                    </TabItem>
+                                </TabControl>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <!-- About Tab -->
+                    <TabItem Header="About">
+                        <ScrollViewer>
+                            <StackPanel Margin="20">
+                                <!-- Developer Section -->
+                                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" Margin="0,0,0,30">
+                                    <Border Grid.Row="0" Grid.Column="0" Classes="circle" Margin="0,0,20,0">
+                                        <Image Source="avares://FrameworkControl/Assets/about.jpg"
+                                               Classes="circle"/>
+                                    </Border>
+                                    
+                                    <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Classes="h1" Text="Framework Control Center" Margin="0,0,0,10"/>
+                                        <TextBlock Classes="description" TextWrapping="Wrap">
+                                            Hi, I'm John Dupuis, the sole developer of Framework Control Center / Framework Hub. At 30 years old, 
+                                            this project represents my passion for optimizing and enhancing the Framework laptop experience.
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- Project Description -->
+                                <TextBlock Classes="h2" Text="About the Project" Margin="0,0,0,10"/>
+                                <TextBlock Classes="description" TextWrapping="Wrap" Margin="0,0,0,30">
+                                    Framework Control Center is a comprehensive power management utility designed specifically for Framework laptops. 
+                                    It provides granular control over power profiles, thermal management, and system performance, helping users 
+                                    optimize their laptop's efficiency and performance according to their needs.
+                                </TextBlock>
+
+                                <!-- Patreon Supporters -->
+                                <TextBlock Text="Special Thanks to Our Patreon Supporters ❤️" Classes="h2" Margin="0,0,0,10" Foreground="#FF4444"/>
+                                <TextBlock Classes="description" TextWrapping="Wrap" Margin="0,0,0,10">
+                                    A heartfelt thank you to all our Patreon supporters who make this project possible:
+                                </TextBlock>
+                                <ItemsControl Margin="20,0,0,30">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.Items>
+                                        <TextBlock Text="Nirav Patel (CEO of Framework Laptops)" Classes="supporter"/>
+                                        <TextBlock Text="Chironjit" Classes="supporter"/>
+                                        <TextBlock Text="HowlVenger" Classes="supporter"/>
+                                        <TextBlock Text="FelyBriyl" Classes="supporter"/>
+                                        <TextBlock Text="XaverVamos" Classes="supporter"/>
+                                        <TextBlock Text="Stephen C" Classes="supporter"/>
+                                        <TextBlock Text="Pierre Cruse" Classes="supporter"/>
+                                        <TextBlock Text="James Gunvald" Classes="supporter"/>
+                                        <TextBlock Text="Finn Schmolke" Classes="supporter"/>
+                                        <TextBlock Text="Robin van der Linde" Classes="supporter"/>
+                                        <TextBlock Text="Darshumar" Classes="supporter"/>
+                                        <TextBlock Text="Toufik El Mouatassim" Classes="supporter"/>
+                                        <TextBlock Text="Barrett T" Classes="supporter"/>
+                                        <TextBlock Text="Duncan Harvey" Classes="supporter"/>
+                                        <TextBlock Text="Yash Rajeev" Classes="supporter"/>
+                                        <TextBlock Text="Tim Bertram" Classes="supporter"/>
+                                        <TextBlock Text="Ian Hagelin" Classes="supporter"/>
+                                        <TextBlock Text="George Willmer" Classes="supporter"/>
+                                        <TextBlock Text="HunterKurza" Classes="supporter"/>
+                                        <TextBlock Text="Sam Gibson" Classes="supporter"/>
+                                        <TextBlock Text="Evan Worner" Classes="supporter"/>
+                                        <TextBlock Text="ScareEm" Classes="supporter"/>
+                                        <TextBlock Text="Swinir" Classes="supporter"/>
+                                        <TextBlock Text="HansDerKrieger" Classes="supporter"/>
+                                        <TextBlock Text="Mr. Spyro" Classes="supporter"/>
+                                        <TextBlock Text="Jeremy Granger" Classes="supporter"/>
+                                        <TextBlock Text="Thomas Beaver" Classes="supporter"/>
+                                        <TextBlock Text="Jay Jay" Classes="supporter"/>
+                                        <TextBlock Text="James Oldiges" Classes="supporter"/>
+                                        <TextBlock Text="strouze" Classes="supporter"/>
+                                        <TextBlock Text="Lasse Embøl" Classes="supporter"/>
+                                        <TextBlock Text="Pecorus Junius" Classes="supporter"/>
+                                        <TextBlock Text="Jake Rogers" Classes="supporter"/>
+                                        <TextBlock Text="Peter Ansorg" Classes="supporter"/>
+                                        <TextBlock Text="retr0sp3kt" Classes="supporter"/>
+                                        <TextBlock Text="Jonathan Webber" Classes="supporter"/>
+                                    </ItemsControl.Items>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <!-- Intel CPU Tab -->
+                    <TabItem Header="Intel CPU" Name="IntelCpuTab">
+                        <StackPanel>
+                            <TextBlock Classes="h1">Intel CPU Power Management</TextBlock>
+                            <TextBlock Classes="description">Configure power limits for Intel processors using WinRing0.</TextBlock>
+                            
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,20">
+                                <TextBlock Text="Profile:" VerticalAlignment="Center"/>
+                                <ComboBox Name="IntelCpuProfileSelector" Margin="10,0,0,0" Width="150">
+                                    <ComboBoxItem>Eco</ComboBoxItem>
+                                    <ComboBoxItem>Balanced</ComboBoxItem>
+                                    <ComboBoxItem>Boost</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel>
+                                <TextBlock Text="Power Limit 1 (PL1) - Sustained Power Limit" Margin="0,10,0,5"/>
+                                <NumericUpDown Name="IntelPL1" Value="28" Minimum="15" Maximum="115" Increment="1" FormatString="0 W"/>
+                                
+                                <TextBlock Text="Power Limit 2 (PL2) - Burst Power Limit" Margin="0,10,0,5"/>
+                                <NumericUpDown Name="IntelPL2" Value="45" Minimum="15" Maximum="115" Increment="1" FormatString="0 W"/>
+                                
+                                <TextBlock Text="Turbo Time Limit" Margin="0,10,0,5"/>
+                                <NumericUpDown Name="IntelTurboTime" Value="28" Minimum="1" Maximum="120" Increment="1" FormatString="0 s"/>
+                                
+                                <TextBlock Text="Temperature Limit" Margin="0,10,0,5"/>
+                                <NumericUpDown Name="IntelTemperature" Value="95" Minimum="85" Maximum="100" Increment="1" FormatString="0 °C"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+            </DockPanel>
+        </Border>
+    </Panel>
+</Window>

@@ -1,37 +1,37 @@
-# Framework Hub Mini
+# Framework Hub
 
 <div align="center">
 
 <div style="background-color: #1a1b1e; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
 
-![Python](https://img.shields.io/badge/Python-3.10+-0D76A8?style=flat&labelColor=1a1b1e)
-![Platform](https://img.shields.io/badge/Platform-Windows%2011-FF8C00?style=flat&labelColor=1a1b1e)
-![License](https://img.shields.io/badge/License-GPL--3.0-4CAF50?style=flat&labelColor=1a1b1e)
-![Framework](https://img.shields.io/badge/Framework-AMD%20Only-FF4444?style=flat&labelColor=1a1b1e)
-![Status](https://img.shields.io/badge/Status-Beta-FFD700?style=flat&labelColor=1a1b1e)
-![RyzenADJ](https://img.shields.io/badge/RyzenADJ-v0.14.0-9B30FF?style=flat&labelColor=1a1b1e)
+![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat&labelColor=1a1b1e)
+![Platform](https://img.shields.io/badge/Platform-Windows%2011-0078D4?style=flat&labelColor=1a1b1e)
+![License](https://img.shields.io/badge/License-MIT-4CAF50?style=flat&labelColor=1a1b1e)
+![Framework](https://img.shields.io/badge/Framework-Intel%20%26%20AMD-FF4444?style=flat&labelColor=1a1b1e)
+![Status](https://img.shields.io/badge/Status-Experimental-FFD700?style=flat&labelColor=1a1b1e)
+![Version](https://img.shields.io/badge/Version-1.2--EXPERIMENTAL-9B30FF?style=flat&labelColor=1a1b1e)
 
 </div>
 
+<div style="margin: 20px 0;">
+<img src="assets/baniere.png" alt="Framework Hub Banner" style="max-width: 800px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+</div>
+
 <div style="margin: 25px 0;">
-Built with ❤️ by <a href="https://patreon.com/Oganoth" style="color: #0D76A8; text-decoration: none; font-weight: 600;">Oganoth</a>
+Built with ❤️ by <a href="https://patreon.com/Oganoth" style="color: #0D76A8; text-decoration: none; font-weight: 600;">John Dupuis</a>
 </div>
 
 <div style="margin: 40px 0;">
 
-# 🙏 Special Thanks to my Amazing Patrons
+# 🙏 Special Thanks to Our Supporters
 
 A heartfelt thank you to those who make this project possible:
 
-- **Nirav Patel** _(Founder of Framework Laptop)_ - Your support as a patron is a great honor. Without you, this project would not be possible, Jonathan Webber, retr0sp3kt, Lysithea2802, Peter Ansorg, Jake Rogers 
+**Nirav Patel** _(CEO of Framework Laptops)_, Chironjit, HowlVenger, FelyBriyl, XaverVamos, Stephen C, Pierre Cruse, James Gunvald, Finn Schmolke, Robin van der Linde, Darshumar, Toufik El Mouatassim, Barrett T, Duncan Harvey, Yash Rajeev, Tim Bertram, Ian Hagelin, George Willmer, HunterKurza, Sam Gibson, Evan Worner, ScareEm, Swinir, HansDerKrieger, Mr. Spyro, Jeremy Granger, Thomas Beaver, Jay Jay, James Oldiges, strouze, Lasse Embøl, Pecorus Junius, Jake Rogers, Peter Ansorg, retr0sp3kt, Jonathan Webber, Kashi Takashi, Eric Olsen, Greg Leask, Jake Fairbrother, Tobias Deyle, Hana Elena, Stephen Chuang.
 
 <div style="margin: 30px 0;">
 <a href="https://patreon.com/Oganoth">
   <img src="https://img.shields.io/badge/SUPPORT_FRAMEWORK_HUB-FF424D?style=for-the-badge&logo=patreon&logoColor=white" alt="Support Framework Hub on Patreon" />
-</a>
-<br><br>
-<a href="https://www.paypal.com/donate/?hosted_button_id=RDLBMFG37GUKQ">
-  <img src="https://img.shields.io/badge/DONATE_WITH_PAYPAL-00457C?style=for-the-badge&logo=paypal&logoColor=white" alt="Donate with PayPal" />
 </a>
 </div>
 
@@ -39,245 +39,147 @@ A heartfelt thank you to those who make this project possible:
 
 <div style="margin: 30px 0; font-size: 16px;">
 
-[English](#english) • 
-[Français](#français) • 
+[Overview](#overview) • 
 [Features](#-key-features) • 
-[Install](#-installation) • 
+[Installation](#-installation) • 
+[Development Build](#-development-build) • 
 [Usage](#-usage) • 
-[Contribute](#-contributing) • 
+[Contributing](#-contributing) • 
 [Support](#-support)
 
 </div>
 
 </div>
 
-<hr style="margin: 40px 0; border: 0; height: 1px; background: linear-gradient(to right, transparent, #666, transparent);">
+## Overview
 
-## English
+Framework Hub is a powerful system management tool designed specifically for Framework laptops. Built with C# and Avalonia UI, it provides comprehensive control over power management, performance optimization, and hardware monitoring through an elegant, feature-rich interface.
 
-### 🎯 Overview
+### 🎯 Key Features
 
-Framework Hub Mini is a powerful system management tool designed specifically for Framework AMD laptops. Built with Python and modern UI components, it provides comprehensive control over power management, performance optimization, and hardware monitoring through an elegant, feature-rich interface.
+#### ⚡ Advanced CPU Management
+- **Intel Core Support**:
+  - Direct WinRing0 implementation
+  - Native power limit control (PL1)
+  - Secure Boot compatibility
+  - Customizable power profiles (15W-115W)
 
-### 📸 Screenshots
+- **AMD Ryzen Support**:
+  - RyzenADJ integration
+  - Framework 13 AMD (7640U/7840U) support
+  - Framework 16 AMD (7840HS/7940HS) support
+  - Custom power profiles
 
-<div align="center">
-<p float="left">
-  <img src="screenshots/main.png" width="250" alt="Main Interface"/>
-  <img src="screenshots/theme1.png" width="250" alt="Fedora Light Theme"/>
-  <img src="screenshots/theme2.png" width="250" alt="Fedora Dark Theme"/>
-</p>
-<p float="left">
-  <img src="screenshots/Updates%20manager.png" width="375" alt="Updates Manager"/>
-  <img src="screenshots/Tweaks.png" width="375" alt="System Tweaks"/>
-</p>
+#### 🔋 Power Management
+- **Framework-Optimized Power Plans**:
+  - Framework-Eco: Battery optimization
+  - Framework-Balanced: Intelligent scaling
+  - Framework-Boost: Maximum performance
 
-<em>Framework Hub Mini in action - Modern UI with multiple themes, system management, and monitoring capabilities</em>
-</div>
+- **Advanced Power Features**:
+  - Windows power plan synchronization
+  - Dynamic processor states
+  - Adaptive boost behavior
+  - Core parking optimization
 
-### ✨ Key Features
+#### 💻 Hardware Support
+- **Comprehensive CPU Support**:
+  - Intel Core Ultra (125H, 155H, 165H)
+  - Intel Core i5/i7 (1340P, 1360P, 1370P)
+  - AMD Ryzen 7 (7640U/7840U, 7840HS/7940HS)
 
-### 🎨 Power Management
-- Windows power plan synchronization
-- RyzenAdj integration for AMD models
-- Automatic hardware detection
-- Real-time power monitoring
-- System tray integration
+- **GPU Management**:
+  - Intel Graphics optimization
+  - AMD iGPU/dGPU support
+  - Dynamic power states
+  - Performance monitoring
 
-### 💻 Hardware Monitoring
+#### 📊 Monitoring System
+- **Real-time Metrics**:
+  - CPU temperature and usage
+  - GPU performance data
+  - Memory utilization
+  - Power consumption
+  - System information
 
-#### Real-time Metrics
-- CPU usage and temperature
-- RAM usage monitoring
-- iGPU metrics (AMD Radeon)
-- dGPU metrics (if available)
-- Battery status and time remaining
-- LibreHardwareMonitor integration
-- Automatic sensor detection
-- 1-second refresh rate (by default)
+## 🔧 Installation
 
-### 🎨 Theme System
-
-#### Built-in Themes
-- **Default Dark**: Modern dark theme with orange accents
-- **Fedora Dark**: GNOME-inspired dark theme with blue accents
-- **Fedora Light**: Clean light theme based on GNOME
-
-#### Theme Features
-- Complete UI customization
-- Color schemes for all elements
-- Font configuration (family and sizes)
-- Spacing and border radius control
-- Real-time theme switching
-
-For detailed information about creating and customizing themes, check out our [Theming Guide](Theming_guide.md).
-
-### ⚡ System Features
-
-#### AMD Power Profiles
-- **Framework 13 AMD (7840U)**:
-  - Silent/ECO: STAPM 15W, Fast 20W, Slow 15W
-  - Balanced: STAPM 25W, Fast 30W, Slow 25W
-  - Boost: STAPM 28W, Fast 35W, Slow 28W
-- **Framework 16 AMD (7840HS/7940HS)**:
-  - Silent/ECO: STAPM 30W, Fast 35W, Slow 30W
-  - Balanced: STAPM 95W, Fast 95W, Slow 95W
-  - Boost: STAPM 120W, Fast 120W, Slow 120W
-
-#### Power Features
-- RyzenADJ integration for AMD models
-- Windows power plan synchronization (Silent/Balanced/Performance)
-- Temperature limits management
-- VRM current control
-- Automatic hardware detection
-
-
-#### Updates Manager
-- System package tracking
-- Winget integration
-- Automatic updates detection
-- Batch update installation
-- Version comparison
-- Update history logging
-
-#### Power Management
-- **Silent/ECO Mode**:
-  - Processor throttling: 5-30%
-  - Power saving graphics
-  - Aggressive power saving settings
-  - Optimized for battery life
-- **Balanced Mode**:
-  - Processor throttling: 10-99%
-  - Moderate boost settings
-  - Balanced power/performance
-  - Dynamic GPU switching
-- **Boost Mode**:
-  - Maximum processor performance
-  - Aggressive boost settings
-  - Maximum GPU performance
-  - No power limits
-
-#### Advanced Power Features
-- Windows power plan synchronization
-- RyzenAdj integration for AMD models
-- Automatic hardware detection
-- Real-time power monitoring
-- System tray integration
-- PCI Express power management
-- Sleep/Hibernation control
-- GPU power optimization
-- Custom power profiles
-
-#### Hardware Monitoring
-- Real-time CPU metrics
-  - Usage percentage
-  - Temperature tracking
-  - Performance states
-- Memory monitoring
-  - RAM usage tracking
-  - Memory frequency
-  - Available memory
-- GPU monitoring
-  - iGPU metrics (AMD Radeon)
-  - dGPU metrics (if available)
-  - Temperature tracking
-  - Usage percentage
-- Battery monitoring
-  - Charge percentage
-  - Time remaining
-  - Charging status
-- LibreHardwareMonitor integration
-- Automatic sensor detection
-- 1-second refresh rate
-- JSON-based sensor logging
-
-### 🖥️ Display Management
-
-#### Display Features
-- Brightness control via WMI
-- Hotkey support (F12)
-- System tray integration
-- Minimized mode operation
-
-### 🔧 Installation
+### Building from Source
 
 #### Prerequisites
 - Windows 11 (22H2 or later)
-- Administrator privileges
-- .NET Framework 4.8
-- Visual C++ Redistributable 2015-2022
+- Visual Studio 2022 or JetBrains Rider
+- .NET 8.0 SDK
+- Git
 
-#### Python Edition (Open Source)
+#### Steps
 ```bash
 # Clone repository
-git clone https://github.com/Oganoth/Framework-Hub-PY.git
-cd Framework-Hub-PY
+git clone https://github.com/JohnDupuis/Framework-Hub.git
+cd Framework-Hub
 
-# Install dependencies
-pip install -r requirements.txt
+# Build solution
+dotnet restore
+dotnet build -c Release
 
 # Run application
-python main.py
+dotnet run -c Release
 ```
 
-#### Framework-Hub.exe (Easy Install)
-Download the all-in-one installer from [Patreon](https://patreon.com/Oganoth)
+#### Required Dependencies
+- .NET 8.0 Desktop Runtime
+- Visual C++ Redistributable 2015-2022
+- WinRing0 driver (included)
 
-### 📋 Usage
+## 🚀 Development Build
 
-#### First Launch
-- Extract the Framework-Hub.zip at root of disk C:
-- Run Framework.exe
-- Enjoy 
+A pre-compiled version with installer is available for Patreon supporters:
 
-#### Daily Use
-- Access via system tray or F12 key
-- Quick profile switching
-- Real-time monitoring
+- Latest experimental features
+- Easy one-click installer
+- Priority support
+- Early access to new features
 
-### 🤝 Contributing
+[Get Development Build on Patreon](https://patreon.com/Oganoth)
 
-#### Code Contributions
-1. Fork the repository
-2. Create a feature branch
-3. Add your improvements
-4. Submit a pull request
+## 📋 Usage
 
-#### Other Ways to Help
-- Report bugs and issues
-- Suggest new features
+### First Launch
+1. Run as administrator
+2. Choose power profile
+3. Customize settings if needed
+
+
+### Important Notes
+- Administrator rights required
+- Some features may be locked by BIOS
+- Regular backups recommended
+- Experimental features may need testing
+
+## 🤝 Contributing
+
+### Development
+1. Fork repository
+2. Create feature branch
+3. Submit pull request
+
+### Other Ways to Help
+- Report issues
+- Suggest features
 - Improve documentation
-- Help with translations
-- Create custom themes
+- Create power profiles
+- Share experiences
 
-### 🔧 Need Help: AMD ADL/ADLX Integration
+## ❤️ Support
 
-I'm currently seeking assistance with the AMD ADL/ADLX integration in Framework Hub. While I've managed to implement basic functionality for controlling refresh rate and resolution settings, there's much more potential to unlock with AMD Adrenaline's capabilities.
-
-#### Current Status
-- Successfully build ADLXPybind.cp312-win_amd64.pyd by following ADLX SDK 
-- Basic resolution management
-- Limited access to AMD Adrenaline features
-
-#### What I'm Looking For
-I'm looking to implement a new "AMD Settings" button that would allow users to:
-- Customize AMD Graphics parameters based on selected profiles
-- Access and control the full range of AMD Adrenaline settings
-- Create profile-specific GPU configurations
-
-If you have experience with AMD ADL/ADLX SDK integration or similar GPU management implementations, your expertise would be invaluable to this project. This enhancement would significantly improve the user experience for AMD GPU owners.
-
-### ❤️ Support
-
-Framework Hub Mini is a passion project that requires significant time and effort. Your support helps:
+Framework Hub is a passion project that requires significant time and effort. Your support helps:
 - Develop new features
-- Improve existing functionality
-- Provide faster support
-- Create better documentation
+- Improve stability
+- Provide better support
+- Create documentation
 
-### 📜 License
+[Support on Patreon](https://patreon.com/Oganoth)
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+## 📜 License
 
-<hr>
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 

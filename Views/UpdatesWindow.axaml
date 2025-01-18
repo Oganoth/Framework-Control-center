@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:FrameworkControl"
+        xmlns:models="clr-namespace:FrameworkControl.Models"
+        x:Class="FrameworkControl.UpdatesWindow"
+        x:DataType="local:UpdatesWindow"
+        Title="Windows Package Manager"
+        Width="800"
+        Height="600"
+        WindowStartupLocation="CenterScreen"
+        SystemDecorations="Full"
+        MinWidth="600"
+        MinHeight="400"
+        Background="Transparent"
+        TransparencyLevelHint="AcrylicBlur">
+
+    <Window.Resources>
+        <Color x:Key="WindowBackground">#1A1A1A</Color>
+        <SolidColorBrush x:Key="ButtonBackground" Color="{DynamicResource SystemAccentColor}"/>
+        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{DynamicResource SystemAccentColorLight1}"/>
+        <SolidColorBrush x:Key="ButtonBackgroundActive" Color="{DynamicResource SystemAccentColorDark1}"/>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="TextBlock.h1">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        
+        <Style Selector="TextBlock.description">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Opacity" Value="0.7"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="24,0,0,10"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+            <Setter Property="RenderTransform" Value="scale(1.02)"/>
+        </Style>
+
+        <Style Selector="Button:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.98)"/>
+        </Style>
+
+        <Style Selector="TabControl">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="-20"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+
+        <Style Selector="TabItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style Selector="TabItem:selected">
+            <Setter Property="Background" Value="#40FFFFFF"/>
+        </Style>
+
+        <Style Selector="TabItem:pointerover">
+            <Setter Property="Background" Value="#20FFFFFF"/>
+        </Style>
+
+        <Style Selector="ListBox">
+            <Setter Property="Background" Value="#20FFFFFF"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+        <Style Selector="ListBoxItem">
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Margin" Value="0,2"/>
+        </Style>
+
+        <Style Selector="ProgressBar">
+            <Setter Property="Height" Value="4"/>
+            <Setter Property="Background" Value="#20FFFFFF"/>
+            <Setter Property="Foreground" Value="{DynamicResource ButtonBackground}"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="MinWidth" Value="200"/>
+        </Style>
+
+        <Style Selector="TextBlock.status">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#CCFFFFFF"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="MaxWidth" Value="600"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.update">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="MinWidth" Value="100"/>
+        </Style>
+
+        <Style Selector="Button.driver-button">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2" Easing="CubicEaseOut"/>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="0"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <Grid ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
+                            <PathIcon Grid.Column="0" 
+                                     Data="{TemplateBinding Tag}" 
+                                     Width="16" 
+                                     Height="16" 
+                                     Foreground="White"
+                                     Margin="0,0,8,0"/>
+                            <ContentPresenter Grid.Column="1" 
+                                            Content="{TemplateBinding Content}"
+                                            TextBlock.Foreground="{TemplateBinding Foreground}"
+                                            VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.driver-button:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+            <Setter Property="RenderTransform" Value="scale(1.02)"/>
+        </Style>
+
+        <Style Selector="Button.driver-button:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.98)"/>
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundActive}"/>
+        </Style>
+    </Window.Styles>
+
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="{StaticResource WindowBackground}"
+                    TintOpacity="1"
+                    MaterialOpacity="0.65"/>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+
+        <Border Padding="20">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Margin="0,0,0,20">
+                    <TextBlock Classes="h1" Text="Windows Package Manager"/>
+                    <TextBlock Classes="description" Text="Manage updates for your Windows applications using winget"/>
+                </StackPanel>
+
+                <Grid ColumnDefinitions="200,*" Margin="0,0,0,20">
+                    <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                        <TextBlock Text="Drivers" 
+                                 FontSize="14" 
+                                 FontWeight="SemiBold" 
+                                 Foreground="White"
+                                 Margin="0,0,0,8"/>
+                        
+                        <Button Name="IntelDriversButton" 
+                               Classes="driver-button"
+                               Content="Intel Drivers"
+                               Tag="M12,3L2,12H5V20H19V12H22L12,3M12,8.5C14.34,8.5 16.46,9.43 18,10.94L16.8,12.12C15.58,10.91 13.88,10.17 12,10.17C10.12,10.17 8.42,10.91 7.2,12.12L6,10.94C7.54,9.43 9.66,8.5 12,8.5M12,11.83C13.4,11.83 14.67,12.39 15.6,13.3L14.4,14.47C13.79,13.87 12.94,13.5 12,13.5C11.06,13.5 10.21,13.87 9.6,14.47L8.4,13.3C9.33,12.39 10.6,11.83 12,11.83M12,15.17C12.94,15.17 13.7,15.91 13.7,16.83C13.7,17.75 12.94,18.5 12,18.5C11.06,18.5 10.3,17.75 10.3,16.83C10.3,15.91 11.06,15.17 12,15.17Z"
+                               Click="IntelDriversButton_Click"/>
+                        
+                        <Button Name="AmdDriversButton" 
+                               Classes="driver-button"
+                               Content="AMD Drivers"
+                               Tag="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L6.04,7.5L12,10.85L17.96,7.5L12,4.15M5,15.91L11,19.29V12.58L5,9.21V15.91M19,15.91V9.21L13,12.58V19.29L19,15.91Z"
+                               Click="AmdDriversButton_Click"/>
+                        
+                        <Button Name="FrameworkDriversButton" 
+                               Classes="driver-button"
+                               Content="Framework Drivers"
+                               Tag="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L6.04,7.5L12,10.85L17.96,7.5L12,4.15Z"
+                               Click="FrameworkDriversButton_Click"/>
+
+                        <TextBlock Text="Tweaks" 
+                                 FontSize="14" 
+                                 FontWeight="SemiBold" 
+                                 Foreground="White"
+                                 Margin="0,16,0,8"/>
+                        
+                        <Button Name="CttWinutilsButton" 
+                               Classes="driver-button"
+                               Content="CTT Winutils"
+                               Tag="M20,19V7H4V19H20M20,3A2,2 0 0,1 22,5V19A2,2 0 0,1 20,21H4A2,2 0 0,1 2,19V5C2,3.89 2.9,3 4,3H20M13,17V15H18V17H13M9.58,13L5.57,9H8.4L11.7,12.3C12.09,12.69 12.09,13.33 11.7,13.72L8.42,17H5.59L9.58,13Z"
+                               Click="CttWinutilsButton_Click"/>
+                    </StackPanel>
+
+                    <DockPanel Grid.Column="1">
+                            <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                            <Button Name="RefreshWingetButton" 
+                                   Content="Check for Updates" 
+                                   HorizontalAlignment="Right"/>
+                            <TextBlock Name="StatusMessage" 
+                                     Classes="status"
+                                     IsVisible="False"/>
+                            <Grid ColumnDefinitions="*,Auto,*" Margin="0,5,0,10">
+                                <ProgressBar Name="ProgressBar" 
+                                           Grid.Column="1"
+                                           IsIndeterminate="True"
+                                           IsVisible="False"/>
+                            </Grid>
+                            </StackPanel>
+                            <ListBox Name="WingetUpdatesList">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="models:PackageUpdate">
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="{CompiledBinding Name}" FontWeight="SemiBold" Foreground="White"/>
+                                                <TextBlock Text="{CompiledBinding Version}" Opacity="0.7" FontSize="12" Foreground="White"/>
+                                            </StackPanel>
+                                            <Button Grid.Column="1" 
+                                                    Content="Update" 
+                                                    Classes="update"
+                                                    Command="{CompiledBinding $parent[local:UpdatesWindow].UpdatePackageCommand}"
+                                                    CommandParameter="{CompiledBinding}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </DockPanel>
+                                        </Grid>
+            </DockPanel>
+        </Border>
+    </Panel>
+</Window> 

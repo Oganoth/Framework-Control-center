@@ -1,0 +1,193 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style Selector="Window">
+        <Setter Property="UseLayoutRounding" Value="True"/>
+    </Style>
+    
+    <Style Selector="Button">
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Button:pointerover">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+        <Setter Property="RenderTransform" Value="scale(1.02)"/>
+    </Style>
+    
+    <Style Selector="Button:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.98)"/>
+    </Style>
+    
+    <Style Selector="Button.active">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundActive}"/>
+    </Style>
+
+    <Style Selector="Button.mode">
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="52"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.15" Easing="ExponentialEaseOut"/>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="ExponentialEaseOut"/>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Button.mode:pointerover">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+        <Setter Property="RenderTransform" Value="scale(1.02) translateY(-1px)"/>
+    </Style>
+    
+    <Style Selector="Button.mode:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.98) translateY(1px)"/>
+    </Style>
+    
+    <Style Selector="Button.mode.active">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundActive}"/>
+        <Setter Property="RenderTransform" Value="scale(1.03) translateY(-2px)"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.2" Easing="ExponentialEaseOut"/>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2" Easing="ExponentialEaseOut"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.windowControl">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <Border Name="PART_Background"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="4">
+                        <Border.Transitions>
+                            <Transitions>
+                                <BrushTransition Property="Background" Duration="0:0:0.1"/>
+                            </Transitions>
+                        </Border.Transitions>
+                    </Border>
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Button.windowControl:pointerover /template/ Border#PART_Background">
+        <Setter Property="Background" Value="#20FFFFFF"/>
+    </Style>
+    
+    <Style Selector="Button.windowControl:pressed /template/ Border#PART_Background">
+        <Setter Property="Background" Value="#40FFFFFF"/>
+    </Style>
+
+    <Style Selector="RadioButton">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^:checked">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundActive}"/>
+            <Setter Property="RenderTransform" Value="scale(1.02)"/>
+        </Style>
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+            <Setter Property="RenderTransform" Value="scale(1.02)"/>
+        </Style>
+        <Style Selector="^:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.98)"/>
+        </Style>
+    </Style>
+
+    <Style Selector="Slider">
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="Background" Value="#40FFFFFF"/>
+        <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style Selector="Slider /template/ RepeatButton#PART_DecreaseButton">
+        <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="FocusTarget"
+                        Background="{TemplateBinding Background}"
+                        Height="4"
+                        CornerRadius="2"
+                        Margin="0,10"/>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Slider /template/ RepeatButton#PART_IncreaseButton">
+        <Setter Property="Background" Value="#40FFFFFF"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="FocusTarget"
+                        Background="{TemplateBinding Background}"
+                        Height="4"
+                        CornerRadius="2"
+                        Margin="0,10"/>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Slider /template/ Thumb">
+        <Setter Property="MinWidth" Value="6"/>
+        <Setter Property="MinHeight" Value="6"/>
+        <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Ellipse Width="6" 
+                         Height="6" 
+                         Fill="{TemplateBinding Background}"/>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Border.batteryOutline">
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="#20FFFFFF"/>
+        <Setter Property="CornerRadius" Value="2"/>
+    </Style>
+</Styles>

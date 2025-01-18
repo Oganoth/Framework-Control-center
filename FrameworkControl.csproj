@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="11.1.5" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.2.3" />
+    <PackageReference Include="Avalonia.BuildServices" Version="0.0.29" />
+    <PackageReference Include="Avalonia.Skia" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Svg.Skia" Version="11.2.0.2" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Win32" Version="11.2.3" />
+    <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.3" />
+    <PackageReference Include="Material.Avalonia" Version="3.9.1" />
+    <PackageReference Include="Material.Icons.Avalonia" Version="2.1.10" />
+    <PackageReference Include="NLog" Version="5.3.4" />
+    <PackageReference Include="SkiaSharp" Version="2.88.9" />
+    <PackageReference Include="Svg.Skia" Version="2.0.0.4" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+    <PackageReference Include="System.Management" Version="9.0.1" />
+    <PackageReference Include="MessageBox.Avalonia" Version="3.2.0" />
+    <PackageReference Include="TaskScheduler" Version="2.11.0" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <Target Name="CopyFiles" AfterTargets="Build">
+    <MakeDir Directories="$(OutDir)ryzenadj" />
+    <MakeDir Directories="$(OutDir)powerplans" />
+    <MakeDir Directories="$(OutDir)logs" />
+    <MakeDir Directories="$(OutDir)intel" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)ryzenadj\ryzenadj.exe&quot; &quot;$(OutDir)ryzenadj\&quot;" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)ryzenadj\amd_profiles.json&quot; &quot;$(OutDir)ryzenadj\profiles.json&quot;" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)powerplans\powerplans.json&quot; &quot;$(OutDir)powerplans\&quot;" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)intel\profiles.json&quot; &quot;$(OutDir)intel\&quot;" />
+  </Target>
+
+  <Target Name="CopyFilesPublish" AfterTargets="Publish">
+    <MakeDir Directories="$(PublishDir)ryzenadj" />
+    <MakeDir Directories="$(PublishDir)powerplans" />
+    <MakeDir Directories="$(PublishDir)logs" />
+    <MakeDir Directories="$(PublishDir)intel" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)ryzenadj\ryzenadj.exe&quot; &quot;$(PublishDir)ryzenadj\&quot;" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)ryzenadj\amd_profiles.json&quot; &quot;$(PublishDir)ryzenadj\profiles.json&quot;" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)powerplans\powerplans.json&quot; &quot;$(PublishDir)powerplans\&quot;" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)intel\profiles.json&quot; &quot;$(PublishDir)intel\&quot;" />
+  </Target>
+</Project>

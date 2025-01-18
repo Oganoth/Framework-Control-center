@@ -1,0 +1,142 @@
+{
+    "intel_profiles": {
+        "1340P_INTEL": {
+            "eco": {
+                "name": "eco",
+                "pl1": 20,
+                "pl2": 28,
+                "turbo_time": 28,
+                "temperature": 95
+            },
+            "balanced": {
+                "name": "balanced",
+                "pl1": 28,
+                "pl2": 45,
+                "turbo_time": 56,
+                "temperature": 95
+            },
+            "boost": {
+                "name": "boost",
+                "pl1": 35,
+                "pl2": 64,
+                "turbo_time": 112,
+                "temperature": 98
+            }
+        },
+        "1360P_INTEL": {
+            "eco": {
+                "name": "eco",
+                "pl1": 20,
+                "pl2": 28,
+                "turbo_time": 28,
+                "temperature": 95
+            },
+            "balanced": {
+                "name": "balanced",
+                "pl1": 28,
+                "pl2": 48,
+                "turbo_time": 56,
+                "temperature": 95
+            },
+            "boost": {
+                "name": "boost",
+                "pl1": 38,
+                "pl2": 64,
+                "turbo_time": 112,
+                "temperature": 98
+            }
+        },
+        "1370P_INTEL": {
+            "eco": {
+                "name": "eco",
+                "pl1": 20,
+                "pl2": 28,
+                "turbo_time": 28,
+                "temperature": 95
+            },
+            "balanced": {
+                "name": "balanced",
+                "pl1": 28,
+                "pl2": 50,
+                "turbo_time": 56,
+                "temperature": 95
+            },
+            "boost": {
+                "name": "boost",
+                "pl1": 40,
+                "pl2": 64,
+                "turbo_time": 112,
+                "temperature": 98
+            }
+        },
+        "125H_INTEL": {
+            "eco": {
+                "name": "eco",
+                "pl1": 20,
+                "pl2": 28,
+                "turbo_time": 28,
+                "temperature": 95
+            },
+            "balanced": {
+                "name": "balanced",
+                "pl1": 28,
+                "pl2": 55,
+                "turbo_time": 56,
+                "temperature": 95
+            },
+            "boost": {
+                "name": "boost",
+                "pl1": 40,
+                "pl2": 115,
+                "turbo_time": 112,
+                "temperature": 98
+            }
+        },
+        "155H_INTEL": {
+            "eco": {
+                "name": "eco",
+                "pl1": 20,
+                "pl2": 28,
+                "turbo_time": 28,
+                "temperature": 95
+            },
+            "balanced": {
+                "name": "balanced",
+                "pl1": 28,
+                "pl2": 60,
+                "turbo_time": 56,
+                "temperature": 95
+            },
+            "boost": {
+                "name": "boost",
+                "pl1": 42,
+                "pl2": 115,
+                "turbo_time": 112,
+                "temperature": 98
+            }
+        },
+        "165H_INTEL": {
+            "eco": {
+                "name": "eco",
+                "pl1": 28,
+                "pl2": 45,
+                "turbo_time": 28,
+                "temperature": 95
+            },
+            "balanced": {
+                "name": "balanced",
+                "pl1": 35,
+                "pl2": 55,
+                "turbo_time": 56,
+                "temperature": 95
+            },
+            "boost": {
+                "name": "boost",
+                "pl1": 45,
+                "pl2": 65,
+                "turbo_time": 112,
+                "temperature": 95
+            }
+        }
+    }
+} 
