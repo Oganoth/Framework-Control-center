@@ -115,7 +115,7 @@ Framework Hub is a powerful system management tool designed specifically for Fra
 #### Steps
 ```bash
 # Clone repository
-git clone https://github.com/JohnDupuis/Framework-Hub.git
+git clone https://github.com/Oganoth/Framework-Control-center.git
 cd Framework-Hub
 
 # Build solution
